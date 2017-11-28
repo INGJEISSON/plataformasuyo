@@ -2,7 +2,7 @@
 require_once __DIR__.'/authgoogle/vendor/autoload.php';
 const CLIENT_ID = '449674911638-afs89gdh2nf1aqoetb29g64n7ju61vrr.apps.googleusercontent.com';
 const CLIENT_SECRET = 'wGp9d1IFsW4EIZ_pTkJ6Q0Nz';
-const REDIRECT_URI = 'http://localhost/plataformasuyo/index.php';
+const REDIRECT_URI = 'http://localhost/plataformasuyo/index2.php';
 include('includes/dependencia/conexion.php');
 
 //include('browser_class_inc.php');
