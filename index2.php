@@ -1,72 +1,85 @@
-<!DOCTYPE html>  
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" type="image/png" sizes="16x16" href="img/suyo_colombia_img.jpg">
-<title>Plataforma Suyo (Beta)</title>
-<!-- Bootstrap Core CSS -->
-<link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- animation CSS -->
-<link href="css/animate.css" rel="stylesheet">
-<!-- Custom CSS -->
-<link href="css/style.css" rel="stylesheet">
-<!-- color CSS -->
-<link href="css/colors/blue.css" id="theme"  rel="stylesheet">
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-</head>
-<body>
-<!-- Preloader -->
-<div class="preloader">
-  <div class="cssload-speeding-wheel"></div>
-</div>
-<section id="wrapper" class="login-register">
+<?php
+require_once __DIR__.'/authgoogle/vendor/autoload.php';
+const CLIENT_ID = '449674911638-afs89gdh2nf1aqoetb29g64n7ju61vrr.apps.googleusercontent.com';
+const CLIENT_SECRET = 'wGp9d1IFsW4EIZ_pTkJ6Q0Nz';
+const REDIRECT_URI = 'http://localhost/plataformasuyo/index.php';
+include('includes/dependencia/conexion.php');
 
-  <div class="login-box login-sidebar">
-     <br> <br> <br> <br>
-    <div class="white-box">
-      <form class="form-horizontal form-material" id="loginform" action="index.html">
-        <a href="javascript:void(0)" class="text-center db"><img src="img/suyo_colombia_img.jpg" width="264" height="164" alt="Home" /></a>  
-        
-    
-        <div class="form-group text-center m-t-20">
-          <div class="col-xs-12">
-            <button class="btn btn-danger btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Log In</button>
-          </div>
-        </div>
-       
-        <div class="form-group m-b-0">
-          <div class="col-sm-12 text-center">
-            <p>¿Problemas al iniciar sesión? <a href="register2.html" class="text-primary m-l-5"><b>Ayuda</b></a></p>
-          </div>
-        </div>
-      </form>
-      
-    </div>
-  </div>
-</section>
-<!-- jQuery -->
-<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Menu Plugin JavaScript -->
-<script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+//include('browser_class_inc.php');
 
-<!--slimscroll JavaScript -->
-<script src="js/jquery.slimscroll.js"></script>
-<!--Wave Effects -->
-<script src="js/waves.js"></script>
-<!-- Custom Theme JavaScript -->
-<script src="js/custom.min.js"></script>
-<!--Style Switcher -->
-<script src="plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
-</body>
-</html>
+/*$br = new browser();
+$br->whatBrowser();
+$version = $br->version;
+$navegador = $br->browsertype;
+$platform = $br->platform;*/
+
+
+$client = new Google_Client();
+$client->setClientId(CLIENT_ID);
+$client->setClientSecret(CLIENT_SECRET);
+$client->setRedirectUri(REDIRECT_URI);
+$client->setScopes('email');
+
+$plus = new Google_Service_Plus($client);
+
+if (isset($_REQUEST['logout'])) {
+   session_unset();
+}
+if (isset($_GET['code'])) {
+  $client->authenticate($_GET['code']);
+  $_SESSION['access_token'] = $client->getAccessToken();
+  $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+  header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
+}
+
+if(isset($_SESSION['cod_usuario'])){
+
+}
+if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+  $client->setAccessToken($_SESSION['access_token']);
+  $me = $plus->people->get('me');
+  // Get User data
+  $id = $me['id'];
+  $name =  $me['displayName'];
+  $email =  $me['emails'][0]['value'];
+  $profile_image_url = $me['image']['url'];
+  $cover_image_url = $me['cover']['coverPhoto']['url'];
+  $profile_url = $me['url'];
+                          
+                         $sql="Select usuarios.email,tipo_usuario.tipo_usuario, usuarios.cod_estado, usuarios.cod_usuario, tipo_usuario.id_grupo from usuarios, tipo_usuario where usuarios.tipo_usuario=tipo_usuario.tipo_usuario and  usuarios.email='".$email."' ";
+                        $query=mysqli_query($conexion, $sql);
+                        $rows=mysqli_num_rows($query);
+                        $datos=mysqli_fetch_assoc($query);
+                                if(isset($rows)){
+                                $_SESSION['nombre']=$name;
+                                $_SESSION['email']=$email;
+                                $_SESSION['tipo_usuario']=$datos['tipo_usuario']; 
+                                $_SESSION['imagen']=$profile_image_url;
+                                $_SESSION['cod_usuario']=$datos['cod_usuario'];                                
+                                $_SESSION['id_grupo']=$datos['id_grupo'];
+                               $access=1; // Acceso permitido..
+                               
+                                }else
+                                $access=2; // Acceso denegado*/
+                                
+
+} else {
+  $authUrl = $client->createAuthUrl();
+}
+
+?>
+    <?php
+    if (isset($authUrl)) {
+       include('includes/php/login.php');
+    } else {
+        //include('includes/php/login.php');
+               if(isset($access)==1) // Si es un usuario habilitado..
+                include('includes/php/portal.php');
+                else{
+                     session_unset();
+                     include('includes/php/login.php');
+                
+                    
+                }
+    }
+?>
