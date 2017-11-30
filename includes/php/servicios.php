@@ -9,9 +9,9 @@ $cod_resp=0;
                     }
                     else
                     $parametro="";   
-$sql="select  distinct cliente.cod_cliente, cliente.nombre, cliente.telefono_1, cliente.ciudad, cliente.barrio, tipo_cliente.descripcion as tipo_cliente from cliente, serv_cliente, tipo_cliente where $parametro cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=serv_cliente.cod_cliente and serv_cliente.cod_estado_caso=23 ";
-          $query=mysqli_query($conexion, $sql);
-          $rows=mysqli_num_rows($query);
+$sql="select  distinct cliente.cod_cliente, cliente.nombre, cliente.telefono_1, cliente.ciudad, cliente.barrio, tipo_cliente.descripcion as tipo_cliente from cliente, serv_cliente, tipo_cliente where $parametro cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=serv_cliente.cod_cliente and serv_cliente.cod_estado=23 ";
+          $query=pg_query($conexion, $sql);
+          $rows=pg_num_rows($query);
 
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
@@ -43,7 +43,7 @@ $sql="select  distinct cliente.cod_cliente, cliente.nombre, cliente.telefono_1, 
                         <div class="white-box">
                          
                             <div class="table-responsive">
-       <table id="table_id" class='table responsive' cellspacing="0" width="100%">
+       <table id="table_id" class='table-hover' cellspacing="0" width="100%">
          <thead>
         <tr>
           <th width="3%">#</th>
@@ -61,11 +61,11 @@ $sql="select  distinct cliente.cod_cliente, cliente.nombre, cliente.telefono_1, 
       <tbody>
       <?php
       $i=1;
-        while($datos=mysqli_fetch_assoc($query)){
-            
-           $sql2="select * from serv_cliente where cod_cliente='".$datos['cod_cliente']."' and cod_estado_caso=23";
-            $query2=mysqli_query($conexion, $sql2);
-            $rows2=mysqli_num_rows($query2);
+        while($datos=pg_fetch_assoc($query)){
+           
+            $query2=pg_query($conexion, "select distinct id_serv_cliente from serv_cliente where cod_cliente='".$datos['cod_cliente']."' and cod_estado=23");
+            $rows2=pg_num_rows($query2);
+             pg_free_result($query2);
       ?>
 
        
@@ -77,12 +77,13 @@ $sql="select  distinct cliente.cod_cliente, cliente.nombre, cliente.telefono_1, 
                 <td><?php echo $datos['ciudad']; ?></td>
                 <td><?php echo $datos['barrio']; ?></td>
                 <td><?php echo utf8_encode($datos['tipo_cliente']); ?></td>
-                <td><?php echo $rows2;  ?></td>
+                <td><?php echo "(".$rows2.")";  ?></td>
                 <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="includes/php/det_serv_client.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>&cod_resp=<?php echo $cod_resp; ?>" tittle='Revisar'><p class='icon-note lg'></p></a></td> 
                 <?php if($_SESSION['tipo_usuario']==1){ ?><td><a href="includes/php/edicion_usu.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>&cod_resp=<?php echo $cod_resp; ?>" tittle='Revisar' class="edicion"><p class='icon-note lg'></p></a></td><?php }  ?>
                 
               </tr>
             <?php   
+           
         $i++; 
 
            }
@@ -98,7 +99,46 @@ $sql="select  distinct cliente.cod_cliente, cliente.nombre, cliente.telefono_1, 
  <script type="text/javascript">
     
 $(document).ready(function () {
- $('#table_id').DataTable();
+  $('#table_id').DataTable({
+    "bJQueryUI": true,
+   // scrollY: 600,
+    //paging: false
+      dom: 'Bfrtip',
+      stateSave: true,
+       /* buttons: [
+            'copy', 'excel', "print", 'columnsToggle'
+        ]*/
+        buttons: [
+
+             {
+                extend: 'copy',
+                text: 'Copiar',
+               
+            },
+             {
+                extend: 'excel',
+                text: 'Excel',
+               
+            },
+            
+            {
+                extend: 'print',
+                text: 'Imprimir',
+                autoPrint: false
+            },
+
+             {
+                extend: 'colvis',
+                text: 'Ver/Ocultar',
+                collectionLayout: 'fixed two-column'
+              
+            },
+
+            
+             
+
+        ]
+} );
     
 });
 </script>

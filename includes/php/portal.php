@@ -21,7 +21,20 @@ date_default_timezone_set('America/Bogota');
     <link href="css/style.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="css/colors/megna-dark.css" id="theme" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
      <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">  
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.flash.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.colVis.min.js"></script>
+
 
 <script src="js/charts/js/highcharts.js"></script>
 <script src="js/charts/js/modules/exporting.js"></script>
@@ -133,11 +146,10 @@ date_default_timezone_set('America/Bogota');
     <!-- Custom Theme JavaScript -->
     <script src="js/custom.min.js"></script> 
 
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">  
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<
 
+    <script src="plugins/bower_components/toast-master/js/jquery.toast.js"></script>    <!--Style Switcher -->
     <script src="plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
-
   
 
     <script type="text/javascript">
@@ -165,9 +177,6 @@ date_default_timezone_set('America/Bogota');
 
         });
     </script>
-    <script src="plugins/bower_components/toast-master/js/jquery.toast.js"></script>
-    <!--Style Switcher -->
-    <script src="plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
 </body>
 
 </html>

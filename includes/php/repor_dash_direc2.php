@@ -194,8 +194,6 @@
 <script type="text/javascript">
 $(document).ready(function () {
 
-  alert("jei");
-
 $('#container').highcharts({
         chart: {
             type: 'bar'

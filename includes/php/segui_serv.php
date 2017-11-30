@@ -6,21 +6,21 @@ $id_serv_cliente=base64_decode($_GET['id_serv_cliente']);
 
 
     // consultamos los datos del servicio
- $sql="select * from serv_cliente where id_serv_cliente='".$id_serv_cliente."' limit 0,1 ";
-     $query=mysqli_query($conexion, $sql);
-     $datos1=mysqli_fetch_assoc($query);
+ $sql="select * from serv_cliente where id_serv_cliente='".$id_serv_cliente."' limit 1 ";
+     $query=pg_query($conexion, $sql);
+     $datos1=pg_fetch_assoc($query);
      
      // Busco el nombre del responsable..
      
-     $sql10="select nombre from usuarios where cod_usuario='".$datos1['cod_usu_resp']."' ";
-     $query10=mysqli_query($conexion, $sql10);
-     $datos10=mysqli_fetch_assoc($query10);
+     $sql10="select nombre from usuarios where cod_usuario='".$datos1['cod_usuario']."' ";
+     $query10=pg_query($conexion, $sql10);
+     $datos10=pg_fetch_assoc($query10);
      
     // Ultima actuación
     
-    $sql11="select usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$id_serv_cliente."' order by activ_serv.id_activi_serv desc limit 0,1 ";
-    $query11=mysqli_query($conexion, $sql11);
-    @$datos11=mysqli_fetch_assoc($query11);
+    $sql11="select distinct usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$id_serv_cliente."' ORDER BY activ_serv.id_activi_serv DESC limit 1 ";
+    $query11=pg_query($conexion, $sql11);
+    @$datos11=pg_fetch_assoc($query11);
         
         
             
@@ -28,44 +28,44 @@ $id_serv_cliente=base64_decode($_GET['id_serv_cliente']);
                                         
                   //  $parametro='AgendaCallCenter';   // Si son llamadas s贸lo para call center.              
 $sql9="select * from cliente where cod_cliente='".$datos1['cod_cliente']."' ";
-                    $query9=mysqli_query($conexion, $sql9);
-                    $datos9=mysqli_fetch_assoc($query9);
+                    $query9=pg_query($conexion, $sql9);
+                    $datos9=pg_fetch_assoc($query9);
 
 
     // Consulto la lista de poderes  y autorización necesario
 
             $sql2="select * from deta_list_despleg where tipo_lista=2";
-            $query2=mysqli_query($conexion, $sql2);
+            $query2=pg_query($conexion, $sql2);
             
             $sql21="select * from deta_list_despleg where tipo_lista=2 and id_list_despleg='".$datos1['poder_aut_nece']."' ";
-            $query21=mysqli_query($conexion, $sql21);
-            @$datos21=mysqli_fetch_assoc($query21);
+            $query21=pg_query($conexion, $sql21);
+            @$datos21=pg_fetch_assoc($query21);
             
 
      // Consulto la lista de tiene poder y autorización.
 
             $sql3="select * from deta_list_despleg where tipo_lista=3";
-            $query3=mysqli_query($conexion, $sql3);
+            $query3=pg_query($conexion, $sql3);
             
             $sql31="select * from deta_list_despleg where tipo_lista=3 and id_list_despleg='".$datos1['poder_aut']."' ";
-            $query31=mysqli_query($conexion, $sql31);
-            @$datos31=mysqli_fetch_assoc($query31);
+            $query31=pg_query($conexion, $sql31);
+            @$datos31=pg_fetch_assoc($query31);
 
      // Consulto la lista de tiene contrato.
             $sql4="select * from deta_list_despleg where tipo_lista=1";
-            $query4=mysqli_query($conexion, $sql4);
+            $query4=pg_query($conexion, $sql4);
             
              $sql41="select * from deta_list_despleg where tipo_lista=1 and id_list_despleg='".$datos1['firm_contrato']."' ";
-            $query41=mysqli_query($conexion, $sql41);
-            @$datos41=mysqli_fetch_assoc($query41);
+            $query41=pg_query($conexion, $sql41);
+            @$datos41=pg_fetch_assoc($query41);
 
      // Consulto la lista de estado de seguimiento (servicio).
             $sql5="select * from deta_list_despleg where tipo_lista=4";
-            $query5=mysqli_query($conexion, $sql5);
+            $query5=pg_query($conexion, $sql5);
             
-            $sql51="select * from deta_list_despleg where tipo_lista=4 and id_list_despleg='".$datos1['cod_estado_segui']."' ";
-            $query51=mysqli_query($conexion, $sql51);
-            @$datos51=mysqli_fetch_assoc($query51);
+            $sql51="select * from deta_list_despleg where tipo_lista=4 and id_list_despleg='".$datos1['id_list_despleg']."' ";
+            $query51=pg_query($conexion, $sql51);
+            @$datos51=pg_fetch_assoc($query51);
 
 
 ?>
@@ -370,7 +370,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
         <td width="778"><select name="firm_contrato" id="firm_contrato">
         <?php
 
-                while($datos=mysqli_fetch_assoc($query4)){
+                while($datos=pg_fetch_assoc($query4)){
 
         ?>
            <option value="<?= $datos['id_list_despleg'] ?>"<?php if($datos['id_list_despleg']==$datos41['id_list_despleg']){ ?> selected='selected' <?php } ?>><?php echo utf8_decode($datos['descripcion'])?></option>
@@ -425,7 +425,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
         <td width="928"><select name="poder_aut_nec" id="poder_aut_nec">
 
           <?php
-                while($datos=mysqli_fetch_assoc($query2)){
+                while($datos=pg_fetch_assoc($query2)){
 
         ?>
            <option value="<?= $datos['id_list_despleg'] ?>"<?php if($datos['id_list_despleg']==$datos21['id_list_despleg']){ ?> selected='selected' <?php } ?>><?php echo utf8_encode($datos['descripcion'])?></option>
@@ -441,7 +441,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
         <td><b>(*)</b>Tiene poder y autorización</td>
         <td><select name="poder_aut" id="poder_aut">
         <?php
-                while($datos=mysqli_fetch_assoc($query3)){
+                while($datos=pg_fetch_assoc($query3)){
 
         ?>
            <option value="<?= $datos['id_list_despleg'] ?>"<?php if($datos['id_list_despleg']==$datos31['id_list_despleg']){ ?> selected='selected' <?php } ?>><?php echo utf8_encode($datos['descripcion'])?></option>
@@ -497,7 +497,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
         <td width="860"><select name="cod_estado_segui" id="cod_estado_segui"> 
 
                 <?php
-                while($datos=mysqli_fetch_assoc($query5)){
+                while($datos=pg_fetch_assoc($query5)){
 
         ?>
              <option value="<?= $datos['id_list_despleg'] ?>"<?php if($datos['id_list_despleg']==$datos51['id_list_despleg']){ ?> selected='selected' <?php } ?>><?php echo utf8_encode($datos['descripcion'])?></option>

@@ -8,13 +8,13 @@ $cod_resp=base64_decode($_GET['cod_resp']);
 		        $parametro="";
 										
 					//$parametro='AgendaCallCenter';	 // Si son llamadas s贸lo para call center.				
- $sql="select distinct  serv_cliente.cod_usu_resp, serv_cliente.id_serv_cliente, servicios.nom_servicio, acuer_pago.descripcion as acuer_pago, serv_cliente.porc_pagado, serv_cliente.valor, estado.descripcion as estado from acuer_pago, servicios, estado, serv_cliente where $parametro servicios.cod_servicio=serv_cliente.cod_servicio  and acuer_pago.cod_acuer_pago=serv_cliente.cod_fase_pago and estado.cod_estado=serv_cliente.cod_estado_caso and serv_cliente.cod_cliente='".$_GET['cod_cliente']."' and serv_cliente.cod_estado_caso=23   ";
-					$query=mysqli_query($conexion,$sql);
-					$rows=mysqli_num_rows($query);
+  $sql="select distinct  serv_cliente.cod_usuario, serv_cliente.id_serv_cliente, servicios.nom_servicio, acuer_pago.descripcion as acuer_pago, serv_cliente.porc_pagado, serv_cliente.valor, estado.descripcion as estado from acuer_pago, servicios, estado, serv_cliente where $parametro servicios.cod_servicio=serv_cliente.cod_servicio  and acuer_pago.cod_acuer_pago=serv_cliente.cod_acuer_pago and estado.cod_estado=serv_cliente.cod_estado and serv_cliente.cod_cliente='".$_GET['cod_cliente']."' and serv_cliente.cod_estado=23   ";
+					$query=pg_query($conexion,$sql);
+					$rows=pg_num_rows($query);
 
 $sql2="select * from cliente where  cod_cliente='".$_GET['cod_cliente']."' ";
-$query2=mysqli_query($conexion, $sql2);
-$datos2=mysqli_fetch_assoc($query2);
+$query2=pg_query($conexion, $sql2);
+$datos2=pg_fetch_assoc($query2);
 
 ?>
 <script src="../../plugins/bower_components/jquery/dist/jquery.min.js"></script>
@@ -47,7 +47,7 @@ $datos2=mysqli_fetch_assoc($query2);
  <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title"> <strong>SERVICIOS DEL CLIENTE: <?php echo  utf8_encode($datos2['nombre']) ?> </strong></h4> </div>
+                        <h4 class="page-title"> <strong>SERVICIOS DEL CLIENTE: <?php echo  ($datos2['nombre']) ?> </strong></h4> </div>
                 </div>
 
  <div class="row">
@@ -73,31 +73,32 @@ $datos2=mysqli_fetch_assoc($query2);
       <tbody>
       <?php
 	  $i=1;
-	   while($datos=mysqli_fetch_assoc($query)){ 
+	   while($datos=pg_fetch_assoc($query)){ 
 	       
-	       $sql11="select usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$datos['id_serv_cliente']."' order by activ_serv.id_activi_serv desc limit 0,1 ";
-    $query11=mysqli_query($conexion, $sql11);
-    @$datos11=mysqli_fetch_assoc($query11);
-    
+	       $sql11="select distinct usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$datos['id_serv_cliente']."'  limit 1 ";
+    $query11=pg_query($conexion, $sql11);
+    @$datos11=pg_fetch_assoc($query11);
+     
 	   
 	   ?>
         <tr>
           <td><?php echo $i; ?></td>
-          <td width="5%"><?php echo utf8_encode($datos['nom_servicio']); ?></td>
-          <td><?php echo utf8_encode($datos['acuer_pago']); ?></td>
+          <td width="5%"><?php echo ($datos['nom_servicio']); ?></td>
+          <td><?php echo ($datos['acuer_pago']); ?></td>
           <td><?php echo $datos['porc_pagado']; ?>%</td>
           <td><?php echo number_format($datos['valor']); ?></td>
           <td><a href="includes/php/ver_cuotas.php?cod_cliente=<?php echo $_GET['cod_cliente']; ?>" tittle='Ver cuotas' target='_blank'><p class='icon-note lg'></p></td>
           <td><?php echo $datos['estado']; ?></td>
-          <td style="alignment-adjust:auto"><?php echo utf8_encode($datos11['etapa'].": ".$datos11['actividad']); ?></td>
+          <td style="alignment-adjust:auto"><?php echo ($datos11['etapa'].": ".$datos11['actividad']); ?></td>
           <td><?php echo $datos11['fecha_actividad']; ?></td>
-          <td><?php  if( (isset($cod_resp)==$datos['cod_usu_resp']) || $_SESSION['tipo_usuario']==1){ ?>
-          			<a href="segui_serv.php?nom_servicio=<?php echo base64_encode(utf8_encode($datos['nom_servicio'])); ?>&id_serv_cliente=<?php echo base64_encode($datos['id_serv_cliente']); ?>" tittle='Seguimiento' class='ediicion'><p class='icon-note lg'></p></a>
+          <td><?php  if( (isset($cod_resp)==$datos['cod_usuario']) || $_SESSION['tipo_usuario']==1){ ?>
+          			<a href="segui_serv.php?nom_servicio=<?php echo base64_encode(($datos['nom_servicio'])); ?>&id_serv_cliente=<?php echo base64_encode($datos['id_serv_cliente']); ?>" tittle='Seguimiento' class='ediicion'><p class='icon-note lg'></p></a>
           			<?php } ?>
 
           </td>
            </tr>
           <?php 
+           pg_free_result($query11);
 		  		$i++;		  
 		  }
 		    ?>

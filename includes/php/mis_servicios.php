@@ -8,7 +8,7 @@ include('../dependencia/conexion.php');
   else
   $sql="select * from usuarios where email='".$_SESSION['email']."' ";
 	
-	$query=mysqli_query($conexion, $sql); 
+	$query=pg_query($conexion, $sql); 
 ?>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
   <script src="../js/datepicker-master/dist/datepicker.js"></script>
@@ -34,7 +34,7 @@ include('../dependencia/conexion.php');
                                                     <div class="form-group">
                                                         <label>USUARIO</label>
                                                         <select name="select" id="email" class='form-control'>
-                       <<?php while($datos=mysqli_fetch_assoc($query)){  ?><option value=<?= $datos['email'] ?>><?php echo $datos['email']  ?></option>             
+                       <<?php while($datos=pg_fetch_assoc($query)){  ?><option value=<?= $datos['email'] ?>><?php echo $datos['email']  ?></option>             
               <?php  }  ?>                   </select> </div>
                                                 </div>
                                             </div>                                           

@@ -1,7 +1,7 @@
 <?php
 include('../dependencia/conexion.php');
             $sql="select * from grupo_usuarios";
-            $query=mysqli_query($conexion, $sql);
+            $query=pg_query($conexion, $sql);
 ?>
 <link href="plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -51,11 +51,11 @@ include('../dependencia/conexion.php');
                                                 <select class="form-control" id="id_grupo">
                                                    <option value="0">Seleccione</option>
                                                            <?php
-                                                                    while($datos=mysqli_fetch_assoc($query)){
+                                                                    while($datos=pg_fetch_assoc($query)){
 
                                                            ?>
 
-                                                           <option value="<?= $datos['cod_grupo']?>"><?php echo utf8_encode($datos['descripcion'])  ?></option>
+                                                           <option value="<?= $datos['cod_grupo']?>"><?php echo ($datos['descripcion'])  ?></option>
 
                                                             <?php 
 

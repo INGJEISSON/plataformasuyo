@@ -47,9 +47,9 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
   $profile_url = $me['url'];
                           
                          $sql="Select usuarios.email,tipo_usuario.tipo_usuario, usuarios.cod_estado, usuarios.cod_usuario, tipo_usuario.id_grupo from usuarios, tipo_usuario where usuarios.tipo_usuario=tipo_usuario.tipo_usuario and  usuarios.email='".$email."' ";
-                        $query=mysqli_query($conexion, $sql);
-                        $rows=mysqli_num_rows($query);
-                        $datos=mysqli_fetch_assoc($query);
+                        $query=pg_query($conexion, $sql);
+                        $rows=pg_num_rows($query);
+                        $datos=pg_fetch_assoc($query);
                                 if(isset($rows)){
                                 $_SESSION['nombre']=$name;
                                 $_SESSION['email']=$email;

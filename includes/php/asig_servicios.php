@@ -49,8 +49,11 @@ $sql="select distinct cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_
 
 ?>
 
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">  
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+
+
+
+
+
 <link rel="stylesheet" href="js/colorbox-master/example1/colorbox.css" />
 <script src="js/colorbox-master/jquery.colorbox-min.js"></script>
 
@@ -82,7 +85,7 @@ $sql="select distinct cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_
   </center>
   </p>
   <div class="card-header d-flex-fluid">
-    <table id="table_id" class='table responsive' cellspacing="0" width="100%">
+    <table id="table_id" class='table responsive nowrap' cellspacing="0" width="100%">
       <thead>
         <tr>
           <th width="34">#</th>
@@ -215,10 +218,14 @@ $sql="select distinct cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_
 $(document).ready(function () {
  //$('#table_id').DataTable();
  
- $('#table_id').DataTable( {
+ $('#table_id').DataTable({
     //"bJQueryUI": true,
    // scrollY: 600,
     //paging: false
+      dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf'
+        ]
 } );
  
 
