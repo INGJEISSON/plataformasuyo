@@ -85,7 +85,7 @@ $sql="select  cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_cliente.
   </center>
   </p>
   <div class="card-header d-flex-fluid">
-    <table id="table_id" class='table responsive nowrap' cellspacing="0" width="100%">
+    <table id="table_id" class='table responsive' cellspacing="0" width="100%">
       <thead>
         <tr>
           <th width="34">#</th>
@@ -266,7 +266,7 @@ $(document).ready(function () {
             data: [
             <?php 
                while($datos4=pg_fetch_assoc($query6)){
-                
+
                                         $sql2="select * from serv_cliente where cod_usuario='".$datos4['cod_usuario']."' and cod_estado=23 ";
                                     $query2=pg_query($conexion, $sql2);
                                     $datos2=pg_fetch_assoc($query2);
