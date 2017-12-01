@@ -14,21 +14,21 @@
                              </tr>
                              <?php
                              $i=1;
-                             while($datos2=mysqli_fetch_assoc($query2)){
+                             while($datos2=pg_fetch_assoc($query2)){
                                  
                                  
                                             @$sql6="select * from serv_cliente  where id_serv_cliente='".$_POST['id_fasfield']."' ";
-                                             @$query6=mysqli_query($conexion, $sql6);
-                                             @$rows6=mysqli_num_rows($query6);
-                                             @$datos6=mysqli_fetch_assoc($query6);
+                                             @$query6=pg_query($conexion, $sql6);
+                                             @$rows6=pg_num_rows($query6);
+                                             @$datos6=pg_fetch_assoc($query6);
                                             
                              ?>
                              <tr>
                                <td><?php echo $i; ?></td>
                                <td><?php echo $datos2['fecha_registro'] ?></td>
-                               <td><?php echo utf8_encode($datos2['observacion']) ?></td>
-                               <td><?php echo utf8_encode($datos2['usuario']) ?></td>
-                               <td><?php echo utf8_encode($datos2['estado']) ?></td>
+                               <td><?php echo ($datos2['observacion']) ?></td>
+                               <td><?php echo ($datos2['usuario']) ?></td>
+                               <td><?php echo ($datos2['estado']) ?></td>
                                <td><?php if($datos2['archivo']!=""){ ?>
                                  <a href="../files/<?php echo $datos2['archivo'] ?>" target="_blank"><img src="../../img/icono_pdf.png" width="31" height="31"></a>
                                <?php } ?></td>

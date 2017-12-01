@@ -10,13 +10,13 @@
                              </tr>
                              <?php
                              $i=1;
-                             while($datos2=mysqli_fetch_assoc($query2)){
+                             while($datos2=pg_fetch_assoc($query2)){
                              ?>
                              <tr>
                                <td><?php echo $i; ?></td>
                                <td><?php echo $datos2['fecha_registro'] ?></td>
-                               <td><?php echo strtoupper(utf8_encode($datos2['etapa'])) ?></td>
-                               <td style="alignment-adjust:auto"><?php echo utf8_encode($datos2['actividad']) ?></td>
+                               <td><?php echo strtoupper(($datos2['etapa'])) ?></td>
+                               <td style="alignment-adjust:auto"><?php echo ($datos2['actividad']) ?></td>
                                <td><?php echo $datos2['fecha_actividad'] ?></td>
                                <td><?php echo $datos2['observacion'] ?></td>
                                <td><?php echo $datos2['usuario'] ?></td>

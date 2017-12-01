@@ -2,38 +2,38 @@
 include('../dependencia/conexion.php');
 
       $sql="select  * from cliente where cod_cliente='".$_GET['cod_cliente']."' ";
-          $query=mysqli_query($conexion, $sql);
-          $rows=mysqli_num_rows($query);
-          $datos=mysqli_fetch_assoc($query);        
+          $query=pg_query($conexion, $sql);
+          $rows=pg_num_rows($query);
+          $datos=pg_fetch_assoc($query);        
 
 // Buscamos la etapa de la última actuación..
 $sql2="select max(activ_serv.cod_activi_etapa) as cod_activi_etapa from activ_serv, activi_etapa where activi_etapa.cod_activi_etapa=activ_serv.cod_activi_etapa and activ_serv.id_serv_cliente='".$_GET['id_serv_cliente']."' ";
-$query2=mysqli_query($conexion, $sql2);
-$rows2=mysqli_num_rows($query2);
+$query2=pg_query($conexion, $sql2);
+$rows2=pg_num_rows($query2);
 $etapa=1;		
     if(isset($rows2)){
-        $datos2=mysqli_fetch_assoc($query2);
+        $datos2=pg_fetch_assoc($query2);
               $sql5="select * from activi_etapa where cod_activi_etapa='".$datos2['cod_activi_etapa']."' ";
-              $query5=mysqli_query($conexion, $sql5);
-              $datos5=mysqli_fetch_assoc($query5);
+              $query5=pg_query($conexion, $sql5);
+              $datos5=pg_fetch_assoc($query5);
 
               $etapa=$datos5['cod_etapa']; // Obtengo la etapa del usuario..
 
             // Consulto las actividades  necesarias de la etapa
                  $sql3="select * from activi_etapa where cod_etapa='".$etapa."' and cod_servicio='".$_GET['cod_servicio']."'  ";
-                $query3=mysqli_query($conexion, $sql3);
-                $n_activi=mysqli_num_rows($query3); // Número de actividades a reallizar..
+                $query3=pg_query($conexion, $sql3);
+                $n_activi=pg_num_rows($query3); // Número de actividades a reallizar..
                     
                     $n_activi_hechas=0;
                       
                         if(isset($n_activi)){
 
-                              while($datos3=mysqli_fetch_assoc($query3)){
+                              while($datos3=pg_fetch_assoc($query3)){
 
                                             // Comparo con las actividades realizadas
                                         $sql4="select * from activ_serv where cod_activi_etapa='".$datos3['cod_activi_etapa']."' and id_serv_cliente='".$_GET['id_serv_cliente']."' ";
-                                        $query4=mysqli_query($conexion, $sql4);
-                                         $rows4=mysqli_num_rows($query4); 
+                                        $query4=pg_query($conexion, $sql4);
+                                         $rows4=pg_num_rows($query4); 
 
                                               if($rows4>=1){
 
@@ -52,11 +52,11 @@ $etapa=1;
                         // Ubico al usuario en la etapa donde debe estar...
 
                               $sql3="select * from activi_etapa where cod_etapa='".$etapa."' and cod_servicio='".$_GET['cod_servicio']."' ";
-                              $query3=mysqli_query($conexion, $sql3); 
+                              $query3=pg_query($conexion, $sql3); 
                               
                               $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
-                              $query4=mysqli_query($conexion, $sql4);
-                              $datos4=mysqli_fetch_assoc($query4);              
+                              $query4=pg_query($conexion, $sql4);
+                              $datos4=pg_fetch_assoc($query4);              
                       } else
 
                       $datos4['descripcion']='SIN ETAPA A REALIZAR';
@@ -66,11 +66,11 @@ $etapa=1;
 		}else{ // SI no hay etapa aaún realiazada entonces listo las actviades de la etapa.
 		
 			$sql3="select * from activi_etapa where cod_etapa='".$etapa."' and cod_servicio='".$_GET['cod_servicio']."' ";
-				$query3=mysqli_query($conexion, $sql3);	
+				$query3=pg_query($conexion, $sql3);	
 				
 				$sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
-				$query4=mysqli_query($conexion, $sql4);
-				$datos4=mysqli_fetch_assoc($query4);		
+				$query4=pg_query($conexion, $sql4);
+				$datos4=pg_fetch_assoc($query4);		
 		}
 
 	
@@ -84,8 +84,8 @@ $etapa=1;
                   <div class="card">
                     
                     <div class="card-header d-flex align-items-center">
-                      <h3 class="h4">Actividades del servicio:  <?php echo utf8_encode($datos['nombre']);  ?> </h3>
-                      <p><strong>ETAPA ACTUAL:</strong> <?php echo strtoupper(utf8_encode($datos4['descripcion']));  ?> </p>
+                      <h3 class="h4">Actividades del servicio:  <?php echo ($datos['nombre']);  ?> </h3>
+                      <p><strong>ETAPA ACTUAL:</strong> <?php echo strtoupper(($datos4['descripcion']));  ?> </p>
                     </div>
                     <div class="card-body">
                          <table width="870" border="0" id="pan_add_revision" class="table responsive" cellpadding="1" cellspacing="4">
@@ -101,9 +101,9 @@ $etapa=1;
                            <tr>
                              <td height="46"><select name="select" id="cod_activi_etapa" class="form-control">
                                <option value="1" selected="selected">Sin actividad</option>
-                              <?php while($datos2=mysqli_fetch_assoc($query3)){ ?>
+                              <?php while($datos2=pg_fetch_assoc($query3)){ ?>
                                
-                               <option value="<?= $datos2['cod_activi_etapa'] ?>"> <?php echo utf8_encode($datos2['descripcion'])?></option>
+                               <option value="<?= $datos2['cod_activi_etapa'] ?>"> <?php echo ($datos2['descripcion'])?></option>
                                <?php } ?>
                              </select></td>
                              <td><label for="textfield"></label></td>

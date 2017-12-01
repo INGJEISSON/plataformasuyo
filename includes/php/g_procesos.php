@@ -39,11 +39,11 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
 
           // Verificamos quién está realizando la revisión.....
-          if($_SESSION['id_grupo']==6 or $_SESSION['id_grupo']==1) // Coordiandor de operaciones.  o Super administrador
+          if($_SESSION['cod_grupo']==6 or $_SESSION['cod_grupo']==1) // Coordiandor de operaciones.  o Super administrador
             $tipo_revision=1; // Control de calidad
-          else if($_SESSION['id_grupo']==3 or $_SESSION['id_grupo']==1) // Analítico....  o Super administrador
+          else if($_SESSION['cod_grupo']==3 or $_SESSION['cod_grupo']==1) // Analítico....  o Super administrador
             $tipo_revision=2; 
-          else if($_SESSION['id_grupo']==8 or $_SESSION['id_grupo']==1) // Asesor...  o Super administrador
+          else if($_SESSION['cod_grupo']==8 or $_SESSION['cod_grupo']==1) // Asesor...  o Super administrador
             $tipo_revision=3; // Asesor
           
         
@@ -145,19 +145,19 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                   if($rows){ // Si encontró entonces actualice...
 
                      // Equipo analítico
-                    if($_SESSION['id_grupo']==3){
+                    if($_SESSION['cod_grupo']==3){
                   $update="update elab_diag set fecha='".$_POST['fecha']."', direccion='".$_POST['direccion']."', cond_serv='".$_POST['cond_serv']."', elab_analitic='".$_POST['elab_analitic']."', apr_analitic='".$_POST['apr_analitic']."', llamada_client='".$_POST['llamada_client']."', pagina_web='".$_POST['pagina_web']."', consult_ent='".$_POST['consult_ent']."', pot='".$_POST['pot']."', der_peticion='".$_POST['der_peticion']."' where id_fasfield='".$_POST['id_fasfield']."' ";
                 $update2="update estados_diag set estado_anali='".$_POST['cod_estado_ana']."' where id_fasfield='".$_POST['id_fasfield']."' ";
                   }
 
                      // Equipo Legal
-                    else if($_SESSION['id_grupo']==4){
+                    else if($_SESSION['cod_grupo']==4){
                       $update="update elab_diag set dir_form_igac='".$_POST['dir_form_igac']."', barrio='".$_POST['barrio']."', municipio='".$_POST['municipio']."', f_nec_form='".$_POST['f_nec_form']."', par_predio_client='".$_POST['par_predio_client']."', analis_client='".$_POST['analis_client']."', msg_info='".$_POST['msg_info']."', f_esp_legal='".$_POST['f_esp_legal']."', aport_client_legal='".$_POST['aport_client_legal']."', elab_legal='".$_POST['elab_legal']."', apr_legal='".$_POST['apr_legal']."', llamada_client='".$_POST['llamada_client']."', pagina_web='".$_POST['pagina_web']."', consult_ent='".$_POST['consult_ent']."', pot='".$_POST['pot']."', der_peticion='".$_POST['der_peticion']."', aport_legal='".$_POST['aport_legal']."' where id_fasfield='".$_POST['id_fasfield']."' ";
                     $update2="update estados_diag set estado_legal='".$_POST['cod_estado_leg']."' where id_fasfield='".$_POST['id_fasfield']."' ";
                   }
                     
                      // Equipo técnico
-                    else if($_SESSION['id_grupo']==5){
+                    else if($_SESSION['cod_grupo']==5){
 
                       $update="update elab_diag set f_nec_legal='".$_POST['f_nec_legal']."', f_ubic_coor='".$_POST['f_ubic_coor']."', f_cons_lic='".$_POST['f_cons_lic']."', f_riesg_inun='".$_POST['f_riesg_inun']."', f_riesg_remo='".$_POST['f_riesg_remo']."', f_riesg_proct='".$_POST['f_riesg_proct']."', tipol_cant_constr='".$_POST['tipol_cant_constr']."', alt_cant_pisos='".$_POST['alt_cant_pisos']."', dim_frent_lote='".$_POST['dim_frent_lote']."', dim_frent_const='".$_POST['dim_frent_const']."', dist_lad_lot='".$_POST['dist_lad_lot']."', dist_lot_izq='".$_POST['dist_lot_izq']."', dist_lot_der='".$_POST['dist_lot_der']."', area_catastral='".$_POST['area_catastral']."', area_docu='".$_POST['area_docu']."', ara_docu_es_de='".$_POST['ara_docu_es_de']."', area_med_de='".$_POST['area_med_de']."', raz_cumpl='".$_POST['raz_cumpl']."', f_esp_tecn='".$_POST['f_esp_tecn']."', aport_client_tecni='".$_POST['aport_client_tecni']."', aport_tecni='".$_POST['aport_tecni']."', apro_tecnico='".$_POST['apro_tecnico']."', elab_tecnico='".$_POST['elab_tecnico']."', area_lote='".$_POST['area_lote']."' where id_fasfield='".$_POST['id_fasfield']."' ";
                     $update2="update estados_diag set estado_tecn='".$_POST['cod_estado_tec']."' where id_fasfield='".$_POST['id_fasfield']."' ";
@@ -651,7 +651,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                         // Diagnósticos gratuitos....
                         $_POST['asesor']=0;
                         
-                        // if($_SESSION['id_grupo']==1)
+                        // if($_SESSION['cod_grupo']==1)
                            include('repor_dash_direc2.php');    
                           //  else
                            // echo "Estamos trabajandoa aquí, por favor intenta mas tarde.";                   
@@ -1015,7 +1015,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                         // Diagnósticos gratuitos....
                         
                         
-                        // if($_SESSION['id_grupo']==1)
+                        // if($_SESSION['cod_grupo']==1)
                            include('repor_dash_direc4.php');    
                           //  else
                            // echo "Estamos trabajandoa aquí, por favor intenta mas tarde.";                   
@@ -1144,7 +1144,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                               $i++;
                             }
 
-                       $sql78="select distinct det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where  $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (resul_visita='".utf8_decode('Visitado y no interesado')."' or resul_visita='".utf8_decode('Visitado y reagendado (Se fue hasta la vivienda y el cliente pidió un cambio en la agenda de la visita)')."' or  resul_visita='".utf8_decode('Llamado y no se logró contactar (antes de la visita no se logró confirmación)')."' or  resul_visita='".utf8_decode('Visitado y no se logró contactar (se fue hasta la vivienda y no se logró confirmación)')."') and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                       $sql78="select distinct det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where  $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (resul_visita='".('Visitado y no interesado')."' or resul_visita='".('Visitado y reagendado (Se fue hasta la vivienda y el cliente pidió un cambio en la agenda de la visita)')."' or  resul_visita='".('Llamado y no se logró contactar (antes de la visita no se logró confirmación)')."' or  resul_visita='".('Visitado y no se logró contactar (se fue hasta la vivienda y no se logró confirmación)')."') and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                             $query78=pg_query($conexion, $sql78);
                         $rows78=pg_num_rows($query78);
                                   $i=1;
@@ -1301,7 +1301,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                         
                           /// Gratuitos.
 
-                      $sql124="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".utf8_decode('Visitado y fue gratuito el diagnóstico')."' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                      $sql124="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".('Visitado y fue gratuito el diagnóstico')."' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query124=pg_query($conexion, $sql124);
                      $gratuito=pg_num_rows($query124); 
                      
@@ -1314,13 +1314,13 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
                           /// Entrega de diagnóstico.
                       
-                       $sql126="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".utf8_decode('Entrega de diagnÃ³stico')."'  and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                       $sql126="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".('Entrega de diagnÃ³stico')."'  and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query126=pg_query($conexion, $sql126);
                       $entr_diag=pg_num_rows($query126); 
                         
 
 
-                          $sql126="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".utf8_decode('Entrega de diagnÃ³stico')."' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                          $sql126="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".('Entrega de diagnÃ³stico')."' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query126=pg_query($conexion, $sql126);
                       $entr_diag=pg_num_rows($query126); 
                         // Sumamos los servicios express..
@@ -1347,7 +1347,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
                           // Sumo el valor ingresado por los aliados y aprobados... 
 
-                           $s5="select sum(det_repor_aseso.valor) as valor, det_repor_aseso.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and enc_procesadas.cod_estado=6 and det_repor_aseso.tipo_pago='Credito'  and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                           $s5="select sum(det_repor_aseso.valor) as valor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and enc_procesadas.cod_estado=6 and det_repor_aseso.tipo_pago='Credito'  and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
                           $q5=pg_query($conexion, $s5);
                           $r5=pg_num_rows($q5);
                               if($r5){
@@ -1391,7 +1391,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                         // Diagnósticos gratuitos....
                         
                         
-                        // if($_SESSION['id_grupo']==1)
+                        // if($_SESSION['cod_grupo']==1)
                            include('repor_dash_direc2.php');    
                           //  else
                            // echo "Estamos trabajandoa aquí, por favor intenta mas tarde.";                   
@@ -1406,16 +1406,16 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
 
           // Verificamos quién está realizando la revisión.....
-          if($_SESSION['id_grupo']==6 or $_SESSION['id_grupo']==1) // Coordiandor de operaciones.  o Super administrador
+          if($_SESSION['cod_grupo']==6 or $_SESSION['cod_grupo']==1) // Coordiandor de operaciones.  o Super administrador
             $tipo_revision=1; // Control de calidad
-          else if($_SESSION['id_grupo']==3 or $_SESSION['id_grupo']==1) // Analítico....  o Super administrador
+          else if($_SESSION['cod_grupo']==3 or $_SESSION['cod_grupo']==1) // Analítico....  o Super administrador
             $tipo_revision=2; 
-          else if($_SESSION['id_grupo']==8 or $_SESSION['id_grupo']==1) // Asesor...  o Super administrador
+          else if($_SESSION['cod_grupo']==8 or $_SESSION['cod_grupo']==1) // Asesor...  o Super administrador
             $tipo_revision=3; // Asesor
           
          
 
-           $insert="insert into seguimientos (tipo_seguimiento, id_fasfield, cod_usuario, observacion, cod_estado,  n_intento, fecha_agenda, archivo) values('".$_POST['tipo_seguimiento']."',  '".$_POST['id_fasfield']."', '".$_SESSION['cod_usuario']."',  '".utf8_decode($_POST['observacion'])."', '".$_POST['cod_estado']."', '".@$_POST['n_intento']."', '".@$_POST['fecha_agenda']."', '".$_SESSION['nom_archivo']."' ) ";
+       $insert="insert into seguimientos (tipo_seguimiento, id_fasfield, cod_usuario, observacion, cod_estado,  fecha_agenda, archivo) values('".$_POST['tipo_seguimiento']."',  '".$_POST['id_fasfield']."', '".$_SESSION['cod_usuario']."',  '".($_POST['observacion'])."', '".$_POST['cod_estado']."', '".@$_POST['fecha_agenda']."', '".$_SESSION['nom_archivo']."' ) ";
         $query=pg_query($conexion, $insert);
             
             if($_POST['cod_estado']==22){
@@ -1476,7 +1476,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
          if(isset($_POST['revi_revi_call2'])){ // Agregar revisión de call center.  y otras revisiones..
                 
                             
-                         $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, estado.descripcion as estado, estado.cod_estado, usuarios.nombre as usuario from seguimientos, usuarios, estado where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=estado.cod_estado and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc limit 0,1  ";
+                         $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, estado.descripcion as estado, estado.cod_estado, usuarios.nombre as usuario from seguimientos, usuarios, estado where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=estado.cod_estado and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc limit 1  ";
                         $query2=pg_query($conexion, $sql2);
                           $rows2=pg_num_rows($query2);
                       include('history_revi.php');
@@ -1500,7 +1500,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                 if(isset($_POST['bus_rol'])){ // Buscamos el tipo de usuario..
 
 
-                      $sql="select * from tipo_usuario where id_grupo='".$_POST['id_grupo']."' ";
+                      $sql="select * from tipo_usuario where cod_grupo='".$_POST['cod_grupo']."' ";
                       $query=pg_query($conexion, $sql);
                       $rows=pg_num_rows($query);
                           if($rows){
@@ -1609,8 +1609,9 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                             
                               // Actualizamos los datos básicos.
 
-                         $sql2="update serv_cliente set n_folio_inm='".$_POST['n_folio_inm']."', refe_catas='".$_POST['refe_catas']."',  firm_contrato='".$_POST['firm_contrato']."', fecha_firm_contr='".$_POST['fecha_firm_contr']."', tiempo_compros='".$_POST['tiempo_compros']."', fecha_compro_contr='".$_POST['fecha_compro_contr']."', poder_aut_nece='".$_POST['poder_aut_nec']."', poder_aut='".$_POST['poder_aut']."', fecha_ini_tramite='".$_POST['fecha_ini_tramite']."', enti_tramite='".$_POST['enti_tramite']."', radicado='".$_POST['radicado']."',cod_estado_segui='".$_POST['cod_estado_segui']."', resu_serv='".utf8_decode($_POST['resu_serv'])."', coment_serv='".utf8_decode($_POST['coment_serv'])."', cod_estado_venc='".$_POST['cod_estado_venc']."' where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
+                           $sql2="update serv_cliente set n_folio_inm='".$_POST['n_folio_inm']."', refe_catas='".$_POST['refe_catas']."',  firm_contrato='".$_POST['firm_contrato']."', fecha_firm_contr='".$_POST['fecha_firm_contr']."', tiempo_compros='".$_POST['tiempo_compros']."', fecha_compro_contr='".$_POST['fecha_compro_contr']."', poder_aut_nece='".$_POST['poder_aut_nec']."', poder_aut='".$_POST['poder_aut']."', fecha_ini_tramite='".$_POST['fecha_ini_tramite']."', enti_tramite='".$_POST['enti_tramite']."', radicado='".$_POST['radicado']."',id_list_despleg='".$_POST['cod_estado_segui']."', resu_serv='".($_POST['resu_serv'])."', coment_serv='".($_POST['coment_serv'])."', cod_estado_venc='".$_POST['cod_estado_venc']."' where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
                            $update=pg_query($conexion, $sql2);
+
                           $sql3="update cliente set barrio='".$_POST['barrio']."', direccion_predio='".$_POST['direccion']."' where cod_cliente='".$_POST['cod_cliente']."' ";
                           $update2=pg_query($conexion, $sql3);
                          
@@ -1629,11 +1630,11 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
         if(isset($_POST['add_revi_serv'])){ // Agregar actividades del servicio.
 
           // Verificamos quién está realizando la revisión.....
-          if($_SESSION['id_grupo']==6 or $_SESSION['id_grupo']==1) // Coordiandor de operaciones.  o Super administrador
+          if($_SESSION['cod_grupo']==6 or $_SESSION['cod_grupo']==1) // Coordiandor de operaciones.  o Super administrador
             $tipo_revision=1; // Control de calidad
-          else if($_SESSION['id_grupo']==3 or $_SESSION['id_grupo']==1) // Analítico....  o Super administrador
+          else if($_SESSION['cod_grupo']==3 or $_SESSION['cod_grupo']==1) // Analítico....  o Super administrador
             $tipo_revision=2; 
-          else if($_SESSION['id_grupo']==8 or $_SESSION['id_grupo']==1) // Asesor...  o Super administrador
+          else if($_SESSION['cod_grupo']==8 or $_SESSION['cod_grupo']==1) // Asesor...  o Super administrador
             $tipo_revision=3; // Asesor
 
             $insert="insert into activ_serv (cod_activi_etapa, id_serv_cliente, observacion, cod_usu_respon, fecha_actividad) values('".$_POST['cod_activi_etapa']."', '".$_POST['id_serv_cliente']."', '".$_POST['observacion']."', '".$_SESSION['cod_usuario']."', '".$_POST['fecha_actividad']."') ";
@@ -1665,7 +1666,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
          if(isset($_POST['revi_serv2'])){ //  Agregar actividades del servicio.
                 
                             
-                      $sql2="select usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$_POST['id_serv_cliente']."' order by activ_serv.id_activi_serv desc limit 0,1 ";
+                      $sql2="select usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$_POST['id_serv_cliente']."' order by activ_serv.id_activi_serv desc limit 1 ";
                         $query2=pg_query($conexion, $sql2);
                           $rows2=pg_num_rows($query2);
                       include('history_revi2.php');
@@ -1685,16 +1686,15 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                             }
           
           }
-
           if(isset($_POST['asig_servicio'])){
 
 
 
-                    $sql="insert into asigna_serv (id_serv_cliente, cod_usu_coor, cod_usu_respon, fecha_filtro) values('".$_POST['id_serv_cliente']."', '".$_SESSION['cod_usuario']."', '".$_POST['cod_usu_resp']."', '".$fecha_registro."') ";
+                    $sql="insert into asigna_serv (id_serv_cliente, cod_usu_coor, cod_usuario, fecha_filtro) values('".$_POST['id_serv_cliente']."', '".$_SESSION['cod_usuario']."', '".$_POST['cod_usu_resp']."', '".$fecha_registro."') ";
                     $query=pg_query($conexion, $sql);
 
                           if($query){
-                                    $update="update serv_cliente set cod_usu_resp='".$_POST['cod_usu_resp']."' where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
+                                    $update="update serv_cliente set cod_usuario='".$_POST['cod_usu_resp']."' where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
                                     $query2=pg_query($conexion, $update);
                                         if($query2)
                                           echo "1"; // Registro exitoso...

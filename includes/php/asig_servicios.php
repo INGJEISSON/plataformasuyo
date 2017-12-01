@@ -12,9 +12,9 @@ include('../dependencia/conexion.php');
   
   if($_SESSION['tipo_usuario']!=6)
 
-$sql="select distinct cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_cliente.descripcion as tipo_cliente, servicios.nom_servicio, serv_cliente.cod_usu_resp, serv_cliente.id_serv_cliente from cliente, serv_cliente, tipo_cliente, servicios where $parametro servicios.cod_servicio=serv_cliente.cod_servicio and cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=serv_cliente.cod_cliente and serv_cliente.cod_estado_caso=23 order by serv_cliente.cod_usu_resp=0 desc";
-          $query=mysqli_query($conexion, $sql);
-          $rows=mysqli_num_rows($query);
+$sql="select distinct cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_cliente.descripcion as tipo_cliente, servicios.nom_servicio, serv_cliente.cod_usuario, serv_cliente.id_serv_cliente from cliente, serv_cliente, tipo_cliente, servicios where $parametro servicios.cod_servicio=serv_cliente.cod_servicio and cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=serv_cliente.cod_cliente and serv_cliente.cod_estado=23 order by serv_cliente.cod_usuario=83 desc";
+          $query=pg_query($conexion, $sql);
+          $rows=pg_num_rows($query);
     
           
     if($_SESSION['tipo_usuario']==1)
@@ -23,10 +23,10 @@ $sql="select distinct cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_
     $sql6="select * from usuarios where  tipo_usuario=19  ";
     else
     $sql6="select * from usuarios where  tipo_usuario=21 or tipo_usuario=6  ";
-                    $query6=mysqli_query($conexion, $sql6);
-                    $rows6=mysqli_num_rows($query6);
+                    $query6=pg_query($conexion, $sql6);
+                    $rows6=pg_num_rows($query6);
                   
-                            /*while($datos4=mysqli_fetch_assoc($query4)){
+                            /*while($datos4=pg_fetch_assoc($query4)){
                                         
                                  if($i==$rows4)
                                      $nom_responsable.="'".$datos4['nombre'].' '.$datos4['apellidos']."'";
@@ -35,9 +35,9 @@ $sql="select distinct cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_
                                         //Buscamos la carga que tenga el usuario
                                         
                                     $sql2="select * from serv_cliente where cod_usu_resp='".$datos4['cod_usuario']."' and cod_estado_caso=23 ";
-                                    $query2=mysqli_query($conexion, $sql2);
-                                    $datos2=mysqli_fetch_assoc($query2);
-                                    $rows2=mysqli_num_rows($query2);
+                                    $query2=pg_query($conexion, $sql2);
+                                    $datos2=pg_fetch_assoc($query2);
+                                    $rows2=pg_num_rows($query2);
                                    
                                      if($i==$rows4)
                                      $carga.="'".$rows2."'";
@@ -103,19 +103,19 @@ $sql="select distinct cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_
       <tbody>
       <?php
       $i=1;
-        while($datos=mysqli_fetch_assoc($query)){
+        while($datos=pg_fetch_assoc($query)){
                               if($_SESSION['tipo_usuario']!=6)
                                 $sql3="select * from usuarios where tipo_usuario=19 ";
                                 else
                               $sql3="select * from usuarios where tipo_usuario=21  or tipo_usuario=6 ";
-                      $query3=mysqli_query($conexion, $sql3);
+                      $query3=pg_query($conexion, $sql3);
                               
-                            $sql2="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from serv_cliente, usuarios where serv_cliente.cod_usu_resp=usuarios.cod_usuario and  serv_cliente.id_serv_cliente='".$datos['id_serv_cliente']."' and serv_cliente.cod_estado_caso=23 and serv_cliente.cod_usu_resp='".$datos['cod_usu_resp']."'   ";
-                              $query2=mysqli_query($conexion, $sql2);
-                              $rows2=mysqli_num_rows($query2);
+                            $sql2="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from serv_cliente, usuarios where serv_cliente.cod_usuario=usuarios.cod_usuario and  serv_cliente.id_serv_cliente='".$datos['id_serv_cliente']."' and serv_cliente.cod_estado=23 and serv_cliente.cod_usuario='".$datos['cod_usu_resp']."'   ";
+                              $query2=pg_query($conexion, $sql2);
+                              $rows2=pg_num_rows($query2);
                                   if($rows2){
                                      
-                                          $datos2=mysqli_fetch_assoc($query2);
+                                          $datos2=pg_fetch_assoc($query2);
                                     $estado="Asignado";
 
                                   }else
@@ -123,11 +123,11 @@ $sql="select distinct cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_
 
                             // Buscamoss la fecha de asignaci¨®n: 
 
-                                  $sql4="select fecha_filtro from asigna_serv where id_serv_cliente='".$datos['id_serv_cliente']."' order by id_asig_serv desc limit 0,1  ";
-                                  $query4=mysqli_query($conexion, $sql4);
-                                  $rows4=mysqli_num_rows($query4);
+                                  $sql4="select fecha_filtro from asigna_serv where id_serv_cliente='".$datos['id_serv_cliente']."' order by id_asig_serv desc limit 1  ";
+                                  $query4=pg_query($conexion, $sql4);
+                                  $rows4=pg_num_rows($query4);
                                       if($rows4){
-                                        $datos4=mysqli_fetch_assoc($query4);    
+                                        $datos4=pg_fetch_assoc($query4);    
                                         $fecha_filtro= $datos4['fecha_filtro'];                                   
                                       }else
                                       $fecha_filtro="";
@@ -136,9 +136,9 @@ $sql="select distinct cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_
         <tr>
           <td><?php echo $i; ?></td>
           <td><?php echo $datos['cod_cliente']; ?></td>
-          <td><?php echo utf8_encode($datos['nombre']); ?></td>
-          <td><?php echo utf8_encode($datos['nom_servicio']); ?></td>
-          <td><?php echo utf8_encode($datos['ciudad']); ?></td>
+          <td><?php echo ($datos['nombre']); ?></td>
+          <td><?php echo ($datos['nom_servicio']); ?></td>
+          <td><?php echo ($datos['ciudad']); ?></td>
           <td><?php?></td>
           <td id='fecha_filtro<?php echo $i ?>'><?php echo $fecha_filtro; ?></td>
           <td><select name="select" id="cod_usu_resp<?php echo $i ?>">
@@ -147,7 +147,7 @@ $sql="select distinct cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_
             <
                     <?php
                      
-                while($datos3=mysqli_fetch_assoc($query3)){  
+                while($datos3=pg_fetch_assoc($query3)){  
                     
                         if($rows2){
                     
@@ -265,13 +265,13 @@ $(document).ready(function () {
             name: 'Population',
             data: [
             <?php 
-               while($datos4=mysqli_fetch_assoc($query6)){
+               while($datos4=pg_fetch_assoc($query6)){
 
                        // Consulto la cantidad de prospectos que tiene la regional.
                                         $sql2="select * from serv_cliente where cod_usu_resp='".$datos4['cod_usuario']."' and cod_estado_caso=23 ";
-                                    $query2=mysqli_query($conexion, $sql2);
-                                    $datos2=mysqli_fetch_assoc($query2);
-                                    $rows2=mysqli_num_rows($query2);
+                                    $query2=pg_query($conexion, $sql2);
+                                    $datos2=pg_fetch_assoc($query2);
+                                    $rows2=pg_num_rows($query2);
             ?>
                 ['<?php echo $datos4['nombre'].' '.$datos4['apellidos'] ?>', <?php echo $rows2 ?>],
             <?php 

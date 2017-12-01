@@ -4,9 +4,9 @@ include('../dependencia/conexion.php');
     if(isset($_GET['cod_cliente'])){ // Buscamos las encuestas
 
       $sql="select * from cliente where cod_cliente='".$_GET['cod_cliente']."' ";
-      $query=mysqli_query($conexion, $sql);
-          $rows=mysqli_num_rows($query);
-          $datos=mysqli_fetch_assoc($query);
+      $query=pg_query($conexion, $sql);
+          $rows=pg_num_rows($query);
+          $datos=pg_fetch_assoc($query);
     
         }
 ?>
@@ -21,7 +21,7 @@ include('../dependencia/conexion.php');
                   <div class="card">
                     
                     <div class="card-header d-flex align-items-center">
-                      <h3 class="h4">Observaciones de comunicación  <?php echo utf8_encode($datos['nombre']);  ?> </h3>
+                      <h3 class="h4">Observaciones de comunicación  <?php ($datos['nombre']);  ?> </h3>
                     </div>
                     <div class="card-body">
 

@@ -18,7 +18,7 @@ $id_serv_cliente=base64_decode($_GET['id_serv_cliente']);
      
     // Ultima actuación
     
-    $sql11="select distinct usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$id_serv_cliente."' ORDER BY activ_serv.id_activi_serv DESC limit 1 ";
+    $sql11="select usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$id_serv_cliente."' ORDER BY activ_serv.id_activi_serv desc limit 1 ";
     $query11=pg_query($conexion, $sql11);
     @$datos11=pg_fetch_assoc($query11);
         
@@ -40,7 +40,6 @@ $sql9="select * from cliente where cod_cliente='".$datos1['cod_cliente']."' ";
             $sql21="select * from deta_list_despleg where tipo_lista=2 and id_list_despleg='".$datos1['poder_aut_nece']."' ";
             $query21=pg_query($conexion, $sql21);
             @$datos21=pg_fetch_assoc($query21);
-            
 
      // Consulto la lista de tiene poder y autorización.
 
@@ -251,7 +250,6 @@ var datos='id_serv_cliente='+id_serv_cliente+'&revi_serv2='+1;
 
                                }
 
-
                         }
                   });
 
@@ -296,7 +294,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
                       <table width="467" border="0">
                         <tr>
                           <td width="181">Cliente:</td>
-                          <td width="276"><?php echo utf8_encode($datos9['nombre']) ?></td>
+                          <td width="276"><?php echo ($datos9['nombre']) ?></td>
                         </tr>
                         <tr>
                           <td>Responsable:</td>
@@ -327,7 +325,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
       <div class="panel-body"><table width="70%" border="0" class="table responsive">
       <tr>
         <td width="108">(*)Barrio</td>
-        <td width="1073"><input name="barrio" type="text" class="form-control" id="barrio" value="<?php echo utf8_encode($datos9['barrio']) ?>"></td>
+        <td width="1073"><input name="barrio" type="text" class="form-control" id="barrio" value="<?php echo ($datos9['barrio']) ?>"></td>
       </tr>
       <tr>
         <td>(*)Dirección</td>
@@ -428,7 +426,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
                 while($datos=pg_fetch_assoc($query2)){
 
         ?>
-           <option value="<?= $datos['id_list_despleg'] ?>"<?php if($datos['id_list_despleg']==$datos21['id_list_despleg']){ ?> selected='selected' <?php } ?>><?php echo utf8_encode($datos['descripcion'])?></option>
+           <option value="<?= $datos['id_list_despleg'] ?>"<?php if($datos['id_list_despleg']==$datos21['id_list_despleg']){ ?> selected='selected' <?php } ?>><?php echo ($datos['descripcion'])?></option>
      <?php
 
                }
@@ -444,7 +442,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
                 while($datos=pg_fetch_assoc($query3)){
 
         ?>
-           <option value="<?= $datos['id_list_despleg'] ?>"<?php if($datos['id_list_despleg']==$datos31['id_list_despleg']){ ?> selected='selected' <?php } ?>><?php echo utf8_encode($datos['descripcion'])?></option>
+           <option value="<?= $datos['id_list_despleg'] ?>"<?php if($datos['id_list_despleg']==$datos31['id_list_despleg']){ ?> selected='selected' <?php } ?>><?php echo ($datos['descripcion'])?></option>
      <?php
 
                }
@@ -500,7 +498,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
                 while($datos=pg_fetch_assoc($query5)){
 
         ?>
-             <option value="<?= $datos['id_list_despleg'] ?>"<?php if($datos['id_list_despleg']==$datos51['id_list_despleg']){ ?> selected='selected' <?php } ?>><?php echo utf8_encode($datos['descripcion'])?></option>
+             <option value="<?= $datos['id_list_despleg'] ?>"<?php if($datos['id_list_despleg']==$datos51['id_list_despleg']){ ?> selected='selected' <?php } ?>><?php echo ($datos['descripcion'])?></option>
      <?php
 
                }
@@ -512,21 +510,21 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
       </tr>
       <tr>
         <td><b>(*)</b>Última actuación:   </td>
-        <td><?php echo utf8_encode($datos11['etapa'].": ".$datos11['actividad']); ?></td>
+        <td><?php echo ($datos11['etapa'].": ".$datos11['actividad']); ?></td>
       </tr>
       <tr>
         <td><b>(*)</b>Fecha de (Última actuación):</td>
-        <td><?php echo utf8_encode($datos11['fecha_actividad']); ?> </td>
+        <td><?php echo ($datos11['fecha_actividad']); ?> </td>
       </tr>
       
       <tr>
         <td><b>(*)</b>Resumen (estado para servicios externos):</td>
-        <td><textarea name="resu_serv" id="resu_serv" class="form-control" ><?php echo utf8_encode($datos1['resu_serv']) ?></textarea></td>
+        <td><textarea name="resu_serv" id="resu_serv" class="form-control" ><?php echo ($datos1['resu_serv']) ?></textarea></td>
       </tr>
       
       <tr>
         <td><b>(*)</b>Comentarios y Observaciones: </td>
-        <td><textarea name="resu_serv" id="coment_serv" class="form-control" ><?php echo utf8_encode($datos1['coment_serv']) ?></textarea></td>
+        <td><textarea name="resu_serv" id="coment_serv" class="form-control" ><?php echo ($datos1['coment_serv']) ?></textarea></td>
       </tr>
    </table></div>
     </div>
