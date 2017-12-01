@@ -18,7 +18,7 @@ $conexion = pg_connect("host=$host dbname=$dbname user=$user password=$pass");
 else
 	echo "no";
 */
-$sql="select * from usuarios";
+/*$sql="select * from usuarios";
 $query=pg_query($conexion, $sql);
 $rows=pg_num_rows($query);
 		
