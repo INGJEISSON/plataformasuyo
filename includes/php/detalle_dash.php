@@ -4,7 +4,7 @@ include('../dependencia/conexion.php');
 		/*	if($_GET['ciudad']=='Todos')  // Si son todas las ciudad
 			     						$parametro='';
 			     						else
-			     						$parametro="enc_procesadas.ciudad='".utf8_decode($_GET['ciudad'])."' and";*/
+			     						$parametro="enc_procesadas.ciudad='".($_GET['ciudad'])."' and";*/
 			 
                             			
 			if($_GET['ciudad']!=''){		
@@ -116,7 +116,7 @@ $sql="select enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_encuesta.nom
                  <td><?php echo @utf8_encode($datos['id_cliente']) ?></td>
                 <td><?php echo utf8_encode($datos3['cliente']) ?></td>
                 <td><?php echo($tipo_encuesta) ?></td>
-                <td><?php if($datos4['resul_visita']=='') echo utf8_decode($datos4['tipo_visita']); else  echo utf8_decode($datos4['resul_visita']) ?></td>
+                <td><?php if($datos4['resul_visita']=='') echo ($datos4['tipo_visita']); else  echo ($datos4['resul_visita']) ?></td>
                 <td><?php echo(number_format($datos4['valor'])) ?></td>
                 <td><?php if($datos4['fecha_entrega_diag1']=='') echo $datos4['fecha_compros_pago1']; else				
 				echo(($datos4['fecha_entrega_diag1'])) ?></td>

@@ -3,9 +3,9 @@ include('../dependencia/conexion.php');
       if(isset($_GET['id_fasfield'])){ // Buscamos las encuestas
 
       $sql="select  enc_procesadas.cod_enc_proc, enc_procesadas.asesor, enc_procesadas.cliente, enc_procesadas.fecha_recepcion, enc_procesadas.fecha_revision, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield, enc_procesadas.ciudad, enc_procesadas.arch_pdf, tipo_encuesta.nombre as tipo_encuesta from enc_procesadas, estado, tipo_encuesta where enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta  and enc_procesadas.id_fasfield='".$_GET['id_fasfield']."' ";
-          $query=mysqli_query($conexion, $sql);
-          $rows=mysqli_num_rows($query);
-          $datos=mysqli_fetch_assoc($query);
+          $query=pg_query($conexion, $sql);
+          $rows=pg_num_rows($query);
+          $datos=pg_fetch_assoc($query);
         $archivo_pdf=$datos['arch_pdf'];    
     
       
@@ -20,22 +20,11 @@ include('../dependencia/conexion.php');
                   <div class="card">
                     
                     <div class="card-header d-flex align-items-center">
-                      <h3 class="h4">Observaciones de pagos de aliados Cliente:  <?php echo utf8_encode($datos['cliente']);  ?> - Ciudad: <?php echo utf8_encode($datos['ciudad']);  ?> </h3>
+                      <h3 class="h4">Observaciones de pagos de aliados Cliente:  <?php echo $datos['cliente'];  ?> - Ciudad: <?php echo $datos['ciudad'];  ?> </h3>
                     </div>
                     <div class="card-body">
 
-                      <p>
-                           <?php
-                         // Buscamos los archivos....
-
-
-      if(isset($_GET['id_fasfield'])){ // Buscamos los archivos de la encuesta..
-
-               
-        }
-?>
-                         </p>
-                         <table width="600" border="0" id="pan_add_revision" class="table responsive" cellpadding="1" cellspacing="4">
+                           <table width="600" border="0" id="pan_add_revision" class="table responsive" cellpadding="1" cellspacing="4">
                            <tr>
                              <td width="189"><strong>Estado Actual:</strong></td>
                              <td width="26">&nbsp;</td>

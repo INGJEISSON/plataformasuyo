@@ -1500,7 +1500,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                 if(isset($_POST['bus_rol'])){ // Buscamos el tipo de usuario..
 
 
-                      $sql="select * from tipo_usuario where cod_grupo='".$_POST['cod_grupo']."' ";
+                      $sql="select * from tipo_usuario where cod_grupo='".$_POST['id_grupo']."' ";
                       $query=pg_query($conexion, $sql);
                       $rows=pg_num_rows($query);
                           if($rows){

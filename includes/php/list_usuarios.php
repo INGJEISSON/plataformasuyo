@@ -1,22 +1,11 @@
 <?php
-$sql="select usuarios.cod_usuario, usuarios.email, usuarios.nombre, usuarios.apellidos, tipo_usuario.descripcion as tipo_usuario, grupo_usuarios.descripcion as grupo_usuario, estado.descripcion as estado from usuarios, estado, grupo_usuarios, tipo_usuario  where grupo_usuarios.cod_grupo=tipo_usuario.id_grupo and usuarios.tipo_usuario=tipo_usuario.tipo_usuario and estado.cod_estado=usuarios.cod_estado  ";
-					$query=mysqli_query($conexion, $sql);
-					$rows=mysqli_num_rows($query);
+$sql="select usuarios.cod_usuario, usuarios.email, usuarios.nombre, usuarios.apellidos, tipo_usuario.descripcion as tipo_usuario, grupo_usuarios.descripcion as grupo_usuario, estado.descripcion as estado from usuarios, estado, grupo_usuarios, tipo_usuario  where grupo_usuarios.cod_grupo=tipo_usuario.cod_grupo and usuarios.tipo_usuario=tipo_usuario.tipo_usuario and estado.cod_estado=usuarios.cod_estado  ";
+					$query=pg_query($conexion, $sql);
+					$rows=pg_num_rows($query);
 
 ?>
 
-<link href="plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
-<script src="js/custom.min.js"></script>
-    <script src="plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
-    <!-- start - This is for export functionality only -->
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
 <script>
   $(document).ready(function(){        
        /* $(".edicion").colorbox({
@@ -53,17 +42,17 @@ $sql="select usuarios.cod_usuario, usuarios.email, usuarios.nombre, usuarios.ape
         <tbody>
          <?php
                 $i=1;
-                while($datos=mysqli_fetch_assoc($query)){
+                while($datos=pg_fetch_assoc($query)){
 			
                     ?>
             <tr>
                 <td><?php echo $i ?></td>
-                <td><?php echo utf8_encode($datos["nombre"]) ?></td>
-                <td><?php echo utf8_encode($datos['apellidos']) ?></td>
-                <td><?php echo utf8_encode($datos['email']) ?></td>
-                <td><?php echo utf8_encode($datos['grupo_usuario']) ?></td>
-                <td><?php echo utf8_encode($datos['tipo_usuario']) ?></td>
-                <td><?php echo utf8_encode($datos['estado']) ?></td>
+                <td><?php echo ($datos["nombre"]) ?></td>
+                <td><?php echo ($datos['apellidos']) ?></td>
+                <td><?php echo ($datos['email']) ?></td>
+                <td><?php echo ($datos['grupo_usuario']) ?></td>
+                <td><?php echo ($datos['tipo_usuario']) ?></td>
+                <td><?php echo ($datos['estado']) ?></td>
                 <td>&nbsp;</td>
               <td><a href="includes/php/revi_call.php?id_fasfield=<?php echo $datos['id_fasfield']; ?>" tittle='Revisar' class="edicion"></a></td>
                <td><a href="includes/php/revi_call.php?id_fasfield=<?php echo $datos['id_fasfield']; ?>" tittle='Revisar' class="edicion"><img src='img/edit.png' alt="" width="24" height="24"></a><a href="includes/php/revi_call.php?id_fasfield=<?php echo $datos['id_fasfield']; ?>" tittle='Revisar' class="edicion"></a></td>       
