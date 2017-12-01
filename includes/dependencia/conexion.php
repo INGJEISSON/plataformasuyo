@@ -13,12 +13,12 @@ $pass="s.col2017qkuk";
 $dbname="platfsuyo";
 $port="5432";
 $conexion = pg_connect("host=$host dbname=$dbname user=$user password=$pass port=$port");
-/*
+
 if(isset($conexion))
 	echo "si";
 else
 	echo "no";
-
+/*
 $sql="select * from usuarios";
 $query=pg_query($conexion, $sql);
 $rows=pg_num_rows($query);
