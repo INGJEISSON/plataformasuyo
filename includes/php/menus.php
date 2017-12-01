@@ -4,6 +4,7 @@
                 <div class="sidebar-head">
                     <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
                 <ul class="nav" id="side-menu">
+                 <li> <a href="javascript:;" id='dashboard' class="waves-effect"><span class="hide-menu">Dashboard</a>
 
 <?php
 

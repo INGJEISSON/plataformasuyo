@@ -53,7 +53,7 @@ $cod_resp=0;
           <th width="9%">Ciudad</th>
           <th width="9%">Costo</th>
           <th width="7%">Aliado</th>
-          <th width="7%">Checkeo</th>
+          <th width="7%">Chequeo</th>
           <th width="11%">Comprobante</th>
           <th width="9%">Enc. Diagnóstico</th>
           <?php if($_SESSION['tipo_usuario']==1){ ?><th width="9%">Editar</th><?php }  ?>

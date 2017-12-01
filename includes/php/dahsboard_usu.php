@@ -1,4 +1,4 @@
-iv class="container-fluid">
+<div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Dashboard</h4> </div>     
@@ -19,10 +19,10 @@ iv class="container-fluid">
                                         <li class="col-last">
                                             <h3 class="counter text-right m-t-15">23</h3></li>
                                         <li class="col-middle">
-                                            <h4>Total projects</h4>
+                                            <h4>Mestas personales (Asignadas)</h4>
                                             <div class="progress">
                                                 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                                    <span class="sr-only">40% Complete (success)</span>
+                                                    <span class="sr-only"></span>
                                                 </div>
                                             </div>
                                         </li>
@@ -36,10 +36,10 @@ iv class="container-fluid">
                                         <li class="col-last">
                                             <h3 class="counter text-right m-t-15">76</h3></li>
                                         <li class="col-middle">
-                                            <h4>Total Earnings</h4>
+                                            <h4>Penalización</h4>
                                             <div class="progress">
                                                 <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                                    <span class="sr-only">40% Complete (success)</span>
+                                                    <span class="sr-only"></span>
                                                 </div>
                                             </div>
                                         </li>
@@ -53,10 +53,10 @@ iv class="container-fluid">
                                         <li class="col-last">
                                             <h3 class="counter text-right m-t-15">83</h3></li>
                                         <li class="col-middle">
-                                            <h4>Total Earnings</h4>
+                                            <h4>Metas de equipo</h4>
                                             <div class="progress">
                                                 <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                                    <span class="sr-only">40% Complete (success)</span>
+                                                    <span class="sr-only"></span>
                                                 </div>
                                             </div>
                                         </li>
@@ -71,12 +71,12 @@ iv class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 col-lg-8 col-sm-12 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title">Products Yearly Sales</h3>
+                            <h3 class="box-title">Rendimiento (Actividades)</h3>
                             <ul class="list-inline text-right">
                                 <li>
-                                    <h5><i class="fa fa-circle m-r-5 text-info"></i>Mac</h5> </li>
+                                    <h5><i class="fa fa-circle m-r-5 text-info"></i>Personales</h5> </li>
                                 <li>
-                                    <h5><i class="fa fa-circle m-r-5 text-danger"></i>Windows</h5> </li>
+                                    <h5><i class="fa fa-circle m-r-5 text-danger"></i>Equipo</h5> </li>
                             </ul>
                             <div id="ct-visits" style="height: 285px;"></div>
                         </div>
@@ -88,10 +88,10 @@ iv class="container-fluid">
                         <div class="white-box">
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <h2 class="m-b-0 font-medium">Week Sales</h2>
-                                    <h5 class="text-muted m-t-0">Ios app - 160 sales</h5></div>
+                                    <h2 class="m-b-0 font-medium">Comunicación con clientes</h2>
+                                    <h5 class="text-muted m-t-0"></h5></div>
                                 <div class="col-xs-4">
-                                    <div class="circle circle-md bg-info pull-right m-t-10"><i class="ti-shopping-cart"></i></div>
+                                    <div class="circle circle-md bg-info pull-right m-t-10"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -106,14 +106,7 @@ iv class="container-fluid">
                     <div class="col-md-12 col-lg-12">
                         <div class="manage-users">
                             <div class="sttabs tabs-style-iconbox">
-                                <nav>
-                                    <ul>
-                                        <li><a href="#section-iconbox-1" class="sticon ti-user"><span>Tareas Hoy</span></a></li>
-                                        <li><a href="#section-iconbox-2" class="sticon ti-lock"><span>Tareas Completadas</span></a></li>
-                                        <li><a href="#section-iconbox-3" class="sticon ti-receipt"><span>Tareas Vencidas</span></a></li>
-                                        <li><a href="#section-iconbox-4" class="sticon ti-check-box"><span>Save and finish</span></a></li>
-                                    </ul>
-                                </nav>
+                               
                                 <div class="content-wrap">
                                     <section id="section-iconbox-1">
                                         <div class="p-20 row">
@@ -402,7 +395,7 @@ iv class="container-fluid">
                                     <section id="section-iconbox-4">
                                         <div class="p-20 row">
                                             <div class="col-sm-6">
-                                                <h3 class="m-t-0">Save and finish</h3></div>
+                                                <h3 class="m-t-0">Tareas (Equipo)</h3></div>
                                             <div class="col-sm-6">
                                                 <ul class="side-icon-text pull-right">
                                                     <li><a href="#"><span class="circle circle-sm bg-success di"><i class="ti-plus"></i></span><span>Add Users</span></a></li>

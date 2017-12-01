@@ -156,6 +156,18 @@ date_default_timezone_set('America/Bogota');
    
         $(document).ready(function(){
 
+            $('#carga_modulo').show();
+                                               $("#contenido").toggle();    
+                                                             $("#contenido").empty();        
+                                                                          $("#contenido").load("includes/php/dahsboard_usu.php",
+                                                                                       function(){                                  
+                                                                                               $('#carga_modulo').hide();
+                                                                                                 $("#contenido").show();
+                                                                                                    $("#footer").show();
+                                              }                               
+                             );    
+
+
                 $("#logout").click(function(){
                 
                 var datos='logout='+1;
@@ -174,6 +186,19 @@ date_default_timezone_set('America/Bogota');
                   });
                 
             });
+                $("#dashboard").click(function(){
+
+                             $('#carga_modulo').show();
+                                               $("#contenido").toggle();    
+                                                             $("#contenido").empty();        
+                                                                          $("#contenido").load("includes/php/dahsboard_usu.php",
+                                                                                       function(){                                  
+                                                                                               $('#carga_modulo').hide();
+                                                                                                 $("#contenido").show();
+                                                                                                    $("#footer").show();
+                                              }                               
+                             );    
+                     });
 
         });
     </script>
