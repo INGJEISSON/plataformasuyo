@@ -53,9 +53,9 @@ $cod_resp=0;
           <th width="9%">Ciudad</th>
           <th width="9%">Costo</th>
           <th width="7%">Aliado</th>
-          <th width="7%">Estado</th>
+          <th width="7%">Checkeo</th>
           <th width="11%">Comprobante</th>
-          <th width="9%">Acción</th>
+          <th width="9%">Enc. Diagnóstico</th>
           <?php if($_SESSION['tipo_usuario']==1){ ?><th width="9%">Editar</th><?php }  ?>
         </tr>
       </thead>
@@ -66,8 +66,11 @@ $cod_resp=0;
           $archivo_pdf=$datos['arch_pdf'];
 
            
-            $query2=pg_query($conexion, "select distinct id_cliente from enc_procesadas where id_cliente='".$datos['id_cliente']."' and tipo_encuesta=1");
+            $query2=pg_query($conexion, "select distinct enc_procesadas.id_cliente, enc_procesadas.arch_pdf, enc_procesadas.id_fasfield, tipo_encuesta.nombre as encuesta from enc_procesadas, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and enc_procesadas.id_cliente='".$datos['id_cliente']."' and enc_procesadas.tipo_encuesta=1");
             $rows2=pg_num_rows($query2);
+            $datos2=pg_fetch_assoc($query2);
+             $archivo_pdf2=$datos2['arch_pdf'];
+
       ?>
 
        
@@ -80,8 +83,8 @@ $cod_resp=0;
                 <td><?php echo number_format($datos['valor']); ?></td>
                 <td><?php echo $datos['aliado']; ?></td>
                 <td><?php if(isset($rows2)) echo "OK"; else echo "Sin Diagnóstico" ?></td>
-                <td><?php  ?></td>
-                <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://app.suyo.io/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></td> 
+                <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://app.suyo.io/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></td>
+                <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://app.suyo.io/fastfield/<?php echo $datos2['encuesta'] ?>/procesados/<?php echo $datos2['id_fasfield']."/".$archivo_pdf2 ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></td> 
                 <td><a href="includes/php/edicion_usu.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>&cod_resp=<?php echo $cod_resp; ?>" tittle='Revisar' class="edicion"><p class='icon-note lg'></p></a></td>
                 
               </tr>
