@@ -14,7 +14,7 @@ $dbname="platfsuyo";
 $port="5432";
 $conexion = pg_connect("host=$host dbname=$dbname user=$user password=$pass port=$port");
 
-if(isset($conexion))
+/*if(isset($conexion))
 	echo "si";
 else
 	echo "no";
