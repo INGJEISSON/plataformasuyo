@@ -17,7 +17,7 @@ $conexion = pg_connect("host=$host dbname=$dbname user=$user password=$pass");
 	echo "si";
 else
 	echo "no";
-/*
+*/
 $sql="select * from usuarios";
 $query=pg_query($conexion, $sql);
 $rows=pg_num_rows($query);
@@ -28,7 +28,7 @@ $rows=pg_num_rows($query);
 			}
 			echo $rows;
 		}
-
+/*
 // INsertamos registro..
 
 $sql2="insert into usuarios (cod_usuario, nombre, apellidos, tipo_usuario, email, cod_estado) values(83, 'Jeisson5', 'Maturana', 1, 'perrio@gmail.com', 1)";

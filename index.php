@@ -46,7 +46,7 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
   $cover_image_url = $me['cover']['coverPhoto']['url'];
   $profile_url = $me['url'];
                           
-                         echo $sql="Select usuarios.email,tipo_usuario.tipo_usuario, usuarios.cod_estado, usuarios.cod_usuario, tipo_usuario.id_grupo from usuarios, tipo_usuario where usuarios.tipo_usuario=tipo_usuario.tipo_usuario and  usuarios.email='".$email."' ";
+                         $sql="Select usuarios.email,tipo_usuario.tipo_usuario, usuarios.cod_estado, usuarios.cod_usuario, tipo_usuario.id_grupo from usuarios, tipo_usuario where usuarios.tipo_usuario=tipo_usuario.tipo_usuario and  usuarios.email='".$email."' ";
                         $query=pg_query($conexion, $sql);
                         $rows=pg_num_rows($query);
                         $datos=pg_fetch_assoc($query);
