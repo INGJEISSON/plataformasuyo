@@ -268,7 +268,7 @@ $(document).ready(function () {
                while($datos4=pg_fetch_assoc($query6)){
 
                        // Consulto la cantidad de prospectos que tiene la regional.
-                                        $sql2="select * from serv_cliente where cod_usu_resp='".$datos4['cod_usuario']."' and cod_estado_caso=23 ";
+                                        $sql2="select * from serv_cliente where cod_usurio='".$datos4['cod_usuario']."' and cod_estado=23 ";
                                     $query2=pg_query($conexion, $sql2);
                                     $datos2=pg_fetch_assoc($query2);
                                     $rows2=pg_num_rows($query2);
