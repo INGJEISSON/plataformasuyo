@@ -13,7 +13,7 @@ include('../dependencia/conexion.php');
 			     						else if($_GET['ciudad']=='solbaq')  // Si son todas las ciudad
 			     						$parametro="(enc_procesadas.ciudad='Barranquilla' or enc_procesadas.ciudad='Soledad')  and ";
 			     						else
-			     						$parametro="enc_procesadas.ciudad='".utf8_decode($_GET['ciudad'])."' and";
+			     						$parametro="enc_procesadas.ciudad='".($_GET['ciudad'])."' and";
 								
 										
 									if($_SESSION['tipo_usuario']==2 or $_SESSION['tipo_usuario']==19)
