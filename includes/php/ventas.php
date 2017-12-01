@@ -5,7 +5,7 @@ include('../dependencia/conexion.php');
 	else
 	$sql="select * from ciudad_asesor where asesor='".$_SESSION['email']."' ";
 	
-	$query=mysqli_query($conexion, $sql); 
+	$query=pg_query($conexion, $sql); 
 ?>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
   <script src="js/datepicker-master/dist/datepicker.js"></script><

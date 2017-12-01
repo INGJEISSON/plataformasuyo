@@ -25,8 +25,8 @@ $sql="select enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_encuesta.nom
 			$sql="select enc_procesadas.asesor, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, estado, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_GET['fecha_1']."' and '".$_GET['fecha_2']."'  and enc_procesadas.asesor='".$_GET['asesor']."' ";
 		}
 			
-					$query=mysqli_query($conexion, $sql);
-					$rows=mysqli_num_rows($query);
+					$query=pg_query($conexion, $sql);
+					$rows=pg_num_rows($query);
 
 ?>
  <link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -82,7 +82,7 @@ $sql="select enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_encuesta.nom
         <tbody>
          <?php
                 $i=1;
-                while($datos=mysqli_fetch_assoc($query)){
+                while($datos=pg_fetch_assoc($query)){
 				if($datos['tipo_encuesta']==1)
 				 $tipo_encuesta="Diagnóstico";
 				 if($datos['tipo_encuesta']==2)
@@ -92,22 +92,22 @@ $sql="select enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_encuesta.nom
 				 if($datos['tipo_encuesta']==5)
 				 $tipo_encuesta="Prospectos";
                         $sql3="select cliente, asesor, arch_pdf from enc_procesadas where id_fasfield='".$datos['id_fasfield']."' ";
-                        $query3=mysqli_query($conexion, $sql3);
-                         $rows3=mysqli_num_rows($query3);
+                        $query3=pg_query($conexion, $sql3);
+                         $rows3=pg_num_rows($query3);
 
                              if($query3){
-                                  $datos3=mysqli_fetch_assoc($query3);
+                                  $datos3=pg_fetch_assoc($query3);
 								   $archivo_pdf=$datos3['arch_pdf']; 
 							 }
 							 // Buscamos informaci贸n del reporte de visita
 							 
 							 $sql4="select * from det_repor_aseso where id_fasfield='".$datos['id_fasfield']."' ";
-							 $query4=mysqli_query($conexion, $sql4);
-                         	 @$datos4=mysqli_fetch_assoc($query4);
+							 $query4=pg_query($conexion, $sql4);
+                         	 @$datos4=pg_fetch_assoc($query4);
 							 
 							 $sql5="select seguimientos.fecha_registro, estado.descripcion as estado from seguimientos, estado where seguimientos.cod_estado=estado.cod_estado and  seguimientos.id_fasfield='".$datos['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.cod_estado!=0 order by seguimientos.id_segui_llam desc ";
-							 $query5=mysqli_query($conexion, $sql5);
-							 $datos5=mysqli_fetch_assoc($query5);
+							 $query5=pg_query($conexion, $sql5);
+							 $datos5=pg_fetch_assoc($query5);
 
                     ?>
             <tr>

@@ -230,12 +230,12 @@ $('#container').highcharts({
             name: 'Population',
             data: [
             <?php 
-                while($datos=mysqli_fetch_assoc($query_asesor)){
+                while($datos=pg_fetch_assoc($query_asesor)){
 
                        // Consulto la cantidad de prospectos que tiene la regional.
                                         $sql5="select cod_enc_proc from enc_procesadas where  $parametro tipo_encuesta=5 and asesor='".$datos['asesor']."'    and fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
-                                        $query5=mysqli_query($conexion, $sql5);
-                                        $prospectos5=mysqli_num_rows($query5);
+                                        $query5=pg_query($conexion, $sql5);
+                                        $prospectos5=pg_num_rows($query5);
             ?>
                 ['<?php echo $datos['asesor'] ?>', <?php echo $prospectos5 ?>],
             <?php 
@@ -295,14 +295,14 @@ $('#container2').highcharts({
             name: 'Population',
             data: [
             <?php 
-                while($datos=mysqli_fetch_assoc($query_asesor11)){
+                while($datos=pg_fetch_assoc($query_asesor11)){
 
                        // Consulto la cantidad de prospectos que tiene la regional.
                                         // Consulto la cantidad de prospectos que tiene la regional.
                                        $sql6="select count(enc_procesadas.asesor) as total from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='Visitado y Pagado' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and  enc_procesadas.asesor='".$datos['asesor']."' ";
-                                        $query6=mysqli_query($conexion, $sql6);
-                                        $vend5=mysqli_num_rows($query6);
-                                        @$datos5=mysqli_fetch_assoc($query6);
+                                        $query6=pg_query($conexion, $sql6);
+                                        $vend5=pg_num_rows($query6);
+                                        @$datos5=pg_fetch_assoc($query6);
             ?>
                 ['<?php echo $datos['asesor'] ?>', <?php echo $datos5['total'] ?>],
             <?php 
@@ -355,14 +355,14 @@ $('#container3').highcharts({
             type: 'pie',
             data: [
                 <?php 
-                  while($datos78=mysqli_fetch_assoc($query78)){
+                  while($datos78=pg_fetch_assoc($query78)){
 
                        // Consulto la cantidad de prospectos que tiene la regional.
                                         // Consulto la cantidad de prospectos que tiene la regional.
                                         // Consulto la cantidad de prospectos que tiene la regional.
                                       $sql512="select enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where  $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".$datos78['resul_visita']."' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
-                                        $query512=mysqli_query($conexion, $sql512);
-                                      $rows512=mysqli_num_rows($query512);
+                                        $query512=pg_query($conexion, $sql512);
+                                      $rows512=pg_num_rows($query512);
             ?>
                 ['<?php echo utf8_encode($datos78['resul_visita']) ?>', <?php echo $rows512 ?>],
                <?php 
