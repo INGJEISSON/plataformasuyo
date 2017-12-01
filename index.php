@@ -46,7 +46,7 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
   $cover_image_url = $me['cover']['coverPhoto']['url'];
   $profile_url = $me['url'];
                           
-                         $sql="Select usuarios.email,tipo_usuario.tipo_usuario, usuarios.cod_estado, usuarios.cod_usuario, tipo_usuario.id_grupo from usuarios, tipo_usuario where usuarios.tipo_usuario=tipo_usuario.tipo_usuario and  usuarios.email='".$email."' ";
+                         echo $sql="Select usuarios.email,tipo_usuario.tipo_usuario, usuarios.cod_estado, usuarios.cod_usuario, tipo_usuario.id_grupo from usuarios, tipo_usuario where usuarios.tipo_usuario=tipo_usuario.tipo_usuario and  usuarios.email='".$email."' ";
                         $query=pg_query($conexion, $sql);
                         $rows=pg_num_rows($query);
                         $datos=pg_fetch_assoc($query);
@@ -57,7 +57,7 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
                                 $_SESSION['imagen']=$profile_image_url;
                                 $_SESSION['cod_usuario']=$datos['cod_usuario'];                                
                                 $_SESSION['id_grupo']=$datos['id_grupo'];
-                               $access=1; // Acceso permitido..
+                            //  $access=1; // Acceso permitido..
                                
                                 }else
                                 $access=2; // Acceso denegado*/

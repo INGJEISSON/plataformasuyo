@@ -11,8 +11,7 @@ $host="bdplataforma.c7wzmctni82t.us-west-2.rds.amazonaws.com";
 $user="as_suyoplatf";
 $pass="s.col2017qkuk";
 $dbname="platfsuyo";
-$port="5432";
-$conexion = pg_connect("host=$host dbname=$dbname user=$user password=$pass port=$port");
+$conexion = pg_connect("host=$host dbname=$dbname user=$user password=$pass");
 
 /*if(isset($conexion))
 	echo "si";
