@@ -1,1 +1,1 @@
-<footer class="footer text-center"> 2017 &copy; Desarrollador por: Ing. Jeisson Ibargüen Maturana </footer>
+<footer class="footer text-center"> 2017 &copy; Desarrollador por: SUYO COLOMBIA</footer>
