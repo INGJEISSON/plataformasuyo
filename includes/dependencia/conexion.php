@@ -30,7 +30,7 @@ $rows=pg_num_rows($query);
 		}
 /*
 // INsertamos registro..
-
+	
 $sql2="insert into usuarios (cod_usuario, nombre, apellidos, tipo_usuario, email, cod_estado) values(83, 'Jeisson5', 'Maturana', 1, 'perrio@gmail.com', 1)";
 $query=pg_query($conexion, $sql2);
 if($query)
