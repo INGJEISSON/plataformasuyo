@@ -35,7 +35,7 @@ $cod_resp=0;
 <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">PAGOS DE DIAGNÓSTICOS </h4> </div>
+                        <h4 class="page-title">CLIENTES CON DIAGNÓSTICOS </h4> </div>
                 </div>
 
  <div class="row">
@@ -52,10 +52,7 @@ $cod_resp=0;
           <th width="7%">Fecha de recepción</th>
           <th width="9%">Ciudad</th>
           <th width="9%">Costo</th>
-          <th width="7%">Aliado</th>
-          <th width="7%">Encuesta Diagnóstico</th>
-          <th width="11%">Comprobante</th>
-          <th width="9%">Visualizar Diagnóstico</th>
+          <th width="7%">Aliado</th>          <
           <?php if($_SESSION['tipo_usuario']==1){ ?><th width="9%">Editar</th><?php }  ?>
         </tr>
       </thead>
@@ -81,10 +78,7 @@ $cod_resp=0;
                 <td><?php echo $datos['fecha_filtro']; ?></td>
                 <td><?php echo ($datos['ciudad']) ?></td>
                 <td><?php echo number_format($datos['valor']); ?></td>
-                <td><?php echo $datos['aliado']; ?></td>
-                <td><?php if(isset($rows2)) echo "OK"; else echo "Sin Diagnóstico" ?></td>
-                <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://app.suyo.io/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></td>
-                <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://app.suyo.io/fastfield/<?php echo $datos2['encuesta'] ?>/procesados/<?php echo $datos2['id_fasfield']."/".$archivo_pdf2 ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></td> 
+                <td><?php echo $datos['aliado']; ?></td>     
                 <td><a href="includes/php/edicion_usu.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>&cod_resp=<?php echo $cod_resp; ?>" tittle='Revisar' class="edicion"><p class='icon-note lg'></p></a></td>
                 
               </tr>

@@ -3,18 +3,6 @@ include('../dependencia/conexion.php');
             $sql="select * from categorias_docu";
             $query=pg_query($conexion, $sql);
 ?>
-<link href="plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
-<script src="js/custom.min.js"></script>
-    <script src="plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
-    <!-- start - This is for export functionality only -->
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -47,7 +35,7 @@ include('../dependencia/conexion.php');
                                                 </select>
                                             </div>
                                         </div>                                      
-                                       <input type="button" name="button" id="registrar" class="btn btn-primary" value="Registar">
+                                       <input type="button" name="button" id="registrar2" class="btn btn-primary" value="Registar">
                                     </form>
 
 
@@ -58,7 +46,7 @@ include('../dependencia/conexion.php');
                 </div>
                 
 
-                 <div id='repor'>
+                 <div id='repor2'>
             
                 </div>
 
@@ -66,20 +54,11 @@ include('../dependencia/conexion.php');
 <script type="text/javascript">
       /*global $, document*/
 $(document).ready(function () {
-    
-$("#cargando2").hide(); 
-    $('#example23').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    });      
-
         
-                $("#registrar").click(function(){
+                $("#registrar2").click(function(){
 
-                        var id_cliente = $("#nombre").val();
-                        var id_cate_docu = $("#apellidos").val();
+                        var id_cate_docu = $("#id_cate_docu").val();
+                        var id_cliente=<?php echo $_GET['id_cliente'] ?>;
 
                         if(id_cliente!=0){
 
@@ -117,12 +96,11 @@ var datos='g_add_docu='+1+'&listar_usuarios='+1;
                                                      data: datos,
                                                      url: 'includes/php/g_procesos.php',
                                                      success: function(valor){
-                                                            $("#repor").html(valor);
+                                                            $("#repor2").html(valor);
                                                             
                                                      }
 
                                                 });
-            
 });
 
   

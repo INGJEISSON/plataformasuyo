@@ -58,25 +58,25 @@
                                             <li><a href="#"><span class="circle circle-sm bg-success di"><i class="ti-plus"></i></span><span>Nueva tarea</span></a></li>
                                             <li><a href="#"><span class="circle circle-sm bg-danger di"><i class="ti-trash"></i></span><span>Delete</span></a></li>
                                         </ul>
-                                        <h3><i class="ti-email"></i> 350 TAREAS RETRASADAS</h3>
+                                        <h3><i class="ti-email"></i>TAREAS RETRASADAS</h3>
                                     </div>
                                     <div class="inbox-center table-responsive">
                                         <table class="table table-hover">
                                             <tbody>
                                                 <tr class="unread">
-                                                    <td>&nbsp;</td>
-                                                    <td style="width: 50px">
+                                                    <td width="1">&nbsp;</td>
+                                                    <td width="50" style="width: 50px">
                                                         <div class="checkbox checkbox-info m-t-0 m-b-0">
                                                             <input type="checkbox">
                                                             <label></label>
                                                         </div>
                                                     </td>
-                                                    <td class="hidden-xs" style="width: 50px"><i class="fa fa-star-o"></i></td>
-                                                    <td class="hidden-xs">Hritik Roshan</td>
-                                                    <td class="max-texts"> <a href="inbox-detail.html"><span class="label label-info m-r-10">Work</span> Lorem ipsum perspiciatis unde omnis iste</a></td>
-                                                    <td class="hidden-xs"><i class="fa fa-paperclip"></i></td>
-                                                    <td class="text-right"> May 13 </td>
-                                                    <td>&nbsp;</td>
+                                                    <td width="83" class="hidden-xs" style="width: 50px"><i class="fa fa-star-o"></i></td>
+                                                    <td width="61" class="hidden-xs">Diagnósticos</td>
+                                                    <td width="286" class="max-texts"> <a href="inbox-detail.html"><span class="label label-info m-r-10">Tienes 2 días para revisar la documentación del cliente ALEJANDRO </span></a></td>
+                                                    <td width="1" class="hidden-xs"><i class="fa fa-paperclip"></i></td>
+                                                    <td width="52" class="text-right">Diciembre 4 </td>
+                                                    <td width="1">&nbsp;</td>
                                                 </tr>
                                                 <tr class="unread">
                                                     <td>&nbsp;</td>
@@ -87,85 +87,10 @@
                                                         </div>
                                                     </td>
                                                     <td class="hidden-xs"><i class="fa fa-star text-warning"></i></td>
-                                                    <td class="hidden-xs">Genelia Roshan</td>
-                                                    <td class="max-texts"><a href="inbox-detail.html">Lorem ipsum perspiciatis unde omnis iste</a></td>
+                                                    <td class="hidden-xs">Servicios</td>
+                                                    <td class="max-texts">Tienes 4 Servicios asignados que no has empezado la revisión</td>
                                                     <td class="hidden-xs"><i class="fa fa-paperclip"></i></td>
-                                                    <td class="text-right"> May 13 </td>
-                                                    <td>&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&nbsp;</td>
-                                                    <td>
-                                                        <div class="checkbox checkbox-info m-t-0 m-b-0">
-                                                            <input type="checkbox">
-                                                            <label></label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="hidden-xs"><i class="fa fa-star-o"></i></td>
-                                                    <td class="hidden-xs">Akshay Kumar</td>
-                                                    <td class="max-texts"><a href="inbox-detail.html"><span class="label label-warning">Work</span> Lorem ipsum perspiciatis unde</a></td>
-                                                    <td class="hidden-xs"><i class="fa fa-paperclip"></i></td>
-                                                    <td class="text-right"> May 12 </td>
-                                                    <td>&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&nbsp;</td>
-                                                    <td>
-                                                        <div class="checkbox checkbox-info m-t-0 m-b-0">
-                                                            <input type="checkbox">
-                                                            <label></label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="hidden-xs"><i class="fa fa-star text-warning"></i></td>
-                                                    <td class="hidden-xs">Genelia Roshan</td>
-                                                    <td class="max-texts"><a href="inbox-detail.html">Lorem ipsum perspiciatis unde omnis iste</a></td>
-                                                    <td class="hidden-xs"><i class="fa fa-paperclip"></i></td>
-                                                    <td class="text-right"> May 11 </td>
-                                                    <td>&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&nbsp;</td>
-                                                    <td>
-                                                        <div class="checkbox checkbox-info m-t-0 m-b-0">
-                                                            <input type="checkbox">
-                                                            <label></label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="hidden-xs"><i class="fa fa-star-o"></i></td>
-                                                    <td class="hidden-xs">Ritesh Deshmh</td>
-                                                    <td class="max-texts"><a href="inbox-detail.html"><span class="label label-success">Elite</span> Lorem ipsum perspiciatis unde omnis</a></td>
-                                                    <td class="hidden-xs"></td>
-                                                    <td class="text-right"> May 11 </td>
-                                                    <td>&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&nbsp;</td>
-                                                    <td>
-                                                        <div class="checkbox checkbox-info m-t-0 m-b-0">
-                                                            <input type="checkbox">
-                                                            <label></label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="hidden-xs"><i class="fa fa-star-o"></i></td>
-                                                    <td class="hidden-xs">Akshay Kumar</td>
-                                                    <td class="max-texts"><a href="inbox-detail.html"><span class="label label-warning">Work</span> Lorem ipsum perspiciatis undeem</a></td>
-                                                    <td class="hidden-xs"><i class="fa fa-paperclip"></i></td>
-                                                    <td class="text-right"> May 11 </td>
-                                                    <td>&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&nbsp;</td>
-                                                    <td>
-                                                        <div class="checkbox m-t-0 m-b-0">
-                                                            <input type="checkbox">
-                                                            <label></label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="hidden-xs"><i class="fa fa-star-o"></i></td>
-                                                    <td class="hidden-xs">Hritik Roshan</td>
-                                                    <td class="max-texts"><a href="inbox-detail.html"><span class="label label-info m-r-10">Work</span> Lorem ipsum perspiciatis undem</a></td>
-                                                    <td class="hidden-xs"><i class="fa fa-paperclip"></i></td>
-                                                    <td class="text-right"> May 10 </td>
+                                                    <td class="text-right">Diciembre 4</td>
                                                     <td>&nbsp;</td>
                                                 </tr>
                                             </tbody>
