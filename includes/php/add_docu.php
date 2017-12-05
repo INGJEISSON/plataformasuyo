@@ -2,11 +2,21 @@
 include('../dependencia/conexion.php');
             $sql="select * from categorias_docu";
             $query=pg_query($conexion, $sql);
+
+            $sql2="select * from documentacion where cod_cliente='".$_GET['id_cliente']."' ";
+            $query2=pg_query($sql2);
+            $datos2=pg_fetch_assoc($query2);
 ?>
+  <script src="../../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+   <link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../../js/colorbox-master/example1/colorbox.css" />
+<script src="../../js/colorbox-master/jquery.colorbox-min.js"></script>
+
 <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">GESTION DOCUMENTAL - REGISTRO DE DOCUMENTOS - CLIENTE:</h4> </div>
+                        <h4 class="page-title">REGISTRO DE DOCUMENTOS - CLIENTE: <?php echo $datos2['nombres']." ".$datos2['apellidos']  ?> </h4> </div>
                 </div>
                 <!-- .row -->
 
@@ -18,11 +28,12 @@ include('../dependencia/conexion.php');
                                     <form class="form-material form-horizontal">
                                           <div class="form-group">
                                             <label class="col-sm-12">CATEGORIA</label>
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-6">
                                                 <select class="form-control" id="id_cate_docu">
                                                    <option value="0">Seleccione</option>
                                                            <?php
-                                                                    while($datos=pg_fetch_assoc($query)){
+                                                                 
+                                                                 while($datos=pg_fetch_assoc($query)){
 
                                                            ?>
 
@@ -34,8 +45,14 @@ include('../dependencia/conexion.php');
                                                            ?>
                                                 </select>
                                             </div>
+                                            <div class="col-sm-6" id="ane_archivo">
+                                             <label class="col-sm-6" >ANEXAR ARCHIVO</label>
+                                             <input type="button" name="button" id="registrar2" class="btn btn-primary" value="Anexar">
+                                           
+                                             </div>
+                                               
                                         </div>                                      
-                                       <input type="button" name="button" id="registrar2" class="btn btn-primary" value="Registar">
+                                       
                                     </form>
 
 
@@ -53,45 +70,42 @@ include('../dependencia/conexion.php');
                 <!-- /.row -->
 <script type="text/javascript">
       /*global $, document*/
-$(document).ready(function () {
-        
-                $("#registrar2").click(function(){
+$(document).ready(function(){
 
-                        var id_cate_docu = $("#id_cate_docu").val();
-                        var id_cliente=<?php echo $_GET['id_cliente'] ?>;
+      $("#ane_archivo").hide();
 
-                        if(id_cliente!=0){
+    $("#id_cate_docu").change(function(){
+            
+
+            var id_cate_docu=$("#id_cate_docu").val();
+
+                    if(id_cate_docu!=0){
+
+                            $("#ane_archivo").show();
+                    }else
+                    $("#ane_archivo").hide();
 
 
-                                var datos ='g_add_docu='+1+'&id_cate_docu='+id_cate_docu+'&id_cliente='+id_cliente+'&create_docu='+1;
+     });
+    $("#registrar2").click(function(){
+          var id_cate_docu=$("#id_cate_docu").val();
+          var cod_cliente="<?php echo $_GET['id_cliente'] ?>";
+          var datos='id_cate_docu='+id_cate_docu+'&cod_cliente='+cod_cliente;
 
-                                                $.ajax({
-                                                     type: "POST",
-                                                     data: datos,
-                                                     url: 'includes/php/g_procesos.php',
-                                                     success: function(valor){
+        $.colorbox({
+          iframe:true, 
+          width:"50%", 
+          height:"50%",
+          overlayClose:false,
+          href: 'upload_docu.php?'+datos,
+          //escKey:
+          });
 
-                                                                if(valor!=2){
 
-                                                                    alert("Documento agregado correctamente");
-                                                                    $("#repor").html(valor);
+    });    
 
-                                                                }else if(valor==2){
-                                                                    alert("Ocurrió un problema al registrar el usuario");
-                                                                }
-                                                                else if(valor==3){
-                                                                    alert("El Cliente y/o empleado ya existe");
-                                                                }
-                                                     }
-
-                                                });
-                        }else
-                        alert("Por favor seleccione a qué tipo de documentación va a pertenecer el usuario");
-
-                });
-
-var datos='g_add_docu='+1+'&listar_usuarios='+1;
-    $.ajax({
+                                           var datos='g_add_docu='+1+'&listar_usuarios='+1;
+                                          $.ajax({
                                                      type: "POST",
                                                      data: datos,
                                                      url: 'includes/php/g_procesos.php',

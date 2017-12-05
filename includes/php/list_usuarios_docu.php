@@ -9,7 +9,7 @@ $sql="select documentacion.apellidos, documentacion.cod_cliente, documentacion.n
 <script>
   $(document).ready(function(){        
         $(".edicion").colorbox({
-          iframe:false, 
+          iframe:true, 
           width:"100%", 
           height:"100%",
           overlayClose:false,
@@ -59,10 +59,16 @@ $sql="select documentacion.apellidos, documentacion.cod_cliente, documentacion.n
                         </div>
                     </div>
                 </div> 
+
  <script type="text/javascript">
     
 $(document).ready(function () {
  $('#table_id').DataTable();
+
+
+ $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').focus();
+})
     
 });
 </script>

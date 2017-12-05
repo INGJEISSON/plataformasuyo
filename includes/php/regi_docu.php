@@ -2,7 +2,11 @@
 include('../dependencia/conexion.php');
             $sql="select * from tipo_docu";
             $query=pg_query($conexion, $sql);
+
+            $sql2="select * from bodegas";
+            $query2=pg_query($sql2);
 ?>
+
 <link rel="stylesheet" href="js/colorbox-master/example1/colorbox.css" />
 <script src="js/colorbox-master/jquery.colorbox-min.js"></script>
 <div class="container-fluid">
@@ -52,7 +56,49 @@ include('../dependencia/conexion.php');
                                                            ?>
                                                 </select>
                                             </div>
-                                        </div>                                      
+                                        </div>            
+
+                                        <div class="form-group">
+                                            <label class="col-sm-12">BOBEGA</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control" id="cod_bodega">
+                                                   <option value="0">Seleccione</option>
+                                                           <?php
+                                                                    while($datos2=pg_fetch_assoc($query2)){
+
+                                                           ?>
+
+                                                           <option value="<?= $datos2['cod_bodega']?>"><?php echo ($datos2['descripcion'])  ?></option>
+
+                                                            <?php 
+
+                                                                    } 
+                                                           ?>
+                                                </select>
+                                            </div>
+                                        </div>          
+
+                                         <div class="form-group">
+                                            <label class="col-sm-12">ESTANTE</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control" id="cod_estante">
+                                                   <option value="0">Seleccione</option>
+                                                           <?php
+                                                                    for($i=1;$i<=10;$i++){
+
+                                                           ?>
+
+                                                           <option value="<?= $i ?>"><?php echo ($i)  ?></option>
+
+                                                            <?php 
+
+                                                                    } 
+                                                           ?>
+                                                </select>
+                                            </div>
+                                        </div>          
+
+
                                        <input type="button" name="button" id="registrar" class="btn btn-primary" value="Registar">
                                     </form>
 
@@ -64,7 +110,7 @@ include('../dependencia/conexion.php');
                 </div>
                 
 
-                 <div id='repor'>
+                 <div id='repor'>   
             
                 </div>
 
@@ -88,11 +134,13 @@ $("#cargando2").hide();
                         var apellidos = $("#apellidos").val();
                         var tipo_docu = $("#tipo_docu").val();
                         var id_cliente= $("#id_cliente").val();
+                        var cod_bodega= $("#cod_bodega").val();
+                        var cod_estante= $("#cod_estante").val();
 
                         if(id_cliente!=0){
 
 
-                                var datos ='g_add_docu='+1+'&nombre='+nombre+'&apellidos='+apellidos+'&tipo_docu='+tipo_docu+'&create='+1+'&id_cliente='+id_cliente;
+                                var datos ='g_add_docu='+1+'&nombre='+nombre+'&apellidos='+apellidos+'&tipo_docu='+tipo_docu+'&create='+1+'&id_cliente='+id_cliente+'&cod_bodega='+cod_bodega+'&cod_estante='+cod_estante;
 
                                                 $.ajax({
                                                      type: "POST",
@@ -100,7 +148,7 @@ $("#cargando2").hide();
                                                      url: 'includes/php/g_procesos.php',
                                                      success: function(valor){
 
-                                                                if(valor!=2){
+                                                                if(valor==1){
 
                                                                     alert("Registro realizado correctamente");
                                                                     $("#repor").html(valor);

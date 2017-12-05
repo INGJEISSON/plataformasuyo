@@ -1744,40 +1744,32 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                         // Buscamos si se encuentra el usuario registrado...
 
-                           $sql="select * from enc_procesadas where id_cliente='".$_POST['id_cliente']."' ";
+                           $sql="select * from documentacion where cod_cliente='".$_POST['id_cliente']."' ";
                            $query=pg_query($conexion, $sql);
                            $rows=pg_num_rows($query);
 
-                                if(isset($rows)){
+                                if($rows==0){
                                       // insertamos cliente 
 
-                                   echo  $sql2="insert into documentacion (cod_cliente, apellidos, nombres, tipo_docu) values('".$_POST['id_cliente']."', '".$_POST['apellidos']."', '".$_POST['nombre']."', '".$_POST['tipo_docu']."', '') ";
+                                    $sql2="insert into documentacion (cod_cliente, apellidos, nombres, tipo_docu, ciudad, cod_bodega, cod_estante) values('".$_POST['id_cliente']."', '".$_POST['apellidos']."', '".$_POST['nombre']."', '".$_POST['tipo_docu']."', '', '".$_POST['cod_bodega']."', '".$_POST['cod_estante']."') ";
 
                                    $carpeta_cliente=$_POST['nombre']."_".$_POST['apellidos']."_".$_POST['id_cliente'];
-                                                mkdir('../files/clientes/'.$carpeta_cliente); // Creamos carpeta inicial...
-                                                  // Creamos subcarpetas
-                                                  mkdir('../files/clientes/'.$carpeta_cliente."/Documentos de propiedad");
-                                                  mkdir('../files/clientes/'.$carpeta_cliente."/Facturas y contratos");
-                                                  mkdir('../files/clientes/'.$carpeta_cliente."/Otros documentos");
-                                                  mkdir('../files/clientes/'.$carpeta_cliente."/Analisis de caso");
-                                    //$query2=pg_query($conexion, $sql2);
+                                               
+                                    $query2=pg_query($conexion, $sql2);
 
-                                         /* if($query2){
-
-                                                  // Creamos carpeta del cliente..  
-                                              $carpeta_cliente=$_POST['nombres']."_".$_POST['apellidos']."_".$_POST['cod_cliente'];
-                                                mkdir('files/'.$carpeta_cliente); // Creamos carpeta inicial...
+                                         if($query2){
+                                            @mkdir('../files/clientes/'.$carpeta_cliente); // Creamos carpeta inicial...
                                                   // Creamos subcarpetas
-                                                  mkdir('files/'.$carpeta_cliente."/Documentos de propiedad");
-                                                  mkdir('files/'.$carpeta_cliente."/Facturas y contratos");
-                                                  mkdir('files/'.$carpeta_cliente."/Otros documentos");
-                                                  mkdir('files/'.$carpeta_cliente."/Analisis de caso");
+                                                 @mkdir('../files/clientes/'.$carpeta_cliente."/Documentos de propiedad");
+                                                 @mkdir('../files/clientes/'.$carpeta_cliente."/Facturas y contratos");
+                                                @mkdir('../files/clientes/'.$carpeta_cliente."/Otros documentos");
+                                                  @mkdir('../files/clientes/'.$carpeta_cliente."/Analisis de caso");
 
                                                   echo "1";// Carpeta creada 
 
 
 
-                                          }*/
+                                          }
 
                                 } else
                                 echo "3"; // El cliente ya existe..
