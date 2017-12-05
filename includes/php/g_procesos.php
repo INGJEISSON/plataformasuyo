@@ -1758,12 +1758,12 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                                     $query2=pg_query($conexion, $sql2);
 
                                          if($query2){
-                                            @mkdir('../files/clientes/'.$carpeta_cliente); // Creamos carpeta inicial...
+                                            mkdir('../files/clientes/'.$carpeta_cliente); // Creamos carpeta inicial...
                                                   // Creamos subcarpetas
-                                                 @mkdir('../files/clientes/'.$carpeta_cliente."/Documentos de propiedad");
-                                                 @mkdir('../files/clientes/'.$carpeta_cliente."/Facturas y contratos");
-                                                @mkdir('../files/clientes/'.$carpeta_cliente."/Otros documentos");
-                                                  @mkdir('../files/clientes/'.$carpeta_cliente."/Analisis de caso");
+                                                 mkdir('../files/clientes/'.$carpeta_cliente."/Documentos de propiedad");
+                                                 mkdir('../files/clientes/'.$carpeta_cliente."/Facturas y contratos");
+                                                mkdir('../files/clientes/'.$carpeta_cliente."/Otros documentos");
+                                                  mkdir('../files/clientes/'.$carpeta_cliente."/Analisis de caso");
 
                                                   echo "1";// Carpeta creada 
 
