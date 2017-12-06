@@ -158,7 +158,7 @@ $("#cargando2").hide();
                         var cod_estante= $("#cod_estante").val();
                         var ubicacion =$("#ubicacion").val();
 
-                        if(id_cliente!=0){
+                        if(id_cliente!=0 && cod_bodega!=0 && cod_estante!=0 && ubicacion!=0 && tipo_docu!=0){
 
 
                                 var datos ='g_add_docu='+1+'&nombre='+nombre+'&apellidos='+apellidos+'&tipo_docu='+tipo_docu+'&create='+1+'&id_cliente='+id_cliente+'&cod_bodega='+cod_bodega+'&cod_estante='+cod_estante+'&ubicacion='+ubicacion;
@@ -172,7 +172,17 @@ $("#cargando2").hide();
                                                                 if(valor==1){
 
                                                                     alert("Registro realizado correctamente");
-                                                                    $("#repor").html(valor);
+                                                                  var datos='g_add_docu='+1+'&listar_usuarios='+1;
+    $.ajax({
+                                                     type: "POST",
+                                                     data: datos,
+                                                     url: 'includes/php/g_procesos.php',
+                                                     success: function(valor){
+                                                            $("#repor").html(valor);
+                                                            
+                                                     }
+
+                                                });
 
                                                                 }else if(valor==2){
                                                                     alert("Ocurrió un problema al registrar el usuario");
@@ -184,7 +194,7 @@ $("#cargando2").hide();
 
                                                 });
                         }else
-                        alert("Por favor seleccione a qué tipo de documentación va a pertenecer el usuario");
+                        alert("Por favor complete los campos con asterícos son obligatorios");
 
                 });
 
