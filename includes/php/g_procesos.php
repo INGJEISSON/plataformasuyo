@@ -1749,21 +1749,23 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                            $rows=pg_num_rows($query);
 
                                 if($rows==0){
-                                      // insertamos cliente 
+                                      // insertamos cliente   
+                                     $carpeta_cliente=$_POST['nombre']."_".$_POST['apellidos']."_".$_POST['id_cliente'];
+                                  $md5_carp=md5($carpeta_cliente);                                                                                
 
-                                    $sql2="insert into documentacion (cod_cliente, apellidos, nombres, tipo_docu, ciudad, cod_bodega, cod_estante) values('".$_POST['id_cliente']."', '".$_POST['apellidos']."', '".$_POST['nombre']."', '".$_POST['tipo_docu']."', '', '".$_POST['cod_bodega']."', '".$_POST['cod_estante']."') ";
+                                    $sql2="insert into documentacion (cod_cliente, apellidos, nombres, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$_POST['id_cliente']."', '".$_POST['apellidos']."', '".$_POST['nombre']."', '".$_POST['tipo_docu']."', '', '".$_POST['cod_bodega']."', '".$_POST['cod_estante']."', '".$_POST['ubicacion']."', '".$md5_carp."') ";
 
-                                   $carpeta_cliente=$_POST['nombre']."_".$_POST['apellidos']."_".$_POST['id_cliente'];
+                                   //$carpeta_cliente=$_POST['nombre']."_".$_POST['apellidos']."_".$_POST['id_cliente'];
                                                
                                     $query2=pg_query($conexion, $sql2);
 
                                          if($query2){
-                                            mkdir('../files/clientes/'.$carpeta_cliente); // Creamos carpeta inicial...
+                                            mkdir('../files/clientes/'.$md5_carp); // Creamos carpeta inicial...
                                                   // Creamos subcarpetas
-                                                 mkdir('../files/clientes/'.$carpeta_cliente."/Documentos de propiedad");
-                                                 mkdir('../files/clientes/'.$carpeta_cliente."/Facturas y contratos");
-                                                mkdir('../files/clientes/'.$carpeta_cliente."/Otros documentos");
-                                                  mkdir('../files/clientes/'.$carpeta_cliente."/Analisis de caso");
+                                                 mkdir('../files/clientes/'.$md5_carp."/Documentos de propiedad");
+                                                 mkdir('../files/clientes/'.$md5_carp."/Facturas y contratos");
+                                                mkdir('../files/clientes/'.$md5_carp."/Otros documentos");
+                                                  mkdir('../files/clientes/'.$md5_carp."/Analisis de caso");
 
                                                   echo "1";// Carpeta creada 
 
@@ -1795,6 +1797,10 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                   if(isset($_POST['listar_usuarios'])){
 
                         include('list_usuarios_docu.php');
+                  }
+
+                  if(isset($_POST['listar_documentos'])){
+                      include('list_documentos.php');
                   }
 
             }

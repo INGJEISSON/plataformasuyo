@@ -13,7 +13,7 @@ $rows2=pg_num_rows($query2);
 
 
 		if(isset($rows2)){
- $carpeta_cliente=$datos2['nombres']."_".$datos2['apellidos']."_".$datos2['cod_cliente'];
+ $carpeta_cliente=$datos2['usr_codif'];
 ?>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <?php
@@ -50,11 +50,11 @@ if(isset($_FILES['upl']) && $_FILES['upl']['error'] == 0){
 					
 					 $qry = "UPDATE detalle_docu SET ruta='".$ruta."' where cod_cliente='".$_GET['cod_cliente']."' and id_cate_docu='".$_GET['id_cate_docu']."'  ";
 					}else{
-					 $qry = "insert into detalle_docu (id_cate_docu, cod_cliente, cod_usuario, cod_estado) values('".$_GET['id_cate_docu']."', '".$_GET['cod_cliente']."', '".$_SESSION['cod_usuario']."', 5)";
+					  $qry = "insert into detalle_docu (id_cate_docu, cod_cliente, cod_usuario, cod_estado, ruta) values('".$_GET['id_cate_docu']."', '".$_GET['cod_cliente']."', '".$_SESSION['cod_usuario']."', 5, '".$ruta."')";
 					}
 					
 
-								//	$sube=pg_query($conexion,  $qry);
+									$sube=pg_query($conexion,  $qry);
 									if(isset($sube))
 									echo "1";
 									else

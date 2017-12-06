@@ -84,7 +84,7 @@ include('../dependencia/conexion.php');
                                                 <select class="form-control" id="cod_estante">
                                                    <option value="0">Seleccione</option>
                                                            <?php
-                                                                    for($i=1;$i<=10;$i++){
+                                                                    for($i=1;$i<=20;$i++){
 
                                                            ?>
 
@@ -96,7 +96,27 @@ include('../dependencia/conexion.php');
                                                            ?>
                                                 </select>
                                             </div>
-                                        </div>          
+                                        </div>       
+
+                                        <div class="form-group">
+                                            <label class="col-sm-12">UBICACION</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control" id="ubicacion">
+                                                   <option value="0">Seleccione</option>
+                                                           <?php
+                                                                    for($i=1;$i<=20;$i++){
+
+                                                           ?>
+
+                                                           <option value="<?= $i ?>"><?php echo ($i)  ?></option>
+
+                                                            <?php 
+
+                                                                    } 
+                                                           ?>
+                                                </select>
+                                            </div>
+                                        </div>         
 
 
                                        <input type="button" name="button" id="registrar" class="btn btn-primary" value="Registar">
@@ -136,11 +156,12 @@ $("#cargando2").hide();
                         var id_cliente= $("#id_cliente").val();
                         var cod_bodega= $("#cod_bodega").val();
                         var cod_estante= $("#cod_estante").val();
+                        var ubicacion =$("#ubicacion").val();
 
                         if(id_cliente!=0){
 
 
-                                var datos ='g_add_docu='+1+'&nombre='+nombre+'&apellidos='+apellidos+'&tipo_docu='+tipo_docu+'&create='+1+'&id_cliente='+id_cliente+'&cod_bodega='+cod_bodega+'&cod_estante='+cod_estante;
+                                var datos ='g_add_docu='+1+'&nombre='+nombre+'&apellidos='+apellidos+'&tipo_docu='+tipo_docu+'&create='+1+'&id_cliente='+id_cliente+'&cod_bodega='+cod_bodega+'&cod_estante='+cod_estante+'&ubicacion='+ubicacion;
 
                                                 $.ajax({
                                                      type: "POST",

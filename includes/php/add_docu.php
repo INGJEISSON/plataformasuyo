@@ -63,7 +63,7 @@ include('../dependencia/conexion.php');
                 </div>
                 
 
-                 <div id='repor2'>
+                 <div id='repor21'>
             
                 </div>
 
@@ -103,14 +103,14 @@ $(document).ready(function(){
 
 
     });    
-
-                                           var datos='g_add_docu='+1+'&listar_usuarios='+1;
+  var cod_cliente="<?php echo $_GET['id_cliente'] ?>";
+                                var datos='g_add_docu='+1+'&cod_cliente='+cod_cliente+'&listar_documentos='+1;
                                           $.ajax({
                                                      type: "POST",
                                                      data: datos,
-                                                     url: 'includes/php/g_procesos.php',
+                                                     url: 'g_procesos.php',
                                                      success: function(valor){
-                                                            $("#repor2").html(valor);
+                                                            $("#repor21").html(valor);
                                                             
                                                      }
 
