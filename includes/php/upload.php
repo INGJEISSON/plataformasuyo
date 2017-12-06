@@ -50,7 +50,7 @@ if(isset($_FILES['upl']) && $_FILES['upl']['error'] == 0){
 					
 					 $qry = "UPDATE detalle_docu SET ruta='".$ruta."' where cod_cliente='".$_GET['cod_cliente']."' and id_cate_docu='".$_GET['id_cate_docu']."'  ";
 					}else{
-					  $qry = "insert into detalle_docu (id_cate_docu, cod_cliente, cod_usuario, cod_estado, ruta) values('".$_GET['id_cate_docu']."', '".$_GET['cod_cliente']."', '".$_SESSION['cod_usuario']."', 5, '".$ruta."')";
+					  $qry = "insert into detalle_docu (id_cate_docu, cod_cliente, cod_usuario, cod_estado, ruta) values('".$_GET['id_cate_docu']."', '".$_GET['cod_cliente']."', '".$_SESSION['cod_usuario']."', 3, '".$ruta."')";
 					}
 					
 
