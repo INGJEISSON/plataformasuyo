@@ -14,7 +14,7 @@
                             <h3 class="box-title">TAREAS VENCIDAS </h3>
                             <ul class="list-inline two-part">
                                 <li><i class="icon-people text-info"></i></li>
-                                <li class="text-right"><span class="counter">23</span></li>
+                                <li class="text-right"><span class="counter">2</span></li>
                             </ul>
                         </div>
                     </div>
@@ -23,16 +23,16 @@
                             <h3 class="box-title">TAREAS PENDIENTES</h3>
                             <ul class="list-inline two-part">
                                 <li><i class="icon-folder text-purple"></i></li>
-                                <li class="text-right"><span class="counter">169</span></li>
+                                <li class="text-right"><span class="counter">80</span></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title">Mensajes</h3>
+                            <h3 class="box-title">PRÓXIMAS A VENCERSE</h3>
                             <ul class="list-inline two-part">
                                 <li><i class="icon-folder text-purple"></i></li>
-                                <li class="text-right"><span class="counter">169</span></li>
+                                <li class="text-right"><span class="counter">10</span></li>
                             </ul>
                         </div>
                     </div>
@@ -43,10 +43,10 @@
                 <div class="white-box bg-theme m-b-0 p-b-0 mailbox-widget">
                             <h2 class="text-white p-b-20">Mis tareas </h2>
                             <ul class="nav customtab nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#home1" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-email"></i></span><span class="hidden-xs"> RETRASADAS</span></a></li>
+                                <li role="presentation" class="active"><a href="#home1" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-email"></i></span><span class="hidden-xs"> VENCIDAS</span></a></li>
                                 <li role="presentation" class=""><a href="#profile1" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-export"></i></span> <span class="hidden-xs">HOY</span></a></li>
-                                <li role="presentation" class=""><a href="#messages1" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-panel"></i></span> <span class="hidden-xs">PROXIMAS TAREAS</span></a></li>
-                                <li role="presentation" class=""><a href="#settings1" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-trash"></i></span> <span class="hidden-xs">COMPLETADAS</span></a></li>
+                                <li role="presentation" class=""><a href="#messages1" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-panel"></i></span> <span class="hidden-xs">PENDIENTES</span></a></li>
+                                <li role="presentation" class=""><a href="#settings1" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-trash"></i></span> <span class="hidden-xs">PRÓXIMAS A VENCERSE</span></a></li>
                             </ul>
                 </div>
 

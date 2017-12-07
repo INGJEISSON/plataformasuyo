@@ -74,7 +74,7 @@ include('../dependencia/conexion.php');
                                <td width="106"><strong>Agregar revisión</strong></td>
                              </tr>
                              <tr align="center">
-                               <td><img src="../../img/if_Plus_206460.png" id="add_revision" style="cursor:pointer" title="Agregar revisión" width="38" height="38"></td>
+                               <td><img src="img/if_Plus_206460.png" id="add_revision" style="cursor:pointer" title="Agregar revisión" width="38" height="38"></td>
                              </tr>
                            </table>
                            <strong>Observaciones</strong>

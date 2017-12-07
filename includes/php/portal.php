@@ -35,6 +35,8 @@ date_default_timezone_set('America/Bogota');
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js"></script>
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.colVis.min.js"></script>
 
+    
+
 
 <script src="js/charts/js/highcharts.js"></script>
 <script src="js/charts/js/modules/exporting.js"></script>
@@ -73,8 +75,8 @@ date_default_timezone_set('America/Bogota');
                <?php include('includes/php/notificacion.php') ?>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
-                        <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
-                            <input type="text" placeholder="Buscar clientes" class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
+                        <form  class="app-search hidden-sm hidden-xs m-r-10">
+                            <input type="text" placeholder="Buscar clientes" id="buscarcliente" class="form-control"> <a href="javascript:;"><i class="fa fa-search"></i></a> </form>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="<?php echo $_SESSION['imagen'] ?>" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><?php echo $_SESSION['nombre'] ?></b><span class="caret"></span> </a>
@@ -155,6 +157,7 @@ date_default_timezone_set('America/Bogota');
     <script type="text/javascript">
    
         $(document).ready(function(){
+
 
             $('#carga_modulo').show();
                                                $("#contenido").toggle();    

@@ -1804,4 +1804,24 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                   }
 
             }
+
+
+            if(isset($_GET['b_cliente'])){
+
+                $q = strtolower($_GET["q"]);
+
+                    $sql="select + from documentacion where cod_cliente LIKE '%$q%' or apellidos LIKE '%$q%' or nombres LIKE '%$q%' ";
+                    $query=pg_query($conexion, $sql);
+                    $rows=pg_num_rows($query);
+
+
+                        if($rows){  
+                                while($rs = pg_fetch_assoc($rsd)) { 
+                                $cname = $rs['id_cliente'].", ".($rs['apellidos'])." ".$rs['nombres']." ";
+                                echo $cname."\n";
+                                }
+                        }
+
+
+            }
 ?>
