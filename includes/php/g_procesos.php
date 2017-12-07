@@ -1816,12 +1816,47 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
 
                         if($rows){  
+                           $data = array();
                                 while($rs = pg_fetch_assoc($rsd)) { 
-                                $cname = $rs['id_cliente'].", ".($rs['apellidos'])." ".$rs['nombres']." ";
-                                echo $cname."\n";
+                                $cname[]= $rs['id_cliente'].", ".($rs['apellidos'])." ".$rs['nombres']." ";
+                              //  echo $cname."\n";
                                 }
+                               echo json_encode($data);
                         }
 
+            }
+
+            if(isset($_POST['g_menus'])){
+
+                  if(isset($_POST['create'])){
+
+                      // COnsultamos que el menú no haya sido creado
+
+                        $sql="select * from menu where descripcion='".trim($_POST['descripcion'])."' ";
+                        $query=pg_query($conexion, $sql);
+                        $rows=pg_num_rows($query);
+
+                           if($rows==1)
+                                echo "3"; // EL Menú ya fué creado ..
+                            else{
+
+                                  $sql="insert into menu (campo, descripcion, ruta) values('".$_POST['campo']."',  '".$_POST['descripcion']."', '".$_POST['ruta']."' ) ";
+                                  $query=pg_query($conexion, $sql);
+
+                                      if($query){
+                                        echo "1";
+                                          include('vistas.php');
+                                      }
+                                      else
+                                        echo "2"; // Problema técnico..
+                            }
+
+                  }
 
             }
+
+            if(isset($_POST['vistas'])){ // Generador de vistas
+                    include('vistas.php');
+            }
+
 ?>

@@ -93,7 +93,12 @@ include('../dependencia/conexion.php');
 $(document).ready(function () {
     
 $("#cargando2").hide(); 
-    
+    $('#example23').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });      
 
     
                 $("#id_grupo").change(function(){

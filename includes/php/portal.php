@@ -35,7 +35,7 @@ date_default_timezone_set('America/Bogota');
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js"></script>
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.colVis.min.js"></script>
 
-    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>   
 
 
 <script src="js/charts/js/highcharts.js"></script>
@@ -76,7 +76,7 @@ date_default_timezone_set('America/Bogota');
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
                         <form  class="app-search hidden-sm hidden-xs m-r-10">
-                            <input type="text" placeholder="Buscar clientes" id="buscarcliente" class="form-control"> <a href="javascript:;"><i class="fa fa-search"></i></a> </form>
+                            <input type="text" placeholder="Buscar clientes" autocomplete="off" id="buscarcliente" class="form-control"> <a href="javascript:;"><i class="fa fa-search"></i></a> </form>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="<?php echo $_SESSION['imagen'] ?>" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><?php echo $_SESSION['nombre'] ?></b><span class="caret"></span> </a>
@@ -202,6 +202,27 @@ date_default_timezone_set('America/Bogota');
                                               }                               
                              );    
                      });
+
+$('#buscarcliente').typeahead({
+  source: function(query, result)
+  {
+   $.ajax({
+    url:"includes/php/fetch.php",
+    method:"POST",
+    data:{query:query},
+    dataType:"json",
+    success:function(data)
+    {
+     result($.map(data, function(item){
+      return item;
+     }));
+    }
+   })
+  }
+ });
+
+
+
 
         });
     </script>
