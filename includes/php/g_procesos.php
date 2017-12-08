@@ -4,7 +4,7 @@ include('../dependencia/conexion.php');
 $fecha_registro=date('Y-m-d H:mm:ss');
 $fecha_filtro=date('Y-m-d');
 //comprobamos que sea una petición ajax
-if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') 
+/*if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') 
 {
 
     //obtenemos el archivo a subir
@@ -33,7 +33,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
     }
 }else{
     throw new Exception("Error Processing Request", 1);   
-}
+}*/
 
 
       if(isset($_POST['add_revision'])){ // Agregar revisión...
