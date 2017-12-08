@@ -1663,7 +1663,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                     $query=pg_query($conexion, $sql);
 
                           if($query){
-                                    $update="update serv_cliente set cod_usuario='".$_POST['cod_usu_resp']."', fecha_filtro='".$fecha_filtro."' where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
+                                    $update="update serv_cliente set cod_usuario='".$_POST['cod_usu_resp']."' where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
                                     $query2=pg_query($conexion, $update);
                                         if($query2)
                                           echo "1"; // Registro exitoso...
