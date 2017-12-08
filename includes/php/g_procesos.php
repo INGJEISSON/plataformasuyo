@@ -2,6 +2,7 @@
 include('../dependencia/conexion.php');
       // Agregamos archivo....
 $fecha_registro=date('Y-m-d H:mm:ss');
+$fecha_filtro=date('Y-m-d');
 //comprobamos que sea una petición ajax
 if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') 
 {
@@ -1690,7 +1691,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
 
 
-                    $sql="insert into asigna_serv (id_serv_cliente, cod_usu_coor, cod_usuario, fecha_filtro) values('".$_POST['id_serv_cliente']."', '".$_SESSION['cod_usuario']."', '".$_POST['cod_usu_resp']."', '".$fecha_registro."') ";
+                    $sql="insert into asigna_serv (id_serv_cliente, cod_usu_coor, cod_usu_respon, fecha_filtro, fecha_radic_serv) values('".$_POST['id_serv_cliente']."', '".$_SESSION['cod_usuario']."', '".$_POST['cod_usu_resp']."', '".$fecha_filtro."', '') ";
                     $query=pg_query($conexion, $sql);
 
                           if($query){
