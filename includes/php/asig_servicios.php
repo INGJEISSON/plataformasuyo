@@ -110,7 +110,7 @@ $sql="select  cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_cliente.
                               $sql3="select * from usuarios where tipo_usuario=21  or tipo_usuario=6 ";
                       $query3=pg_query($conexion, $sql3);
                               
-                            $sql2="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from serv_cliente, usuarios where serv_cliente.cod_usuario=usuarios.cod_usuario and  serv_cliente.id_serv_cliente='".$datos['id_serv_cliente']."' and serv_cliente.cod_estado=23 and serv_cliente.cod_usuario='".$datos['cod_usurio']."'   ";
+                            $sql2="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from serv_cliente, usuarios where serv_cliente.cod_usuario=usuarios.cod_usuario and  serv_cliente.id_serv_cliente='".$datos['id_serv_cliente']."' and serv_cliente.cod_estado=23 and serv_cliente.cod_usuario='".$datos['cod_usuario']."'   ";
                               $query2=pg_query($conexion, $sql2);
                               $rows2=pg_num_rows($query2);
                                   if($rows2){

@@ -75,8 +75,8 @@ date_default_timezone_set('America/Bogota');
                <?php include('includes/php/notificacion.php') ?>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
-                        <form  class="app-search hidden-sm hidden-xs m-r-10">
-                            <input type="text" placeholder="Buscar clientes" autocomplete="off" id="buscarcliente" class="form-control"> <a href="javascript:;"><i class="fa fa-search"></i></a> </form>
+                      
+                            <input type="text" placeholder="Buscar clientes" autocomplete="off" id="buscarcliente" class="form-control "></a> 
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="<?php echo $_SESSION['imagen'] ?>" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><?php echo $_SESSION['nombre'] ?></b><span class="caret"></span> </a>
