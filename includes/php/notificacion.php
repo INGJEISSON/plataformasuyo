@@ -2,11 +2,11 @@
                     <li><a href="javascript:void(0)" class="open-close waves-effect waves-light"><i class="ti-menu"></i></a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-gmail"></i>
-                            <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                           <!-- <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>-->
                         </a>
                         <ul class="dropdown-menu mailbox animated bounceInDown">
                             <li>
-                                <div class="drop-title">Tienes 4 nuevos mensajes</div>
+                                <div class="drop-title">Tienes nuevos mensajes</div>
                             </li>
                             <li>
                                 <div class="message-center">
@@ -33,7 +33,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a class="text-center" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                                <a class="text-center" href="javascript:void(0);"> <strong>Ver todas las notificaciones</strong> <i class="fa fa-angle-right"></i> </a>
                             </li>
                         </ul>
                         <!-- /.dropdown-messages -->
@@ -41,7 +41,7 @@
                     <!-- .Task dropdown -->
                     <li class="dropdown">
                         <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-check-circle"></i>
-                            <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                            <!-- <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>-->
                         </a>
                         <ul class="dropdown-menu dropdown-tasks animated slideInUp">
                             <li>
@@ -89,7 +89,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a class="text-center" href="#"> <strong>See All Tasks</strong> <i class="fa fa-angle-right"></i> </a>
+                                <a class="text-center" href="#"> <strong>Ver todas las tareas</strong> <i class="fa fa-angle-right"></i> </a>
                             </li>
                         </ul>
                     </li>

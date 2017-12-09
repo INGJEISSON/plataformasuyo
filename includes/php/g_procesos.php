@@ -1,8 +1,12 @@
 <?php
 include('../dependencia/conexion.php');
       // Agregamos archivo....
+date_default_timezone_set('America/Bogota');
 $fecha_registro=date('Y-m-d H:mm:ss');
 $fecha_filtro=date('Y-m-d');
+// Verificamos que el usuario esté autenticado..
+
+if(isset($_SESSION['cod_usuario'])){
 
       if(isset($_POST['add_revision'])){ // Agregar revisión...
 
@@ -1659,7 +1663,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
 
 
-                    $sql="insert into asigna_serv (id_serv_cliente, cod_usu_coor, cod_usu_respon, fecha_filtro, fecha_radic_serv) values('".$_POST['id_serv_cliente']."', '".$_SESSION['cod_usuario']."', '".$_POST['cod_usu_resp']."', '".$fecha_filtro."', '') ";
+                     $sql="insert into asigna_serv (id_serv_cliente, cod_usu_coor, cod_usu_respon, fecha_filtro, fecha_radic_serv) values('".$_POST['id_serv_cliente']."', '".$_SESSION['cod_usuario']."', '".$_POST['cod_usu_resp']."', '".$fecha_filtro."', '') ";
                     $query=pg_query($conexion, $sql);
 
                           if($query){
@@ -1822,10 +1826,103 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                   }
 
+                  if(isset($_POST['submenu'])){
+
+                        $sql="select * from menu where descripcion='".trim($_POST['descripcion'])."' ";
+                        $query=pg_query($conexion, $sql);
+                        $rows=pg_num_rows($query);
+                              if($rows==1)
+                                echo "3";  // Ya existe un submenú iugal..
+                              else{
+
+                                      $sql="insert into submenu(cod_menu, descripcion, ruta, m_order, comentario) values('".$_POST['cod_menu']."', '".$_POST['descripcion']."', '".$_POST['ruta']."', '".$_POST['m_order']."','".$_POST['comentario']."') ";
+                                      $query=pg_query($conexion, $sql);
+
+                                          if($query){
+                                              echo "1";
+                                               // include('vistas.php');
+
+                                          }else
+                                          echo "2"; // Problema técnico..
+                              }
+                  }
+
             }
+
+            if(isset($_POST['g_permisos'])){
+
+                  $sql="select * from permisos_menu where cod_submenu='".$_POST['cod_submenu']."' and cod_usuario='".$_POST['cod_usuario']."' ";
+                  $query=pg_query($conexion, $sql);
+                  $rows=pg_num_rows($query);
+
+                          if($rows){ // SI encontro el permiso del usuario entonteces actualice..
+                            $datos=pg_fetch_assoc($query);
+
+                              $sql2="update permisos_menu set cod_permiso='".$_POST['cod_estado']."' where id='".$datos['id']."' ";
+
+                          }else
+                          $sql2="insert into permisos_menu (cod_submenu, cod_permiso, cod_usuario) values('".$_POST['cod_submenu']."','".$_POST['cod_estado']."', '".$_POST['cod_usuario']."') ";
+
+                          $query2=pg_query($conexion,$sql2);
+
+                              if($query2)
+                                 include('vistas.php');
+
+            }
+             
+              // Gestión de tareas.
+            if(isset($_POST['g_tareas'])){
+
+                  if(isset($_POST['create'])){  // Crear una tarea manual..  
+
+                    // Consultamos que la tarea no haya sido ya creada por el usuario
+
+                        $sql="select * from tareas where nombre='".trim($_POST['nombre'])."' and cod_usu_emisor='".$_SESSION['cod_usuario']."' and cod_proyecto='".$_POST['cod_proyecto']."' ";
+                        $query=pg_query($conexion, $sql);
+                        $rows=pg_num_rows($query);                        
+                             
+                               if($rows==0){
+                                  // Ahora creamos tarea del usuario.. /tipo de generación manual..
+                            $insert="insert into tareas (tipo_gene, fecha_venci, cod_usu_emisor, n_repet, tipo_termino, descripcion, prioridad, fecha_inicio, cod_proyecto, nombre) values(2, '".$_POST['fecha_venci']."', '".$_SESSION['cod_usuario']."', '".$_POST['n_repet']."', '".$_POST['tipo_termino']."', '".$_POST['descripcion']."', '".$_POST['prioridad']."', '".$_POST['fecha_ini']."', '".$_POST['cod_proyecto']."', '".$_POST['nombre']."') ";
+                              $query2=pg_query($conexion, $insert);
+                                }
+                                    
+                                    if(isset($query2) or $rows==1){
+                                      // consultamos el id de la tarea del usuario..
+                                      $sql="select max(id_tarea) as id_tarea from tareas  where cod_usu_emisor='".$_SESSION['cod_usuario']."' ";
+                                      $query=pg_query($conexion, $sql);
+                                      $datos=pg_fetch_assoc($query);
+
+                                          //Buscamos si ya se anexó la tarea al usuario..
+                                          $sql2="select id_tarea from asigna_tareas where id_tarea='".$datos['id_tarea']."' and cod_usu_asignado='".$_POST['cod_usu_asignado']."' ";
+                                          $query2=pg_query($conexion, $sql2);
+                                          $rows2=pg_num_rows($query2);
+
+                                                  if($rows2==0){
+                                                    $insert="insert into asigna_tareas (id_tarea, cod_usu_asignado) values('".$datos['id_tarea']."', '".$_POST['cod_usu_asignado']."' ) ";
+                                                     $query3=pg_query($conexion, $insert);
+                                                  }
+                                                  else 
+                                                    $sal=1;
+
+                                                      if(isset($query3) or $sal==1)
+                                                        echo "1"; // Tarea asignada al usuario..
+                                                      else
+                                                        echo "2"; // Problema técnico..
+                                          }
+
+                                 
+                        } // Fin de creación de tarea...
+                        
+            }
+            
 
             if(isset($_POST['vistas'])){ // Generador de vistas
                     include('vistas.php');
             }
+
+
+  }else
+  echo "9"; // Sesión cadudad por tiempo sin actividad..
 
 ?>

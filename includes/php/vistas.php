@@ -1,6 +1,14 @@
 <?php
 if($_POST['vistas']==2) // Vista de menús.
 $sql="select * from menu ";
+elseif($_POST['vistas']==3) // Vista de submenús.
+$sql="select * from submenu where cod_menu='".$_POST['cod_menu']."' ";
+elseif($_POST['vistas']==4) // Vista de  permisos de usuario
+$sql="select estado.descripcion as estado, submenu.descripcion as submenu from permisos_menu, submenu, estado where permisos_menu.cod_permiso=estado.cod_estado and permisos_menu.cod_submenu=submenu.cod_submenu and permisos_menu.cod_usuario='".$_POST['cod_usuario']."' ";
+
+elseif($_POST['vistas']==5) // Vista de tareas creadas por el usuario (Manual)
+$sql="select tareas.id_tarea, tareas.nombre as tarea, tareas.descripcion, proyectos_tar.descripcion as proyecto, tareas.fecha_inicio, tareas.fecha_venci, tareas.prioridad from proyectos_tar, tareas where tareas.cod_proyecto=proyectos_tar.cod_proyecto and tareas.cod_usu_emisor='".$_SESSION['cod_usuario']."' order by tareas.prioridad asc  ";
+
 
           $query=pg_query($conexion, $sql);
           $rows=pg_num_rows($query);
@@ -10,13 +18,13 @@ $sql="select * from menu ";
 
 <script>
   $(document).ready(function(){        
-       /* $(".edicion").colorbox({
+      $(".edicion").colorbox({
           iframe:false, 
           width:"100%", 
           height:"100%",
           overlayClose:false,
           //escKey:
-          });    */      
+          });         
   });
 </script>
 
@@ -62,7 +70,160 @@ $sql="select * from menu ";
      </div>
                         </div>
                     </div>
-                </div>
+  </div>
+
+  <?php
+}
+?> 
+
+<?php if($_POST['vistas']==3){ // Vista de submenús.
+?>
+
+<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">LISTADO DE SUBMENUS</h3>
+                            <div class="table-responsive">
+       <table id="table_id" class='table responsive' cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="2%">#</th>
+                <th width="6%">Nombre del submenu</th>
+                <th width="7%">Estado</th>              
+                <
+            </tr>
+        </thead>
+        <tbody>
+         <?php
+                $i=1;
+                while($datos=pg_fetch_assoc($query)){
+      
+                    ?>
+            <tr>
+                <td><?php echo $i ?></td>
+                <td><?php echo ($datos["descripcion"]) ?></td>
+                <td><?php echo ($datos['ruta']) ?></td>
+                <td><?php echo ($datos['m_order']) ?></td>
+                <td><?php echo ($datos['comentario']) ?></td>
+               <td><a href="includes/php/submenus.php?cod_menu=<?php echo $datos['cod_menu']; ?>" tittle='Revisar' class="edicion"><img src='img/edit.png' alt="" width="24" height="24"></a></td>       
+          </tr>
+             <?php
+       $i++;
+           }
+    ?>
+     </tbody>
+    </table>
+     </div>
+                        </div>
+                    </div>
+  </div>
+
+  <?php
+}
+?> 
+
+
+<?php if($_POST['vistas']==4){ // Vista de permisos de usuario (Menús)
+?>
+
+<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">LISTADO DE PERMISOS DE USUARIO</h3>
+                            <div class="table-responsive">
+       <table id="table_id" class='table responsive' cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="2%">#</th>
+                <th width="6%">Nombre del Submenú</th>
+                <th width="11%">Estado</th>         
+            </tr>
+        </thead>
+        <tbody>
+         <?php
+                $i=1;
+                while($datos=pg_fetch_assoc($query)){
+      
+                    ?>
+            <tr>
+                <td><?php echo $i ?></td>
+                <td><?php echo ($datos["submenu"]) ?></td>
+                <td><?php if($datos['estado']==5) echo "Habilitado"; else echo "Deshabilitado" ?></td>                 
+          </tr>
+             <?php
+       $i++;
+           }
+    ?>
+     </tbody>
+    </table>
+     </div>
+                        </div>
+                    </div>
+  </div>
+
+  <?php
+}
+?> 
+
+
+
+
+<?php if($_POST['vistas']==5){ // Vista de tareas realizadas por él a otro miembro del equipo..
+?> 
+<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">LISTADO DE TAREAS CREADAS</h3>
+                            <div class="table-responsive">
+       <table id="table_id" class='table responsive' cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="2%">#</th>
+                <th width="6%">Proyecto</th>
+                <th width="11%">Tarea</th>  
+                <th width="11%">Asignados</th> 
+                 <th width="11%">Fecha de inicio</th> 
+                <th width="11%">Fecha de vencimiento</th> 
+                <th width="11%">Prioridad</th>
+                <th width="11%">Estado</th>     
+                <th width="11%">Editar</th> 
+                <th width="11%">Eliminar</th>         
+            </tr>
+        </thead>
+        <tbody>
+         <?php
+                $i=1;
+                while($datos=pg_fetch_assoc($query)){
+
+                        // Consulto la cantidad de usuarios asignados por tarea.
+
+                      $sql2="select id_tarea from asigna_tareas where id_tarea='".$datos['id_tarea']."' ";
+                      $query2=pg_query($conexion, $sql2);
+                      $rows2=pg_num_rows($query2);
+      
+                    ?>
+            <tr>
+                <td><?php echo $i ?></td>
+                <td><?php echo ($datos["proyecto"]) ?></td>
+                <td><?php echo ($datos["tarea"]) ?></td>
+                <td><?php echo "(".$rows2.")"; ?></td>
+                <td><?php echo ($datos["fecha_inicio"]) ?></td>
+                <td><?php echo ($datos["fecha_venci"]) ?></td>
+                <td><?php if($datos["prioridad"]==1) echo "Alta"; elseif($datos["prioridad"]==2) echo "Media"; else echo "Baja" ?></td>
+                <td><?php  ?></td>
+                <td><?php  ?></td>
+                <td><?php  ?></td>
+          </tr>
+             <?php
+       $i++;
+           }
+    ?>
+     </tbody>
+    </table>
+     </div>
+                        </div>
+                    </div>
+  </div>
 
   <?php
 }
@@ -70,7 +231,12 @@ $sql="select * from menu ";
  <script type="text/javascript">
     
 $(document).ready(function () {
- $('#table_id').DataTable();
+ $('#table_id').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });      
     
 });
 </script>
