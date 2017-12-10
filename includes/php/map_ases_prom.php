@@ -1,8 +1,7 @@
 <?php
 include('../dependencia/conexion.php');
 
-$select="select enc_procesadas.asesor, enc_procesadas.tipo_encuesta, enc_procesadas.ciudad,  enc_procesadas.id_cliente, enc_procesadas.telefono, enc_procesadas.cliente, segui_asesor.latitude, segui_asesor.longitude, segui_asesor.visita, segui_asesor.detalle_vis, enc_procesadas.id_fasfield from enc_procesadas, segui_asesor where enc_procesadas.id_fasfield=segui_asesor.id_fasfield  and segui_asesor.latitude!='' and enc_procesadas.fecha_filtro between '2017-10-01' and '2017-12-30'  
-ORDER BY `enc_procesadas`.`cliente`  DESC";
+$select="select enc_procesadas.asesor, enc_procesadas.tipo_encuesta, enc_procesadas.ciudad,  enc_procesadas.id_cliente, enc_procesadas.telefono, enc_procesadas.cliente, segui_asesor.latitude, segui_asesor.longitude, segui_asesor.visita, segui_asesor.detalle_vis, enc_procesadas.id_fasfield from enc_procesadas, segui_asesor where enc_procesadas.id_fasfield=segui_asesor.id_fasfield  and segui_asesor.latitude<>0 and enc_procesadas.fecha_filtro between '2017-10-01' and '2017-12-30'  ORDER BY enc_procesadas.cliente  DESC";
 $query=pg_query($conexion, $select);
 $rows=pg_num_rows($query);
 
