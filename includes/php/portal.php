@@ -86,18 +86,19 @@ date_default_timezone_set('America/Bogota');
                                     <div class="u-img"><img src="<?php echo $_SESSION['imagen'] ?>" alt="user" /></div>
                                     <div class="u-text">
                                         <h4><?php echo $_SESSION['nombre'] ?></h4>
-                                        <p class="text-muted"><?php echo $_SESSION['email']  ?></p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a></div>
+                                        <p class="text-muted"><?php echo $_SESSION['email']  ?></p>
+                                       <!-- <a href="profile.html" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a>--></div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>                          
-                            <li><a href="#"><i class="ti-wallet"></i> Mis activides</a></li>
-                            <li><a href="#"><i class="ti-email"></i> Mensajes</a></li>
+                            <!--<li><a href="#"><i class="ti-wallet"></i> Mis activides</a></li>
+                            <li><a href="#"><i class="ti-email"></i> Mensajes</a></li>--
                             <li role="separator" class="divider"></li>
                             <li><a href="#"><i class="ti-settings"></i> Configuración de cuenta</a></li>
-                            <li role="separator" class="divider"></li>
+                            <li role="separator" class="divider"></li>-->
                             <li><a href="javascript:;" id="logout"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
-                        <!-- /.dropdown-user -->
+                        <!-- /.dropdown-user 
                     </li>
                     <!-- /.dropdown -->
                 </ul>

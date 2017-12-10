@@ -316,44 +316,29 @@ if(isset($_SESSION['cod_usuario'])){
                               $i=1;
                               $nom_asesor=0;
                                $prospectos_ase=0;
-                           /* while($datos=pg_fetch_assoc($query_asesor)){
-
-                                   
-                                     if($i==$rows)
-                                     $nom_asesor.="'".$datos['asesor']."'";
-                                     else
-                                     $nom_asesor.="'".$datos['asesor']."', ";
-
-                                   //COntamos los prospectos realizados del asesor.
-
-                                        // Consulto la cantidad de prospectos que tiene la regional.
-                                        $sql5="select cod_enc_proc from enc_procesadas where  $parametro tipo_encuesta=5 and asesor='".$datos['asesor']."'    and fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
-                                        $query5=pg_query($conexion, $sql5);
-                                        $prospectos5=pg_num_rows($query5);
-
-                                            if($i==$rows)
-                                           $prospectos_ase.=$prospectos5;
-                                               else
-                                            $prospectos_ase.=$prospectos5.", ";
+                          
 
 
-                                       $sql6="select cod_enc_proc from enc_procesadas where $parametro tipo_encuesta=1 and asesor='".$datos['asesor']."' and fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
-                                        $query6=pg_query($conexion, $sql6);
-                                        $diagno6=pg_num_rows($query6);
-
-                                            if($i==$rows)
-                                            $diagno_ase.=$diagno6;
-                                            else
-                                            $diagno_ase.=$diagno6.", ";
-
-                              $i++;
-                            }*/
-
-
-                          $sql711="select distinct enc_procesadas.asesor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='Visitado y Pagado' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                           $sql711="select distinct enc_procesadas.asesor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='Visitado y pagado' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query_asesor11=pg_query($conexion, $sql711);
                         $rows=pg_num_rows($query_asesor11);
                               $i=1;
+
+                                 // SUmamos el dinero recaudado por Diagnóstico Vistado y Pagado
+
+
+                        $sql71="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='Visitado y pagado' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                          $query71=pg_query($conexion, $sql71);
+                        $rows_71=pg_num_rows($query71); 
+                               $v_diagnos=0;
+                              if($rows_71){                                 
+
+                                  $v_diagnos=0;
+                                  while($datos71=pg_fetch_assoc($query71)){
+                                    $v_diagnos=$datos71['valor']+$v_diagnos;
+                                  }                                 
+                              }
+                            
                            /* while($datos=pg_fetch_assoc($query_asesor11)){
 
                                    
@@ -383,105 +368,9 @@ if(isset($_SESSION['cod_usuario'])){
                         $rows78=pg_num_rows($query78);
                                   $i=1;
 
-                           /*while($datos78=pg_fetch_assoc($query78)){
-
-                                   
-                                      if($i==$rows78)
-                                     $resul_visita.="'".$datos78['resul_visita']."'";
-                                     else
-                                     $resul_visita.="'".$datos78['resul_visita']."', ";
-
-                                        // Consulto la cantidad de prospectos que tiene la regional.
-                                      $sql512="select enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where  $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".$datos78['resul_visita']."' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
-                                        $query512=pg_query($conexion, $sql512);
-                                      $rows512=pg_num_rows($query512);
-
-
-                                            if($i==$rows)
-                                           $rows_resul_visit.=$rows512;
-                                               else
-                                            $rows_resul_visit.=$rows512.", ";
-                              $i++;
-                            }*/
-
-                           
-
-                           //select distinct enc_procesadas.asesor from enc_procesadas, det_repor_aseso where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and resul_visita='Visitado y Pagado' and enc_procesadas.fecha_filtro between '2017-10-01' and '2017-10-16'
-
                          
 
-                            //Resultado de las visitas.
-
-                         /*$sql7="select distinct det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where  $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and resul_visita<>'' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
-                            $query7=pg_query($conexion, $sql7);
-
-                                  $i=1;
-                            while($datos7=pg_fetch_assoc($query7)){
-
-                                   
-                                     if($i==$rows)
-                                     $resul_visita.="'".$datos7['resul_visita']."'";
-                                     else
-                                     $resul_visita.="'".$datos7['resul_visita']."', ";
-
-                                        // Consulto la cantidad de prospectos que tiene la regional.
-                                      $sql51="select enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where  $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".$datos7['resul_visita']."' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
-                                        $query51=pg_query($conexion, $sql51);
-                                      $rows51=pg_num_rows($query51);
-
-
-                                            if($i==$rows)
-                                           $rows_resul_visit.=$rows51;
-                                               else
-                                            $rows_resul_visit.=$rows51.", ";
-                              $i++;
-                            }*/
-                          
-                          
-                          //Resultado de las visitas. 2
-
-                           /* $sql77="select distinct det_repor_aseso.tipo_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and tipo_visita<>'' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
-                            $query77=pg_query($conexion, $sql77);
-
-                                  $i=1;
-                            while($datos77=pg_fetch_assoc($query77)){
-
-                                   
-                                     if($i==$rows)
-                                      $tipo_visita.="'".$datos77['tipo_visita']."'";
-                                     else
-                                     $tipo_visita.="'".$datos77['tipo_visita']."', ";
-
-                                        // Consulto la cantidad de prospectos que tiene la regional.
-                                        $sql511="select enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tipo_visita='".$datos77['tipo_visita']."' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
-                                        $query511=pg_query($conexion, $sql511);
-                                        $rows511=pg_num_rows($query511);
-
-
-                                            if($i==$rows)
-                                           $rows_tipo_visit.=$rows511;
-                                               else
-                                            $rows_tipo_visit.=$rows511.", ";
-                              $i++;
-                            }*/
-
-
-
-                            // SUmamos el dinero recaudado por Diagnóstico Vistado y Pagado
-
-
-                        $sql71="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and resul_visita='Visitado y Pagado'  and enc_procesadas.cod_estado=6 and  enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
-                          $query71=pg_query($conexion, $sql71);
-                        $rows_71=pg_num_rows($query71); 
-                               $v_diagnos=0;
-                              if($rows_71){                                 
-
-                                  $v_diagnos=0;
-                                  while($datos71=pg_fetch_assoc($query71)){
-                                    $v_diagnos=$datos71['valor']+$v_diagnos;
-                                  }                                 
-                              }
-                            
+                         
   // Consulto los diagnósticos que no tomaron el servicio
                        $sql8="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro  enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='No' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query8=pg_query($conexion, $sql8);

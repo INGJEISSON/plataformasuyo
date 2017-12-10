@@ -1,10 +1,10 @@
 <Ul class="nav navbar-top-links navbar-left">
                     <li><a href="javascript:void(0)" class="open-close waves-effect waves-light"><i class="ti-menu"></i></a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-gmail"></i>
-                           <!-- <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>-->
-                        </a>
-                        <ul class="dropdown-menu mailbox animated bounceInDown">
+                     <!--   <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-gmail"></i>
+                           <!-- <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                        </a>-->
+                       <!--   <ul class="dropdown-menu mailbox animated bounceInDown">
                             <li>
                                 <div class="drop-title">Tienes nuevos mensajes</div>
                             </li>
@@ -39,11 +39,11 @@
                         <!-- /.dropdown-messages -->
                     </li>
                     <!-- .Task dropdown -->
-                    <li class="dropdown">
+                    <!--<li class="dropdown">
                         <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-check-circle"></i>
-                            <!-- <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>-->
-                        </a>
-                        <ul class="dropdown-menu dropdown-tasks animated slideInUp">
+                            <!-- <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                        </a>-->
+                      <!--  <ul class="dropdown-menu dropdown-tasks animated slideInUp">
                             <li>
                                 <a href="#">
                                     <div>
