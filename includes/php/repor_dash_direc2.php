@@ -87,8 +87,7 @@
                   
                 </div>
                 
-                <div class="col-xl-6 col-sm-6">
-                
+                <div class="col-xl-6 col-sm-6">                
                
                     	<table width="345" border="1" cellpadding="0" cellspacing="0" class="table" id="1">
                               <tr align="center">
@@ -138,7 +137,7 @@
                 </div>                
  			                <div class="col-xl-3 col-sm-6">
                      <div class="item d-flex align-items-center">
-                        <div><a href="includes/php/map_ases_prom.php" target="_blank"><img src='img/map-pin-location.jpg' width='64' height='64'></a></div>
+                        <div><a href="includes/php/map_ases_prom.php" target="_blank"><img src='img/map-pin-location.jpg' width='80' height='80'></a></div>
                         <div class="title"><span>Seguimiento Asesor y Promotor</span>:</div>
                      </div>
                     <div class="number"><strong></strong></div>
