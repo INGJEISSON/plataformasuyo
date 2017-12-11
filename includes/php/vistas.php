@@ -9,6 +9,11 @@ $sql="select estado.descripcion as estado, submenu.descripcion as submenu from p
 elseif($_POST['vistas']==5) // Vista de tareas creadas por el usuario (Manual)
 $sql="select tareas.id_tarea, tareas.nombre as tarea, tareas.descripcion, proyectos_tar.descripcion as proyecto, tareas.fecha_inicio, tareas.fecha_venci, tareas.prioridad from proyectos_tar, tareas where tareas.cod_proyecto=proyectos_tar.cod_proyecto and tareas.cod_usu_emisor='".$_SESSION['cod_usuario']."' order by tareas.prioridad asc  ";
 
+elseif($_POST['vistas']==6) // Vista de clientes con su respectiva documentación...
+$sql="select * from cliente ";
+
+//$sql="select documentacion.cod_cliente, documentacion.apellidos, documentacion.nombres, documentacion.ciudad, bodegas.descripcion as bodega, documentacion.cod_estante as estante, documentacion.ubicacion, documentacion.usr_codif from documentacion, bodegas where documentacion.cod_bodega=bodegas.cod_bodega ";
+
 
           $query=pg_query($conexion, $sql);
           $rows=pg_num_rows($query);
@@ -213,6 +218,59 @@ $sql="select tareas.id_tarea, tareas.nombre as tarea, tareas.descripcion, proyec
                 <td><?php  ?></td>
                 <td><?php  ?></td>
                 <td><?php  ?></td>
+          </tr>
+             <?php
+       $i++;
+           }
+    ?>
+     </tbody>
+    </table>
+     </div>
+                        </div>
+                    </div>
+  </div>
+
+  <?php
+}
+?> 
+
+
+<?php if($_POST['vistas']==6){ // Vista de tareas realizadas por él a otro miembro del equipo..
+?> 
+<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">                           
+                            <div class="table-responsive">
+       <table id="table_id" class='table responsive' cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="2%">#</th>
+                <th width="6%">Identificacion</th>
+                <th width="11%">Cliente</th>  
+                <th width="11%">Ciudad</th> 
+                <th width="11%">Teléfono</th> 
+                <th width="11%">Bodega (Física)</th> 
+                <th width="11%">Estante</th> 
+                <th width="11%">Ubicación</th>  
+                <th width="11%">Visualizar</th>       
+            </tr>
+        </thead>
+        <tbody>
+         <?php
+                $i=1;
+                while($datos=pg_fetch_assoc($query)){
+                           
+                    ?>
+            <tr>
+                <td><?php echo $i ?></td>
+                <td><?php echo ($datos["cod_cliente"]) ?></td>
+                <td><?php echo ($datos["nombre"]); ?></td>
+                <td><?php echo $datos["ciudad"]; ?></td>
+                <td><?php echo $datos["telefono_1"]; ?></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href="includes/php/perfil_cliente.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>" tittle='Revisar' class="edicion"><img src='img/edit.png' alt="" width="24" height="24"></a></td> 
           </tr>
              <?php
        $i++;

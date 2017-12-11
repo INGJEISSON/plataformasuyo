@@ -190,6 +190,22 @@ date_default_timezone_set('America/Bogota');
                   });
                 
             });
+
+
+$("#b_clientes").click(function(){
+
+                             $('#carga_modulo').show();
+                                               $("#contenido").toggle();    
+                                                             $("#contenido").empty();        
+                                                                          $("#contenido").load("includes/php/b_clientes.php",
+                                                                                       function(){                                  
+                                                                                               $('#carga_modulo').hide();
+                                                                                                 $("#contenido").show();
+                                                                                                    $("#footer").show();
+                                              }                               
+                             );    
+});
+
                 $("#dashboard").click(function(){
 
                              $('#carga_modulo').show();

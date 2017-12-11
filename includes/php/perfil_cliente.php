@@ -1,10 +1,19 @@
 <?php
 include('../dependencia/conexion.php');
-            $sql="select * from tipo_docu";
-            $query=pg_query($conexion, $sql);
+        // Consultamos los datos del cliente..
+        $sql="select * from cliente where cod_cliente='".$_GET['cod_cliente']."' ";
+        $query=pg_query($conexion, $sql);
+        $datos=pg_fetch_assoc($query);
 
-            $sql2="select * from bodegas";
-            $query2=pg_query($sql2);
+        // Consultamos la cantidad diagnósticos que tiene el cliente..
+
+        // Consultamos la cantidad de servicios que tiene el cleinte..
+
+        $sql3="select  * from serv_cliente where cod_cliente='".$_GET['cod_cliente']."' ";
+        $query3=pg_query($conexion, $sql3);
+        $rows3=pg_num_rows($query3);
+
+          
 ?>
 
 <link rel="stylesheet" href="js/colorbox-master/example1/colorbox.css" />
@@ -12,63 +21,56 @@ include('../dependencia/conexion.php');
  <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Contact Detail</h4> </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
-                        <a href="javascript: void(0);" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Buy Admin Now</a>
-                        <ol class="breadcrumb">
-                            <li><a href="#">Dashboard</a></li>
-                            <li class="active">Contact Detail</li>
-                        </ol>
-                    </div>
+                        <h4 class="page-title">PERFIL DEL CLIENTE</h4> </div>
+                   
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- row -->
                 <div class="row">
                     <div class="col-md-4 col-xs-12">
                         <div class="white-box">
-                            <div class="user-bg"> <img width="100%" alt="user" src="../plugins/images/large/img1.jpg"> </div>
+                            <div class="user-bg"> <img width="50%" alt="user" align="text-center" src="img/Profile.png"> </div>
                             <div class="user-btm-box">
                                 <!-- .row -->
                                 <div class="row text-center m-t-10">
-                                    <div class="col-md-6 b-r"><strong>Name</strong>
-                                        <p>Genelia Deshmukh</p>
+                                    <div class="col-md-6 b-r"><strong>Nombre</strong>
+                                        <p><?php echo $datos['nombre'] ?> </p>
                                     </div>
-                                    <div class="col-md-6"><strong>Designation</strong>
-                                        <p>Designer</p>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
-                                <hr>
-                                <!-- .row -->
-                                <div class="row text-center m-t-10">
-                                    <div class="col-md-6 b-r"><strong>Email ID</strong>
-                                        <p>genelia@gmail.com</p>
-                                    </div>
-                                    <div class="col-md-6"><strong>Phone</strong>
-                                        <p>+123 456 789</p>
+                                    <div class="col-md-6"><strong>Ciudad</strong>
+                                       <p><?php echo $datos['ciudad'] ?> </p>
                                     </div>
                                 </div>
                                 <!-- /.row -->
                                 <hr>
                                 <!-- .row -->
                                 <div class="row text-center m-t-10">
-                                    <div class="col-md-12"><strong>Address</strong>
-                                        <p>E104, Dharti-2, Chandlodia Ahmedabad
-                                            <br/> Gujarat, India.</p>
+                                    <div class="col-md-6 b-r"><strong>Ubicación de Predios</strong>
+                                        <p><img src='img/map-pin-location.jpg' width='80' height='80'></p>
+                                    </div>
+                                    <div class="col-md-6"><strong>Teléfono</strong>
+                                        <p><?php echo $datos['telefono_1'] ?> </p>
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+                                <hr>
+                                <!-- .row -->
+                                <div class="row text-center m-t-10">
+                                    <div class="col-md-12"><strong>Dirección</strong>
+                                       <p><?php echo $datos['direccion_predio'] ?> </p>
                                     </div>
                                 </div>
                                 <hr>
                                 <!-- /.row -->
                                 <div class="col-md-4 col-sm-4 text-center">
-                                    <p class="text-purple"><i class="ti-facebook"></i></p>
-                                    <h1>258</h1> </div>
+                                    <p class="text-purple">Prospectos</i></p>
+                                    <h1></h1> </div>
                                 <div class="col-md-4 col-sm-4 text-center">
-                                    <p class="text-blue"><i class="ti-twitter"></i></p>
-                                    <h1>125</h1> </div>
+                                    <p class="text-blue">Diagnósticos</p>
+                                    <h1></h1> </div>
                                 <div class="col-md-4 col-sm-4 text-center">
-                                    <p class="text-danger"><i class="ti-dribbble"></i></p>
-                                    <h1>556</h1> </div>
+                                    <p class="text-danger">Servicios</p>
+                                    <h1><?php echo $rows3 ?></h1> </div>
+
                             </div>
                         </div>
                     </div>
@@ -77,14 +79,21 @@ include('../dependencia/conexion.php');
                             <!-- .tabs -->
                             <ul class="nav nav-tabs tabs customtab">
                                 <li class="active tab">
-                                    <a href="#home" data-toggle="tab"> <span class="visible-xs"><i class="fa fa-home"></i></span> <span class="hidden-xs">Activity</span> </a>
+                                    <a href="#home" data-toggle="tab"> <span class="visible-xs"><i class="fa fa-home"></i></span> <span class="hidden-xs">Comunicaciones</span> </a>
                                 </li>
                                 <li class="tab">
-                                    <a href="#profile" data-toggle="tab"> <span class="visible-xs"><i class="fa fa-user"></i></span> <span class="hidden-xs">Profile</span> </a>
+                                    <a href="#profile" data-toggle="tab"> <span class="visible-xs"><i class="fa fa-user"></i></span> <span class="hidden-xs">Diagnósticos</span> </a>
                                 </li>
                                 <li class="tab">
-                                    <a href="#settings" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Edit Detail</span> </a>
+                                    <a href="#settings" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Servicios</span> </a>
                                 </li>
+                                <li class="tab">
+                                    <a href="#settings2" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Documentos</span> </a>
+                                </li>   
+
+                                <li class="tab">
+                                    <a href="#settings2" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Responsables del caso</span> </a>
+                                </li>                               
                             </ul>
                             <!-- /.tabs -->
                             <div class="tab-content">
@@ -112,14 +121,8 @@ include('../dependencia/conexion.php');
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="sl-item">
-                                            <div class="sl-left"> <img src="../plugins/images/users/ritesh.jpg" alt="user" class="img-circle" /> </div>
-                                            <div class="sl-right">
-                                                <div class="m-l-40"><a href="#" class="text-info">John Doe</a> <span class="sl-date">5 minutes ago</span>
-                                                    <p class="m-t-10"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper </p>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                       
                                         <div class="sl-item">
                                             <div class="sl-left"> <img src="../plugins/images/users/govinda.jpg" alt="user" class="img-circle" /> </div>
                                             <div class="sl-right">
@@ -128,6 +131,8 @@ include('../dependencia/conexion.php');
                                                 </div>
                                             </div>
                                         </div>
+
+
                                     </div>
                                 </div>
                                 <!-- /.tabs1 -->
@@ -361,18 +366,6 @@ $("#cargando2").hide();
 
                 });
 
-var datos='g_add_docu='+1+'&listar_usuarios='+1;
-    $.ajax({
-                                                     type: "POST",
-                                                     data: datos,
-                                                     url: 'includes/php/g_procesos.php',
-                                                     success: function(valor){
-                                                            $("#repor").html(valor);
-                                                            
-                                                     }
-
-                                                });
-            
 });
 
   

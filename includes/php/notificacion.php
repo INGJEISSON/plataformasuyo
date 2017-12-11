@@ -107,7 +107,7 @@
                             <li class="col-sm-3">
                                 <ul>
                                     <li class="dropdown-header">Gestión Documental</li>
-                                    <li><a href="javascript:;">Buscar clientes</a></li>
+                                    <li><a href="javascript:;" id="b_clientes">Buscar clientes</a></li>
                                     <li><a href="javascript:;">Agregar archivos</a></li>
                                 </ul>
                             </li>                           
