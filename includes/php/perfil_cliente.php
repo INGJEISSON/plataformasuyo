@@ -101,36 +101,30 @@ include('../dependencia/conexion.php');
                                 <div class="tab-pane active" id="home">
                                     <div class="steamline">
                                         <div class="sl-item">
-                                            <div class="sl-left"> <img src="../plugins/images/users/genu.jpg" alt="user" class="img-circle" /> </div>
+                                            <div class="sl-left"> <img src="../plugins/images/users/sonu.jpg" alt="user" class="img-circle" /> </div>
                                             <div class="sl-right">
-                                                <div class="m-l-40"><a href="#" class="text-info">John Doe</a> <span class="sl-date">5 minutes ago</span>
-                                                    <p>assign a new task <a href="#"> Design weblayout</a></p>
-                                                    <div class="m-t-20 row"><img src="../plugins/images/img1.jpg" alt="user" class="col-md-3 col-xs-12" /> <img src="../plugins/images/img2.jpg" alt="user" class="col-md-3 col-xs-12" /> <img src="../plugins/images/img3.jpg" alt="user" class="col-md-3 col-xs-12" /></div>
+                                                <div class="m-l-40"> <a href="#" class="text-info">Rubby Villa</a> <span class="sl-date">2 minutes</span>
+                                                    <div class="m-t-20 row">
+                                                        <div class="col-md-2 col-xs-12"><img src="../plugins/images/img1.jpg" alt="user" class="img-responsive" /></div>
+                                                        <div class="col-md-9 col-xs-12">
+                                                            <p>Se realiza comunicación con el cliente, dice que está satisfecho con el servicio, que está muy feliz con haber legalizado su propiedad</p></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="sl-item">
                                             <div class="sl-left"> <img src="../plugins/images/users/sonu.jpg" alt="user" class="img-circle" /> </div>
                                             <div class="sl-right">
-                                                <div class="m-l-40"> <a href="#" class="text-info">John Doe</a> <span class="sl-date">5 minutes ago</span>
+                                                <div class="m-l-40"> <a href="#" class="text-info">Alejandro ramírez</a> <span class="sl-date">5 minutes</span>
                                                     <div class="m-t-20 row">
                                                         <div class="col-md-2 col-xs-12"><img src="../plugins/images/img1.jpg" alt="user" class="img-responsive" /></div>
                                                         <div class="col-md-9 col-xs-12">
-                                                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa</p> <a href="#" class="btn btn-success"> Design weblayout</a></div>
+                                                            <p> Se realiza comunicación con el cliente para verificar si se había podido comunicar con la persona que figura en el impuesto pre-dial (Yovanis Echavarria de la Rosa), para ver si es posible volver a agendar cita para la elaboración de la compraventa de posesión, (servicio previo necesario para la ejecución del servicio de Cargue catastral), el usuario informa que si se había podido comunciar y que si es posible, agendar d euna vez la cita para el día 17 de Nov-2017 a las 11:15 AM, ya que es la diponibilidad que tiene el señor Yovanis, por lo cual se agenda cita para ejecución del servicio de compraventa, servicio previo necesario par ejcutar el servicio de Cargue Catastral</p></div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                       
-                                        <div class="sl-item">
-                                            <div class="sl-left"> <img src="../plugins/images/users/govinda.jpg" alt="user" class="img-circle" /> </div>
-                                            <div class="sl-right">
-                                                <div class="m-l-40"><a href="#" class="text-info">John Doe</a> <span class="sl-date">5 minutes ago</span>
-                                                    <p>assign a new task <a href="#"> Design weblayout</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
 
 
                                     </div>
