@@ -1,7 +1,7 @@
 <?php
 include('../dependencia/conexion.php');
 							
- $sql="select enc_procesadas.id_fasfield, enc_procesadas.id_cliente, estado.descripcion as estado, enc_procesadas.asesor, enc_procesadas.ciudad, det_repor_aseso.valor, det_repor_aseso.aliado, enc_procesadas.fecha_filtro, enc_procesadas.cliente FROM det_repor_aseso, enc_procesadas, estado where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and det_repor_aseso.tipo_pago='Credito' and estado.cod_estado=enc_procesadas.cod_estado and enc_procesadas.id_cliente<>0 ";
+ $sql="select enc_procesadas.id_fasfield, enc_procesadas.id_cliente, estado.descripcion as estado, enc_procesadas.asesor, enc_procesadas.ciudad, det_repor_aseso.valor, det_repor_aseso.aliado, enc_procesadas.fecha_filtro, enc_procesadas.cliente FROM det_repor_aseso, enc_procesadas, estado where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and det_repor_aseso.tipo_pago='Credito' and estado.cod_estado=enc_procesadas.cod_estado";
 					$query=pg_query($conexion, $sql);
 					$rows=pg_num_rows($query);
 
