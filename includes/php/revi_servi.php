@@ -35,14 +35,22 @@ $etapa=1;
                                         $query4=pg_query($conexion, $sql4);
                                          $rows4=pg_num_rows($query4); 
 
-                                              if($rows4>=1){
-
+                                              if($rows4>=1){                                                 
                                                      $n_activi_hechas=$n_activi_hechas+1; 
                                               }                                 
                               }// Fin contancdo las activides realizadas por el usuario en la etapa del servicio..
 
-                              if($n_activi_hechas==$n_activi) // Avanza de etapa
-                                  $etapa=$etapa+1;                                       
+                              if($n_activi_hechas==$n_activi){
+                                   if($_GET['cod_servicio']==54){
+                                        if($etapa==2)
+                                          $etapa=6;
+                                        else
+                                           $etapa=$etapa+1; 
+                                   }
+
+                                // Avanza de etapa
+                                  $etapa=$etapa+1; 
+                              }                                       
                               
 
                                
