@@ -75,7 +75,7 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
     } else {
         //include('includes/php/login.php');
                if(isset($access)==1) // Si es un usuario habilitado..
-                include('includes/php/portal.php');
+                include('includes/php/redirect.php');
                 else{
                      session_unset();
                      include('includes/php/login.php');

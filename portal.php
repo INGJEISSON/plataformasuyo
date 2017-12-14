@@ -1,7 +1,6 @@
 <?php
-include('../dependencia/conexion.php');
+include('includes/dependencia/conexion.php');
 date_default_timezone_set('America/Bogota');
-echo "valor: ".$_SESSION['cod_usuario'];
 if(isset($_SESSION['cod_usuario'])){
 
 ?>
