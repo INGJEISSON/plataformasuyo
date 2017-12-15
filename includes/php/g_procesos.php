@@ -1611,8 +1611,9 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                            $rows=pg_num_rows($query);
 
                                 if($rows==0){
+                                    
                                       // insertamos cliente   
-                                     $carpeta_cliente=$_POST['nombre']."_".$_POST['apellidos']."_".$_POST['id_cliente'];
+                                  $carpeta_cliente=$_POST['nombre']."_".$_POST['apellidos']."_".$_POST['id_cliente'];
                                   $md5_carp=md5($carpeta_cliente);                                                                                
 
                                     $sql2="insert into documentacion (cod_cliente, apellidos, nombres, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$_POST['id_cliente']."', '".$_POST['apellidos']."', '".$_POST['nombre']."', '".$_POST['tipo_docu']."', '', '".$_POST['cod_bodega']."', '".$_POST['cod_estante']."', '".$_POST['ubicacion']."', '".$md5_carp."') ";
@@ -1812,6 +1813,6 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
 
   }else
-  echo "9"; // Sesión cadudad por tiempo sin actividad..
+  echo "Tu sesión ha caducado inactividad en el sistema, por favor refresca la página e inicia nuevamente"; // Sesión cadudad por tiempo sin actividad..
 
 ?>

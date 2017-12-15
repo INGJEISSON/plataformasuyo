@@ -18,7 +18,7 @@ $rows2=pg_num_rows($query2);
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <?php
 // A list of permitted file extensions
-$allowed = array('doc', 'docx', 'pdf', 'jpeg', 'jpg', 'png');
+$allowed = array('doc', 'docx', 'pdf', 'jpeg', 'jpg', 'png', '.mp4', '.3gp','.3gpp');
 
 if(isset($_FILES['upl']) && $_FILES['upl']['error'] == 0){
 
