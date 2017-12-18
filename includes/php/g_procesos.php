@@ -1289,8 +1289,7 @@ if(isset($_SESSION['cod_usuario'])){
 
               if($query){
               
-                    if($query){
-                      $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, estado.descripcion as estado, estado.cod_estado, usuarios.nombre as usuario from seguimientos, usuarios, estado where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=estado.cod_estado and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
+                         $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, estado.descripcion as estado, estado.cod_estado, usuarios.nombre as usuario from seguimientos, usuarios, estado where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=estado.cod_estado and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
                           $query2=pg_query($conexion, $sql2);
                           $rows2=pg_num_rows($query2);
                           
@@ -1307,18 +1306,77 @@ if(isset($_SESSION['cod_usuario'])){
                           }
                           
                           
-                              if($_POST['tipo_seguimiento']==2){
+                      if($_POST['tipo_seguimiento']==2){
                       // actualizamos el valor aprobado y su estado
                           
                             $update1="update  enc_procesadas set cod_estado='".$_POST['cod_estado']."'  where id_fasfield='".$_POST['id_fasfield']."' ";
                             $query1=pg_query($conexion, $update1);
+
+                                  // Vericamos aprobación del cliente y lo agregamos
+                                        /*if($_POST['cod_estado']==6){ // Si aprobado, lo agrgamos al grupo de clientes..
+
+                                            //Consultamos los datos del cliente
+                                          $sql3="select enc_procesadas.id_cliente, enc_procesadas.ciudad, enc_procesadas.direccion, enc_procesadas.telefono, enc_procesadas.Barrio, det_repor_aseso.resul_visita, det_repor_aseso.tom_serv from det_repor_aseso, enc_procesadas where det_repor_aseso.id_fasfield=enc_procesadas.id_fasfield and enc_procesadas.id_fasfield='".$_POST['id_fasfield']."' ";
+                                          $query3=pg_query($conexion, $sql3);
+                                          $datos=pg_fetch_assoc($query3);
+
+                                              // Verificamos que no esté registrado
+                                              $sql4="select cod_cliente from cliente where cod_cliente='".$datos['id_cliente']."'";
+                                              $query4=pg_query($coenxion, $sql4); 
+                                                $rows4=pg_num_rows($query4);
+
+                                                    if($rows4==0){ // SI no está registrado entonces..
+
+                                                            $insert="insert into cliente (id_fasfield, cod_cliente, nombre, tipo_cliente, ciudad, barrio, direccion_predio, telefono_1) values('".$_POST['id_fasfield']."', '".$datos['id_cliente']."', '".$datos['cliente']."', 1, '".$datos['ciudad']."', '".$datos['Barrio']."', '".$datos['direccion']."', '".$datos['telefono']."') ";
+                                                             $query4=pg_query($conexion, $insert);
+
+                                                          // Ahora creamos la carpeta del cliente..
+
+                                                               // insertamos cliente   
+                                                        $carpeta_cliente=$datos['cliente'];
+                                                        $md5_carp=md5($carpeta_cliente);                                                                                
+
+                                                          $sql2="insert into documentacion (cod_cliente,  nombres, apellidos, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$_POST['id_cliente']."', '".$_POST['cliente']."', '', 2, '', 1, 1, 1, '".$md5_carp."') ";
+
+                                                         //$carpeta_cliente=$_POST['nombre']."_".$_POST['apellidos']."_".$_POST['id_cliente'];
+                                                                     
+                                                          $query2=pg_query($conexion, $sql2);
+
+                                                               if($query2){
+                                                                  mkdir('../files/clientes/'.$md5_carp); // Creamos carpeta inicial...
+                                                                        // Creamos subcarpetas
+                                                                       mkdir('../files/clientes/'.$md5_carp."/Documentos de propiedad");
+                                                                       mkdir('../files/clientes/'.$md5_carp."/Facturas y contratos");
+                                                                      mkdir('../files/clientes/'.$md5_carp."/Otros documentos");
+                                                                        mkdir('../files/clientes/'.$md5_carp."/Analisis de caso");
+
+                                                                        echo "1";// Carpeta creada 
+                                                                }
+                                                    }
+
+
+                                                 // Veriquemos el tipo de encuesta....
+
+                                              if($datos['resul_visita']=='Visitado pagado'){
+
+                                                    // Es un diagnóstico entonces.. registramos el diagnóstico nuevo del cliente..
+
+                                                $insert2="insert into diagno_client (id_fasfield, cod_cliente, ciudad, direccion, cod_estado) values('".$_POST['id_fasfield']."', '".$datos['id_cliente']."', '".$datos['ciudad']."', '".$datos['direccion']."', 23) ";
+                                                $query2=pg_query($insert2);
+
+                                              } else  if($datos['tom_serv']=='Si'){ // Es un servicio nuevo 
+
+                                               // $insert2="insert into serv_cliente (cod_servicio, cod_estado, cod_cliente, valor, ";
+
+                                              }
+
+
+
+                                        }*/
                           }
-                      include('history_revi.php');
-                      
-                    }
+                      include('history_revi.php');                      
+                    
                     $_SESSION['nom_archivo']="";
-
-
               }
               else
                 echo "2"; // Problema interno (técnico).            
@@ -1505,12 +1563,12 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
               if($query){
               
-                    if($query){
+                  
                     $sql2="select usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$_POST['id_serv_cliente']."' order by activ_serv.id_activi_serv desc ";
                           $query2=pg_query($conexion, $sql2);
                           $rows2=pg_num_rows($query2);
                          include('history_revi2.php');
-                    }
+                  
               }
               else
                 echo "2"; // Problema interno (técnico).            
@@ -1612,7 +1670,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                                 if($rows==0){
                                     
-                                      // insertamos cliente   
+                                   // insertamos cliente   
                                   $carpeta_cliente=$_POST['nombre']."_".$_POST['apellidos']."_".$_POST['id_cliente'];
                                   $md5_carp=md5($carpeta_cliente);                                                                                
 

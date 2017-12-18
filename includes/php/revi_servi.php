@@ -10,9 +10,10 @@ include('../dependencia/conexion.php');
 $sql2="select max(activ_serv.cod_activi_etapa) as cod_activi_etapa from activ_serv, activi_etapa where activi_etapa.cod_activi_etapa=activ_serv.cod_activi_etapa and activ_serv.id_serv_cliente='".$_GET['id_serv_cliente']."' ";
 $query2=pg_query($conexion, $sql2);
 $rows2=pg_num_rows($query2);
+ $datos2=pg_fetch_assoc($query2);
 $etapa=1;		
-    if(isset($rows2)){
-        $datos2=pg_fetch_assoc($query2);
+    if($datos2['cod_activi_etapa']!=""){
+       
               $sql5="select * from activi_etapa where cod_activi_etapa='".$datos2['cod_activi_etapa']."' ";
               $query5=pg_query($conexion, $sql5);
               $datos5=pg_fetch_assoc($query5);

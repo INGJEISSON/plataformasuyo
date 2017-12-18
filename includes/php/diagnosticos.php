@@ -9,7 +9,7 @@ $cod_resp=0;
                     }
                     else
                     $parametro="";   
- $sql="select distinct det_repor_aseso.aliado, enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.arch_pdf, enc_procesadas.cliente, enc_procesadas.fecha_filtro, enc_procesadas.ciudad, enc_procesadas.id_fasfield, det_repor_aseso.det_servi_tomado, det_repor_aseso.n_cuotas, det_repor_aseso.valor, det_repor_aseso.tipo_pago, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso, tipo_encuesta where tipo_encuesta.tipo_encuesta=enc_procesadas.tipo_encuesta and enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.cod_estado=6 and enc_procesadas.tipo_encuesta=2 and enc_procesadas.id_cliente!=0 and det_repor_aseso.resul_visita='Visitado y pagado' order by enc_procesadas.fecha_filtro desc";
+$sql="select  distinct cliente.cod_cliente, cliente.nombre as cliente, cliente.telefono_1, cliente.ciudad, cliente.barrio, tipo_cliente.descripcion as tipo_cliente from cliente, diagno_client, tipo_cliente where $parametro cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=diagno_client.cod_cliente and diagno_client.cod_estado=23 ";
           $query=pg_query($conexion, $sql);
           $rows=pg_num_rows($query);
 
@@ -48,38 +48,48 @@ $cod_resp=0;
         <tr>
           <th width="3%">#</th>
           <th width="8%">Identificación</th>
-          <th width="18%">Cliente</th>         
-          <th width="7%">Fecha de recepción</th>
-          <th width="9%">Ciudad</th>
-          <th width="9%">Costo</th>
-          <th width="7%">Aliado</th>          <
-          <?php if($_SESSION['tipo_usuario']==1){ ?><th width="9%">Editar</th><?php }  ?>
+          <th width="18%">Cliente</th>  
+          <th width="18%">Barrio</th> 
+          <th width="18%">Ciudad</th> 
+          <th width="7%"># Teléfonos</th>  
+          <th width="7%"># Diagnósticos</th> 
+          <th width="7%">Pago acumulado</th> 
+          <th width="7%">Valor total</th> 
+          <th width="7%">Primer contacto</th>
+          <th width="7%">Forma de aquisición</th>
+          <th width="7%">Fecha de primer contacto</th>
+          <th width="7%">Ver</th>
         </tr>
       </thead>
       <tbody>
       <?php
       $i=1;
         while($datos=pg_fetch_assoc($query)){
-          $archivo_pdf=$datos['arch_pdf'];
 
+         // $archivo_pdf=$datos['arch_pdf'];
            
-            $query2=pg_query($conexion, "select distinct enc_procesadas.id_cliente, enc_procesadas.arch_pdf, enc_procesadas.id_fasfield, tipo_encuesta.nombre as encuesta from enc_procesadas, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and enc_procesadas.id_cliente='".$datos['id_cliente']."' and enc_procesadas.tipo_encuesta=1");
+            $query2=pg_query($conexion, "select cod_cliente from diagno_client where cod_cliente='".$datos['cod_cliente']."' ");
             $rows2=pg_num_rows($query2);
-            $datos2=pg_fetch_assoc($query2);
-             $archivo_pdf2=$datos2['arch_pdf'];
+            //@$datos2=pg_fetch_assoc($query2);
+            // @$archivo_pdf2=$datos2['arch_pdf'];
 
       ?>
 
        
               <tr>
                 <td><?php echo $i; ?></td>
-                <td><?php echo $datos['id_cliente']; ?></td>
+                <td><?php echo $datos['cod_cliente']; ?></td>
                 <td><?php echo $datos['cliente']; ?></td>             
-                <td><?php echo $datos['fecha_filtro']; ?></td>
+                <td><?php echo $datos['barrio']; ?></td>
                 <td><?php echo ($datos['ciudad']) ?></td>
-                <td><?php echo number_format($datos['valor']); ?></td>
-                <td><?php echo $datos['aliado']; ?></td>     
-                <td><a href="includes/php/edicion_usu.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>&cod_resp=<?php echo $cod_resp; ?>" tittle='Revisar' class="edicion"><p class='icon-note lg'></p></a></td>
+                <td><?php // echo $rows2 ?></td>
+                <td><?php echo $rows2 ?></td>     
+                <td><?php echo $rows2 ?></td>     
+                <td><?php echo $rows2 ?></td>     
+                <td><?php echo $rows2 ?></td>     
+                <td><?php echo $rows2 ?></td>     
+                <td><?php echo $rows2 ?></td>     
+               <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="includes/php/det_diag_client.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>&cod_resp=<?php echo $cod_resp; ?>" tittle='Revisar'><p class='icon-note lg'></p></a></td> 
                 
               </tr>
             <?php   

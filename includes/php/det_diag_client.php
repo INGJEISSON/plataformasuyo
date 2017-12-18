@@ -8,7 +8,7 @@ $cod_resp=base64_decode($_GET['cod_resp']);
 		        $parametro="";
 										
 					//$parametro='AgendaCallCenter';	 // Si son llamadas s贸lo para call center.				
-  $sql="select distinct  serv_cliente.cod_usuario, serv_cliente.id_serv_cliente, servicios.nom_servicio, acuer_pago.descripcion as acuer_pago, serv_cliente.porc_pagado, serv_cliente.valor, estado.descripcion as estado from acuer_pago, servicios, estado, serv_cliente where $parametro servicios.cod_servicio=serv_cliente.cod_servicio  and acuer_pago.cod_acuer_pago=serv_cliente.cod_acuer_pago and estado.cod_estado=serv_cliente.cod_estado and serv_cliente.cod_cliente='".$_GET['cod_cliente']."' and serv_cliente.cod_estado=23   ";
+$sql="select distinct diagno_client.id_elab_diag, enc_procesadas.asesor, estado.descripcion as estado, diagno_client.barrio, diagno_client.ciudad, diagno_client.direccion from diagno_client, enc_procesadas, estado where diagno_client.cod_estado=estado.cod_estado and diagno_client.id_fasfield=enc_procesadas.id_fasfield and enc_procesadas.id_cliente='".$_GET['cod_cliente']."'   ";
 					$query=pg_query($conexion,$sql);
 					$rows=pg_num_rows($query);
 
@@ -59,14 +59,20 @@ $datos2=pg_fetch_assoc($query2);
       <thead>
         <tr>
           <th width="3%">#</th>
-          <th>Servicio</th>
-          <th>Fase (Acuerdo al pago)</th>
-          <th>% Pagado</th>
-          <th>Costo</th>
-          <th >Ver Cuotas</th>
+          <th>Asesor</th>
           <th>Estado</th>
-          <th>Última Actuación</th>
-          <th>Fecha  actuación</th>
+          <th>Ciudad del predio</th>
+          <th>Barrio</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Tipo Diagnóstico</th>
+          <th>Afectaciones</th>
+          <th>Relación jurídica</th>
+          <th>Call center</th>
+          <th>Última actuación</th>
+          <th>Acuerdo(Pago)</th>
+          <th>Fuente(Pago)</th>
+          <th>Valor pagado</th>
           <th>Seguimiento</th>
         </tr>
       </thead>
@@ -75,30 +81,34 @@ $datos2=pg_fetch_assoc($query2);
 	  $i=1;
 	   while($datos=pg_fetch_assoc($query)){ 
 	       
-	       $sql11="select distinct usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$datos['id_serv_cliente']."'  limit 1 ";
+	      /* $sql11="select distinct usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$datos['id_serv_cliente']."'  limit 1 ";
     $query11=pg_query($conexion, $sql11);
-    @$datos11=pg_fetch_assoc($query11);
+    @$datos11=pg_fetch_assoc($query11);*/
      
 	   
 	   ?>
         <tr>
           <td><?php echo $i; ?></td>
-          <td width="5%"><?php echo ($datos['nom_servicio']); ?></td>
-          <td><?php echo ($datos['acuer_pago']); ?></td>
-          <td><?php echo $datos['porc_pagado']; ?>%</td>
-          <td><?php echo number_format($datos['valor']); ?></td>
-          <td><a href="includes/php/ver_cuotas.php?cod_cliente=<?php echo $_GET['cod_cliente']; ?>" tittle='Ver cuotas' target='_blank'><p class='icon-note lg'></p></td>
-          <td><?php echo $datos['estado']; ?></td>
-          <td style="alignment-adjust:auto"><?php echo ($datos11['etapa'].": ".$datos11['actividad']); ?></td>
-          <td><?php echo $datos11['fecha_actividad']; ?></td>
-          <td><?php  if( (isset($cod_resp)==$datos['cod_usuario']) || $_SESSION['tipo_usuario']==1){ ?>
-          			<a href="segui_serv.php?nom_servicio=<?php echo base64_encode(($datos['nom_servicio'])); ?>&id_serv_cliente=<?php echo base64_encode($datos['id_serv_cliente']); ?>" tittle='Seguimiento' class='ediicion'><p class='icon-note lg'></p></a>
-          			<?php } ?>
-
+          <td width="5%"><?php echo ($datos['asesor']); ?></td>
+          <td><?php echo ($datos['estado']); ?></td>
+          <td><?php echo $datos['ciudad']; ?></td>
+          <td><?php echo $datos['barrio']; ?></td>
+          <td><?php //echo $datos['telefono']; ?></td>
+          <td><?php echo $datos['direccion']; ?></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td style="alignment-adjust:auto"><?php  // echo ($datos11['etapa'].": ".$datos11['actividad']); ?></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><a href="segui_diag.php?&id_elab_diag=<?php echo base64_encode($datos['id_elab_diag']); ?>" tittle='Seguimiento' class='ediicion'><p class='icon-note lg'></p></a>
+          		
           </td>
            </tr>
           <?php 
-           pg_free_result($query11);
+          //78 pg_free_result($query11);
 		  		$i++;		  
 		  }
 		    ?>
