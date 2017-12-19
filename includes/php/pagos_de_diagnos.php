@@ -9,7 +9,7 @@ $cod_resp=0;
                     }
                     else
                     $parametro="";   
- $sql="select distinct det_repor_aseso.aliado, enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.arch_pdf, enc_procesadas.cliente, enc_procesadas.fecha_filtro, enc_procesadas.ciudad, enc_procesadas.id_fasfield, det_repor_aseso.det_servi_tomado, det_repor_aseso.n_cuotas, det_repor_aseso.valor, det_repor_aseso.tipo_pago, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso, tipo_encuesta where tipo_encuesta.tipo_encuesta=enc_procesadas.tipo_encuesta and enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.cod_estado=6 and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='Visitado y pagado' order by enc_procesadas.fecha_filtro desc";
+ $sql="select distinct det_repor_aseso.aliado, enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.arch_pdf, enc_procesadas.cliente, enc_procesadas.fecha_filtro, enc_procesadas.ciudad, enc_procesadas.id_fasfield, det_repor_aseso.det_servi_tomado, det_repor_aseso.n_cuotas, det_repor_aseso.valor, det_repor_aseso.tipo_pago, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso, tipo_encuesta where tipo_encuesta.tipo_encuesta=enc_procesadas.tipo_encuesta and enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.cod_estado=6 and enc_procesadas.tipo_encuesta=2 and enc_procesadas.id_cliente!='0' and det_repor_aseso.resul_visita='Visitado y pagado' order by enc_procesadas.fecha_filtro desc";
           $query=pg_query($conexion, $sql);
           $rows=pg_num_rows($query);
 
