@@ -14,6 +14,11 @@ include('../dependencia/conexion.php');
 $_GET['id_elab_diag']=base64_decode($_GET['id_elab_diag']);
   if($_GET['tipo_seguimiento']==8)
     $sql1="select * from afectaciones";
+  if($_GET['tipo_seguimiento']==9)
+    $sql1="select activi_etapa_diag.id_activi_diag as tipo_afect, activi_etapa_diag.descripcion from activi_etapa_diag where id_activi_diag=11 or id_activi_diag=50";
+   if($_GET['tipo_seguimiento']==14 or $_GET['tipo_seguimiento']==15)
+    $sql1="select servicios.nom_servicio as descripcion, servicios.cod_servicio as tipo_afect from servicios";
+
 
 
 $query3=pg_query($conexion, $sql1);

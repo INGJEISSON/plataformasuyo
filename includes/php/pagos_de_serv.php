@@ -83,7 +83,7 @@ $cod_resp=0;
                 <td><?php echo $datos['aliado']; ?></td>
                 <td><?php echo "(".$datos['n_cuotas'].")"; ?></td>
                 <td><?php  ?></td>
-                <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://app.suyo.io/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></td> 
+                <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></td> 
                 <td><a href="includes/php/edicion_usu.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>&cod_resp=<?php echo $cod_resp; ?>" tittle='Revisar' class="edicion"><p class='icon-note lg'></p></a></td>
                 
               </tr>

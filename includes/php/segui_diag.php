@@ -234,8 +234,8 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
       </div>
       <div id="collapse4" class="panel-collapse collapse">
         <div class="panel-body">
-            <div id='history_revi4' align="center"> </div>
-    <p><a href="../../includes/php/seguimientos.php?cod_cliente=<?php echo $datos1['cod_cliente'] ?>&id_serv_diag=<?php echo $datos1['id_serv_diag'] ?>" class='edicion'>Agregar/Editar Necesidad</a></p></div>
+           <div id='history_necesidad' align="center"> </div>
+    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=9" class='edicion'>Agregar/Editar Necesidad</a></p></div>
 
        </div>
       </div>
@@ -503,10 +503,8 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
       </div>
       <div id="collapse12" class="panel-collapse collapse">
         <div class="panel-body">
-          <div id='history_revi3' align="center">
-                    </div>
-   <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Registrar/Editar</a>
-
+          <div id='history_serv_recom' align="center"> </div>
+    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=14" class='edicion'>Agregar/Editar Servicios</a></p></div>
 
         </div>
       </div>
@@ -521,10 +519,8 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
       </div>
       <div id="collapse13" class="panel-collapse collapse">
         <div class="panel-body">
-                <div id='history_revi3' align="center">
-                    </div>
-   <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Registrar/Editar</a>
-
+             <div id='history_serv_recom' align="center"> </div>
+    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=15" class='edicion'>Agregar/Editar Servicios</a></p></div>
 
         </div>
       </div>
