@@ -2,16 +2,21 @@
 include('../dependencia/conexion.php');
    
 //decodificamo id_serv_cliente
-$id_serv_cliente=base64_decode($_GET['id_elab_diag']);
+$id_elab_diag=base64_decode($_GET['id_elab_diag']);
 
-/*
+
     // consultamos los datos del servicio
- $sql="select * from serv_cliente where id_serv_cliente='".$id_serv_cliente."' limit 1 ";
+    $sql="select * from diagno_client where id_elab_diag='".$id_elab_diag."' limit 1 ";
      $query=pg_query($conexion, $sql);
-     $datos1=pg_fetch_assoc($query);
+     $d=pg_fetch_assoc($query);
+
+// Consultamos del servicio
+     $sql2="select * from cliente where cod_cliente='".$d['cod_cliente']."' ";
+     $query2=pg_query($conexion, $sql2);
+     $datos2=pg_fetch_assoc($query2);
      
      // Busco el nombre del responsable..
-     
+  /*   
      $sql10="select nombre from usuarios where cod_usuario='".$datos1['cod_usuario']."' ";
      $query10=pg_query($conexion, $sql10);
      $datos10=pg_fetch_assoc($query10);
@@ -89,185 +94,22 @@ $id_serv_cliente=base64_decode($_GET['id_elab_diag']);
           //escKey:
           });
           
-          $("#panel_ubi_predio").hide(); // Ubicación del predio.
-          
-           $("#exp_ubi_predio").click(function(){
-               $("#exp_ubi_predio").slideToggle( "slow", function() {               
-                    
-                     $("#panel_ubi_predio").show();
-               });
-           });
-           
-        $('#fecha_firm_compro_contr').datepicker({
-        autoHide: true,
-        zIndex: 2048,
-          format: 'yyyy-mm-dd'
-      });
-      
-        $('#fecha_firm_contr').datepicker({
-        autoHide: true,
-        zIndex: 2048,
-          format: 'yyyy-mm-dd'
-      });
-$('#fecha_ini_tramite').datepicker({
-        autoHide: true,
-        zIndex: 2048,
-          format: 'yyyy-mm-dd'
-      });
-        
-          
-          
-function daysBetween(f1, f2){ 
-var aFecha1 = f1.split('-'); 
- var aFecha2 = f2.split('-'); 
- var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]); 
- var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]); 
- var dif = fFecha2 - fFecha1;
- var dias = Math.floor(dif / (1000 * 60 * 60 * 24)); 
- return dias;   
 
-} 
-
-
-// Calculmos fecha de compromiso
-
-$("#fecha_firm_contr").change(function(){
-    
-var hoy = new Date();
-var dd = hoy.getDate();
-var mm = hoy.getMonth()+1; //hoy es 0!
-var yyyy = hoy.getFullYear();
-
-var fecha_hoy=(yyyy+'-'+mm+'-'+dd);
-                // La suma  del tiempo de compromiso y la fecha de compromiso...
-
-                var fecha_firm_contr=$("#fecha_firm_contr").val();
-                var tiempo_compros=$("#tiempo_compros").val();
-               
-                var separar=fecha_firm_contr.split('-');
-             
-                var dia=separar[2];
-                var mes=separar[1];
-                var ano=separar[0];
-                
-             dia=parseInt(dia)+parseInt(tiempo_compros);
-            
-                    if(dia>=30){
-                            mes=parseInt(mes)+1;
-                                if(mes==12){
-                                    ano=parseInt(ano)+1;
-                                dia=1;
-                                mes=1;
-                                    
-                                }else{
-                                dia=30-dia;
-                                }
-                     }
-                $("#fecha_compro_contr").val(ano+'-'+mes+'-'+dia);
-         
-    var tiempo_venc=daysBetween(fecha_hoy,$("#fecha_compro_contr").val());
-    $("#tiempo_venc").val(tiempo_venc);
-    if(tiempo_venc<0)
-        $("#cod_estado_venc").val("VENCIDO");
-    else if(tiempo_venc==0)
-     $("#cod_estado_venc").val("A TIEMPO");
-    else
-         $("#cod_estado_venc").val("SE VENCERÁ");
-    
-});
-
-          $("#guardar").click(function(){
-
-                             
-                   var id_serv_cliente=<?php echo $id_serv_cliente ?>; 
-                   var cod_cliente=<?php echo $datos1['cod_cliente'] ?>; 
-                    var ciudad=$('#ciudad').val();
-                    var barrio=$('#barrio').val();
-                    var direccion=$('#direccion').val();
-                    var n_folio_inm=$('#n_folio_inm').val();
-                    var refe_catas=$('#refe_catas').val();
-                    var orig_serv=$('#orig_serv').val();
-                    var cod_servicio=$('#cod_servicio').val();
-                    var proc_v_serv=$('#proc_v_serv').val();
-                    var firm_contrato=$('#firm_contrato').val();
-                    var fecha_firm_contr=$('#fecha_firm_contr').val();
-                    var tiempo_compros=$('#tiempo_compros').val();
-                    var fecha_compro_contr=$('#fecha_compro_contr').val();                  
-                    var poder_aut_nec=$('#poder_aut_nec').val();
-                    var poder_aut=$('#poder_aut').val();
-                    var fecha_ini_tramite=$('#fecha_ini_tramite').val();
-                    var enti_tramite=$('#enti_tramite').val();
-                    var radicado=$('#radicado').val();
-                    var cod_estado_segui=$('#cod_estado_segui').val();
-                    var resu_serv=$('#resu_serv').val();
-                    var coment_serv=$('#coment_serv').val();
-                    var cod_estado_venc=$('#cod_estado_venc').val();
-
-                    if(barrio!="" && ciudad!="" && direccion!="" && refe_catas!="" && orig_serv!="" && firm_contrato!="" && fecha_firm_contr!="" && tiempo_compros!="" && fecha_compro_contr!=""  && poder_aut_nec!="" && poder_aut!=""   && cod_estado_segui!="" && resu_serv!="" && coment_serv!="" && cod_estado_venc){
-
-
-                    var datos='g_serv='+1+'&ciudad='+ciudad+'&barrio='+barrio+'&direccion='+direccion+'&n_folio_inm='+n_folio_inm+'&refe_catas='+refe_catas+'&orig_serv='+orig_serv+'&firm_contrato='+firm_contrato+'&fecha_firm_contr='+fecha_firm_contr+'&tiempo_compros='+tiempo_compros+'&fecha_compro_contr='+fecha_compro_contr+'&poder_aut_nec='+poder_aut_nec+'&poder_aut='+poder_aut+'&fecha_ini_tramite='+fecha_ini_tramite+'&enti_tramite='+enti_tramite+'&radicado='+radicado+'&cod_estado_segui='+cod_estado_segui+'&resu_serv='+resu_serv+'&coment_serv='+coment_serv+'&id_serv_cliente='+id_serv_cliente+'&cod_estado_venc='+cod_estado_venc+'&cod_cliente='+cod_cliente;
-
-
-                                    $.ajax({
-                                                type: "POST",
-                                                data: datos,
-                                                url: "g_procesos.php",
-                                                success: function(valor){
-
-                                                        if(valor==1)
-                                                            alert("Información actualizada");
-                                                        else
-                                                            alert("Hubo error de comunicación con el servidor, intente de nuevo.");
-                                                }
-                                    });
-
-
-                    }else
-                    alert("Por favor complete los campos con asterístcos (*), son obligatorios");
-
-         });
-var id_serv_cliente="<?php echo $id_serv_cliente ?>";
-var datos='id_serv_cliente='+id_serv_cliente+'&revi_serv2='+1;
-    
-          //  $("#cargar2").show();
-              $.ajax({
-
-                        type: "POST",
-                        data: datos,
-                        url: 'g_procesos.php?'+datos,
-                        success: function(valor){
-                           
-                               if(valor!=2){
-                             //   $("#cargar2").hide();
-
-                              //    alert("Se ha agregado su observación al cliente");   
-                                  $("#history_revi3").html(valor);
-
-                               }else{
-                                    
-                                alert("Ocurrió un error al crear el registro de la observación, por favor intenta de nuevo o comuníquese con el administrador.");
-
-                               }
-
-                        }
-                  });
-
-var id_fasfield="<?php echo $datos1['cod_cliente'] ?>";
-var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+6;
-    
+var id_fasfield="<?php echo $id_elab_diag ?>"; 
+var tipo_seguimiento=8;
+var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;    
             $("#cargar2").show();
               $.ajax({
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../../includes/php/g_procesos.php?'+datos,
                         success: function(valor){
                            
                                if(valor!=2){
                                 $("#cargar2").hide();
-                              //    alert("Se ha agregado su observación al cliente");   
-                                  $("#history_revi4").html(valor);
+                              //    alert("Se ha agregado su observación al cliente");                                 
+                                   $("#history_afect").html(valor);      
 
                                }else{
                                       $("#cargar2").hide();
@@ -278,6 +120,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
 
                         }
                   });
+         
           
   });
 </script>
@@ -288,52 +131,12 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
               <div class="row">
                 <div class="col-lg-12">
                   <div class="card">
-                    
-                    <div class="card-header d-flex align-items-center" style="background-color:#CCC; border-radius:20">
-                      <h3 class="h4"> Seguimiento del servicio: <?php echo base64_decode($_GET['nom_servicio']) ?></h3>
-                      <table width="467" border="0">
-                        <tr>
-                          <td width="181">Cliente:</td>
-                          <td width="276"><?php echo ($datos9['nombre']) ?></td>
-                        </tr>
-                        <tr>
-                          <td>Responsable:</td>
-                          <td><?php echo $datos10['nombre'] ?></td>
-                        </tr>
-                        <tr>
-                          <td>Fecha y hora de asignación:</td>
-                          <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <td>Estado</td>
-                          <td>&nbsp;</td>
-                        </tr>
-                      </table>
-                    </div>
-              <center><input type="button" name="guardar" id='guardar' class='btn btn-warning' value='Guardar'></center>
+                    <center>
+                    <input type="button" name="guardar" id='guardar' class='btn btn-warning' value='Guardar'></center>
                     <div class="card-body">
                       <p> 
     <div class="panel-group" id="accordion">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-       Compromiso</a>
-      </h4>
-    </div>
-    <div id="collapse1" class="panel-collapse collapse in">
-      <div class="panel-body"><table width="70%" border="0" class="table responsive">
-      <tr>
-        <td width="108">(*)Barrio</td>
-        <td width="1073"><input name="barrio" type="text" class="form-control" id="barrio" value="<?php echo ($datos9['barrio']) ?>"></td>
-      </tr>
-      <tr>
-        <td>(*)Dirección</td>
-        <td><input type="text" name="direccion" id="direccion" class="form-control" value="<?php echo $datos9['direccion_predio'] ?>"></td>
-      </tr>
-    </table></div>
-    </div>
-  </div>
+ 
 
 
     <div class="panel panel-primary">
@@ -384,37 +187,37 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
        Información básica del usuario</a>
       </h4>
     </div>
-    <div id="collapse3" class="panel-collapse collapse in">
+    <div id="collapse3" class="panel-collapse collapse">
       <div class="panel-body">
    <table width="42%" border="0" class="table responsive">
       <tr>
         <td width="203">(*)Nombre del cliente:</td>
-        <td width="259"><input type="text" name="textfield" class="form-control" id="textfield">
+        <td width="259"><input type="text" name="textfield" class="form-control" id="textfield" value="<?php echo $datos2['nombre'] ?>">
        </td>
       </tr>
       <tr>
         <td>(*)Identificación:</td>
-        <td><input type="text" name="textfield2" class="form-control" id="textfield2"></td>
+        <td><input type="text" name="textfield2" class="form-control" id="textfield2" value="<?php echo $datos2['cod_cliente'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Dirección (Formato IGAC):</td>
-        <td><input type="text" name="textfield3" class="form-control" id="textfield3"></td>
+        <td><input type="text" name="textfield3" class="form-control" id="textfield3" value="<?php echo $d['dir_form_igac'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Barrio (nombre legal):</td>
-        <td><input type="text" name="textfield4" class="form-control" id="textfield4"></td>
+        <td><input type="text" name="textfield4" class="form-control" id="textfield4" value="<?php echo $d['barrio'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Municipio:</td>
-        <td><input type="text" name="textfield5" class="form-control" id="textfield5"></td>
+        <td><input type="text" name="textfield5" class="form-control" id="textfield5" value="<?php echo $d['ciudad'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Folio de matrícula:</td>
-        <td><input type="text" name="textfield6" class="form-control" id="textfield6"></td>
+        <td><input type="text" name="textfield6" class="form-control" id="textfield6" value="<?php echo $d['folio_mat'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Referencia catastral:</td>
-        <td><input type="text" name="textfield7" class="form-control" id="textfield7"></td>
+        <td><input type="text" name="textfield7" class="form-control" id="textfield7" value="<?php echo $d['refe_catas'] ?>"></td>
       </tr>
       </table>
 </div>
@@ -426,10 +229,10 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-        Necesdidad identifiada</a>
+        Necesidad identificada</a>
         </h4>
       </div>
-      <div id="collapse4" class="panel-collapse">
+      <div id="collapse4" class="panel-collapse collapse">
         <div class="panel-body">
             <div id='history_revi4' align="center"> </div>
     <p><a href="../../includes/php/seguimientos.php?cod_cliente=<?php echo $datos1['cod_cliente'] ?>&id_serv_diag=<?php echo $datos1['id_serv_diag'] ?>" class='edicion'>Agregar/Editar Necesidad</a></p></div>
@@ -440,32 +243,32 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
 
 
 
-  <div class="panel panel-primary">
+<div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
        Situación actual y ubicación del predio</a>
       </h4>
     </div>
-    <div id="collapse5" class="panel-collapse">
+    <div id="collapse5" class="panel-collapse collapse">
       <div class="panel-body">
        <table width="42%" border="0" class="table responsive">
       <tr>
         <td width="203">(*)Ubicación del predio:</td>
-        <td width="259"><input type="text" name="textfield" class="form-control" id="textfield">
+        <td width="259"><input type="text" name="textfield" class="form-control" id="textfield" value="<?php echo $d['ubu_predio'] ?>">
        </td>
       </tr>
       <tr>
         <td>(*)Longitud:</td>
-        <td><input type="text" name="textfield2" class="form-control" id="textfield2"></td>
+        <td><input type="text" name="textfield2" class="form-control" id="textfield2" value="<?php echo $d['longitud'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Latitud:</td>
-        <td><input type="text" name="textfield3" class="form-control" id="textfield3"></td>
+        <td><input type="text" name="textfield3" class="form-control" id="textfield3" value="<?php echo $d['latitud'] ?>"></td>
       </tr>
       <tr>
-        <td>(*)Tipo de suelo:</td>
-        <td><input type="text" name="textfield4" class="form-control" id="textfield4"></td>
+        <td>(*)Uso de suelo</td>
+        <td><input type="text" name="textfield4" class="form-control" id="textfield4" value="<?php echo $d['uso_suelo'] ?>">></td>
       </tr>
       <tr>
         <td>(*)Foto o imagen</td>
@@ -483,16 +286,16 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
         Afectaciones</a>
         </h4>
       </div>
-      <div id="collapse6" class="panel-collapse">
+      <div id="collapse6" class="panel-collapse collapse">
         <div class="panel-body">
-            <div id='history_revi4' align="center"> </div>
-    <p><a href="../../includes/php/seguimientos.php?cod_cliente=<?php echo $datos1['cod_cliente'] ?>&id_serv_diag=<?php echo $datos1['id_serv_diag'] ?>" class='edicion'>Agregar/Editar Afectaciones</a></p></div>
+            <div id='history_afect' align="center"> </div>
+    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=8" class='edicion'>Agregar/Editar Afectaciones</a></p></div>
        
 
        </div>
       </div>
 
-    </div>
+    
 
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -501,15 +304,14 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
         Relación jurídica</a>
         </h4>
       </div>
-      <div id="collapse7" class="panel-collapse">
+      <div id="collapse7" class="panel-collapse collapse">
         <div class="panel-body">
             <div id='history_revi4' align="center"> </div>
     <p><a href="../../includes/php/seguimientos.php?cod_cliente=<?php echo $datos1['cod_cliente'] ?>&id_serv_diag=<?php echo $datos1['id_serv_diag'] ?>" class='edicion'>Agregar/Editar Relación jurídica</a></p></div>
 
         </div>
       </div>
-    </div>
-
+  
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -517,7 +319,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
         Análisis del cumplimento y ordenamiento territorial</a>
         </h4>
       </div>
-      <div id="collapse8" class="panel-collapse">
+      <div id="collapse8" class="panel-collapse collapse">
         <div class="panel-body"> <table width="68%" border="0" class="table responsive">
       <tr>
         <td width="487">(*)<span class="form-group row">
@@ -618,7 +420,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
         Titularidad del predio</a>
         </h4>
       </div>
-      <div id="collapse9" class="panel-collapse">
+      <div id="collapse9" class="panel-collapse collapse">
         <div class="panel-body"> <table width="68%" border="0" class="table responsive">
       <tr>
         <td width="487">(*)<span class="form-group row">
@@ -626,7 +428,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
             :</label>
         </span></td>
         <td width="258"><span class="col-sm-9">
-          <textarea name="par_predio_client" class="form-control" id="par_predio_client" placeholder="Introduzca Párrafo de cómo fue adquirido el predio por el cliente"></textarea>
+          <textarea name="par_predio_client" class="form-control" id="par_predio_client" placeholder="Introduzca Párrafo de cómo fue adquirido el predio por el cliente"><?php echo $d['par_predio_client'] ?></textarea>
         </span></td>
       </tr>
       <tr>
@@ -635,8 +437,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
           :
         </span></td>
         <td><span class="col-sm-9">
-        <textarea name="alt_cant_pisos" class="form-control" id="alt_cant_pisos" placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)
-"><?php echo $d['alt_cant_pisos'] ?></textarea>
+        <textarea name="alt_cant_pisos" class="form-control" id="til_predio_client" placeholder="Introduzca el párrafo de quién es el titular"><?php echo $d['til_predio_client'] ?></textarea>
         </span></td>
       </tr>
       </table>
@@ -651,7 +452,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
         Situación actual en relación con el impuesto</a>
         </h4>
       </div>
-      <div id="collapse10" class="panel-collapse">
+      <div id="collapse10" class="panel-collapse collapse">
         <div class="panel-body"><div id='history_revi3' align="center">
                            </div>
    <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Registrar/Editar</a></div>
@@ -661,14 +462,14 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse15">
        Situación actual con lo servicios públicos</a>
         </h4>
       </div>
-      <div id="collapse1" class="panel-collapse">
+      <div id="collapse15" class="panel-collapse collapse">
         <div class="panel-body">
           <div id='history_revi3' align="center">
-                           </div>
+                    </div>
    <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Registrar/Editar</a>
 
         </div>
@@ -682,10 +483,10 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
         Otras situaciones</a>
         </h4>
       </div>
-      <div id="collapse11" class="panel-collapse">
+      <div id="collapse11" class="panel-collapse collapse">
         <div class="panel-body">
           <div id='history_revi3' align="center">
-                           </div>
+                    </div>
    <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Nueva situación</a>
 
         </div>
@@ -700,10 +501,10 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
         Servicios recomendados</a>
         </h4>
       </div>
-      <div id="collapse12" class="panel-collapse">
+      <div id="collapse12" class="panel-collapse collapse">
         <div class="panel-body">
           <div id='history_revi3' align="center">
-                           </div>
+                    </div>
    <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Registrar/Editar</a>
 
 
@@ -718,11 +519,29 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
         Servicios que no se pueden recomendar</a>
         </h4>
       </div>
-      <div id="collapse13" class="panel-collapse">
+      <div id="collapse13" class="panel-collapse collapse">
         <div class="panel-body">
                 <div id='history_revi3' align="center">
-                           </div>
+                    </div>
    <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Registrar/Editar</a>
+
+
+        </div>
+      </div>
+    </div>
+
+      <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse131">
+        Cotización</a>
+        </h4>
+      </div>
+      <div id="collapse131" class="panel-collapse collapse">
+        <div class="panel-body">
+                <div id='history_revi31' align="center">
+                    </div>
+   <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Cotizar</a>
 
 
         </div>
@@ -745,11 +564,11 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
    <div class="panel panel-primary">
     <div class="panel-heading ">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse15">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse17">
       Actvidades (Última actividad)</a>
       </h4>
     </div>
-    <div id="collapse15" class="panel-collapse collapse">
+    <div id="collapse17" class="panel-collapse collapse">
       <div class="panel-body"><div id='history_revi3' align="center">
                            </div>
    <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Nueva actividad</a></div>

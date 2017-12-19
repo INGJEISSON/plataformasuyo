@@ -1288,8 +1288,16 @@ if(isset($_SESSION['cod_usuario'])){
         
 
               if($query){
+
+                        if($_POST['tipo_seguimiento']<8)
               
                          $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, estado.descripcion as estado, estado.cod_estado, usuarios.nombre as usuario from seguimientos, usuarios, estado where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=estado.cod_estado and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
+                       else{
+                            if($_POST['tipo_seguimiento']==8)
+                                $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, afectaciones.descripcion as estado, usuarios.nombre as usuario from seguimientos, usuarios, afectaciones where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=afectaciones.tipo_afect and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
+
+                       }
+
                           $query2=pg_query($conexion, $sql2);
                           $rows2=pg_num_rows($query2);
                           
@@ -1385,8 +1393,15 @@ if(isset($_SESSION['cod_usuario'])){
       
          if(isset($_POST['revi_revi_call'])){ // Agregar revisión de call center.  y otras revisiones..
                 
-                            
-                         $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, estado.descripcion as estado, estado.cod_estado, usuarios.nombre as usuario from seguimientos, usuarios, estado where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=estado.cod_estado and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
+                      if($_POST['tipo_seguimiento']<8) 
+                       $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, estado.descripcion as estado, estado.cod_estado, usuarios.nombre as usuario from seguimientos, usuarios, estado where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=estado.cod_estado and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
+                     else{
+                           if($_POST['tipo_seguimiento']==8)  /// Sin son afectaciones..
+                           $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, afectaciones.descripcion as estado, usuarios.nombre as usuario from seguimientos, usuarios, afectaciones where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=afectaciones.tipo_afect and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
+
+                     }
+                        
+
                         $query2=pg_query($conexion, $sql2);
                           $rows2=pg_num_rows($query2);
                       include('history_revi.php');
