@@ -82,7 +82,7 @@ $cod_resp=0;
                 <td><?php echo ($datos['ciudad']) ?></td>
                 <td><?php echo number_format($datos['valor']); ?></td>
                 <td><?php echo $datos['aliado']; ?></td>
-                <td><?php if(isset($rows2)) echo "OK"; else echo "Sin Diagnóstico" ?></td>
+                <td><?php if($rows2==1) echo "OK"; else echo "Sin Diagnóstico" ?></td>
                 <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></td>
                 <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos2['encuesta'] ?>/procesados/<?php echo $datos2['id_fasfield']."/".$archivo_pdf2 ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></td> 
                 <td><a href="includes/php/edicion_usu.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>&cod_resp=<?php echo $cod_resp; ?>" tittle='Revisar' class="edicion"><p class='icon-note lg'></p></a></td>
