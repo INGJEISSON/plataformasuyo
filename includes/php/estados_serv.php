@@ -57,7 +57,7 @@ include('../dependencia/conexion.php');
           @$datos5=pg_fetch_assoc($query5);
                              
 
-               $sql11="select distinct activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from etapa_activ, activ_serv, activi_etapa where etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$datos['id_serv_cliente']."' order by activ_serv.id_activi_serv desc limit 0,1 ";
+               $sql11="select activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from etapa_activ, activ_serv, activi_etapa where etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$datos['id_serv_cliente']."' order by activ_serv.id_activi_serv desc limit 1 ";
                   $query11=pg_query($conexion, $sql11);
                   @$datos11=pg_fetch_assoc($query11);
       ?>

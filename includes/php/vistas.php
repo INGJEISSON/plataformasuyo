@@ -12,6 +12,8 @@ $sql="select tareas.id_tarea, tareas.nombre as tarea, tareas.descripcion, proyec
 elseif($_POST['vistas']==6) // Vista de clientes con su respectiva documentación...
 $sql="select * from cliente ";
 
+//elseif($_POST['vistas']==7) // Estados de servicios
+//$sql="select * from cliente ";
 //$sql="select documentacion.cod_cliente, documentacion.apellidos, documentacion.nombres, documentacion.ciudad, bodegas.descripcion as bodega, documentacion.cod_estante as estante, documentacion.ubicacion, documentacion.usr_codif from documentacion, bodegas where documentacion.cod_bodega=bodegas.cod_bodega ";
 
 
