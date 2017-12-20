@@ -136,8 +136,9 @@ $("#g_revision").click(function(){  // Abregamos revisión .....
 
 var cod_estado=$("#cod_estado").val();
 var observacion=$("#observacion").val();
+var tipo_seguimiento="<?php echo "$_GET[tipo_seguimiento]" ?>";
 var id_fasfield="<?php echo "$_GET[id_serv_cliente]" ?>";
-var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+observacion+'&add_revi_call='+1+'&tipo_seguimiento='+6;
+var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+observacion+'&add_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;
     
     if(cod_estado!=1){
 
@@ -198,7 +199,7 @@ var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+o
 });
 
 var id_fasfield="<?php echo "$_GET[id_serv_cliente]" ?>";
-var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+observacion+'&revi_revi_call='+1+'&tipo_seguimiento='+6;
+var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+observacion+'&revi_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;
     
             $("#cargar2").show();
               $.ajax({

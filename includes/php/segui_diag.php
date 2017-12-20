@@ -120,7 +120,84 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
 
                         }
                   });
-         
+var id_fasfield="<?php echo $id_elab_diag ?>"; 
+var tipo_seguimiento=14;
+var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: '../../includes/php/g_procesos.php?'+datos,
+                        success: function(valor){
+                           
+                               if(valor!=2){
+                                $("#cargar2").hide();
+                              //    alert("Se ha agregado su observación al cliente");                                 
+                                   $("#history_serv_recom").html(valor);      
+
+                               }else{
+                                      $("#cargar2").hide();
+                                alert("Ocurrió un error al crear el registro de la observación, por favor intenta de nuevo o comuníquese con el administrador.");
+
+                               }
+
+
+                        }
+                  });
+
+var id_fasfield="<?php echo $id_elab_diag ?>"; 
+var tipo_seguimiento=15;
+var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: '../../includes/php/g_procesos.php?'+datos,
+                        success: function(valor){
+                           
+                               if(valor!=2){
+                                $("#cargar2").hide();
+                              //    alert("Se ha agregado su observación al cliente");                                 
+                                   $("#history_serv_recom2").html(valor);      
+
+                               }else{
+                                      $("#cargar2").hide();
+                                alert("Ocurrió un error al crear el registro de la observación, por favor intenta de nuevo o comuníquese con el administrador.");
+
+                               }
+
+
+                        }
+                  });
+        
+
+var id_fasfield="<?php echo $datos1['cod_cliente'] ?>";
+var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+18;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                           
+                               if(valor!=2){
+                                $("#cargar2").hide();
+                              //    alert("Se ha agregado su observación al cliente");   
+                                  $("#history_revi4").html(valor);
+
+                               }else{
+                                      $("#cargar2").hide();
+                                alert("Ocurrió un error al crear el registro de la observación, por favor intenta de nuevo o comuníquese con el administrador.");
+
+                               }
+
+
+                        }
+                  }); 
           
   });
 </script>
@@ -306,7 +383,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
       </div>
       <div id="collapse7" class="panel-collapse collapse">
         <div class="panel-body">
-            <div id='history_revi4' align="center"> </div>
+            <div id='history_revi41' align="center"> </div>
     <p><a href="../../includes/php/seguimientos.php?cod_cliente=<?php echo $datos1['cod_cliente'] ?>&id_serv_diag=<?php echo $datos1['id_serv_diag'] ?>" class='edicion'>Agregar/Editar Relación jurídica</a></p></div>
 
         </div>
@@ -508,7 +585,6 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
 
         </div>
       </div>
-    </div>
 
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -519,12 +595,11 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
       </div>
       <div id="collapse13" class="panel-collapse collapse">
         <div class="panel-body">
-             <div id='history_serv_recom' align="center"> </div>
+             <div id='history_serv_recom2' align="center"> </div>
     <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=15" class='edicion'>Agregar/Editar Servicios</a></p></div>
 
         </div>
       </div>
-    </div>
 
       <div class="panel panel-primary">
       <div class="panel-heading">
@@ -553,7 +628,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
     </div>
     <div id="collapse14" class="panel-collapse collapse">
       <div class="panel-body"><div id='history_revi4' align="center">                           </div>
-    <p><a href="../../includes/php/revi_call2.php?cod_cliente=<?php echo $datos1['cod_cliente'] ?>&id_serv_cliente=<?php echo $datos1['id_serv_cliente'] ?>" class='edicion'>Nueva comunicación</a></p></div>
+    <p><a href="../../includes/php/revi_call2.php?cod_cliente=<?php echo $datos1['cod_cliente'] ?>tipo_seguimiento=18&id_serv_cliente=<?php echo $datos1['id_elab_diag'] ?>" class='edicion'>Nueva comunicación</a></p></div>
     </div>
   </div>
 
@@ -567,7 +642,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
     <div id="collapse17" class="panel-collapse collapse">
       <div class="panel-body"><div id='history_revi3' align="center">
                            </div>
-   <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Nueva actividad</a></div>
+   <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>" class='edicion'>Nueva actividad</a></div>
     </div>
   </div>
   

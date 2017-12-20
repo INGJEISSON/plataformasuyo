@@ -539,7 +539,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
     </div>
     <div id="collapse7" class="panel-collapse collapse">
       <div class="panel-body"><div id='history_revi4' align="center">                           </div>
-    <p><a href="../../includes/php/revi_call2.php?cod_cliente=<?php echo $datos1['cod_cliente'] ?>&id_serv_cliente=<?php echo $datos1['id_serv_cliente'] ?>" class='edicion'>Nueva comunicación</a></p></div>
+    <p><a href="../../includes/php/revi_call2.php?cod_cliente=<?php echo $datos1['cod_cliente'] ?>&tipo_seguimiento=6&id_serv_cliente=<?php echo $datos1['id_serv_cliente'] ?>" class='edicion'>Nueva comunicación</a></p></div>
     </div>
   </div>
 

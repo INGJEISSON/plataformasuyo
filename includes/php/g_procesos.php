@@ -1296,6 +1296,43 @@ if(isset($_SESSION['cod_usuario'])){
                             if($_POST['tipo_seguimiento']==8)
                                 $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, afectaciones.descripcion as estado, usuarios.nombre as usuario from seguimientos, usuarios, afectaciones where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=afectaciones.tipo_afect and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
 
+                             else if($_POST['tipo_seguimiento']==14 || $_POST['tipo_seguimiento']==15)
+                                  $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, servicios.nom_servicio as estado, usuarios.nombre as usuario from seguimientos, usuarios, servicios where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=servicios.cod_servicio and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";  
+
+                            elseif($_POST['tipo_seguimiento']==14){
+
+                                  $_POST['pr_servi_n']="";
+                                                     // Verificamos que el servicio aún no esté recomendado..
+                                      $sql2="select cod_servicio from serv_recom_diag where cod_servicio='".$_POST['cod_estado']."' ";
+                                      $query2=pg_query($conexion, $sql2); 
+                                      $rows=pg_num_rows($query2);
+
+                                          if($rows)
+                                            echo "3"; // Servicio ya se encuentra recomendado en el diagnóstico..
+                                          
+                                          else{ // AHora insertarmos el servicio recomendado..
+
+                                             // Buscamos el nombre del producto y plazo sugerido del servico (defecto).
+
+                                            $sql3="select * from produc_servi where cod_servicio='".$_POST['cod_estado']."' ";
+                                            $query3=pg_query($conexion, $sql3);
+                                            $rows3=pg_num_rows($query3);
+                                            
+                                                    if($rows3){
+                                                      $dato3=pg_fetch_assoc($query3);
+                                                      $cod_product_serv=$dato3['cod_produc_serv'];
+                                                    }
+                                                    else
+                                                      $cod_product_serv=0;                                              
+                                        $insert="insert into serv_recom_diag (id_elab_diag, cod_servicio, pr_serv_n, cod_produc_serv) values('".$_POST['id_fasfield']."', '".$_POST['cod_estado']."', '".$_POST['pr_servi_n']."', '".$cod_product_serv."' ) ";
+                                             $query=pg_query($conexion, $insert);
+                                                if($query)
+                                                  echo "1";
+                                                else
+                                                  echo "2"; // Problema técnico...
+                                          }
+                              }
+
                        }
 
                           $query2=pg_query($conexion, $sql2);
@@ -1398,7 +1435,8 @@ if(isset($_SESSION['cod_usuario'])){
                      else{
                            if($_POST['tipo_seguimiento']==8)  /// Sin son afectaciones..
                            $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, afectaciones.descripcion as estado, usuarios.nombre as usuario from seguimientos, usuarios, afectaciones where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=afectaciones.tipo_afect and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
-
+                           else if($_POST['tipo_seguimiento']==14 or $_POST['tipo_seguimiento']==15)
+                            $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, servicios.nom_servicio as estado, usuarios.nombre as usuario from seguimientos, usuarios, servicios where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=servicios.cod_servicio and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
                      }
                         
 
@@ -1562,7 +1600,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
         }
 
 
-        if(isset($_POST['add_revi_serv'])){ // Agregar actividades del servicio.
+    if(isset($_POST['add_revi_serv'])){ // Agregar actividades del servicio.
 
           // Verificamos quién está realizando la revisión.....
           if($_SESSION['cod_grupo']==6 or $_SESSION['cod_grupo']==1) // Coordiandor de operaciones.  o Super administrador
@@ -1589,9 +1627,55 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                 echo "2"; // Problema interno (técnico).            
 
       } 
+
+     if(isset($_POST['add_revi_diag'])){ // Agregar actividades del servicio.
+
+          // Verificamos quién está realizando la revisión.....
+          if($_SESSION['cod_grupo']==6 or $_SESSION['cod_grupo']==1) // Coordiandor de operaciones.  o Super administrador
+            $tipo_revision=1; // Control de calidad
+          else if($_SESSION['cod_grupo']==3 or $_SESSION['cod_grupo']==1) // Analítico....  o Super administrador
+            $tipo_revision=2; 
+          else if($_SESSION['cod_grupo']==8 or $_SESSION['cod_grupo']==1) // Asesor...  o Super administrador
+            $tipo_revision=3; // Asesor
+
+            $insert="insert into activ_diag (cod_activi_etapa, id_elab_diag, observacion, cod_usu_respon, fecha_actividad) values('".$_POST['cod_activi_etapa']."', '".$_POST['id_elab_diag']."', '".$_POST['observacion']."', '".$_SESSION['cod_usuario']."', '".$_POST['fecha_actividad']."') ";
+            $query=pg_query($conexion, $insert);
+                    
+
+              if($query){
+              
+                  
+                    $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_diag, activi_etapa where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' order by activ_diag.id_activi_diag desc ";
+                          $query2=pg_query($conexion, $sql2);
+                          $rows2=pg_num_rows($query2);
+                         include('history_revi2.php');
+                  
+              }
+              else
+                echo "2"; // Problema interno (técnico).            
+
+      } 
+
        if(isset($_POST['revi_serv'])){ //  Agregar actividades del servicio.
                             
                       $sql2="select usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$_POST['id_serv_cliente']."' order by activ_serv.id_activi_serv desc ";
+                        $query2=pg_query($conexion, $sql2);
+                          $rows2=pg_num_rows($query2);
+                      include('history_revi2.php');
+         
+         }
+         if(isset($_POST['revi_serv_diag'])){ //  Agregar actividades del diagnóstico
+                            
+                     $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_diag, activi_etapa where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' order by activ_diag.id_activi_diag desc ";
+                        $query2=pg_query($conexion, $sql2);
+                          $rows2=pg_num_rows($query2);
+                      include('history_revi2.php');
+         
+         }
+
+          if(isset($_POST['revi_serv2_diag'])){//  Agregar actividades del diagnóstico
+                            
+                     $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_diag, activi_etapa where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' order by activ_diag.id_activi_diag desc ";
                         $query2=pg_query($conexion, $sql2);
                           $rows2=pg_num_rows($query2);
                       include('history_revi2.php');

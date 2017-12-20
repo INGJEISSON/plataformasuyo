@@ -178,7 +178,12 @@ var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+o
                                 $("#cargar2").hide();
                               //    alert("Se ha agregado su observación al cliente");   
                                   $("#resul_seguimiento").html(valor);
-                                   $("#history_afect").html(valor);      
+                                  if(tipo_seguimiento==8)
+                                   $("#history_afect").html(valor);    
+                                  else if(tipo_seguimiento==14)
+                                  $("#history_serv_recom").html(valor);
+                                 else if(tipo_seguimiento==15)
+                                  $("#history_serv_recom2").html(valor);  
 
                                }else{
                                       $("#cargar2").hide();
