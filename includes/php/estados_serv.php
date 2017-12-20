@@ -2,7 +2,7 @@
 include('../dependencia/conexion.php');    
                     $parametro="";   
                     
-  $sql="select serv_cliente.id_serv_cliente, serv_cliente.cod_cliente, cliente.ciudad, cliente.nombre, servicios.nom_servicio from serv_cliente, servicios, cliente  where cliente.cod_cliente=serv_cliente.cod_cliente and serv_cliente.cod_servicio=servicios.cod_servicio and serv_cliente.cod_cliente=cliente.cod_cliente and  serv_cliente.cod_estado_caso=23 ";
+  $sql="select serv_cliente.id_serv_cliente, serv_cliente.cod_cliente, cliente.ciudad, cliente.nombre, servicios.nom_servicio from serv_cliente, servicios, cliente  where cliente.cod_cliente=serv_cliente.cod_cliente and serv_cliente.cod_servicio=servicios.cod_servicio and serv_cliente.cod_cliente=cliente.cod_cliente and  serv_cliente.cod_estado=23 ";
           $query=pg_query($conexion, $sql);
           $rows=pg_num_rows($query);
 ?>
@@ -51,7 +51,7 @@ include('../dependencia/conexion.php');
       $i=1;
         while($datos=pg_fetch_assoc($query)){
 
-          $sql5="select distinct cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_cliente.descripcion as tipo_cliente, servicios.nom_servicio, serv_cliente.cod_usu_resp, serv_cliente.id_serv_cliente, deta_list_despleg.descripcion as estado_segui_interno, usuarios.nombre as usuario, usuarios.apellidos as apellidos from cliente, serv_cliente, tipo_cliente, servicios, deta_list_despleg, usuarios where usuarios.cod_usuario=serv_cliente.cod_usu_resp and deta_list_despleg.id_list_despleg=serv_cliente.cod_estado_segui and servicios.cod_servicio=serv_cliente.cod_servicio and cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=serv_cliente.cod_cliente and serv_cliente.id_serv_cliente='".$datos['id_serv_cliente']."' ";
+          $sql5="select distinct cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_cliente.descripcion as tipo_cliente, servicios.nom_servicio, serv_cliente.cod_usuario, serv_cliente.id_serv_cliente, deta_list_despleg.descripcion as estado_segui_interno, usuarios.nombre as usuario, usuarios.apellidos as apellidos from cliente, serv_cliente, tipo_cliente, servicios, deta_list_despleg, usuarios where usuarios.cod_usuario=serv_cliente.cod_usuario and deta_list_despleg.id_list_despleg=serv_cliente.cod_estado_segui and servicios.cod_servicio=serv_cliente.cod_servicio and cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=serv_cliente.cod_cliente and serv_cliente.id_serv_cliente='".$datos['id_serv_cliente']."' ";
           $query5=pg_query($conexion, $sql5);
           $rows5=pg_num_rows($query5);
           @$datos5=pg_fetch_assoc($query5);
