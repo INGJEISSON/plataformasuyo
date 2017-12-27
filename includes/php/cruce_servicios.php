@@ -13,19 +13,19 @@ if($_POST['cod_estado']==6){ // Si aprobado, lo agrgamos al grupo de clientes..
               $_POST['id_fasfield']=$datos1['id_fasfield'];
 
                                             //Consultamos los datos del cliente
-                                            $sql3="select enc_procesadas.id_cliente, enc_procesadas.asesor, enc_procesadas.ciudad, enc_procesadas.telefono, enc_procesadas.Barrio, det_repor_aseso.resul_visita, det_repor_aseso.tom_serv, det_repor_aseso.valor, det_repor_aseso.tipo_pago, det_repor_aseso.servi_tomados  from det_repor_aseso, enc_procesadas where det_repor_aseso.id_fasfield=enc_procesadas.id_fasfield and enc_procesadas.id_fasfield='".$_POST['id_fasfield']."' ";
+                                            $sql3="select enc_procesadas.id_cliente, enc_procesadas.cliente, enc_procesadas.asesor, enc_procesadas.ciudad, enc_procesadas.telefono, enc_procesadas.Barrio, det_repor_aseso.resul_visita, det_repor_aseso.tom_serv, det_repor_aseso.valor, det_repor_aseso.tipo_pago, det_repor_aseso.servi_tomados  from det_repor_aseso, enc_procesadas where det_repor_aseso.id_fasfield=enc_procesadas.id_fasfield and enc_procesadas.id_fasfield='".$_POST['id_fasfield']."' ";
                                           $query3=pg_query($conexion, $sql3);
                                           $datos=pg_fetch_assoc($query3);
 
                                               // Verificamos que no esté registrado
-                                              $sql4="select cod_cliente from cliente where cod_cliente='".$datos['id_cliente']."'";
+                                             echo  $sql4="select cod_cliente from cliente where cod_cliente='".$datos['id_cliente']."'";
                                               $query4=pg_query($conexion, $sql4); 
                                                 $rows4=pg_num_rows($query4);
 
-                                                  /*if($rows4==0){ // SI no está registrado entonces..
+                                                 if($rows4==0){ // SI no está registrado entonces..
 
-                                                            $insert="insert into cliente (id_fasfield, cod_cliente, nombre, tipo_cliente, ciudad, barrio, direccion_predio, telefono_1) values('".$_POST['id_fasfield']."', '".$datos['id_cliente']."', '".$datos['cliente']."', 1, '".$datos['ciudad']."', '".$datos['Barrio']."', '".$datos['direccion']."', '".$datos['telefono']."') ";
-                                                             $query4=pg_query($conexion, $insert);
+                                                          echo   $insert="insert into cliente (id_fasfield, cod_cliente, nombre, tipo_cliente, ciudad, barrio, direccion_predio, telefono_1) values('".$_POST['id_fasfield']."', '".$datos['id_cliente']."',  '".$datos['cliente']."', '', '".$datos['telefono']."') ";
+                                                            // $query4=pg_query($conexion, $insert);
 
                                                           // Ahora creamos la carpeta del cliente..
 
@@ -35,20 +35,19 @@ if($_POST['cod_estado']==6){ // Si aprobado, lo agrgamos al grupo de clientes..
 
                                                           $sql2="insert into documentacion (cod_cliente,  nombres, apellidos, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$_POST['id_cliente']."', '".$_POST['cliente']."', '', 2, '', 1, 1, 1, '".$md5_carp."') ";                                                       
                                                                      
-                                                          $query2=pg_query($conexion, $sql2);
+                                                         // $query2=pg_query($conexion, $sql2);
 
                                                                if($query2){
-                                                                  mkdir('../files/clientes/'.$md5_carp); // Creamos carpeta inicial...
+                                                                /* mkdir('../files/clientes/'.$md5_carp); // Creamos carpeta inicial...
                                                                         // Creamos subcarpetas
                                                                        mkdir('../files/clientes/'.$md5_carp."/Documentos de propiedad");
                                                                        mkdir('../files/clientes/'.$md5_carp."/Facturas y contratos");
                                                                       mkdir('../files/clientes/'.$md5_carp."/Otros documentos");
-                                                                        mkdir('../files/clientes/'.$md5_carp."/Analisis de caso");
-
+                                                                        mkdir('../files/clientes/'.$md5_carp."/Analisis de caso");*/
                                                                         echo "1";// Carpeta creada 
                                                                 }
                                                     } // Fin si no encontró el cliente...
-                                                    */
+                                                   
                                                  
                                                  // Veriquemos el tipo de encuesta....
 
