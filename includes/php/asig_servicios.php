@@ -12,7 +12,7 @@ include('../dependencia/conexion.php');
   
   if($_SESSION['tipo_usuario']!=6)
 
-echo $sql="select  cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_cliente.descripcion as tipo_cliente, servicios.nom_servicio, serv_cliente.cod_usuario, serv_cliente.id_serv_cliente from cliente, serv_cliente, tipo_cliente, servicios where $parametro servicios.cod_servicio=serv_cliente.cod_servicio and cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=serv_cliente.cod_cliente and serv_cliente.cod_estado=23 order by serv_cliente.cod_usuario=95 desc";
+ $sql="select  cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_cliente.descripcion as tipo_cliente, servicios.nom_servicio, serv_cliente.cod_usuario, serv_cliente.id_serv_cliente from cliente, serv_cliente, tipo_cliente, servicios where $parametro servicios.cod_servicio=serv_cliente.cod_servicio and cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=serv_cliente.cod_cliente and serv_cliente.cod_estado=23 order by serv_cliente.cod_usuario=95 desc";
           $query=pg_query($conexion, $sql);
           $rows=pg_num_rows($query);
     
