@@ -109,7 +109,7 @@ include('../dependencia/conexion.php');
                                 else
                               $sql3="select * from usuarios where tipo_usuario=21  or tipo_usuario=6 ";*/
 
-                        /*if($_SESSION['tipo_usuario']==1)
+                        if($_SESSION['tipo_usuario']==1)
                          $sql3="select * from usuarios where  tipo_usuario=21 or tipo_usuario=6 or tipo_usuario=19  "; 
                         else if($_SESSION['tipo_usuario']!=6)
                         $sql3="select * from usuarios where  tipo_usuario=19  ";
@@ -137,7 +137,7 @@ include('../dependencia/conexion.php');
                                         $datos4=pg_fetch_assoc($query4);    
                                         $fecha_filtro= $datos4['fecha_filtro'];                                   
                                       }else
-                                      $fecha_filtro="";*/
+                                      $fecha_filtro="";
       ?>
 
         <tr>
