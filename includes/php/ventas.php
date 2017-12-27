@@ -32,7 +32,7 @@ include('../dependencia/conexion.php');
                                                        <select name="select" id="ciudad" class='form-control'>
                             <?php if($_SESSION['tipo_usuario']==1 or  $_SESSION['tipo_usuario']==2 or  $_SESSION['tipo_usuario']==19 or  $_SESSION['tipo_usuario']==4  or $_SESSION['tipo_usuario']==15){  ?><option value="Todos">Todos</option><?php  }  ?>
                             
-                                                        <?php if($_SESSION['tipo_usuario']==1 or  $_SESSION['tipo_usuario']==2 $_SESSION['tipo_usuario']==15){  ?><option value="solbaq">Soledad y Barranquilla</option><?php  }  ?>
+                                                        <?php if($_SESSION['tipo_usuario']==1 or  $_SESSION['tipo_usuario']==2 or $_SESSION['tipo_usuario']==15){  ?><option value="solbaq">Soledad y Barranquilla</option><?php  }  ?>
                             <?php if($_SESSION['tipo_usuario']==15 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==2  or $_SESSION['tipo_usuario']==11){  ?><option value="Barranquilla">Barranquilla</option><?php  }  ?>
                             <?php if($_SESSION['tipo_usuario']==16 or $_SESSION['tipo_usuario']==15 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==2){  ?><option value="Bogotá">Bogotá</option><?php  }  ?>
                            <?php if($_SESSION['tipo_usuario']==14 or $_SESSION['tipo_usuario']==15 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==2){  ?> <option value="Cali">Cali</option><?php  }  ?>
