@@ -10,10 +10,11 @@ include('../dependencia/conexion.php');
                     else
                     $parametro="";   
   
-  if($_SESSION['tipo_usuario']!=6)
+  //if($_SESSION['tipo_usuario']!=6)
 
  $sql="select  cliente.cod_cliente, cliente.nombre, cliente.ciudad, tipo_cliente.descripcion as tipo_cliente, servicios.nom_servicio, serv_cliente.cod_usuario, serv_cliente.id_serv_cliente from cliente, serv_cliente, tipo_cliente, servicios where $parametro servicios.cod_servicio=serv_cliente.cod_servicio and cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=serv_cliente.cod_cliente and serv_cliente.cod_estado=23 order by serv_cliente.cod_usuario=95 desc";
           $query=pg_query($conexion, $sql);
+
           $rows=pg_num_rows($query);
     
           
@@ -115,6 +116,7 @@ include('../dependencia/conexion.php');
                         $sql3="select * from usuarios where  tipo_usuario=19  ";
                         else
                         $sql3="select * from usuarios where  tipo_usuario=21 or tipo_usuario=6 ";
+
                       $query3=pg_query($conexion, $sql3);
                               
                             $sql2="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from serv_cliente, usuarios where serv_cliente.cod_usuario=usuarios.cod_usuario and  serv_cliente.id_serv_cliente='".$datos['id_serv_cliente']."' and serv_cliente.cod_estado=23 and serv_cliente.cod_usuario='".$datos['cod_usuario']."'   ";
