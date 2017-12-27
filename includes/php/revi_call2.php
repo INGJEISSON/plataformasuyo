@@ -199,6 +199,7 @@ var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+o
 });
 
 var id_fasfield="<?php echo "$_GET[id_serv_cliente]" ?>";
+var tipo_seguimiento="<?php echo "$_GET[tipo_seguimiento]" ?>";
 var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+observacion+'&revi_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;
     
             $("#cargar2").show();

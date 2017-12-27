@@ -77,7 +77,7 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
 
                                       // Generamos la clave de doble autotenticación.
 
-                               /* echo   $sql2 ="select * from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and cod_estado=3 ";
+                                echo   $sql2 ="select * from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and cod_estado=3 ";
                                    $query2=pg_query($conexion, $sql2);
                                    $rows2=pg_num_rows($query2);
                                             
@@ -125,9 +125,9 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
                                                               }
 
                                                     }
-                                        }*/
+                                        }
 
-                                $access=1; // Acceso permitido..
+                               
                           
                                
                                 }else
@@ -146,7 +146,7 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
     } else {
         //include('includes/php/login.php');
                if(isset($access)==1) // Si es un usuario habilitado..
-                   include('includes/php/redirect.php');
+                   echo "algo";
                 else{
                      session_unset();
                      include('includes/php/login.php');
