@@ -1,10 +1,12 @@
 <?php 
 $url = 'https://api.hablame.co/sms/envio/';
+$numero=$_GET['numero'];
+$sms=$_GET['sms'];
 $data = array(
 	'cliente' => 10010646, //Numero de cliente
 	'api' => 'IlHFpX4NJNt2UOOluEHC8oseMCmvKD', //Clave API suministrada
-	'numero' => '573504039343', //numero o numeros telefonicos a enviar el SMS (separados por una coma ,)
-	'sms' => 'Vos sos muy feo, esto una prueba', //Mensaje de texto a enviar
+	'numero' => $numero, //numero o numeros telefonicos a enviar el SMS (separados por una coma ,)
+	'sms' => $sms, //Mensaje de texto a enviar
 	'fecha' => '', //(campo opcional) Fecha de envio, si se envia vacio se envia inmediatamente (Ejemplo: 2017-12-31 23:59:59)
 	'referencia' => 'Referenca Envio Hablame', //(campo opcional) Numero de referencio ó nombre de campaña
 );
