@@ -13,10 +13,10 @@ curl_setopt_array($curl, array(
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "{ \"from\":\"$from\", \"to\":\"$number\", \"text\":\"Test SMS.\" }",
+  CURLOPT_POSTFIELDS => "{ \"from\":\"Suyo\", \"to\":\"573122913154\", \"text\":\"Hola compañero\" }",
   CURLOPT_HTTPHEADER => array(
     "accept: application/json",
-    "authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
+    "authorization: Basic c3V5bzpKZWlzc29uMTk5MQ==",
     "content-type: application/json"
   ),
 ));

@@ -36,7 +36,7 @@ include('../dependencia/conexion.php');
                             <?php if($_SESSION['tipo_usuario']==15 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==2  or $_SESSION['tipo_usuario']==11){  ?><option value="Barranquilla">Barranquilla</option><?php  }  ?>
                             <?php if($_SESSION['tipo_usuario']==16 or $_SESSION['tipo_usuario']==15 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==2){  ?><option value="Bogotá">Bogotá</option><?php  }  ?>
                            <?php if($_SESSION['tipo_usuario']==14 or $_SESSION['tipo_usuario']==15 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==2){  ?> <option value="Cali">Cali</option><?php  }  ?>
-                            <?php if($_SESSION['tipo_usuario']==17 or $_SESSION['tipo_usuario']==1  or $_SESSION['tipo_usuario']==2){  ?><option value="Medellin">Medellín</option><?php  }  ?>
+                            <?php if($_SESSION['tipo_usuario']==17 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==15  or $_SESSION['tipo_usuario']==2){  ?><option value="Medellin">Medellín</option><?php  }  ?>
                             <?php if($_SESSION['tipo_usuario']==15 or $_SESSION['tipo_usuario']==1  or $_SESSION['tipo_usuario']==2  or $_SESSION['tipo_usuario']==11){  ?><option value="Soledad">Soledad</option><?php  }  ?>
                           </select> </div>
                                                 </div>
