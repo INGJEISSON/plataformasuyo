@@ -1726,7 +1726,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
          
           if(isset($_POST['mis_servicios'])){ // Listamos lo servicios.
           
-                  $sql="select * from usuarios where email='".$_POST['email']."' ";
+                 $sql="select * from usuarios where email='".$_POST['email']."' ";
                     $query=pg_query($conexion, $sql);
                     $rows=pg_num_rows($query);
                             if($rows){

@@ -1,5 +1,6 @@
 <?php
-@include('../dependencia/conexion.php');
+if(empty($_POST['email']))
+include('../dependencia/conexion.php');
 $cod_resp=0;
              if(isset($_POST['email'])){
                         $parametro="serv_cliente.cod_usuario='".$datos['cod_usuario']."' and ";
