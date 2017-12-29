@@ -14,5 +14,5 @@
 }*/
 ?>
 <script type="text/javascript">
-	parent.location='doble_auth.php';
+	parent.location='portal.php';
 </script>
