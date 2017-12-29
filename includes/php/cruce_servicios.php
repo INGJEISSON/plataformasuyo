@@ -75,7 +75,7 @@ if($_POST['cod_estado']==6){ // Si aprobado, lo agrgamos al grupo de clientes..
                                                                           if($rows31==0){ // EL servicio no se ha registrado enttonces... agréguelo..
                                                                               
                                                                               if($datos['tipo_pago']=='Contado'){
-                                                                             echo   $insert2="insert into serv_cliente (asesor, cod_servicio, cod_estado, cod_cliente, valor, fecha_registro, cod_usuario, cod_acuer_pago, id_list_despleg) values('".$datos['asesor']."', '".$cod_servicio."', 23, '".$datos['id_cliente']."', '".$datos['valor']."', '".$fecha_registro."', 95, 1, 1)  ";
+                                                                             echo  $insert2="insert into serv_cliente (asesor, cod_servicio, cod_estado, cod_cliente, valor, fecha_registro, cod_usuario, cod_acuer_pago, id_list_despleg) values('".$datos['asesor']."', '".$cod_servicio."', 23, '".$datos['id_cliente']."', '".$datos['valor']."', '".$fecha_registro."', 95, 1, 1)  ";
                                                                                 $queryinser=pg_query($conexion, $insert2); // INsertamos el cliente..
                                                                               }
 

@@ -12,6 +12,9 @@ $sql="select tareas.id_tarea, tareas.nombre as tarea, tareas.descripcion, proyec
 elseif($_POST['vistas']==6) // Vista de clientes con su respectiva documentación...
 $sql="select * from cliente ";
 
+elseif($_POST['vistas']==7) // Vista de clientes en devolución.
+$sql="select cliente.nombre, tipo_cliente.descripcion as tipo_cliente, cliente.ciudad, cliente.cod_cliente from devolucion, serv_cliente, cliente, tipo_cliente where cliente.tipo_cliente=tipo_cliente.tipo_cliente and  cliente.cod_cliente=serv_cliente.cod_cliente and devolucion.id_serv_cliente=serv_cliente.id_serv_cliente ";
+
 //elseif($_POST['vistas']==7) // Estados de servicios
 //$sql="select * from cliente ";
 //$sql="select documentacion.cod_cliente, documentacion.apellidos, documentacion.nombres, documentacion.ciudad, bodegas.descripcion as bodega, documentacion.cod_estante as estante, documentacion.ubicacion, documentacion.usr_codif from documentacion, bodegas where documentacion.cod_bodega=bodegas.cod_bodega ";
@@ -288,13 +291,59 @@ $sql="select * from cliente ";
   <?php
 }
 ?> 
+
+<?php if($_POST['vistas']==7){ // Vista de devoluciones...
+?> 
+<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">                           
+                            <div class="table-responsive">
+       <table id="table_id" class='table responsive' cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="2%">#</th>
+                <th width="6%">Identificacion</th>
+                <th width="11%">Cliente</th>  
+                <th width="11%">Tipo de cliente</th> 
+                <th width="11%">Ciudad</th>  
+                <th width="11%">Ver/Editar</th>              
+            </tr>
+        </thead>
+        <tbody>
+         <?php
+                $i=1;
+                while($datos=pg_fetch_assoc($query)){
+                           
+                    ?>
+            <tr>
+                <td><?php echo $i ?></td>
+                <td><?php echo ($datos["cod_cliente"]) ?></td>
+                <td><?php echo ($datos["nombre"]); ?></td>
+                <td><?php echo ($datos["tipo_cliente"]); ?></td>
+                <td><?php echo $datos["ciudad"]; ?></td> 
+                <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="includes/php/det_devol_client.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>" tittle='Revisar'><p class='icon-note lg'></p></a></td> 
+          </tr>
+             <?php
+       $i++;
+           }
+    ?>
+     </tbody>
+    </table>
+     </div>
+                        </div>
+                    </div>
+  </div>
+
+  <?php
+}
+?> 
  <script type="text/javascript">
     
 $(document).ready(function () {
  $('#table_id').DataTable({
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            'copy', 'csv', 'excel', 'print'
         ]
     });      
     

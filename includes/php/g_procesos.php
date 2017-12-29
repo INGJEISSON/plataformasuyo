@@ -1380,7 +1380,7 @@ if(isset($_SESSION['cod_usuario'])){
 
                                                                // insertamos cliente   
                                                         $carpeta_cliente=$datos['cliente'];
-                                                        $md5_carp=md5($carpeta_cliente);                                                                                
+                                                        $md5_carp=$clave:md5($carpeta_cliente);                                                                                
 
                                                           $sql2="insert into documentacion (cod_cliente,  nombres, apellidos, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$_POST['id_cliente']."', '".$_POST['cliente']."', '', 2, '', 1, 1, 1, '".$md5_carp."') ";                                                       
                                                                      
@@ -1628,7 +1628,21 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
           else if($_SESSION['cod_grupo']==8 or $_SESSION['cod_grupo']==1) // Asesor...  o Super administrador
             $tipo_revision=3; // Asesor
 
-            $insert="insert into activ_serv (cod_activi_etapa, id_serv_cliente, observacion, cod_usu_respon, fecha_actividad) values('".$_POST['cod_activi_etapa']."', '".$_POST['id_serv_cliente']."', '".$_POST['observacion']."', '".$_SESSION['cod_usuario']."', '".$_POST['fecha_actividad']."') ";
+               @$s1="select * from activ_etapa_devol where id_activi_devol='".$_POST['cod_activi_etapa']."' ";
+              @$q=pg_query($conexion, $s1);
+              @$d=pg_fetch_assoc($q);
+
+              // Consultamos el cod del serviicio
+
+            @$s2="select * from serv_cliente where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
+              @$q2=pg_query($conexion, $s2);
+              @$d2=pg_fetch_assoc($q2);
+          // INsetamos nueva actividad (devolución al servicio  especitivi)
+             $insert2="insert into activi_etapa (cod_activi_etapa, cod_etapa, cod_servicio, check_1, descripcion) values('".$_POST['cod_activi_etapa']."',   '".$d['cod_etapa']."', '".$d2['cod_servicio']."', 1, '".$d['descripcion']."' )";
+            $query2=pg_query($conexion, $insert2);
+
+
+             $insert="insert into activ_serv (cod_activi_etapa, id_serv_cliente, observacion, cod_usu_respon, fecha_actividad) values('".$_POST['cod_activi_etapa']."', '".$_POST['id_serv_cliente']."', '".$_POST['observacion']."', '".$_SESSION['cod_usuario']."', '".$_POST['fecha_actividad']."') ";
             $query=pg_query($conexion, $insert);
                     
 
@@ -1986,13 +2000,62 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
             if(isset($_POST['ingresar_auth'])){
 
                   // Verificamos que el código generado sea el correcto
-                    $sql="select * from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and cod_estado=3 ";
+                    $sql="select * from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and cod_estado=3 and clave='".$_POST['clave_auth']."'  ";
                     $query=pg_query($conexion, $sql);
                     $rows=pg_num_rows($query);
 
-                        if($rows){  //
-
+                        if(isset($rows)){
+                          $_SESSION['doble_auth']=$_POST['clave_auth'];
+                          echo "1";
+                            $sql="update  doble_auth set cod_estado=4 where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."'  ";
+                          $query=pg_query($conexion, $sql);
+                          $rows=pg_num_rows($query);
                         }
+                        else
+                          echo "2";
+
+            }
+
+             if(isset($_POST['r_sms'])){ // Reenviar mensaje de doble autenticación...
+
+                  // Verificamos que el código generado sea el correcto
+                    $sql="select * from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and cod_estado=3   ";
+                    $query=pg_query($conexion, $sql);
+                    $rows=pg_num_rows($query);
+                    $dt=pg_fetch_assoc($query);
+
+                        if(isset($rows)){
+                          include('envia_sms2.php');
+                         
+                        }
+                        else
+                          echo "2";
+
+            }
+
+
+             if(isset($_POST['add_segui_devol'])){ //Actualización datos (Devolución)
+
+                  // Verificamos que exista el servicio del cliente a devolver..
+
+                    $sql="select * from devolucion where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
+                    $query=pg_query($conexion, $sql);
+                    $rows=pg_num_rows($query);
+                        if(isset($rows)){
+
+                            if($_POST['cod_serv_reemplazo']=='' )
+                              $_POST['cod_serv_reemplazo']=0;
+
+                            // Actualizamos datos
+                   $update="update devolucion set v_ejecutado='".$_POST['v_ejecutado']."', p_identificado='".$_POST['p_identificado']."', res_problema='".$_POST['res_problema']."',  cod_serv_remplazo='".$_POST['cod_serv_reemplazo']."', exp_caso='".$_POST['exp_caso']."', costo_suyo_devol='".$_POST['costo_suyo_devol']."', costo_suyo_conti='".$_POST['costo_suyo_conti']."' where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
+                               $query=pg_query($conexion, $update);
+                                if($query)
+                                  echo "1";
+                                else
+                                  echo "2";
+                        }
+                        else
+                          echo "3";
 
             }
             

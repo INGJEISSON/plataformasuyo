@@ -1,8 +1,111 @@
 <?php
 include('includes/dependencia/conexion.php');
 date_default_timezone_set('America/Bogota');
-echo "valor: ".$_SESSION['cod_usuario'];
+//echo "valor: ".$_SESSION['cod_usuario'];
 if(isset($_SESSION['cod_usuario'])){
+      // Agregamos archivo....
+date_default_timezone_set('America/Bogota');
+$fecha_actual= date('Y-m-d');
+
+$fecha_registro= date('d-m-Y H:m:s');
+
+function generar_clave(){
+    $an = "0123456789";
+    $su = strlen($an) - 1;
+    return substr($an, rand(0, $su), 1) .
+            substr($an, rand(0, $su), 1) .
+            substr($an, rand(0, $su), 1) .
+            substr($an, rand(0, $su), 1) .
+            substr($an, rand(0, $su), 1) .
+            substr($an, rand(0, $su), 1);
+}
+
+  // Generamos la clave de doble autotenticación.
+
+                             $sql2 ="select * from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_actual."' and cod_estado=3 ";
+                                   $query2=pg_query($conexion, $sql2);
+                                   $rows2=pg_num_rows($query2);
+                                            
+                                        if($rows2==0){ // Si no ha encontrado entonces genere clave
+
+                                          for ($i = 0; $i < 4; $i++)
+                                            $clave=generar_clave();
+
+                                                $insert="insert into doble_auth (cod_usuario, fecha_gene, fecha_filtro, ip, peticion, clave, cod_estado) values('".$_SESSION['cod_usuario']."', '".$fecha_registro."', '".$fecha_actual."', '".$_SERVER["REMOTE_ADDR"]."','sms', '".$clave."', 3) ";
+                                                $query_insert=pg_query($conexion, $insert);
+
+                                                    if($query_insert){ // Enviamos sms al celular..
+                                                           
+
+                                                                $telefono="57".$_SESSION['telefono'];                       
+                                                                $mensaje=$_SESSION['nombre'].", su código de doble autenticación es: ".$clave;
+                                                                $curl = curl_init();
+                                                                $from="Suyo Colombia";
+                                                                $number=$telefono;
+                                                                $msg=$mensaje;
+                                                                $_SESSION['clave_auth2']=$clave;
+
+
+                                                                curl_setopt_array($curl, array(
+                                                                  CURLOPT_URL => "http://api.infobip.com/sms/1/text/single",
+                                                                  CURLOPT_RETURNTRANSFER => true,
+                                                                  CURLOPT_ENCODING => "",
+                                                                  CURLOPT_MAXREDIRS => 10,
+                                                                  CURLOPT_TIMEOUT => 30,
+                                                                  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                                                  CURLOPT_CUSTOMREQUEST => "POST",
+                                                                  CURLOPT_POSTFIELDS => "{ \"from\":\"$from\", \"to\":\"$number\", \"text\":\"$msg\" }",
+                                                                  CURLOPT_HTTPHEADER => array(
+                                                                    "accept: application/json",
+                                                                    "authorization: Basic c3V5bzpKZWlzc29uMTk5MQ==",
+                                                                    "content-type: application/json"
+                                                                  ),
+                                                                ));
+
+                                                                $response = curl_exec($curl);
+                                                                $err = curl_error($curl);
+
+                                                                curl_close($curl);
+
+                                                                if ($err) {
+                                                               //   echo "cURL Error #:" . $err;
+                                                                } else {
+                                                                //  echo $response;
+                                                                }
+
+                                                              /*$url = 'https://api.hablame.co/sms/envio/';
+                                                              $data = array(
+                                                                'cliente' => 10010646, //Numero de cliente
+                                                                'api' => 'IlHFpX4NJNt2UOOluEHC8oseMCmvKD', //Clave API suministrada
+                                                                'numero' => $telefono, //numero o numeros telefonicos a enviar el SMS (separados por una coma ,)
+                                                                'sms' => $mensaje, //Mensaje de texto a enviar
+                                                                'fecha' => '', //(campo opcional) Fecha de envio, si se envia vacio se envia inmediatamente (Ejemplo: 2017-12-31 23:59:59)
+                                                                'referencia' => 'Suyo Colombia', //(campo opcional) Numero de referencio ó nombre de campaña
+                                                              );
+
+                                                              $options = array(
+                                                                  'http' => array(
+                                                                      'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                                                                      'method'  => 'POST',
+                                                                      'content' => http_build_query($data)
+                                                                  )
+                                                              );
+                                                              |$context  = stream_context_create($options);
+                                                              $result = json_decode((file_get_contents($url, false, $context)), true);
+
+                                                              if ($result["resultado"]===0) {
+                                                               // $access=1; // Acceso permitido..
+
+                                                                //print 'Se ha enviado el SMS exitosamente';
+
+                                                              } else {
+                                                                print 'ha ocurrido un error!!';
+                                                              }*/
+
+                                                    }
+                                        }
+
+
 
 ?>
 <!DOCTYPE html>
@@ -31,15 +134,6 @@ if(isset($_SESSION['cod_usuario'])){
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">  
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.flash.min.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.colVis.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>   
 
 
 <script src="js/charts/js/highcharts.js"></script>
@@ -56,7 +150,7 @@ if(isset($_SESSION['cod_usuario'])){
 <section id="wrapper" class="login-register">
   <div class="login-box">
     <div class="white-box">
-      <form class="form-horizontal form-material" id="loginform" action="index.html">
+      <div class="form-horizontal form-material" action="">
         
         <div class="form-group">
           <div class="col-xs-12 text-center">
@@ -67,17 +161,20 @@ if(isset($_SESSION['cod_usuario'])){
         </div>
         <div class="form-group ">
           <div class="col-xs-12">
-          Se ha enviado un código de doble autenticación a su número de celular, por favor digítelo a continuación<br><br>
-            <input class="form-control" type="text"  id='clave_auth' required="" placeholder="Introduzca código">
+          Se ha enviado un código de doble autenticación a su(s) número de celular, por favor digítelo a continuación<br><br>
+            <input class="form-control" type="text"  id='clave_auth'  placeholder="Introduzca código">
           </div>
         </div>
+
         <div class="form-group text-center">
           <div class="col-xs-12">
-            <button class="btn btn-info  btn-block text-uppercase waves-effect waves-light" type="submit" id="ingresar_auth">Ingresar</button> 
+            <button class="btn btn-info  btn-block text-uppercase waves-effect waves-light"  id="ingresar_auth">Ingresar</button> 
             <button class="btn btn-warning  btn-block text-uppercase waves-effect waves-light" id="r_sms">Re-enviar código</button>
           </div>
         </div>
-      </form>
+
+       </div>
+
     </div>
   </div>
 </section>
@@ -114,7 +211,7 @@ if(isset($_SESSION['cod_usuario'])){
                         success: function(valor){
                            
                                if(valor==1)
-                               parent.location='index.php';
+                               parent.location='index2.php';
                                else
                                alert("No se pudo cerrar sesi杌妌, contacte con el administrador");
                         }
@@ -124,6 +221,18 @@ if(isset($_SESSION['cod_usuario'])){
             });
 
             $("#r_sms").click(function(){ 
+
+                var datos='r_sms='+1;
+
+                  $.ajax({
+            
+                        type: "POST",
+                        data: datos,
+                        url: 'includes/php/g_procesos.php',
+                        success: function(valor){
+                             alert("Clave ha sido reenviada a su número de teléfono");
+                        }
+                  });
 
              
             });

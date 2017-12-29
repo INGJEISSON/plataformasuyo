@@ -1,5 +1,5 @@
 <?php
-/*if($_SESSION['doble_auth']==1){
+/*if(isset($_SESSION['doble_auth'])){
 ?>
 <script type="text/javascript">
 	parent.location='portal.php';
@@ -14,5 +14,5 @@
 }*/
 ?>
 <script type="text/javascript">
-	parent.location='portal.php';
+	parent.location='doble_auth.php';
 </script>
