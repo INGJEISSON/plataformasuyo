@@ -45,6 +45,7 @@ include('../dependencia/conexion.php');
                              <td height="46"><select name="select" id="cod_estado" class="form-control">
                                <option value="1" selected="selected">Sin revisar</option>
                                <?php if($_SESSION['tipo_usuario']!=11){ ?><option value="6">Aprobado</option><?php }  ?>
+                                <option value="5">Solicitud de Corrección</option>
                              <?php if($_SESSION['tipo_usuario']!=11){ ?>   <option value="7">No Aprobado</option>
                                <option value="21">Documento No legible</option>
                               <option value="22">Cliente No identificado</option>
