@@ -170,11 +170,16 @@ include('../dependencia/conexion.php');
                              <td width="11">&nbsp;</td>
                              <td width="242"><strong>Fecha de Actividad</strong></td>
                              <td width="16" >&nbsp;</td>
+                              <td width="16" >Adjuntar archivo</td>
+                              <td width="16" >&nbsp;</td>
                              <td width="113"><strong>Acción</strong></td>
                            </tr>
                            <tr>
                              <td height="46"><select name="select" id="cod_activi_etapa" class="form-control">
                                <option value="1" selected="selected">Sin actividad</option>
+
+                               <option value=731>No tiene carpeta</option>
+                               <option value=732>Remitido a devolución</option>
                               <?php while($datos2=pg_fetch_assoc($query3)){ ?>
                                
                                <option value="<?= $datos2['cod_activi_etapa'] ?>"> <?php echo ($datos2['descripcion'])?></option>
@@ -184,6 +189,8 @@ include('../dependencia/conexion.php');
                              <td><input type="text" class="form-control" name="textfield2" id="observacion"></td>
                              <td>&nbsp;</td>
                              <td><input type="date" class="form-control" name="textfield2" id="fecha_actividad"></td>
+                              <td>&nbsp;</td>
+                              <td><iframe src="subir_archivo.php" scrolling="no" height="200" width="300" /></iframe></td>
                              <td>&nbsp;</td>
                              <td><input type="button" class="btn btn-primary" name="button" id="g_revision" value="Registrar"></td>
                            </tr>

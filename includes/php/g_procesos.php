@@ -1637,19 +1637,48 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
             @$s2="select * from serv_cliente where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
               @$q2=pg_query($conexion, $s2);
               @$d2=pg_fetch_assoc($q2);
+
+                  // Verificamos que la etapa no esté  registrada
+                  $f="select * from activi_etapa where  cod_activi_etapa='".$_POST['cod_activi_etapa']."' " ;
+                  $g=pg_query($conexion, $f);
+                  $r=pg_num_rows($g);
+                      if($r==0){
+                            if($d['cod_etapa']==''){
+                              $d['cod_etapa']=12;
+                              $d['descripcion']="Remitido a devolucion";
+
+                            }
           // INsetamos nueva actividad (devolución al servicio  especitivi)
              $insert2="insert into activi_etapa (cod_activi_etapa, cod_etapa, cod_servicio, check_1, descripcion) values('".$_POST['cod_activi_etapa']."',   '".$d['cod_etapa']."', '".$d2['cod_servicio']."', 1, '".$d['descripcion']."' )";
             $query2=pg_query($conexion, $insert2);
 
+                      }
 
-             $insert="insert into activ_serv (cod_activi_etapa, id_serv_cliente, observacion, cod_usu_respon, fecha_actividad) values('".$_POST['cod_activi_etapa']."', '".$_POST['id_serv_cliente']."', '".$_POST['observacion']."', '".$_SESSION['cod_usuario']."', '".$_POST['fecha_actividad']."') ";
+             $insert="insert into activ_serv (cod_activi_etapa, id_serv_cliente, observacion, cod_usu_respon, fecha_actividad, archivo) values('".$_POST['cod_activi_etapa']."', '".$_POST['id_serv_cliente']."', '".$_POST['observacion']."', '".$_SESSION['cod_usuario']."', '".$_POST['fecha_actividad']."', '".$_SESSION['nom_archivo']."') ";
             $query=pg_query($conexion, $insert);
+
+                  if($_POST['cod_activi_etapa']==732){ // SI está remitido a devoluciones entonces..
+
+                       // Verificamos que no esté en devolución..
+
+                        $sql6="select * from devolucion where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
+                        $query6=pg_query($conexion, $sql6);
+                          $rows6=pg_num_rows($query6);
+
+                              if($rows6==0){                                
+                                // REgistrelo en devoluciones...
+                               $insert5="insert into devolucion (id_serv_cliente, v_ejecutado, p_identificado) values('".$_POST['id_serv_cliente']."', 0, '".$_POST['observacion']."') ";
+                               $query_insert=pg_query($conexion, $insert5);
+
+                              }
+
+                  } 
                     
 
               if($query){
               
                   
-                    $sql2="select usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$_POST['id_serv_cliente']."' order by activ_serv.id_activi_serv desc ";
+                    $sql2="select usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, activ_serv.archivo, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$_POST['id_serv_cliente']."' order by activ_serv.id_activi_serv desc ";
                           $query2=pg_query($conexion, $sql2);
                           $rows2=pg_num_rows($query2);
                          include('history_revi2.php');
@@ -1690,7 +1719,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
        if(isset($_POST['revi_serv'])){ //  Agregar actividades del servicio.
                             
-                      $sql2="select usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$_POST['id_serv_cliente']."' order by activ_serv.id_activi_serv desc ";
+                      $sql2="select usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro,  activ_serv.archivo, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$_POST['id_serv_cliente']."' order by activ_serv.id_activi_serv desc ";
                         $query2=pg_query($conexion, $sql2);
                           $rows2=pg_num_rows($query2);
                       include('history_revi2.php');
@@ -2043,11 +2072,11 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                     $rows=pg_num_rows($query);
                         if(isset($rows)){
 
-                            if($_POST['cod_serv_reemplazo']=='' )
+                            if($_POST['cod_serv_reemplazo']=='')
                               $_POST['cod_serv_reemplazo']=0;
 
                             // Actualizamos datos
-                   $update="update devolucion set v_ejecutado='".$_POST['v_ejecutado']."', p_identificado='".$_POST['p_identificado']."', res_problema='".$_POST['res_problema']."',  cod_serv_remplazo='".$_POST['cod_serv_reemplazo']."', exp_caso='".$_POST['exp_caso']."', costo_suyo_devol='".$_POST['costo_suyo_devol']."', costo_suyo_conti='".$_POST['costo_suyo_conti']."' where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
+                   $update="update devolucion set v_ejecutado='".$_POST['v_ejecutado']."', p_identificado='".$_POST['p_identificado']."', res_problema='".$_POST['res_problema']."',  cod_serv_remplazo='".$_POST['cod_serv_reemplazo']."', exp_caso='".$_POST['exp_caso']."', costo_suyo_devol='".$_POST['costo_suyo_devol']."', costo_suyo_conti='".$_POST['costo_suyo_conti']."', v_cotizado='".$_POST['v_cotizado']."', v_pago_cliente='".$_POST['v_pago_cliente']."' where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
                                $query=pg_query($conexion, $update);
                                 if($query)
                                   echo "1";

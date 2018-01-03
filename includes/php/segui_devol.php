@@ -6,7 +6,7 @@ $id_serv_cliente=base64_decode($_GET['id_serv_cliente']);
 
 
     // consultamos los datos del servicio
-  $sql="select cliente.cod_cliente, serv_cliente.cod_servicio, devolucion.v_ejecutado, devolucion.p_identificado, devolucion.exp_caso, devolucion.costo_suyo_devol, devolucion.costo_suyo_conti, devolucion.cod_serv_remplazo, devolucion.res_problema from devolucion, cliente, serv_cliente where serv_cliente.id_serv_cliente=devolucion.id_serv_cliente and serv_cliente.cod_cliente=cliente.cod_cliente and devolucion.id_serv_cliente='".$id_serv_cliente."' limit 1 ";
+  $sql="select cliente.cod_cliente, serv_cliente.cod_servicio, devolucion.v_ejecutado, devolucion.p_identificado, devolucion.exp_caso, devolucion.costo_suyo_devol, devolucion.v_cotizado, devolucion.v_pago_cliente, devolucion.costo_suyo_conti, devolucion.cod_serv_remplazo, devolucion.res_problema from devolucion, cliente, serv_cliente where serv_cliente.id_serv_cliente=devolucion.id_serv_cliente and serv_cliente.cod_cliente=cliente.cod_cliente and devolucion.id_serv_cliente='".$id_serv_cliente."' limit 1 ";
      $query=pg_query($conexion, $sql);
      $datos1=pg_fetch_assoc($query);
      
@@ -170,10 +170,13 @@ var fecha_hoy=(yyyy+'-'+mm+'-'+dd);
                      var cod_serv_reemplazo=$("#cod_serv_reemplazo").val();
                      var costo_suyo_devol=$("#costo_suyo_devol").val();
                      var costo_suyo_conti=$("#costo_suyo_conti").val();
+                     var v_cotizado=$("#v_cotizado").val();
+                     var v_pago_cliente=$("#v_pago_cliente").val();
+
 
                      if(costo_suyo_devol=!"" && costo_suyo_devol!="" & v_ejecutado!=""){
 
-   var datos='add_segui_devol='+1+'&id_serv_cliente='+id_serv_cliente+'&v_ejecutado='+v_ejecutado+'&p_identificado='+p_identificado+'&res_problema='+res_problema+'&exp_caso='+exp_caso+'&cod_serv_reemplazo='+cod_serv_reemplazo+'&exp_caso='+exp_caso+'&cod_serv_reemplazo='+cod_serv_reemplazo+'&costo_suyo_conti='+costo_suyo_conti+'&costo_suyo_devol='+costo_suyo_devol;
+   var datos='add_segui_devol='+1+'&id_serv_cliente='+id_serv_cliente+'&v_ejecutado='+v_ejecutado+'&p_identificado='+p_identificado+'&res_problema='+res_problema+'&exp_caso='+exp_caso+'&cod_serv_reemplazo='+cod_serv_reemplazo+'&exp_caso='+exp_caso+'&cod_serv_reemplazo='+cod_serv_reemplazo+'&costo_suyo_conti='+costo_suyo_conti+'&costo_suyo_devol='+costo_suyo_devol+'&v_cotizado='+v_cotizado+'&v_pago_cliente='+v_pago_cliente;
 
                                     $.ajax({
                                                 type: "POST",
@@ -288,9 +291,22 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
           <span data-sheets-value="{'1':2,'2':'Servicio recomendado contratado'}" data-sheets-userformat="{'2':29695,'3':[null,0],'4':[null,2,11982760],'5':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'6':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'7':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'8':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'9':1,'10':1,'11':4,'12':0,'15':'Arial','16':10,'17':1}">Servicio recomendado contratado</span></td>
         <td><?php echo base64_decode($_GET['nom_servicio']) ?></td>
       </tr>
+
       <tr>
         <td><!--td {border: 1px solid #ccc;}br {mso-data-placement:same-cell;}-->
-          <span data-sheets-value="{'1':2,'2':'Valor ejecutado de conformidad con la etapa'}" data-sheets-userformat="{'2':29695,'3':[null,0],'4':[null,2,16770457],'5':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'6':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'7':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'8':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'9':1,'10':1,'11':4,'12':0,'15':'Arial','16':10,'17':1}">Valor ejecutado de conformidad con la etapa</span></td>
+          <span data-sheets-value="{'1':2,'2':'Valor ejecutado de conformidad con la etapa'}" data-sheets-userformat="{'2':29695,'3':[null,0],'4':[null,2,16770457],'5':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'6':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'7':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'8':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'9':1,'10':1,'11':4,'12':0,'15':'Arial','16':10,'17':1}">Valor cotizado</span></td>
+        <td><input type="text" id='v_ejecutado'  class="form-control" value="<?php echo $datos1['v_cotizado'] ?>"></td>
+      </tr>
+
+       <tr>
+        <td><!--td {border: 1px solid #ccc;}br {mso-data-placement:same-cell;}-->
+          <span data-sheets-value="{'1':2,'2':'Valor ejecutado de conformidad con la etapa'}" data-sheets-userformat="{'2':29695,'3':[null,0],'4':[null,2,16770457],'5':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'6':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'7':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'8':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'9':1,'10':1,'11':4,'12':0,'15':'Arial','16':10,'17':1}">Valor pagador por el cliente</span></td>
+        <td><input type="text" id='v_ejecutado'  class="form-control" value="<?php echo $datos1['v_pago_cliente'] ?>"></td>
+      </tr>
+
+      <tr>
+        <td><!--td {border: 1px solid #ccc;}br {mso-data-placement:same-cell;}-->
+          <span data-sheets-value="{'1':2,'2':'Valor ejecutado de conformidad con la etapa'}" data-sheets-userformat="{'2':29695,'3':[null,0],'4':[null,2,16770457],'5':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'6':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'7':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'8':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'9':1,'10':1,'11':4,'12':0,'15':'Arial','16':10,'17':1}">Valor gastado hasta el momento</span></td>
         <td><input type="text" id='v_ejecutado'  class="form-control" value="<?php echo $datos1['v_ejecutado'] ?>"></td>
       </tr>
       <tr>
