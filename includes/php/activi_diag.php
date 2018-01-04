@@ -6,6 +6,43 @@ include('../dependencia/conexion.php');
           $rows=pg_num_rows($query);
           $datos=pg_fetch_assoc($query);        
 
+
+if($_GET['tipo']==1){
+  $etapa=1;
+
+               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 9 and 19 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+
+}
+
+if($_GET['tipo']==2){
+  $etapa=1;
+
+               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 24 and 62 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+
+}
+if($_GET['tipo']==3){
+  $etapa=1;
+
+               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 65 and 77 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+
+}
+
+/*
 // Buscamos la etapa de la última actuación..
 $sql2="select max(activ_diag.cod_activi_etapa) as cod_activi_etapa from activ_diag, activi_etapa_diag where etapa_activ=activ_diag.cod_activi_etapa and activ_diag.id_elab_diag='".$_GET['id_elab_diag']."' and activi_etapa_diag.cod_equipo='".$_GET['cod_equipo']."' ";
 
@@ -84,13 +121,15 @@ $etapa=1;
 				$query4=pg_query($conexion, $sql4);
 				$datos4=pg_fetch_assoc($query4);		
 		}
-
+*/
 	
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
  <link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../../js/colorbox-master/example1/colorbox.css" />
 <script src="../../js/colorbox-master/jquery.colorbox-min.js"></script>
+<script src="../../js/datepicker-master/dist/datepicker.js"></script>
+<link rel="stylesheet" href="../../js/datepicker-master/dist/datepicker.css">
 
  <header class="page-header">
            <section class="tables">   
@@ -102,13 +141,15 @@ $etapa=1;
                     <div class="card-header d-flex align-items-center">
                       <h3 class="h4">Actividades del diagnostico:  <?php echo ($datos['nombre']);  ?> </h3>
                       <p><strong>ETAPA ACTUAL:</strong> <?php echo strtoupper(($datos4['descripcion']));  ?> </p>
+                       <p><strong>FICHA:</strong> <?php echo strtoupper((base64_decode($_GET['ficha'])));  ?> </p>
+                      
                     </div>
                     <div class="card-body">
                          <table width="870" border="0" id="pan_add_revision" class="table responsive" cellpadding="1" cellspacing="4">
                            <tr>
                              <td width="189"><strong>Actividad</strong></td>
                              <td width="26">&nbsp;</td>
-                             <td width="227"><strong>Observación:</strong></td>
+                             <td width="227"><strong>Detalle:</strong></td>
                              <td width="11">&nbsp;</td>
                              <td width="242"><strong>Fecha de Actividad</strong></td>
                              <td width="16" >&nbsp;</td>
@@ -271,8 +312,7 @@ var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+
 
 
 });
-
-var id_elab_diag="<?php echo "$_GET[id_elab_diag]" ?>";
+var id_serv_cliente="<?php echo "$_GET[id_elab_diag]" ?>";
 var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&revi_serv_diag='+1+'&fecha_actividad='+fecha_actividad;
     
             $("#cargar2").show();

@@ -74,7 +74,6 @@ $id_elab_diag=base64_decode($_GET['id_elab_diag']);
 
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
 <link rel="stylesheet" href="../../js/colorbox-master/example1/colorbox.css" />
 <script src="../../js/colorbox-master/jquery.colorbox-min.js"></script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -95,7 +94,7 @@ $id_elab_diag=base64_decode($_GET['id_elab_diag']);
           });
           
 
-var id_fasfield="<?php echo $id_elab_diag ?>"; 
+var id_fasfield="<?php echo $id_elab_diag ?>";
 var tipo_seguimiento=8;
 var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;    
             $("#cargar2").show();
@@ -120,7 +119,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
 
                         }
                   });
-var id_fasfield="<?php echo $id_elab_diag ?>"; 
+var id_fasfield="<?php echo $id_elab_diag ?>";
 var tipo_seguimiento=14;
 var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;    
             $("#cargar2").show();
@@ -141,12 +140,10 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
                                 alert("Ocurrió un error al crear el registro de la observación, por favor intenta de nuevo o comuníquese con el administrador.");
 
                                }
-
-
                         }
                   });
 
-var id_fasfield="<?php echo $id_elab_diag ?>"; 
+var id_fasfield="<?php echo $id_elab_diag ?>";
 var tipo_seguimiento=15;
 var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;    
             $("#cargar2").show();
@@ -173,7 +170,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
                   });
         
 
-var id_fasfield="<?php echo $datos1['cod_cliente'] ?>";
+var id_fasfield="<?php echo $id_elab_diag ?>";
 var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+18;
     
             $("#cargar2").show();
@@ -302,14 +299,72 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
   </div>
 
 
-    <div class="panel panel-primary">
+<div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-        Necesidad identificada</a>
+        Revisión de los documentos del cliente y de la encuesta </a>
         </h4>
       </div>
       <div id="collapse4" class="panel-collapse collapse">
+        <div class="panel-body">
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=1&ficha=<?php echo base64_encode('Revisión de los documentos del cliente y de la encuesta') ?>" class='edicion'>Registrar/Editar</a>
+          </div>
+       </div>
+  </div>
+
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse41">
+        Identificar cadena de tradiciones  </a>
+        </h4>
+      </div>
+      <div id="collapse41" class="panel-collapse collapse">
+        <div class="panel-body">
+
+        <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=2&ficha=<?php echo base64_encode('Identificar cadena de tradiciones') ?>" class='edicion'>Registrar/Editar</a>
+       </div>
+      </div>
+  </div>
+
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse42">
+        Revisión de mapas colaborativos </a>
+        </h4>
+      </div>
+      <div id="collapse42" class="panel-collapse collapse">
+        <div class="panel-body">
+       <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=3&ficha=<?php echo base64_encode('Revisión de mapas colaborativos') ?>" class='edicion'>Registrar/Editar</a>
+       </div>
+      </div>
+  </div>
+  
+   <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse43">
+       Revisión páginas impuestos </a>
+        </h4>
+      </div>
+      <div id="collapse43" class="panel-collapse collapse">
+        <div class="panel-body">
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=4&ficha=<?php echo base64_encode('Revisión páginas impuestos') ?>" class='edicion'>Registrar/Editar</a>
+
+       </div>
+      </div>
+    </div>
+
+      <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse43">
+       Revisión Base de datos </a>
+        </h4>
+      </div>
+      <div id="collapse43" class="panel-collapse collapse">
         <div class="panel-body">
            <div id='history_necesidad' align="center"> </div>
     <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=9" class='edicion'>Agregar/Editar Necesidad</a></p></div>
@@ -317,8 +372,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
        </div>
       </div>
 
-
-
+                            
 
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -388,6 +442,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
 
         </div>
       </div>
+
   
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -493,69 +548,6 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse9">
-        Titularidad del predio</a>
-        </h4>
-      </div>
-      <div id="collapse9" class="panel-collapse collapse">
-        <div class="panel-body"> <table width="68%" border="0" class="table responsive">
-      <tr>
-        <td width="487">(*)<span class="form-group row">
-          <label class="col-sm-9 form-control-label">Párrafo de cómo fue adquirido el predio por el cliente
-            :</label>
-        </span></td>
-        <td width="258"><span class="col-sm-9">
-          <textarea name="par_predio_client" class="form-control" id="par_predio_client" placeholder="Introduzca Párrafo de cómo fue adquirido el predio por el cliente"><?php echo $d['par_predio_client'] ?></textarea>
-        </span></td>
-      </tr>
-      <tr>
-        <td>(*)<span class="form-group row">
-          <label class="col-sm-9 form-control-label">Párrafo de quién es el titular</label>
-          :
-        </span></td>
-        <td><span class="col-sm-9">
-        <textarea name="alt_cant_pisos" class="form-control" id="til_predio_client" placeholder="Introduzca el párrafo de quién es el titular"><?php echo $d['til_predio_client'] ?></textarea>
-        </span></td>
-      </tr>
-      </table>
-</div>
-      </div>
-    </div>
-
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse10">
-        Situación actual en relación con el impuesto</a>
-        </h4>
-      </div>
-      <div id="collapse10" class="panel-collapse collapse">
-        <div class="panel-body"><div id='history_revi3' align="center">
-                           </div>
-   <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Registrar/Editar</a></div>
-      </div>
-    </div>
-
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse15">
-       Situación actual con lo servicios públicos</a>
-        </h4>
-      </div>
-      <div id="collapse15" class="panel-collapse collapse">
-        <div class="panel-body">
-          <div id='history_revi3' align="center">
-                    </div>
-   <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Registrar/Editar</a>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse11">
         Otras situaciones</a>
         </h4>
@@ -632,20 +624,8 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
     </div>
   </div>
 
-   <div class="panel panel-primary">
-    <div class="panel-heading ">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse17">
-      Actvidades (Última actividad)</a>
-      </h4>
-    </div>
-    <div id="collapse17" class="panel-collapse collapse">
-      <div class="panel-body"><div id='history_revi3' align="center">
-                           </div>
-   <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>" class='edicion'>Nueva actividad</a></div>
-    </div>
-  </div>
-  
+
+   
  <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">
