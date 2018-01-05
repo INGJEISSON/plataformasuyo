@@ -1,6 +1,6 @@
 <?php
 $telefono="57".$_SESSION['telefono'];                       
-                                                                $mensaje=$_SESSION['nombre'].", su código de doble autenticación es: ".$_SESSION['clave_auth2'];
+                                                                $mensaje=$_SESSION['nombre'].",  su token de seguridad es: ".$_SESSION['clave_auth2'];
                                                                 $curl = curl_init();
                                                                 $from="Suyo Colombia";
                                                                 $number=$telefono;

@@ -38,7 +38,7 @@ function generar_clave(){
                                                            
 
                                                                 $telefono="57".$_SESSION['telefono'];                       
-                                                                $mensaje=$_SESSION['nombre'].", su código de doble autenticación es: ".$clave;
+                                                                $mensaje=$_SESSION['nombre'].", su token de seguridad es: ".$clave;
                                                                 $curl = curl_init();
                                                                 $from="Suyo Colombia";
                                                                 $number=$telefono;
@@ -161,15 +161,18 @@ function generar_clave(){
         </div>
         <div class="form-group ">
           <div class="col-xs-12">
-          Se ha enviado un código de doble autenticación a su(s) número de celular, por favor digítelo a continuación<br><br>
-            <input class="form-control" type="text"  id='clave_auth'  placeholder="Introduzca código">
+          Se ha enviado un token de seguridad de doble factor a su número de celular, por favor confirma en tu celular<br><br>
+          
+           <div class="col-xs-12" align="center">
+        Esperando confirmación desde el dispostivo móvil<br><br>
+          
+          </div>
           </div>
         </div>
 
         <div class="form-group text-center">
-          <div class="col-xs-12">
-            <button class="btn btn-info  btn-block text-uppercase waves-effect waves-light"  id="ingresar_auth">Ingresar</button> 
-            <button class="btn btn-warning  btn-block text-uppercase waves-effect waves-light" id="r_sms">Re-enviar código</button>
+          <div class="col-xs-12">           
+            <button class="btn btn-warning  btn-block text-uppercase waves-effect waves-light" id="r_sms">Re-enviar token</button>
           </div>
         </div>
 

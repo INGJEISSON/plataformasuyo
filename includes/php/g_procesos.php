@@ -1533,8 +1533,26 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
               }
               
-              if($_POST['listar_usuarios'])
+              if(isset($_POST['listar_usuarios']))
                include('list_usuarios.php');
+
+            if(isset($_POST['acuali_perfil'])){ // Actualización de perfil
+
+                  $sql="select cod_usuario from usuarios where cod_usuario='".$_SESSION['cod_usuario']."' limit 1 ";
+                  $query=pg_query($conexion, $sql);
+                  $rows=pg_num_rows($query);
+
+                        if($rows==1){  // Encontró usuario..
+
+                              $insert="update usuarios set telefono_1='".$_POST['telefono_1']."', id_usuario='".$_POST['id_usuario']."', profesion='".$_POST['profesion']."', correo_alt='".$_POST['correo_alt']."', direccion_casa='".$_POST['direccion_casa']."', telefono_casa='".$_POST['telefono_casa']."', nombre='".$_POST['nombre']."', apellidos='".$_POST['apellidos']."', actuali_perfil=1 where cod_usuario='".$_SESSION['cod_usuario']."' ";
+                              $query_insert=pg_query($conexion, $insert);
+                                  if($query_insert)
+                                    echo "1";
+                                  else 
+                                    echo "2";
+                        }
+
+            }
               
               /*if($_POST['']){  // Para borrar usuariuo (Deshabilita mejor)..
 
