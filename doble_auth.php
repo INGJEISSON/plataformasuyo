@@ -34,6 +34,9 @@ function generar_clave(){
                                                 $insert="insert into doble_auth (cod_usuario, fecha_gene, fecha_filtro, ip, peticion, clave, cod_estado) values('".$_SESSION['cod_usuario']."', '".$fecha_registro."', '".$fecha_actual."', '".$_SERVER["REMOTE_ADDR"]."','sms', '".$clave."', 3) ";
                                                 $query_insert=pg_query($conexion, $insert);
 
+                                                $update ="update device_user set confir=0 where cod_usuario='".$_SESSION['cod_usuario']."' ";
+                                                 $query_insert2=pg_query($conexion, $update);
+
                                                     if($query_insert){ // Enviamos sms al celular..
                                                            
 
