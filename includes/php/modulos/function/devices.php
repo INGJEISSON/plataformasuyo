@@ -23,13 +23,13 @@ $fecha_filtro=date('Y-m-d');
 
 				if(isset($_POST['confirmar'])){
 
-							$sql="select * from device_user where suyo_key_mb='".$_POST['suyo_key_mb']."' and confir=0 ";
+							echo $sql="select * from device_user where suyo_key_mb='".$_POST['suyo_key_mb']."' and confir=0 ";
 							$query=pg_query($conexion, $sql);
 							$rows=pg_num_rows($query);
 
 									if($rows==1){ // COnfirmarmos identidad
 
-												$update="udpate device_user set confir=1, fecha_confir='".$fecha_registro."' where suyo_key_mb='".$_POST['suyo_key_mb']."' ";
+												echo $update="udpate device_user set confir=1, fecha_confir='".$fecha_registro."' where suyo_key_mb='".$_POST['suyo_key_mb']."' ";
 												$query=pg_query($conexion, $update);
 														if($query)
 															echo "1";
@@ -37,7 +37,7 @@ $fecha_filtro=date('Y-m-d');
 															echo "2";
 									}	
 									else
-										echo "2";
+										echo "22";
 
 				}
 				if(isset($_POST['matricular'])){
