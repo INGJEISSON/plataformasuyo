@@ -29,7 +29,7 @@ $fecha_filtro=date('Y-m-d');
 
 									if($rows==1){ // COnfirmarmos identidad
 
-												echo $update2="udpate device_user set confir=1, fecha_confir='".$fecha_registro."' where suyo_key_mb='".$_POST['suyo_key_mb']."' ";
+												echo $update2="update device_user set confir=1, fecha_confir='".$fecha_registro."' where suyo_key_mb='".$_POST['suyo_key_mb']."' ";
 												$queryw=pg_query($conexion, $update2);
 														if($queryw){
 
