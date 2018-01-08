@@ -153,7 +153,7 @@ $info=detect();
                                                                       'content' => http_build_query($data)
                                                                   )
                                                               );
-                                                              |$context  = stream_context_create($options);
+                                                              $context  = stream_context_create($options);
                                                               $result = json_decode((file_get_contents($url, false, $context)), true);
 
                                                               if ($result["resultado"]===0) {
