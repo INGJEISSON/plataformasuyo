@@ -7,9 +7,14 @@ $fecha_filtro=date('Y-m-d');
 // Registramos dispositivo 
 	if(isset($_POST['regisid'])){
 
-				if(isset($_POST['consultar'])){
+				if(isset($_POST['consultar'])){	// Peticiones y confirmación de equipo..
 
+					if(isset($_POST['suyo_key_mb']) || $_SESSION['cod_usuario']){
+
+							if(isset($_POST['suyo_key_mb']))
 							$sql="select * from device_user where suyo_key_mb='".$_POST['suyo_key_mb']."' and confir=0 ";
+							else
+							 $sql="select * from device_user where cod_usuario='".$_SESSION['cod_usuario']."' and confir=1 ";
 							$query=pg_query($conexion, $sql);
 							$rows=pg_num_rows($query);
 
@@ -17,9 +22,36 @@ $fecha_filtro=date('Y-m-d');
 									echo "1";							
 									}	
 									else
-										echo "2";
-
+									echo "2";
+					 }	
+					
 				}
+
+				if(isset($_POST['consultar_det_pet'])){	 // Consultar detalles de la petición...
+
+					if(isset($_POST['suyo_key_mb'])){							
+							$sql="select * from doble_auth where suyo_key_mb='".$_POST['suyo_key_mb']."' and cod_estado=3 and fecha_filtro='".$fecha_filtro."' ";
+							$query=pg_query($conexion, $sql);
+							$rows=pg_num_rows($query);
+
+									if($rows==1){
+										$datos=pg_fetch_assoc($query);
+										echo ' <br>
+                                                     DETALLES DE LA PETICIÓN 
+                                                    <div class="col-sm-12">
+                                                    <b>EQUIPO: </b> '.$datos['platform'].'<br>
+                                                    <b>NAVEGADOR: </b> '.$datos['browser'].'<br>
+                                                    <b>IP: </b> '.$datos['ip'].' <br>
+                                                    <b>HASH: </b> '.$datos['clave_pc'].'
+                                                    </div>';
+									}	
+									else
+									echo "2";
+					 }	
+					
+				}
+
+
 
 				if(isset($_POST['confirmar'])){
 
@@ -114,6 +146,25 @@ $fecha_filtro=date('Y-m-d');
 				}
 				if(isset($_POST['update'])){ // Actualizamos dispostivo del usuario..
 
+
+				}
+
+				// COnsultamos la clave del pc para identificar el equipo en el día..
+				if(isset($_POST['consul_clave_pc'])){
+
+							if(isset($_POST['clave']))
+						$sql="select clave_pc from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and clave='".$_POST['clave']."' ";
+						else
+							$sql="select clave_pc from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and cod_estado=4 ";
+
+					$query_sql=pg_query($conexion, $sql);
+					$rows=pg_num_rows($query_sql);
+							if($rows==1){
+								$datos=pg_fetch_assoc($query_sql);
+								echo $datos['clave_pc'];
+							}
+							else
+								echo "2";
 
 				}
 

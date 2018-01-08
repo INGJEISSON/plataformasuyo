@@ -152,10 +152,6 @@ if(isset($_SESSION['cod_usuario'])){
     <script src="js/waves.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/custom.min.js"></script> 
-
-<
-
-    <script src="plugins/bower_components/toast-master/js/jquery.toast.js"></script>    <!--Style Switcher -->
     <script src="plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
   
 

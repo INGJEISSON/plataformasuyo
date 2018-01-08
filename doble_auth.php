@@ -19,6 +19,55 @@ function generar_clave(){
             substr($an, rand(0, $su), 1) .
             substr($an, rand(0, $su), 1);
 }
+function generar_clave_pc(){
+    $an = "ABCDEFGIJKLMNOPQRSTUVWXYZ";
+    $su = strlen($an) - 1;
+    return substr($an, rand(0, $su), 1) .
+            substr($an, rand(0, $su), 1) .
+            substr($an, rand(0, $su), 1) .
+            substr($an, rand(0, $su), 1) .
+            substr($an, rand(0, $su), 1) .
+            substr($an, rand(0, $su), 1);
+}
+//echo $_SERVER['HTTP_USER_AGENT'];
+function detect()
+{
+  $browser=array("IE","OPERA","MOZILLA","NETSCAPE","FIREFOX","SAFARI","CHROME");
+  $os=array("WINDOWS","MAC","LINUX");
+ 
+  # definimos unos valores por defecto para el navegador y el sistema operativo
+  $info['browser'] = "OTHER";
+  $info['os'] = "OTHER";
+ 
+  # buscamos el navegador con su sistema operativo
+  foreach($browser as $parent)
+  {
+    $s = strpos(strtoupper($_SERVER['HTTP_USER_AGENT']), $parent);
+    $f = $s + strlen($parent);
+    $version = substr($_SERVER['HTTP_USER_AGENT'], $f, 15);
+    $version = preg_replace('/[^0-9,.]/','',$version);
+    if ($s)
+    {
+      $info['browser'] = $parent;
+      $info['version'] = $version;
+    }
+  }
+ 
+  # obtenemos el sistema operativo
+  foreach($os as $val)
+  {
+    if (strpos(strtoupper($_SERVER['HTTP_USER_AGENT']),$val)!==false)
+      $info['os'] = $val;
+  }
+ 
+  # devolvemos el array de valores
+  return $info;
+}
+
+
+$info=detect();
+ 
+
 
   // Generamos la clave de doble autotenticación.
 
@@ -30,8 +79,9 @@ function generar_clave(){
 
                                           for ($i = 0; $i < 4; $i++)
                                             $clave=generar_clave();
+                                           $clave_pc=hash('sha256', generar_clave_pc());
 
-                                                $insert="insert into doble_auth (cod_usuario, fecha_gene, fecha_filtro, ip, peticion, clave, cod_estado) values('".$_SESSION['cod_usuario']."', '".$fecha_registro."', '".$fecha_actual."', '".$_SERVER["REMOTE_ADDR"]."','sms', '".$clave."', 3) ";
+                                                $insert="insert into doble_auth (cod_usuario, fecha_gene, fecha_filtro, ip, peticion, clave, cod_estado, clave_pc, platform, version, browser, agente) values('".$_SESSION['cod_usuario']."', '".$fecha_registro."', '".$fecha_actual."', '".$_SERVER["REMOTE_ADDR"]."','sms', '".$clave."', 3, '".$clave_pc."', '".$info["os"]."', '".$info['version']."', '".$info['browser']."', '".$_SERVER['HTTP_USER_AGENT']."') ";
                                                 $query_insert=pg_query($conexion, $insert);
 
                                                 $update ="update device_user set confir=0 where cod_usuario='".$_SESSION['cod_usuario']."' ";
@@ -48,8 +98,12 @@ function generar_clave(){
                                                                 $msg=$mensaje;
                                                                 $_SESSION['clave_auth2']=$clave;
 
+                                                                $sql="select cod_usuario from device_user where cod_usuario='".$_SESSION['cod_usuario']."' limit 1 ";
+                                                            $query_sql=pg_query($conexion, $sql);
+                                                            $rows=pg_num_rows($query_sql);
 
-                                                                curl_setopt_array($curl, array(
+                                                                    if($rows==0){ 
+                                                                      curl_setopt_array($curl, array(
                                                                   CURLOPT_URL => "http://api.infobip.com/sms/1/text/single",
                                                                   CURLOPT_RETURNTRANSFER => true,
                                                                   CURLOPT_ENCODING => "",
@@ -104,6 +158,12 @@ function generar_clave(){
                                                               } else {
                                                                 print 'ha ocurrido un error!!';
                                                               }*/
+                                                                          
+
+                                                                    }
+
+
+                                                                
 
                                                     }
                                         }
@@ -148,13 +208,12 @@ function generar_clave(){
     <!-- Preloader -->
     <!-- ============================================================== -->
    <div class="preloader">
-  <div class="cssload-speeding-wheel"></div>
+ 
 </div>
 <section id="wrapper" class="login-register">
-  <div class="login-box">
+  <div>
     <div class="white-box">
-      <div class="form-horizontal form-material" action="">
-        
+      <div class="form-horizontal form-material" action="">        
         <div class="form-group">
           <div class="col-xs-12 text-center">
             <div class="user-thumb text-center"> <img alt="thumbnail" class="img-circle" width="100" src="<?php echo $_SESSION['imagen'] ?>">
@@ -162,17 +221,15 @@ function generar_clave(){
             </div>
           </div>
         </div>
-        <div class="form-group ">
+        <div class="form-group " align="center">
           <div class="col-xs-12">
-          Se ha enviado un token de seguridad de doble factor a su número de celular, por favor confirma en tu celular<br><br>
-          
+          Se ha enviado un token de seguridad de doble factor a su número de celular, por favor confirma en tu celular para continuar<br><br>          
            <div class="col-xs-12" align="center">
-        Esperando confirmación desde el dispostivo móvil<br><br>
-          
+        Esperando confirmación desde el dispostivo móvil         
           </div>
+           <img src="img/preloader.gif" id="cargando">        
           </div>
         </div>
-
         <div class="form-group text-center">
           <div class="col-xs-12">           
             <button class="btn btn-warning  btn-block text-uppercase waves-effect waves-light" id="r_sms">Re-enviar token</button>
@@ -196,35 +253,15 @@ function generar_clave(){
     <script src="js/waves.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/custom.min.js"></script> 
-
-    <script src="plugins/bower_components/toast-master/js/jquery.toast.js"></script>    <!--Style Switcher -->
     <script src="plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
   
 
     <script type="text/javascript">
    
-        $(document).ready(function(){
+    $(document).ready(function(){
+      $("#cargando").hide();   
 
-            $("#ingresar_auth").click(function(){
-                var clave_auth=$("#clave_auth").val();
-                var datos='ingresar_auth='+1+'&clave_auth='+clave_auth;
-
-                  $.ajax({
-            
-                        type: "POST",
-                        data: datos,
-                        url: 'includes/php/g_procesos.php',
-                        success: function(valor){
-                           
-                               if(valor==1)
-                               parent.location='index2.php';
-                               else
-                               alert("No se pudo cerrar sesi杌妌, contacte con el administrador");
-                        }
-                  });
-
-
-            });
+      localStorage.setItem("clave_pc", 0);
 
             $("#r_sms").click(function(){ 
 
@@ -256,14 +293,51 @@ function generar_clave(){
                                if(valor==1)
                                parent.location='index.php';
                                else
-                               alert("No se pudo cerrar sesi杌妌, contacte con el administrador");
+                               alert("No se pudo cerrar sesión, contacte con el administrador");
                         }
                   });
                 
             });
 
+            setInterval(refres_estado, 5000);
+
+               function refres_estado(){ // Verificar confirmación desde del dispostivo..
+                      if(localStorage.getItem("clave_pc")==0){
+                             var datos='consultar='+1+'&regisid='+1;
 
 
+                                             $.ajax({
+                                                    type: "POST",
+                                                    data: datos,
+                                                    url: 'includes/php/modulos/function/devices.php',
+                                                    success: function(valor){
+                                                         if(valor==1){ 
+                                                           $("#cargando").show();   
+
+                                                                 // Consultamos  y registramos  del equipo en el día....
+                                                                var datos2='consul_clave_pc='+1+'&regisid='+1+'&clave='+<?php echo $_SESSION['clave_auth2']?>;
+                                                                    $.ajax({            
+                                                                          type: "POST",
+                                                                          data: datos2,
+                                                                          url: 'includes/php/modulos/function/devices.php',
+                                                                          success: function(valor2){
+                                                                                     
+                                                                                 if(valor2!=2){
+                                                                                    localStorage.setItem("clave_pc", valor2);
+                                                                                    parent.location='portal.php';
+                                                                                 }
+                                                                                
+                                                                          }
+                                                                    });                                                   
+                                                          
+                                                          }
+                                                    }
+                                              });  
+                            
+                          }
+                   
+                      
+                  }
         });
     </script>
 </body>
@@ -271,6 +345,6 @@ function generar_clave(){
 </html>
 <?php
 }else
-echo "Tu sesión ha cacudado por tiempo sin actividad, haga clic en el siguiente enlace para volver a iniciar sesión";
+echo "Tu sesión ha caducado por tiempo sin actividad, haga clic en el siguiente enlace para volver a iniciar sesión";
 
 ?>
