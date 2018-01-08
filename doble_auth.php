@@ -328,7 +328,9 @@ $info=detect();
                                                                           url: 'includes/php/modulos/function/devices.php',
                                                                           success: function(valor2){
                                                                                      alert(valor2);
+
                                                                                  if(valor2!=2){
+                                                                                    alert("jei2");
                                                                                     localStorage.setItem("clave_pc", valor2);
                                                                                     //parent.location='portal.php';
                                                                                  }
