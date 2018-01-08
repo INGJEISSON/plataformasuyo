@@ -94,11 +94,11 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
        include('includes/php/login.php');
     } else {
         //include('includes/php/login.php');
-               if(isset($access)==1){
+                if(isset($access)==1){
                   if($datos['actuali_perfil']==0)
-                    include('actuali_perfil.php');
+                     include('actuali_perfil.php');
                   else
-                    include('includes/php/redirect.php');
+                    include('redirect.php');
 
                } // Si es un usuario habilitado..
               
