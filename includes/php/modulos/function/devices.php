@@ -23,7 +23,7 @@ $fecha_filtro=date('Y-m-d');
 
 				if(isset($_POST['confirmar'])){
 
-							echo $sql="select * from device_user where suyo_key_mb='".$_POST['suyo_key_mb']."' and confir=0 ";
+							 $sql="select * from device_user where suyo_key_mb='".$_POST['suyo_key_mb']."' and confir=0 ";
 							$query=pg_query($conexion, $sql);
 							$rows=pg_num_rows($query);
 
@@ -31,18 +31,18 @@ $fecha_filtro=date('Y-m-d');
 									if($rows==1){ // COnfirmarmos identidad
 										$datos=pg_fetch_assoc($query);
 
-												echo $update2="update device_user set confir=1, fecha_confir='".$fecha_registro."' where suyo_key_mb='".$_POST['suyo_key_mb']."' ";
+												$update2="update device_user set confir=1, fecha_confir='".$fecha_registro."' where suyo_key_mb='".$_POST['suyo_key_mb']."' ";
 												$queryw=pg_query($conexion, $update2);
 														if($queryw){
 
 															// Verificamos que el código generado sea el correcto
-													                 echo    $sql="select * from doble_auth where cod_usuario='".$datos['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and cod_estado=3  ";
+													                    $sql="select * from doble_auth where cod_usuario='".$datos['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and cod_estado=3  ";
 													                    $query=pg_query($conexion, $sql);
 													                    $rows=pg_num_rows($query);
 
 													                        if(isset($rows)){
 													                         // $_SESSION['doble_auth']=$_POST['clave_auth'];
-													                          echo "1";
+													                          "1";
 													                            $sql="update  doble_auth set cod_estado=4 where cod_usuario='".$datos['cod_usuario']."' and fecha_filtro='".$fecha_filtro."'  ";
 													                          $query=pg_query($conexion, $sql);
 													                          $rows=pg_num_rows($query);
