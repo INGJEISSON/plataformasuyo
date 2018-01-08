@@ -154,7 +154,7 @@ $fecha_filtro=date('Y-m-d');
 				if(isset($_POST['consul_clave_pc'])){
 
 							if(isset($_POST['clave']))
-						$sql="select clave_pc from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and clave='".$_POST['clave']."' ";
+						$sql="select clave_pc from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and cod_estado=3 ";
 						else
 							$sql="select clave_pc from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and cod_estado=4 ";
 
