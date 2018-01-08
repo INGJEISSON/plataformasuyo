@@ -81,7 +81,13 @@ $info=detect();
                                             $clave=generar_clave();
                                            $clave_pc=hash('sha256', generar_clave_pc());
 
-                                                $insert="insert into doble_auth (cod_usuario, fecha_gene, fecha_filtro, ip, peticion, clave, cod_estado, clave_pc, platform, version, browser, agente) values('".$_SESSION['cod_usuario']."', '".$fecha_registro."', '".$fecha_actual."', '".$_SERVER["REMOTE_ADDR"]."','sms', '".$clave."', 3, '".$clave_pc."', '".$info["os"]."', '".$info['version']."', '".$info['browser']."', '".$_SERVER['HTTP_USER_AGENT']."') ";
+                                           // Buscamos el dispostivo del usuario
+
+                                              $s="select suyo_key_mb from device_user where cod_usuario='".$_SESSION['cod_usuario']."' ";
+                                              $q=pg_query($conexion, $s);
+                                              $d=pg_fetch_assoc($q);
+
+                                                $insert="insert into doble_auth (cod_usuario, fecha_gene, fecha_filtro, ip, peticion, clave, cod_estado, clave_pc, platform, version, browser, agente, suyo_key_mb) values('".$_SESSION['cod_usuario']."', '".$fecha_registro."', '".$fecha_actual."', '".$_SERVER["REMOTE_ADDR"]."','sms', '".$clave."', 3, '".$clave_pc."', '".$info["os"]."', '".$info['version']."', '".$info['browser']."', '".$_SERVER['HTTP_USER_AGENT']."', '".$d['suyo_key_mb']."') ";
                                                 $query_insert=pg_query($conexion, $insert);
 
                                                 $update ="update device_user set confir=0 where cod_usuario='".$_SESSION['cod_usuario']."' ";

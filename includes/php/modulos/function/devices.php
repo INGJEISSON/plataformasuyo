@@ -42,6 +42,7 @@ $fecha_filtro=date('Y-m-d');
                                                     <b>EQUIPO: </b> '.$datos['platform'].'<br>
                                                     <b>NAVEGADOR: </b> '.$datos['browser'].'<br>
                                                     <b>IP: </b> '.$datos['ip'].' <br>
+                                                    <b>FECHA/HORA: </b> '.$datos['fecha_gene'].'
                                                     <b>HASH: </b> '.$datos['clave_pc'].'
                                                     </div>';
 									}	
