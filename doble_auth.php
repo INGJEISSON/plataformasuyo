@@ -109,7 +109,7 @@ $info=detect();
                                                             $rows=pg_num_rows($query_sql);
 
                                                                     if($rows==0){ 
-                                                                      curl_setopt_array($curl, array(
+                                                                      /*curl_setopt_array($curl, array(
                                                                   CURLOPT_URL => "http://api.infobip.com/sms/1/text/single",
                                                                   CURLOPT_RETURNTRANSFER => true,
                                                                   CURLOPT_ENCODING => "",
@@ -134,9 +134,9 @@ $info=detect();
                                                                //   echo "cURL Error #:" . $err;
                                                                 } else {
                                                                 //  echo $response;
-                                                                }
+                                                                }*/
 
-                                                              /*$url = 'https://api.hablame.co/sms/envio/';
+                                                              $url = 'https://api.hablame.co/sms/envio/';
                                                               $data = array(
                                                                 'cliente' => 10010646, //Numero de cliente
                                                                 'api' => 'IlHFpX4NJNt2UOOluEHC8oseMCmvKD', //Clave API suministrada
@@ -163,7 +163,7 @@ $info=detect();
 
                                                               } else {
                                                                 print 'ha ocurrido un error!!';
-                                                              }*/
+                                                              }
                                                                           
 
                                                                     }
