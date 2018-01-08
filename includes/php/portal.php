@@ -159,6 +159,23 @@ if(isset($_SESSION['cod_usuario'])){
    
         $(document).ready(function(){
 
+          var datos2='consul_clave_pc='+1+'&regisid='+1;
+               $.ajax({            
+                    type: "POST",
+                     data: datos2,
+                     url: 'includes/php/modulos/function/devices.php',
+                     success: function(valor2){
+                               alert(valor2);
+
+                           if(valor2!=2){
+                             
+                               localStorage.setItem("clave_pc", valor2);
+                          
+                           }
+                                                                                
+                    }
+              });        
+
 
             $('#carga_modulo').show();
                                                $("#contenido").toggle();    
@@ -219,27 +236,6 @@ $("#b_clientes").click(function(){
                                               }                               
                              );    
                      });
-
-$('#buscarcliente').typeahead({
-  source: function(query, result)
-  {
-   $.ajax({
-    url:"includes/php/fetch.php",
-    method:"POST",
-    data:{query:query},
-    dataType:"json",
-    success:function(data)
-    {
-     result($.map(data, function(item){
-      return item;
-     }));
-    }
-   })
-  }
- });
-
-
-
 
         });
     </script>

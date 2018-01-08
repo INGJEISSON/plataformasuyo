@@ -99,7 +99,7 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
                   if($datos['actuali_perfil']==0)
                      include('actuali_perfil.php');
                   else
-                    include('includes/php/redirect.php');
+                    include('redirect.php');
 
                } // Si es un usuario habilitado..
               

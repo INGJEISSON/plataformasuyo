@@ -66,9 +66,10 @@ function detect()
 
 
 $info=detect();
- 
 
 
+
+    
   // Generamos la clave de doble autotenticación.
 
                              $sql2 ="select * from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_actual."' and cod_estado=3 ";
@@ -175,7 +176,6 @@ $info=detect();
                                         }
 
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -268,7 +268,8 @@ $info=detect();
       $("#cargando").hide();   
 
       localStorage.setItem("clave_pc", 0);
-
+      localStorage.setItem('token',<?php echo $_SESSION['clave_auth2']?>);
+     
             $("#r_sms").click(function(){ 
 
                 var datos='r_sms='+1;
@@ -308,7 +309,7 @@ $info=detect();
             setInterval(refres_estado, 5000);
 
                function refres_estado(){ // Verificar confirmación desde del dispostivo..
-                      if(localStorage.getItem("clave_pc")==0){
+                     
                              var datos='consultar='+1+'&regisid='+1;
 
 
@@ -319,30 +320,28 @@ $info=detect();
                                                     success: function(valor){
                                                          if(valor==1){ 
                                                            $("#cargando").show();   
-
-                                                                 // Consultamos  y registramos  del equipo en el día....
-                                                              var datos2='consul_clave_pc='+1+'&regisid='+1;
-                                                                    $.ajax({            
+                                                                var datos2='consul_clave_pc='+1+'&regisid='+1+'&clave='+<?php echo $_SESSION['clave_auth2']?>;
+                                                                     $.ajax({            
                                                                           type: "POST",
-                                                                          data: datos2,
-                                                                          url: 'includes/php/modulos/function/devices.php',
-                                                                          success: function(valor2){
+                                                                           data: datos2,
+                                                                           url: 'includes/php/modulos/function/devices.php',
+                                                                           success: function(valor2){
                                                                                      alert(valor2);
 
                                                                                  if(valor2!=2){
-                                                                                  
-                                                                                    localStorage.setItem("clave_pc", valor2);
-                                                                                    parent.location='portal.php';
-                                                                                 }
+                                                                                   
+                                                                                     localStorage.setItem("clave_pc", valor2);
+                                                                                     parent.location='redirect.php';
                                                                                 
+                                                                                 }
+                                                                                                                                      
                                                                           }
-                                                                    });                                                   
-                                                          
+                                                                    });  
                                                           }
                                                     }
                                               });  
                             
-                          }
+                          
                    
                       
                   }

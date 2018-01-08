@@ -155,8 +155,8 @@ $fecha_filtro=date('Y-m-d');
 
 							if(isset($_POST['clave']))
 						$sql="select clave_pc from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and clave='".$_POST['clave']."' ";
-						else
-						$sql="select clave_pc from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and cod_estado=4 ";
+						else if(isset($_POST['token']))
+						 $sql="select clave_pc from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_filtro."' and clave='".$_POST['token']."' and cod_estado=4 ";
 
 					$query_sql=pg_query($conexion, $sql);
 					$rows=pg_num_rows($query_sql);

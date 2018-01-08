@@ -1,7 +1,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 Espere por favor .....
 <script type="text/javascript">
- 							       var datos2='consul_clave_pc='+1+'&regisid='+1;
+
+var token=localStorage.getItem("token");
+ 							       var datos2='consul_clave_pc='+1+'&regisid='+1+'&token='+token;
                                      $.ajax({            
                                             type: "POST",
                                             data: datos2,
@@ -10,9 +12,11 @@ Espere por favor .....
                                             	
                                                    if(valor2!=3){
                                                    		if(localStorage.getItem("clave_pc")==valor2){ // Verifico si la clave depositada al equipo confirmó identidad en el día actual.
-                                                    	  localStorage.setItem("clave_pc", valor2);                                                    	  
+                                                    	  localStorage.setItem("clave_pc", valor2);
+                                                    	 // alert("jeisson");                                                    	  
                                                     	   parent.location='portal.php';
                                                    		}else{
+                                                   			//alert("jeisson2");
                                                    			
                                                    			 parent.location='doble_auth.php'; // Genero otra identidad al equipo..
 

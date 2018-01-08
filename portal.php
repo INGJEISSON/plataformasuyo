@@ -162,6 +162,8 @@ if(isset($_SESSION['cod_usuario'])){
    
         $(document).ready(function(){
 
+           
+
 
             $('#carga_modulo').show();
                                                $("#contenido").toggle();    
