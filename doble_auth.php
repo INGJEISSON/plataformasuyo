@@ -321,7 +321,7 @@ $info=detect();
                                                            $("#cargando").show();   
 
                                                                  // Consultamos  y registramos  del equipo en el día....
-                                                              var datos2='consul_clave_pc='+1+'&regisid='+1+'&suyo_key_mb='+<?php echo $_SESSION['suyo_key_mb']  ?>;
+                                                              var datos2='consul_clave_pc='+1+'&regisid='+1;
                                                                     $.ajax({            
                                                                           type: "POST",
                                                                           data: datos2,
