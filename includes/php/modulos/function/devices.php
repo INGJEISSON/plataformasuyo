@@ -42,7 +42,7 @@ $fecha_filtro=date('Y-m-d');
 
 													                        if(isset($rows)){
 													                         // $_SESSION['doble_auth']=$_POST['clave_auth'];
-													                          "1";
+													                         echo  "1";
 													                            $sql="update  doble_auth set cod_estado=4 where cod_usuario='".$datos['cod_usuario']."' and fecha_filtro='".$fecha_filtro."'  ";
 													                          $query=pg_query($conexion, $sql);
 													                          $rows=pg_num_rows($query);
