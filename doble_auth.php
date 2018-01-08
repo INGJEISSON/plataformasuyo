@@ -330,9 +330,9 @@ $info=detect();
                                                                                      alert(valor2);
 
                                                                                  if(valor2!=2){
-                                                                                    alert("jei2");
+                                                                                  
                                                                                     localStorage.setItem("clave_pc", valor2);
-                                                                                    //parent.location='portal.php';
+                                                                                    parent.location='portal.php';
                                                                                  }
                                                                                 
                                                                           }
