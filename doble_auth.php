@@ -326,7 +326,7 @@ $info=detect();
                                                                            data: datos2,
                                                                            url: 'includes/php/modulos/function/devices.php',
                                                                            success: function(valor2){
-                                                                                     alert(valor2);
+                                                                                    // alert(valor2);
 
                                                                                  if(valor2!=2){
                                                                                    

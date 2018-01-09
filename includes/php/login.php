@@ -43,11 +43,19 @@
           </div>
         </div>
        
-        <div class="form-group m-b-0">
+        <!--<div class="form-group m-b-0">
           <div class="col-sm-12 text-center">
             <p>¿Problemas al iniciar sesión? <a href="register2.html" class="text-primary m-l-5"><b>Ayuda</b></a></p>
           </div>
+        </div>-->
+        <div class="form-group m-b-0">
+          <div class="col-sm-12 text-center">
+            <p>Descargue e instale Suyo Security</p>
+             <img src='img/qr_suyosecurity.png'>
+          </div>
         </div>
+
+
       </form>
       
     </div>

@@ -1,6 +1,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 Espere por favor .....
 <script type="text/javascript">
+                                                
+  parent.location='portal.php';
+</script>
+
+<!--
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+Espere por favor .....
+<script type="text/javascript">
 
 var token=localStorage.getItem("token");
  							       var datos2='consul_clave_pc='+1+'&regisid='+1+'&token='+token;
@@ -27,3 +36,4 @@ var token=localStorage.getItem("token");
                                             }
                                       });  
 </script>
+-->
