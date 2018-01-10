@@ -162,10 +162,10 @@ if(isset($_SESSION['cod_usuario'])){
    
         $(document).ready(function(){
 
-           
 
 
-            $('#carga_modulo').show();
+
+                              $('#carga_modulo').show();
                                                $("#contenido").toggle();    
                                                              $("#contenido").empty();        
                                                                           $("#contenido").load("includes/php/dahsboard_usu.php",

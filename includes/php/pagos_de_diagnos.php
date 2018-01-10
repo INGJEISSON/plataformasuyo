@@ -9,7 +9,7 @@ $cod_resp=0;
                     }
                     else
                     $parametro="";   
- $sql="select distinct det_repor_aseso.aliado, enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.arch_pdf, enc_procesadas.cliente, enc_procesadas.fecha_filtro, enc_procesadas.ciudad, enc_procesadas.id_fasfield, det_repor_aseso.det_servi_tomado, det_repor_aseso.n_cuotas, det_repor_aseso.valor, det_repor_aseso.tipo_pago, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso, tipo_encuesta where tipo_encuesta.tipo_encuesta=enc_procesadas.tipo_encuesta and enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.cod_estado=6 and enc_procesadas.tipo_encuesta=2 and enc_procesadas.id_cliente!='0' and det_repor_aseso.resul_visita='Visitado y pagado' order by enc_procesadas.fecha_filtro desc";
+ echo $sql="select distinct det_repor_aseso.aliado, enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.arch_pdf, enc_procesadas.cliente, enc_procesadas.fecha_filtro, enc_procesadas.ciudad, enc_procesadas.id_fasfield, det_repor_aseso.det_servi_tomado, det_repor_aseso.n_cuotas, det_repor_aseso.valor, det_repor_aseso.tipo_pago, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso, tipo_encuesta where tipo_encuesta.tipo_encuesta=enc_procesadas.tipo_encuesta and enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.cod_estado=6 and enc_procesadas.tipo_encuesta=2 and enc_procesadas.id_cliente!='0' and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visitado y fue gratuito el diagnóstico') order by enc_procesadas.fecha_filtro desc";
           $query=pg_query($conexion, $sql);
           $rows=pg_num_rows($query);
 
@@ -67,10 +67,11 @@ $cod_resp=0;
           $archivo_pdf=$datos['arch_pdf'];
 
            
-            $query2=pg_query($conexion, "select distinct enc_procesadas.id_cliente, enc_procesadas.arch_pdf, enc_procesadas.id_fasfield, tipo_encuesta.nombre as encuesta from enc_procesadas, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and enc_procesadas.id_cliente='".$datos['id_cliente']."' and enc_procesadas.tipo_encuesta=1");
-            $rows2=pg_num_rows($query2);
+           $sql2="select distinct enc_procesadas.id_cliente, enc_procesadas.arch_pdf, enc_procesadas.id_fasfield, tipo_encuesta.nombre as encuesta from enc_procesadas, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and enc_procesadas.id_cliente='".$datos['id_cliente']."' and enc_procesadas.tipo_encuesta=1 limit 1";
+            $query2=pg_query($conexion, $sql2);
             $datos2=pg_fetch_assoc($query2);
-             $archivo_pdf2=$datos2['arch_pdf'];
+            $rows2=pg_num_rows($query2);
+            $archivo_pdf2=$datos2['arch_pdf'];
 
       ?>
 
