@@ -6,12 +6,13 @@ $rows=pg_num_rows($query);
 			
 			if($rows){
 						while($datos=pg_fetch_assoc($query)){
+							echo $datos['id_fasfield'];
 
-								echo $update="update enc_procesadas set cod_estado=6 where id_fasfield='".$datos['id_fasfield']."' ";
-							//	$query=pg_query($conexion, $update);
-								if($query){
-									echo "1";
-								}else
-								echo "2";
+						echo $update="update enc_procesadas set cod_estado=6 where id_fasfield='".$datos['id_fasfield']."' ";
+							 $query2=pg_query($conexion, $update);
+								//if($query)
+							//	echo "1";
+							//	else
+							//	echo "2";
 						}
 			}
