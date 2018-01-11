@@ -13,15 +13,28 @@ include('../dependencia/conexion.php');
         $query3=pg_query($conexion, $sql3);
         $rows3=pg_num_rows($query3);
 
+
+        //Buscamos la multimedia relacionada con el cliente, 
+         $sql_mult="select distinct enc_procesadas.id_cliente, enc_procesadas.arch_pdf, enc_procesadas.id_fasfield, tipo_encuesta.nombre as encuesta from enc_procesadas, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and enc_procesadas.id_cliente='".$_GET['cod_cliente']."' and enc_procesadas.tipo_encuesta=1 limit 1 ";
+        $query_mult=pg_query($conexion, $sql_mult);
+        $datos2=pg_fetch_assoc($query_mult);
+          $archivo_pdf2=$datos2['arch_pdf'];
+
+            /// Listamos la multimedia.
+          $sql_mult2=""
+
+
           
 ?>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
 <link rel="stylesheet" href="js/colorbox-master/example1/colorbox.css" />
 <script src="js/colorbox-master/jquery.colorbox-min.js"></script>
  <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">PERFIL DEL CLIENTE</h4> </div>
+                        <h4 class="page-title">PERFIL DEL CLIENTE</h4>  <?php echo $datos['nombre'] ?>  </div>
                    
                     <!-- /.col-lg-12 -->
                 </div>
@@ -79,26 +92,26 @@ include('../dependencia/conexion.php');
                             <!-- .tabs -->
                             <ul class="nav nav-tabs tabs customtab">
                                 <li class="active tab">
-                                    <a href="#home" data-toggle="tab"> <span class="visible-xs"><i class="fa fa-home"></i></span> <span class="hidden-xs">Comunicaciones</span> </a>
+                                    <a href="#comunicacion" data-toggle="tab"> <span class="visible-xs"><i class="fa fa-home"></i></span> <span class="hidden-xs">Comunicaciones</span> </a>
                                 </li>
                                 <li class="tab">
-                                    <a href="#profile" data-toggle="tab"> <span class="visible-xs"><i class="fa fa-user"></i></span> <span class="hidden-xs">Diagnósticos</span> </a>
+                                    <a href="#diagnosticos" data-toggle="tab"> <span class="visible-xs"><i class="fa fa-user"></i></span> <span class="hidden-xs">Diagnósticos</span> </a>
                                 </li>
                                 <li class="tab">
-                                    <a href="#settings" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Servicios</span> </a>
+                                    <a href="#servicios" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Servicios</span> </a>
                                 </li>
                                 <li class="tab">
-                                    <a href="#settings2" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Documentos</span> </a>
+                                    <a href="#documentos" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Documentos</span> </a>
                                 </li>   
 
                                 <li class="tab">
-                                    <a href="#settings2" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Responsables del caso</span> </a>
+                                    <a href="#responsables_caso" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Responsables del caso</span> </a>
                                 </li>                               
                             </ul>
                             <!-- /.tabs -->
                             <div class="tab-content">
                                 <!-- .tabs 1 -->
-                                <div class="tab-pane active" id="home">
+                                <div class="tab-pane active" id="comunicacion">
                                     <div class="steamline">
                                         <div class="sl-item">
                                             <div class="sl-left"> <img src="../plugins/images/users/sonu.jpg" alt="user" class="img-circle" /> </div>
@@ -131,8 +144,8 @@ include('../dependencia/conexion.php');
                                 </div>
                                 <!-- /.tabs1 -->
                                 <!-- .tabs2 -->
-                                <div class="tab-pane" id="profile">
-                                    <div class="row">
+                                <div class="tab-pane" id="diagnosticos">
+                                <!--  <div class="row">
                                         <div class="col-md-3 col-xs-6 b-r"> <strong>Full Name</strong>
                                             <br>
                                             <p class="text-muted">Johnathan Deo</p>
@@ -150,7 +163,7 @@ include('../dependencia/conexion.php');
                                             <p class="text-muted">London</p>
                                         </div>
                                     </div>
-                                    <hr>
+                                  <hr>
                                     <p class="m-t-30">Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
                                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries </p>
                                     <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
@@ -171,12 +184,12 @@ include('../dependencia/conexion.php');
                                     <h5>Photoshop <span class="pull-right">70%</span></h5>
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%;"> <span class="sr-only">50% Complete</span> </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <!-- /.tabs2 -->
                                 <!-- .tabs3 -->
-                                <div class="tab-pane" id="settings">
-                                    <form class="form-horizontal form-material">
+                                <div class="tab-pane" id="servicios">
+                                   <!-- <form class="form-horizontal form-material">
                                         <div class="form-group">
                                             <label class="col-md-12">Full Name</label>
                                             <div class="col-md-12">
@@ -220,8 +233,197 @@ include('../dependencia/conexion.php');
                                                 <button class="btn btn-success">Update Profile</button>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
+                                    </form>-->
+                                </div> 
+
+                                <div class="tab-pane" id="servicios">
+                                   <!-- <form class="form-horizontal form-material">
+                                        <div class="form-group">
+                                            <label class="col-md-12">Full Name</label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="example-email" class="col-md-12">Email</label>
+                                            <div class="col-md-12">
+                                                <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Password</label>
+                                            <div class="col-md-12">
+                                                <input type="password" value="password" class="form-control form-control-line"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Phone No</label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Message</label>
+                                            <div class="col-md-12">
+                                                <textarea rows="5" class="form-control form-control-line"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-12">Select Country</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control form-control-line">
+                                                    <option>London</option>
+                                                    <option>India</option>
+                                                    <option>Usa</option>
+                                                    <option>Canada</option>
+                                                    <option>Thailand</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <button class="btn btn-success">Update Profile</button>
+                                            </div>
+                                        </div>
+                                    </form>-->
+                                </div> 
+
+                                <div class="tab-pane" id="documentos">
+                                   <div class="row">
+                                        <div class="col-md-3 col-xs-6 b-r"> <strong>Documentos de propiedad</strong>
+                                            <br>
+                                            <p class="text-muted">Visualizar</p>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6 b-r"> <strong>Facturas y contratos</strong>
+                                            <br>
+                                            <p class="text-muted">Visualizar</p>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6 b-r"> <strong>Otros documentos</strong>
+                                            <br>
+                                            <p class="text-muted">Visualizar</p>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6"> <strong>Análisis de caso</strong>
+                                            <br>
+                                            <p class="text-muted">Visualizar</p>
+                                        </div>
+
+                                        <div class="col-md-3 col-xs-6"> <strong>Encuesta Diagnóstico</strong>
+                                            <br>
+                                            <p class="text-muted"><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos2['encuesta'] ?>/procesados/<?php echo $datos2['id_fasfield']."/".$archivo_pdf2 ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></p>
+                                        </div>
+
+                                        <div class="col-md-3 col-xs-6"> <strong>Adjuntar archivos</strong>
+                                            <br>
+                                            <p class="text-muted"><a href='includes/php/add_docu.php?id_cliente=<?php echo $_GET['cod_cliente'] ?>'>Ingresar</a></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id='visualizar_docu'>
+                                        <div class="col-md-12 col-xs-12 b-r"> 
+
+ <a href="https://source.unsplash.com/5CpaOSMWLdQ/1500x1000" data-fancybox="images" data-width="1500" data-height="1000">
+      <img src="https://source.unsplash.com/5CpaOSMWLdQ/240x160" />
+  </a>
+  
+  
+                                           
+                                           
+                                        </div>
+                                        
+                                    </div>
+
+
+
+                                   <!-- <form class="form-horizontal form-material">
+                                        <div class="form-group">
+                                            <label class="col-md-12">Full Name</label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="example-email" class="col-md-12">Email</label>
+                                            <div class="col-md-12">
+                                                <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Password</label>
+                                            <div class="col-md-12">
+                                                <input type="password" value="password" class="form-control form-control-line"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Phone No</label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Message</label>
+                                            <div class="col-md-12">
+                                                <textarea rows="5" class="form-control form-control-line"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-12">Select Country</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control form-control-line">
+                                                    <option>London</option>
+                                                    <option>India</option>
+                                                    <option>Usa</option>
+                                                    <option>Canada</option>
+                                                    <option>Thailand</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <button class="btn btn-success">Update Profile</button>
+                                            </div>
+                                        </div>
+                                    </form>-->
+                                </div> 
+
+                                <div class="tab-pane" id="responsables_caso">
+                                   <!-- <form class="form-horizontal form-material">
+                                        <div class="form-group">
+                                            <label class="col-md-12">Full Name</label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="example-email" class="col-md-12">Email</label>
+                                            <div class="col-md-12">
+                                                <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Password</label>
+                                            <div class="col-md-12">
+                                                <input type="password" value="password" class="form-control form-control-line"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Phone No</label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Message</label>
+                                            <div class="col-md-12">
+                                                <textarea rows="5" class="form-control form-control-line"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-12">Select Country</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control form-control-line">
+                                                    <option>London</option>
+                                                    <option>India</option>
+                                                    <option>Usa</option>
+                                                    <option>Canada</option>
+                                                    <option>Thailand</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <button class="btn btn-success">Update Profile</button>
+                                            </div>
+                                        </div>
+                                    </form>-->
+                                </div> 
                                 <!-- /.tabs3 -->
                             </div>
                         </div>
@@ -307,8 +509,7 @@ $("#cargando2").hide();
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
-    });      
-
+    }); 
         
                 $("#registrar").click(function(){
 
