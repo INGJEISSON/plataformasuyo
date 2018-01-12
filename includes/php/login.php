@@ -31,12 +31,11 @@
 <section id="wrapper" class="login-register">
 
   <div class="login-box login-sidebar">
-     <br> <br> <br> <br>
+     <br> <br> 
     <div class="white-box">
       <form class="form-horizontal form-material" id="loginform" action="index.html">
         <a href="javascript:void(0)" class="text-center db"><img src="img/suyo_colombia_img.jpg" width="264" height="164" alt="Home" /></a>  
         
-    
         <div class="form-group text-center m-t-20">
           <div class="col-xs-12">
           <a class="btn btn-danger btn-lg btn-block text-uppercase waves-effect waves-light" href='<?php echo $authUrl  ?>'>Log In</a>
@@ -51,6 +50,7 @@
         <div class="form-group m-b-0">
           <div class="col-sm-12 text-center">
             <p>Descargue e instale Suyo Security</p>
+            <a href='http://bit.ly/2EATvMJ'>DESCARGAR AQUÍ</a>
              <img src='img/qr_suyosecurity.png'>
           </div>
         </div>
