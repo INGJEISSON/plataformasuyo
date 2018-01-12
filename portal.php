@@ -252,10 +252,12 @@ $('#buscarcliente').typeahead({
         });
     </script>
 </body>
-
 </html>
 <?php
-}else
-echo "Tu sesión ha cacudado por tiempo sin actividad, haga clic en el siguiente enlace para volver a iniciar sesión";
+}else{
+  echo "Tu sesión ha cacudado por tiempo sin actividad, haga clic en el siguiente enlace para volver a iniciar sesión";
+
+
+}
 
 ?>
