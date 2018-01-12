@@ -203,7 +203,8 @@ $("#id_usuario").focus();
                               data: datos,
                               success: function(valor){
                                     if(valor==1)
-                                    parent.location='doble_auth.php';
+                                       parent.location='portal.php';
+                                   // parent.location='doble_auth.php';
                                     else if(valor==2)
                                       alert("Ocurrió un problema interno, por favor comunícate con el administrador");
                               }
