@@ -64,12 +64,7 @@ function detect()
   return $info;
 }
 
-
 $info=detect();
-
-
-
-    
   // Generamos la clave de doble autotenticación.
 
                              $sql2 ="select * from doble_auth where cod_usuario='".$_SESSION['cod_usuario']."' and fecha_filtro='".$fecha_actual."' and cod_estado=3 ";
