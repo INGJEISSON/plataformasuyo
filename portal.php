@@ -255,9 +255,12 @@ $('#buscarcliente').typeahead({
 </html>
 <?php
 }else{
-  echo "Tu sesión ha cacudado por tiempo sin actividad, haga clic en el siguiente enlace para volver a iniciar sesión";
-
-
+  ?>
+ <script type="text/javascript">
+   
+parent.location='includes/php/logout.php';
+</script>
+?php
 }
 
 ?>
