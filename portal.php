@@ -256,11 +256,10 @@ $('#buscarcliente').typeahead({
 <?php
 }else{
   ?>
- <script type="text/javascript">
-   
+ <script type="text/javascript">   
 parent.location='includes/php/logout.php';
 </script>
-?php
+<?php
 }
 
 ?>
