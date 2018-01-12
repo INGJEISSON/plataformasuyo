@@ -98,9 +98,9 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
     } else {
         //include('includes/php/login.php');
                 if(isset($access)==1){
-                  //if($datos['actuali_perfil']==0)
-                  //  include('actuali_perfil.php');
-                 // else
+                  if($datos['actuali_perfil']==0)
+                  include('actuali_perfil.php');
+                     else
                    include('redirect.php');
 
                } // Si es un usuario habilitado..
