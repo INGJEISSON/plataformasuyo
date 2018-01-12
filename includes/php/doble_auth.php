@@ -17,7 +17,7 @@ $fecha_actual2= date('d-m-Y');
                                           for ($i = 0; $i < 100; $i++)
                                             $clave=generar_clave();
 
-                                              echo   $insert="insert into doble_auth (cod_usuario, fecha_gene, fecha_filtro, ip, peticion, clave, cod_estado) values('".$_SESSION['cod_usuario']."', '".$fecha_registro."', '".$fecha_filtro."', '".$_SERVER["REMOTE_ADDR"]."','sms', '".$clave."', 3) ";
+                                                $insert="insert into doble_auth (cod_usuario, fecha_gene, fecha_filtro, ip, peticion, clave, cod_estado) values('".$_SESSION['cod_usuario']."', '".$fecha_registro."', '".$fecha_filtro."', '".$_SERVER["REMOTE_ADDR"]."','sms', '".$clave."', 3) ";
                                                 $query_insert=pg_query($conexion, $insert);
 
                                                     if($query_insert){ // Enviamos sms al celular..

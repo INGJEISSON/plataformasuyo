@@ -2111,6 +2111,10 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                     include('vistas.php');
             }
 
+             if(isset($_POST['vista_docu'])){ // Generador de vistas de documentos. (archivos)
+                    include('vistas_docu.php');
+            }
+
 
   }else
   echo "Tu sesión ha caducado inactividad en el sistema, por favor refresca la página e inicia nuevamente"; // Sesión cadudad por tiempo sin actividad..

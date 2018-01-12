@@ -7,11 +7,14 @@ include('../dependencia/conexion.php');
             $query2=pg_query($sql2);
             $datos2=pg_fetch_assoc($query2);
 ?>
+
   <script src="../../plugins/bower_components/jquery/dist/jquery.min.js"></script>
    <link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <link rel="stylesheet" href="../../js/colorbox-master/example1/colorbox.css" />
 <script src="../../js/colorbox-master/jquery.colorbox-min.js"></script>
+
+
 
 <div class="container-fluid">
                 <div class="row bg-title">

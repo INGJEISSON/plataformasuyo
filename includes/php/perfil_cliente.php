@@ -21,7 +21,31 @@ include('../dependencia/conexion.php');
           $archivo_pdf2=$datos2['arch_pdf'];
 
             /// Listamos la multimedia.
-          $sql_mult2=""
+         $sql_mult2="select * from archivos where id_fastfield='".$datos2['id_fasfield']."' ";
+          $query_mult2=pg_query($conexion, $sql_mult2);
+
+             /// Listamos los archivos de facturas multimedia.
+         $sql_mult3="select * from archivos where id_fastfield='".$datos2['id_fasfield']."' ";
+          $query_mult2=pg_query($conexion, $sql_mult2);
+
+
+
+// Listamos los servicios del cliente..
+
+          $s="select distinct  serv_cliente.cod_usuario, serv_cliente.id_serv_cliente, servicios.nom_servicio, servicios.cod_servicio,  acuer_pago.descripcion as acuer_pago, serv_cliente.porc_pagado, serv_cliente.valor, estado.descripcion as estado from acuer_pago, servicios, estado, serv_cliente where  servicios.cod_servicio=serv_cliente.cod_servicio  and acuer_pago.cod_acuer_pago=serv_cliente.cod_acuer_pago and estado.cod_estado=serv_cliente.cod_estado and serv_cliente.cod_cliente='".$_GET['cod_cliente']."' ";
+          $q=pg_query($conexion, $s);
+          $t=pg_query($conexion,$s);
+          $rowsq=pg_num_rows($q);
+
+          //Listamos los responsables de los servicios
+
+           $s1="select distinct usuarios.foto, usuarios.nombre as usuarios, usuarios.tipo_usuario, usuarios.telefono_1, serv_cliente.cod_servicio from usuarios,  serv_cliente where usuarios.cod_usuario=serv_cliente.cod_usuario and serv_cliente.cod_cliente='".$_GET['cod_cliente']."' ";
+          $q1=pg_query($conexion, $s1);
+
+          // Listamos las comunicaciones que ha tenido el cliente...
+
+         
+
 
 
           
@@ -31,6 +55,82 @@ include('../dependencia/conexion.php');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
 <link rel="stylesheet" href="js/colorbox-master/example1/colorbox.css" />
 <script src="js/colorbox-master/jquery.colorbox-min.js"></script>
+
+
+<script>
+
+
+$(document).ready(function(){
+ $("[data-fancybox]").fancybox({
+    iframe : {
+        css : {
+            width : '1024px',
+            height: '600px'
+        }
+    }
+});  
+
+ $("#v_otros").click(function(){
+    var cod_cliente="<?php echo "$_GET[cod_cliente]" ?>";
+    var id_fasfield="<?php echo "$datos2[id_fasfield]" ?>";
+
+    var datos='vista_docu='+1+'&cod_cliente='+cod_cliente+'&id_cate_docu='+3+'&id_fasfield='+id_fasfield;
+
+                    $.ajax({
+                            type: "POST",
+                            url: 'includes/php/g_procesos.php',
+                            data: datos,
+                            success: function(valor){
+
+                                 $("#content_docu").empty();
+                                    $("#content_docu").html(valor);
+                            }
+
+                    });
+ });
+
+  $("#v_facturas").click(function(){
+    var cod_cliente="<?php echo "$_GET[cod_cliente]" ?>";
+    var id_fasfield="<?php echo "$datos2[id_fasfield]" ?>";
+
+    var datos='vista_docu='+1+'&cod_cliente='+cod_cliente+'&id_cate_docu='+2+'&id_fasfield='+id_fasfield;
+
+                    $.ajax({
+                            type: "POST",
+                            url: 'includes/php/g_procesos.php',
+                            data: datos,
+                            success: function(valor){
+
+                                 $("#content_docu").empty();
+                                    $("#content_docu").html(valor);
+                            }
+
+                    });
+ });
+
+  $("#v_ana_caso").click(function(){
+    var cod_cliente="<?php echo "$_GET[cod_cliente]" ?>";
+    var id_fasfield="<?php echo "$datos2[id_fasfield]" ?>";
+
+    var datos='vista_docu='+1+'&cod_cliente='+cod_cliente+'&id_cate_docu='+4+'&id_fasfield='+id_fasfield;
+
+                    $.ajax({
+                            type: "POST",
+                            url: 'includes/php/g_procesos.php',
+                            data: datos,
+                            success: function(valor){
+
+                                 $("#content_docu").empty();
+                                    $("#content_docu").html(valor);
+                            }
+
+                    });
+ });
+
+});
+
+
+</script>
  <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -113,31 +213,47 @@ include('../dependencia/conexion.php');
                                 <!-- .tabs 1 -->
                                 <div class="tab-pane active" id="comunicacion">
                                     <div class="steamline">
-                                        <div class="sl-item">
-                                            <div class="sl-left"> <img src="../plugins/images/users/sonu.jpg" alt="user" class="img-circle" /> </div>
-                                            <div class="sl-right">
-                                                <div class="m-l-40"> <a href="#" class="text-info">Rubby Villa</a> <span class="sl-date">2 minutes</span>
-                                                    <div class="m-t-20 row">
-                                                        <div class="col-md-2 col-xs-12"><img src="../plugins/images/img1.jpg" alt="user" class="img-responsive" /></div>
-                                                        <div class="col-md-9 col-xs-12">
-                                                            <p>Se realiza comunicación con el cliente, dice que está satisfecho con el servicio, que está muy feliz con haber legalizado su propiedad</p></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sl-item">
-                                            <div class="sl-left"> <img src="../plugins/images/users/sonu.jpg" alt="user" class="img-circle" /> </div>
-                                            <div class="sl-right">
-                                                <div class="m-l-40"> <a href="#" class="text-info">Alejandro ramírez</a> <span class="sl-date">5 minutes</span>
-                                                    <div class="m-t-20 row">
-                                                        <div class="col-md-2 col-xs-12"><img src="../plugins/images/img1.jpg" alt="user" class="img-responsive" /></div>
-                                                        <div class="col-md-9 col-xs-12">
-                                                            <p> Se realiza comunicación con el cliente para verificar si se había podido comunicar con la persona que figura en el impuesto pre-dial (Yovanis Echavarria de la Rosa), para ver si es posible volver a agendar cita para la elaboración de la compraventa de posesión, (servicio previo necesario para la ejecución del servicio de Cargue catastral), el usuario informa que si se había podido comunciar y que si es posible, agendar d euna vez la cita para el día 17 de Nov-2017 a las 11:15 AM, ya que es la diponibilidad que tiene el señor Yovanis, por lo cual se agenda cita para ejecución del servicio de compraventa, servicio previo necesario par ejcutar el servicio de Cargue Catastral</p></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
+                                    <?php 
+                                         if( $rowsq){   
+                                         $i=1;   
+                                         $no_reg=1;                                     
+                                             while ($datos=pg_fetch_assoc($t)){ 
+
+                                                          $sql11="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, estado.descripcion as estado, estado.cod_estado, usuarios.nombre as usuario, usuarios.foto from seguimientos, usuarios, estado where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=estado.cod_estado and seguimientos.id_fasfield='".$datos['id_serv_cliente']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento=6 order by seguimientos.id_segui_llam desc limit 3  ";
+                                                        $query11=pg_query($conexion, $sql11);
+                                                        @$datos11=pg_fetch_assoc($query11);
+                                                        $rows=pg_num_rows($query11);    
+
+                                                                if($rows){
+                                                                                             
+                                        ?> 
+                               
+                                        
+                                        <div class="sl-item">
+                                            <div class="sl-left"> <img src="<?php echo $datos11['foto']  ?>" alt="user" class="img-circle" /> </div>
+                                            <div class="sl-right">
+                                                <div class="m-l-40"> <a href="#" class="text-info"><?php echo $datos11['usuario']  ?></a> <span class="sl-date"><?php echo $datos11['fecha_registro']  ?></span>
+                                                    <div class="m-t-20 row">
+                                                        <div class="col-md-2 col-xs-12"><b>Caso: </b> <?php echo $datos['nom_servicio']  ?> </div>
+                                                        <div class="col-md-9 col-xs-12">
+                                                            <p><?php echo $datos11['observacion']  ?></p></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    <?php 
+                                                                }else{
+                                                                    $no_reg++;
+                                                                    
+                                                                }
+                                                               
+                                                    $i++;
+                                                    }
+                                                        if($no_reg==$i)
+                                                            echo "Ninguna registro de comunicación hasta ahora";
+                                            }
+                                        ?> 
 
 
                                     </div>
@@ -145,6 +261,8 @@ include('../dependencia/conexion.php');
                                 <!-- /.tabs1 -->
                                 <!-- .tabs2 -->
                                 <div class="tab-pane" id="diagnosticos">
+
+                                Estado del diagnóstico  (Modúlo en desarrollo)
                                 <!--  <div class="row">
                                         <div class="col-md-3 col-xs-6 b-r"> <strong>Full Name</strong>
                                             <br>
@@ -188,100 +306,65 @@ include('../dependencia/conexion.php');
                                 </div>
                                 <!-- /.tabs2 -->
                                 <!-- .tabs3 -->
+                               
                                 <div class="tab-pane" id="servicios">
-                                   <!-- <form class="form-horizontal form-material">
-                                        <div class="form-group">
-                                            <label class="col-md-12">Full Name</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="example-email" class="col-md-12">Email</label>
-                                            <div class="col-md-12">
-                                                <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Password</label>
-                                            <div class="col-md-12">
-                                                <input type="password" value="password" class="form-control form-control-line"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Phone No</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Message</label>
-                                            <div class="col-md-12">
-                                                <textarea rows="5" class="form-control form-control-line"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-12">Select Country</label>
-                                            <div class="col-sm-12">
-                                                <select class="form-control form-control-line">
-                                                    <option>London</option>
-                                                    <option>India</option>
-                                                    <option>Usa</option>
-                                                    <option>Canada</option>
-                                                    <option>Thailand</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-12">
-                                                <button class="btn btn-success">Update Profile</button>
-                                            </div>
-                                        </div>
-                                    </form>-->
-                                </div> 
 
-                                <div class="tab-pane" id="servicios">
-                                   <!-- <form class="form-horizontal form-material">
-                                        <div class="form-group">
-                                            <label class="col-md-12">Full Name</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                         <?php 
+                                         if( $rowsq){
+                                            $i=1;
+                                             while ($datos=pg_fetch_assoc($q)){ 
+
+                                                         $sql11="select  usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$datos['id_serv_cliente']."' order by activ_serv.id_activi_serv desc limit 1 ";
+                                                        $query11=pg_query($conexion, $sql11);
+                                                        @$datos11=pg_fetch_assoc($query11);
+                                                                                             
+                                        ?> 
+                               
+                                    <div class="row">
+                                        <div class="col-md-3 col-xs-6 b-r"> <strong><font color='red'>Servicio #<?php echo $i ?></font></strong>
+                                            <br>
+                                            <p class="text-muted"> <?php echo $datos['nom_servicio']  ?> </p>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="example-email" class="col-md-12">Email</label>
-                                            <div class="col-md-12">
-                                                <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        <div class="col-md-3 col-xs-6 b-r"> <strong>Estado</strong>
+                                            <br>
+                                            <p class="text-muted"><?php echo $datos11['etapa']; ?></p>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Password</label>
-                                            <div class="col-md-12">
-                                                <input type="password" value="password" class="form-control form-control-line"> </div>
+                                        <div class="col-md-3 col-xs-6 b-r"> <strong>Última actuación</strong>
+                                            <br>
+                                            <p class="text-muted"><?php echo $datos11['actividad']; ?></p>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Phone No</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
+                                        <div class="col-md-3 col-xs-6"> <strong>Detalle</strong>
+                                            <br>
+                                            <p class="text-muted"><?php echo $datos11['observacion']; ?></p>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Message</label>
-                                            <div class="col-md-12">
-                                                <textarea rows="5" class="form-control form-control-line"></textarea>
-                                            </div>
+                                        <div class="col-md-3 col-xs-6"> <strong>Fecha ult.actuación</strong>
+                                            <br>
+                                            <p class="text-muted"><?php echo $datos11['fecha_actividad']; ?></p>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-12">Select Country</label>
-                                            <div class="col-sm-12">
-                                                <select class="form-control form-control-line">
-                                                    <option>London</option>
-                                                    <option>India</option>
-                                                    <option>Usa</option>
-                                                    <option>Canada</option>
-                                                    <option>Thailand</option>
-                                                </select>
-                                            </div>
+
+                                        <div class="col-md-3 col-xs-6"> <strong>Responsable</strong>
+                                            <br>
+                                                     <p class="text-muted"><?php echo $datos11['usuario']; ?></p>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-12">
-                                                <button class="btn btn-success">Update Profile</button>
-                                            </div>
+
+                                        <div class="col-md-3 col-xs-6"> <strong>Ver seguimiento</strong>
+                                                 <br>
+                                                     <p class="text-muted"><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="includes/php/ver_seguimiento.php?id_serv_cliente=<?php echo $datos['id_serv_cliente'] ?>&cod_servicio=<?php echo $datos['cod_servicio'] ?>&cod_cliente=<?php echo $_GET['cod_cliente'] ?>" class='edicion'>Visualizar</a></p>
                                         </div>
-                                    </form>-->
+
+                                        <div class="col-md-12 col-xs-12 b-r"></strong>
+                                            
+                                           <hr>
+                                        </div>
+                                    </div>
+
+                                             <?php 
+                                             $i++;
+                                                  }
+                                         }
+
+                                    ?> 
+
                                 </div> 
 
                                 <div class="tab-pane" id="documentos">
@@ -292,15 +375,15 @@ include('../dependencia/conexion.php');
                                         </div>
                                         <div class="col-md-3 col-xs-6 b-r"> <strong>Facturas y contratos</strong>
                                             <br>
-                                            <p class="text-muted">Visualizar</p>
+                                            <p class="text-muted"><a id='v_facturas' href="javascript:;">Visualizar</a></p>
                                         </div>
                                         <div class="col-md-3 col-xs-6 b-r"> <strong>Otros documentos</strong>
                                             <br>
-                                            <p class="text-muted">Visualizar</p>
+                                           <p class="text-muted"><a id='v_otros' href="javascript:;">Visualizar</a></p>
                                         </div>
                                         <div class="col-md-3 col-xs-6"> <strong>Análisis de caso</strong>
                                             <br>
-                                            <p class="text-muted">Visualizar</p>
+                                            <p class="text-muted"><a id='v_ana_caso' href="javascript:;">Visualizar</a></p>
                                         </div>
 
                                         <div class="col-md-3 col-xs-6"> <strong>Encuesta Diagnóstico</strong>
@@ -310,119 +393,88 @@ include('../dependencia/conexion.php');
 
                                         <div class="col-md-3 col-xs-6"> <strong>Adjuntar archivos</strong>
                                             <br>
-                                            <p class="text-muted"><a href='includes/php/add_docu.php?id_cliente=<?php echo $_GET['cod_cliente'] ?>'>Ingresar</a></p>
+                                            <p class="text-muted"><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src='includes/php/add_docu.php?id_cliente=<?php echo $_GET['cod_cliente'] ?>'>Ingresar</a></p>
+                                           
                                         </div>
                                     </div>
 
-                                    <div class="row" id='visualizar_docu'>
+                                    <div class="row" id='content_docu'>
                                         <div class="col-md-12 col-xs-12 b-r"> 
-
- <a href="https://source.unsplash.com/5CpaOSMWLdQ/1500x1000" data-fancybox="images" data-width="1500" data-height="1000">
-      <img src="https://source.unsplash.com/5CpaOSMWLdQ/240x160" />
-  </a>
-  
-  
-                                           
-                                           
+                                       
                                         </div>
                                         
                                     </div>
 
 
-
-                                   <!-- <form class="form-horizontal form-material">
-                                        <div class="form-group">
-                                            <label class="col-md-12">Full Name</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="example-email" class="col-md-12">Email</label>
-                                            <div class="col-md-12">
-                                                <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Password</label>
-                                            <div class="col-md-12">
-                                                <input type="password" value="password" class="form-control form-control-line"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Phone No</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Message</label>
-                                            <div class="col-md-12">
-                                                <textarea rows="5" class="form-control form-control-line"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-12">Select Country</label>
-                                            <div class="col-sm-12">
-                                                <select class="form-control form-control-line">
-                                                    <option>London</option>
-                                                    <option>India</option>
-                                                    <option>Usa</option>
-                                                    <option>Canada</option>
-                                                    <option>Thailand</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-12">
-                                                <button class="btn btn-success">Update Profile</button>
-                                            </div>
-                                        </div>
-                                    </form>-->
                                 </div> 
 
                                 <div class="tab-pane" id="responsables_caso">
-                                   <!-- <form class="form-horizontal form-material">
-                                        <div class="form-group">
-                                            <label class="col-md-12">Full Name</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="example-email" class="col-md-12">Email</label>
-                                            <div class="col-md-12">
-                                                <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Password</label>
-                                            <div class="col-md-12">
-                                                <input type="password" value="password" class="form-control form-control-line"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Phone No</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Message</label>
-                                            <div class="col-md-12">
-                                                <textarea rows="5" class="form-control form-control-line"></textarea>
+                                    <!-- Diagnósticos-->
+                                      <!-- <div class="col-md-4 col-sm-4">
+                                            <div class="white-box">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-4 text-center">
+                                                        <a href="contact-detail.html"><img src="../plugins/images/users/genu.jpg" alt="user" class="img-circle img-responsive"></a>
+                                                    </div>
+                                                    <div class="col-md-8 col-sm-8">
+                                                        <h3 class="box-title m-b-0">JUAN PABLO MONTOYA</h3>
+                                                        <p>
+                                                            <address>
+                                                                <b>Asignación:</b> 2017-01-11
+                                                                <br/>
+                                                                <b>Caso: </b>Diagnóstico
+                                                                <br/>
+                                                                <b>Area: </b>Técnico
+                                                                <br/>
+                                                                <abbr title="Teléfono"><b>Teléfono: </b></abbr>(123) 456-7890
+                                                            </address>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                          <hr>
+                                        <!-- Servicios-->
+
+                                        <?php 
+                                             while ($datos=pg_fetch_assoc($q1)){ 
+
+                                                $sql="select servicios.nom_servicio from servicios where cod_servicio='".$datos['cod_servicio']."' ";
+                                                $query=pg_query($conexion, $sql);
+                                                $datos2=pg_fetch_assoc($query);
+
+                                                $sql2="select grupo_usuarios.descripcion as area from tipo_usuario, grupo_usuarios where tipo_usuario.cod_grupo=grupo_usuarios.cod_grupo and tipo_usuario.tipo_usuario='".$datos['tipo_usuario']."' ";
+                                                $query3=pg_query($conexion, $sql2);
+                                                $datos3=pg_fetch_assoc($query3);
+                                        ?> 
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="white-box">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-4 text-center">
+                                                        <a href="contact-detail.html"><img src="<?php echo $datos['foto'] ?>" alt="user" class="img-circle img-responsive"></a>
+                                                    </div>
+                                                    <div class="col-md-8 col-sm-8">
+                                                        <h3 class="box-title m-b-0"><?php echo $datos['usuarios'] ?> </h3>
+                                                        <p>
+                                                            <address>
+                                                                <b>Asignación:</b>
+                                                                <br/>
+                                                                <b>Caso: </b><?php echo $datos2['nom_servicio'] ?>
+                                                                <br/>
+                                                                <b>Area: </b><?php echo $datos3['area'] ?>
+                                                                <br/>
+                                                                <abbr title="Teléfono"><b>Teléfono: </b></abbr> <?php echo $datos['telefono_1'] ?>
+                                                            </address>
+                                                        </p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-12">Select Country</label>
-                                            <div class="col-sm-12">
-                                                <select class="form-control form-control-line">
-                                                    <option>London</option>
-                                                    <option>India</option>
-                                                    <option>Usa</option>
-                                                    <option>Canada</option>
-                                                    <option>Thailand</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-12">
-                                                <button class="btn btn-success">Update Profile</button>
-                                            </div>
-                                        </div>
-                                    </form>-->
+
+                                        <?php 
+                                           }
+                                        ?> 
+                                         
                                 </div> 
                                 <!-- /.tabs3 -->
                             </div>

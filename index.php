@@ -59,7 +59,10 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
             substr($an, rand(0, $su), 1) .
             substr($an, rand(0, $su), 1) .
             substr($an, rand(0, $su), 1);
-}
+}                   
+
+                          $update="update usuarios set foto='".$profile_image_url."' where email='".$email."'  ";
+                          $query_update=pg_query($update);
                           
                           $sql="Select usuarios.telefono_1, usuarios.actuali_perfil, usuarios.nombre, usuarios.email,tipo_usuario.tipo_usuario, usuarios.cod_estado, usuarios.cod_usuario, tipo_usuario.cod_grupo from usuarios, tipo_usuario where usuarios.tipo_usuario=tipo_usuario.tipo_usuario and  usuarios.email='".$email."' ";
                         $query=pg_query($conexion, $sql);
@@ -95,10 +98,10 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
     } else {
         //include('includes/php/login.php');
                 if(isset($access)==1){
-                  //if($datos['actuali_perfil']==0)
-                  //   include('actuali_perfil.php');
-                  //else
-                    include('redirect.php');
+                  if($datos['actuali_perfil']==0)
+                    include('actuali_perfil.php');
+                  else
+                   include('redirect.php');
 
                } // Si es un usuario habilitado..
               
