@@ -1296,14 +1296,15 @@ if(isset($_SESSION['cod_usuario'])){
                             if($_POST['tipo_seguimiento']==8)
                                 $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, afectaciones.descripcion as estado, usuarios.nombre as usuario from seguimientos, usuarios, afectaciones where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=afectaciones.tipo_afect and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
 
-                             else if($_POST['tipo_seguimiento']==14 || $_POST['tipo_seguimiento']==15)
-                                  $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, servicios.nom_servicio as estado, usuarios.nombre as usuario from seguimientos, usuarios, servicios where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=servicios.cod_servicio and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";  
+                             else if($_POST['tipo_seguimiento']==14 || $_POST['tipo_seguimiento']==15){
 
-                            elseif($_POST['tipo_seguimiento']==14){
+                                   if($_POST['tipo_seguimiento']==14){
+
+                             /// echo "Entró aquí";
 
                                   $_POST['pr_servi_n']="";
                                                      // Verificamos que el servicio aún no esté recomendado..
-                                      $sql2="select cod_servicio from serv_recom_diag where cod_servicio='".$_POST['cod_estado']."' ";
+                                       $sql2="select cod_servicio from serv_recom_diag where cod_servicio='".$_POST['cod_estado']."' ";
                                       $query2=pg_query($conexion, $sql2); 
                                       $rows=pg_num_rows($query2);
 
@@ -1325,13 +1326,18 @@ if(isset($_SESSION['cod_usuario'])){
                                                     else
                                                       $cod_product_serv=0;                                              
                                         $insert="insert into serv_recom_diag (id_elab_diag, cod_servicio, pr_serv_n, cod_produc_serv) values('".$_POST['id_fasfield']."', '".$_POST['cod_estado']."', '".$_POST['pr_servi_n']."', '".$cod_product_serv."' ) ";
+                                             
                                              $query=pg_query($conexion, $insert);
-                                                if($query)
+                                               /* if($query)
                                                   echo "1";
                                                 else
-                                                  echo "2"; // Problema técnico...
+                                                  echo "2"; // Problema técnico...*/
                                           }
                               }
+
+
+                                  $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, servicios.nom_servicio as estado, usuarios.nombre as usuario from seguimientos, usuarios, servicios where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=servicios.cod_servicio and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";  
+                                }
 
                        }
 
@@ -1351,6 +1357,8 @@ if(isset($_SESSION['cod_usuario'])){
                           }
                           
                           
+
+
                       if($_POST['tipo_seguimiento']==2){
                       // actualizamos el valor aprobado y su estado
                           
@@ -1463,6 +1471,85 @@ if(isset($_SESSION['cod_usuario'])){
                       include('history_revi.php');
          
          }
+
+         // Listamos los servicios
+          if(isset($_POST['list_servicios'])){
+
+                                  // Listamos los nombres de los servicios
+                            $sql2="select serv_recom_diag.id_serv_recom, servicios.nom_servicio, servicios.cod_servicio from serv_recom_diag, servicios where serv_recom_diag.cod_servicio=servicios.cod_servicio and id_elab_diag='".$_POST['id_elab_diag']."' ";
+
+                             $query2=pg_query($conexion, $sql2);
+                             $rows2=pg_num_rows($query2);
+                                if($rows2)
+                               include('list_servicios.php');
+                             else
+                              echo "Aun no se encuentran servicios a cotizar";
+
+          }
+
+
+          if(isset($_POST['listar_actividades_diag'])){
+
+
+                if($_POST['tipo']==1){
+                  $etapa=1;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 9 and 19 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                              
+                }
+
+                elseif($_POST['tipo']==2){
+                  $etapa=1;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 24 and 62 order by id_activi_diag ";
+                                 
+                                              
+                                 
+
+                }
+                elseif($_POST['tipo']==3){
+                  $etapa=1;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 78 and 85 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                   
+
+                }
+
+               elseif($_POST['tipo']==4){
+                  $etapa=1;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 65 and 77 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+
+                }
+
+                elseif($_POST['tipo']==5 ){ // Listado de variables de  revisión de bases de datos
+                  $etapa=1;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 86 and 91 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+
+                }
+
+                elseif($_POST['tipo']==6 ){ // Listado de variables de  revisión de mapas colaborativos
+                  $etapa=1;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 92 and 97 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                
+                }
+                              
+                  // Listar actividades del diagnósticos
+                $query3=pg_query($conexion, $sql3); 
+                  $rows5=pg_num_rows($query3);
+                        if($rows5){
+                          include('listar_actividades_diag.php');
+                        }
+
+
+          }
          
          if(isset($_POST['revi_revi_call2'])){ // Agregar revisión de call center.  y otras revisiones..
                 

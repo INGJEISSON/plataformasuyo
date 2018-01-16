@@ -65,7 +65,15 @@ $query3=pg_query($conexion, $sql1);
                                 <option value="20">Duplicado</option>-->
                              </select></td>
                              <td><label for="textfield"></label></td>
-                             <td><input type="text" class="form-control" name="textfield2" id="observacion"></td>
+                             <td>
+
+
+
+                             <input type="text" class="form-control" name="textfield2" id="observacion">
+
+
+
+                             </td>
                              <td><iframe src="subir_archivo.php" scrolling="no" height="200" width="300" /></iframe></iframe>
                              <td><input type="button" class="btn btn-primary" name="button" id="g_revision" value="Registrar"></td>
                            </tr>

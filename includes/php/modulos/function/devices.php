@@ -91,25 +91,27 @@ $fecha_filtro=date('Y-m-d');
 				}
 				if(isset($_POST['matricular'])){
 
-							if(isset($_POST['token_security'])){ // si encuentra el token de securidad	
+							if(isset($_POST['token_security'])){ // si encuentra el token de securidad	o número de celualar...
 										
 									if(is_numeric($_POST['token_security'])){ // verificamos que sea un número
 
-											// Consultamos el token a qué usuario pertenece..
-										 	 $sql="select cod_usuario from doble_auth where clave='".$_POST['token_security']."' and cod_estado=3 limit 1 ";
+											// Consultamos el token a qué usuario pertenece..el número de celular.
+										 	 $sql="select cod_usuario from usuarios where telefono_1='".$_POST['token_security']."' limit 1 ";
+											
+										 	// $sql="select cod_usuario from doble_auth where clave='".$_POST['token_security']."' and cod_estado=3 limit 1 ";
 											$query=pg_query($conexion, $sql);
-											$rows=pg_num_rows($query);
+											$rows=pg_num_rows($query);	
 													if($rows==1){
 														$datos=pg_fetch_assoc($query);
 																// Consultamos que no haya registrado dispostivo..
-														 $sql="select * from device_user where cod_usuario='".$datos['cod_usuario']."' ";
+														 $sql="select * from device_user where cod_usuario='".$datos['cod_usuario']."' limit 1";
 														 $query=pg_query($conexion, $sql);
 														 $rows=pg_num_rows($query);
 														 		if($rows==0){	
 														 			// INsertamos dispostivo del usuario
 														 			  $insert="insert into device_user (cod_usuario, suyo_key_mb, platform, version, model, fecha_registro, confir, fecha_solic) values('".$datos['cod_usuario']."', '".$_POST['suyo_key_mb']."','".$_POST['platform']."', '".$_POST['version']."', '".$_POST['model']."','".$fecha_registro."', 0, '".$fecha_registro."') ";
 														 				$query_insert=pg_query($conexion, $insert);
-
+														 				
 														 					if($query_insert)
 														 						echo "exito";
 														 					else

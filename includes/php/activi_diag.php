@@ -7,6 +7,8 @@ include('../dependencia/conexion.php');
           $datos=pg_fetch_assoc($query);        
 
 
+
+
 if($_GET['tipo']==1){
   $etapa=1;
 
@@ -33,6 +35,18 @@ if($_GET['tipo']==2){
 if($_GET['tipo']==3){
   $etapa=1;
 
+               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 78 and 85 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+
+}
+
+if($_GET['tipo']==4){
+  $etapa=1;
+
                $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 65 and 77 order by id_activi_diag ";
                    $query3=pg_query($conexion, $sql3); 
                               
@@ -41,6 +55,31 @@ if($_GET['tipo']==3){
                   $datos4=pg_fetch_assoc($query4);   
 
 }
+
+if($_GET['tipo']==5 ){ // Listado de variables de  revisión de bases de datos
+  $etapa=1;
+
+               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 86 and 91 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+
+}
+
+if($_GET['tipo']==6 ){ // Listado de variables de  revisión de mapas colaborativos
+  $etapa=1;
+
+               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 92 and 97 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+
+}
+
 
 /*
 // Buscamos la etapa de la última actuación..

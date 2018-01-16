@@ -133,7 +133,29 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
                                if(valor!=2){
                                 $("#cargar2").hide();
                               //    alert("Se ha agregado su observación al cliente");                                 
-                                   $("#history_serv_recom").html(valor);      
+                                   $("#history_serv_recom").html(valor);  
+
+                          // Listamos servicios cotizados
+                              var id_elab_diag="<?php echo $id_elab_diag ?>";
+                              var datos='id_elab_diag='+id_elab_diag+'&list_servicios='+1;
+                                  
+                                          $("#cargar2").show();
+                                            $.ajax({
+
+                                                      type: "POST",
+                                                      data: datos,
+                                                      url: 'g_procesos.php?'+datos,
+                                                      success: function(valor){
+                                                          $("#history_serv_recom2").empty();
+                                                              $("#cargar2").hide();
+                                                            //    alert("Se ha agregado su observación al cliente");   
+                                                                $("#history_cotizacion").html(valor);
+
+                                                             
+
+
+                                                      }
+                                                });     
 
                                }else{
                                       $("#cargar2").hide();
@@ -153,8 +175,10 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
                         data: datos,
                         url: '../../includes/php/g_procesos.php?'+datos,
                         success: function(valor){
-                           
+                            
                                if(valor!=2){
+
+
                                 $("#cargar2").hide();
                               //    alert("Se ha agregado su observación al cliente");                                 
                                    $("#history_serv_recom2").html(valor);      
@@ -195,7 +219,125 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
 
                         }
                   }); 
-          
+
+// Listamos servicios cotizados
+var id_elab_diag="<?php echo $id_elab_diag ?>";
+var datos='id_elab_diag='+id_elab_diag+'&list_servicios='+1;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                            $("#history_serv_recom2").empty();
+                                $("#cargar2").hide();
+                              //    alert("Se ha agregado su observación al cliente");   
+                                  $("#history_cotizacion").html(valor);
+
+                               
+
+
+                        }
+                  }); 
+
+
+    // Listamos las actividades de los documentos del cliente y lde la encuesta.
+var datos='listar_actividades_diag='+1+'&tipo='+1+'&cod_equipo='+2;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                            $("#list_revi_docu").empty();
+                                $("#cargar2").hide();
+                                   $("#list_revi_docu").html(valor);
+                        }
+                  }); 
+
+        // Listamos las actividades de los documentos del cliente y lde la encuesta.
+var datos='listar_actividades_diag='+1+'&tipo='+2+'&cod_equipo='+2;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                            $("#list_revi_docu2").empty();
+                                $("#cargar2").hide();
+                                   $("#list_revi_docu2").html(valor);
+                        }
+                  });
+    
+    // Listamos las actividades de los documentos del cliente y lde la encuesta.
+var datos='listar_actividades_diag='+1+'&tipo='+3+'&cod_equipo='+2;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                            $("#list_revi_docu3").empty();
+                                $("#cargar2").hide();
+                                   $("#list_revi_docu3").html(valor);
+                        }
+                  });
+
+      // Listamos las actividades de los documentos del cliente y lde la encuesta.
+var datos='listar_actividades_diag='+1+'&tipo='+4+'&cod_equipo='+2;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                            $("#list_revi_docu4").empty();
+                                $("#cargar2").hide();
+                                   $("#list_revi_docu4").html(valor);
+                        }
+                  });
+
+            // Listamos las actividades de los documentos del cliente y lde la encuesta.
+var datos='listar_actividades_diag='+1+'&tipo='+5+'&cod_equipo='+2;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                            $("#list_revi_docu5").empty();
+                                $("#cargar2").hide();
+                                   $("#list_revi_docu5").html(valor);
+                        }
+                  });
+
+              // Listamos las actividades de los documentos del cliente y lde la encuesta.
+var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                            $("#list_revi_docu6").empty();
+                                $("#cargar2").hide();
+                                   $("#list_revi_docu6").html(valor);
+                        }
+                  });
   });
 </script>
 
@@ -308,6 +450,9 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
       </div>
       <div id="collapse4" class="panel-collapse collapse">
         <div class="panel-body">
+
+        <div id='list_revi_docu'></div>
+
            <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=1&ficha=<?php echo base64_encode('Revisión de los documentos del cliente y de la encuesta') ?>" class='edicion'>Registrar/Editar</a>
           </div>
        </div>
@@ -322,6 +467,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
       </div>
       <div id="collapse41" class="panel-collapse collapse">
         <div class="panel-body">
+           <div id='list_revi_docu2'></div>
 
         <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=2&ficha=<?php echo base64_encode('Identificar cadena de tradiciones') ?>" class='edicion'>Registrar/Editar</a>
        </div>
@@ -332,12 +478,14 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse42">
-        Revisión de mapas colaborativos </a>
+        Revisión páginas de mapas </a>
         </h4>
       </div>
       <div id="collapse42" class="panel-collapse collapse">
         <div class="panel-body">
-       <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=3&ficha=<?php echo base64_encode('Revisión de mapas colaborativos') ?>" class='edicion'>Registrar/Editar</a>
+
+           <div id='list_revi_docu3'></div>
+       <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=3&ficha=<?php echo base64_encode('Revisión páginas de mapas') ?>" class='edicion'>Registrar/Editar</a>
        </div>
       </div>
   </div>
@@ -351,28 +499,62 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
       </div>
       <div id="collapse43" class="panel-collapse collapse">
         <div class="panel-body">
+           <div id='list_revi_docu4'></div>
            <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=4&ficha=<?php echo base64_encode('Revisión páginas impuestos') ?>" class='edicion'>Registrar/Editar</a>
 
        </div>
       </div>
     </div>
 
-      <div class="panel panel-primary">
+
+    <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse43">
-       Revisión Base de datos </a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse431">
+       Revisión bases de datos </a>
         </h4>
       </div>
-      <div id="collapse43" class="panel-collapse collapse">
+      <div id="collapse431" class="panel-collapse collapse">
         <div class="panel-body">
-           <div id='history_necesidad' align="center"> </div>
-    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=9" class='edicion'>Agregar/Editar Necesidad</a></p></div>
+           <div id='list_revi_docu5'></div>
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=5&ficha=<?php echo base64_encode('Revisión bases de datos') ?>" class='edicion'>Registrar/Editar</a>
 
        </div>
       </div>
+    </div>
 
-                            
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse432">
+       Revisión de mapas colaborativos </a>
+        </h4>
+      </div>
+      <div id="collapse432" class="panel-collapse collapse">
+        <div class="panel-body">
+           <div id='list_revi_docu6'></div>
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=6&ficha=<?php echo base64_encode('Revisión mapas colaboartivos') ?>" class='edicion'>Registrar/Editar</a>
+
+       </div>
+      </div>
+    </div>
+
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse433">
+       Analisis de titularidad </a>
+        </h4>
+      </div>
+      <div id="collapse433" class="panel-collapse collapse">
+        <div class="panel-body">
+          
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=4&ficha=<?php echo base64_encode('Analisis de titularidad') ?>" class='edicion'>Registrar/Editar</a>
+
+       </div>
+      </div>
+    </div>
 
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -426,24 +608,6 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
        </div>
       </div>
 
-    
-
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
-        Relación jurídica</a>
-        </h4>
-      </div>
-      <div id="collapse7" class="panel-collapse collapse">
-        <div class="panel-body">
-            <div id='history_revi41' align="center"> </div>
-    <p><a href="../../includes/php/seguimientos.php?cod_cliente=<?php echo $datos1['cod_cliente'] ?>&id_serv_diag=<?php echo $datos1['id_serv_diag'] ?>" class='edicion'>Agregar/Editar Relación jurídica</a></p></div>
-
-        </div>
-      </div>
-
-  
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -602,11 +766,8 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
       </div>
       <div id="collapse131" class="panel-collapse collapse">
         <div class="panel-body">
-                <div id='history_revi31' align="center">
+                <div id='history_cotizacion' align="center"> Espere por favor.
                     </div>
-   <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Cotizar</a>
-
-
         </div>
       </div>
     </div>
