@@ -389,6 +389,11 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2;
         <td>Última actuación:</td>
         <td>&nbsp;</td>
       </tr>
+
+       <tr>
+        <td>Perfil del cliente:</td>
+        <td><a href="perfil_cliente.php?cod_cliente=<?php echo $datos2['cod_cliente']; ?>" class='edicion'>Ver perfil</a></td>
+      </tr>
     </table>
 
 </div>
