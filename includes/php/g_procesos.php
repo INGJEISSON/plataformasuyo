@@ -1866,7 +1866,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                             if($rows){
                                 
                                 $datos=pg_fetch_assoc($query);
-                                        include('servicios.php');    
+                                        include('diagnosticos.php');    
                                 
                             }
           
@@ -1880,6 +1880,26 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                           if($query){
                                     $update="update serv_cliente set cod_usuario='".$_POST['cod_usu_resp']."' where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
+                                    $query2=pg_query($conexion, $update);
+                                        if($query2)
+                                          echo "1"; // Registro exitoso...
+                                        else
+                                          echo "3"; // Ocurrió un error técnico....
+                          }
+                          else
+                            echo "2"; // Ocurrió un problema al registrar la información.
+
+          }
+
+          if(isset($_POST['asig_diagnostico'])){ // Asignación de diagnóstico
+
+
+
+                    $sql="insert into asigna_diag (id_elab_diag, cod_usu_coor, cod_usu_respon, fecha_filtro, fecha_registro) values('".$_POST['id_elab_diag']."', '".$_SESSION['cod_usuario']."', '".$_POST['cod_usu_resp']."', '".$fecha_filtro."', '".$fecha_registro."') ";
+                    $query=pg_query($conexion, $sql);
+
+                          if($query){
+                                   $update="update diagno_client set cod_usuario='".$_POST['cod_usu_resp']."' where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
                                     $query2=pg_query($conexion, $update);
                                         if($query2)
                                           echo "1"; // Registro exitoso...

@@ -2,7 +2,7 @@
 @include('../dependencia/conexion.php');
 $cod_resp=0;
              if(isset($_POST['email'])){
-                        $parametro="serv_cliente.cod_usuario='".$datos['cod_usuario']."' and ";
+                        $parametro="(diagno_client.cod_usu_legal='".$datos['cod_usuario']."' or diagno_client.cod_usu_tecnico='".$datos['cod_usuario']."')  and ";
                         
                         $cod_resp=base64_encode($datos['cod_usuario']);
                         

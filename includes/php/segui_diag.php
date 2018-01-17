@@ -92,6 +92,14 @@ $id_elab_diag=base64_decode($_GET['id_elab_diag']);
           overlayClose:false,
           //escKey:
           });
+
+        $(".edicion2").colorbox({
+          iframe:true, 
+          width:"100%", 
+          height:"100%",
+          overlayClose:false,
+          //escKey:
+          });
           
 
 var id_fasfield="<?php echo $id_elab_diag ?>";
@@ -392,7 +400,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2;
 
        <tr>
         <td>Perfil del cliente:</td>
-        <td><a href="perfil_cliente.php?cod_cliente=<?php echo $datos2['cod_cliente']; ?>" class='edicion'>Ver perfil</a></td>
+        <td><a href="perfil_cliente2.php?cod_cliente=<?php echo $datos2['cod_cliente']; ?>" target='_blank'>Ver perfil</a></td>
       </tr>
     </table>
 
