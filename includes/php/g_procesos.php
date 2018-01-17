@@ -1866,7 +1866,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                             if($rows){
                                 
                                 $datos=pg_fetch_assoc($query);
-                                        include('diagnosticos.php');    
+                                        include('servicios.php');    
                                 
                             }
           
