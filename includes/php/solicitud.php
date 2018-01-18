@@ -37,8 +37,8 @@ include('../dependencia/conexion.php');
                            <tr>
                              <td height="46"><select name="select" id="cod_estado" class="form-control">
                                <option value="1" selected="selected">Sin revisar</option>
-                               <option value="36">Problema funcional</option>
-                               <option value="37">Sugerencia</option>                             
+                               <option value="38">Problema funcional</option>
+                               <option value="39">Sugerencia</option>                             
                              </select></td>
                              <td><label for="textfield"></label></td>
                              <td><input type="textarea" class="form-control" name="textfield2" id="observacion"></td>
