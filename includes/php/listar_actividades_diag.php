@@ -23,7 +23,7 @@
 
                                           // Consultamos la última observacion de la actividad... 
 
-                                   $sql1="select observacion from activ_diag where cod_activi_etapa='".$datos2['cod_activi_etapa']."' order by id_activi_diag desc limit 1 ";
+                                 $sql1="select observacion from activ_diag where cod_activi_etapa='".$datos2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' order by id_activi_diag desc limit 1 ";
                                    $query1=pg_query($conexion, $sql1);
                                    $datos1=pg_fetch_assoc($query1);
 

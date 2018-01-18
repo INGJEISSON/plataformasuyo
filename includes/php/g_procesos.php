@@ -1871,6 +1871,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                             }
           
           }
+
           if(isset($_POST['asig_servicio'])){
 
 
@@ -1891,6 +1892,23 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
           }
 
+           if(isset($_POST['mis_diagnosticos'])){ // Listamos lo servicios.
+          
+              $sql="select * from usuarios where email='".$_POST['email']."' ";
+                    $query=pg_query($conexion, $sql);
+                    $rows=pg_num_rows($query);
+                            if($rows){
+                              
+                                $datos=pg_fetch_assoc($query);
+                                        include('diagnosticos.php');    
+                                
+                            }
+          
+          }
+
+          
+
+
           if(isset($_POST['asig_diagnostico'])){ // Asignación de diagnóstico
 
 
@@ -1899,7 +1917,19 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                     $query=pg_query($conexion, $sql);
 
                           if($query){
-                                   $update="update diagno_client set cod_usuario='".$_POST['cod_usu_resp']."' where id_serv_cliente='".$_POST['id_serv_cliente']."' ";
+
+                            // Buscamos si el usuario es de legal o de técnico
+                              $sq="select * from usuarios where cod_usuario='".$_POST['cod_usu_resp']."' ";
+                              $qr=pg_query($conexion, $sq);
+                              $rows=pg_num_rows($qr);
+                              $d=pg_fetch_assoc($qr);
+
+                                    if($d['tipo_usuario']==19)
+                                      $parametro='cod_usu_legal=';
+                                    else if($d['tipo_usuario']==21)
+                                      $parametro='cod_usu_tecnico=';
+
+                                   $update="update diagno_client set $parametro'".$_POST['cod_usu_resp']."' where id_elab_diag='".$_POST['id_elab_diag']."' ";
                                     $query2=pg_query($conexion, $update);
                                         if($query2)
                                           echo "1"; // Registro exitoso...

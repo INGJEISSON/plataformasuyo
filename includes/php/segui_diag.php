@@ -252,7 +252,8 @@ var datos='id_elab_diag='+id_elab_diag+'&list_servicios='+1;
 
 
     // Listamos las actividades de los documentos del cliente y lde la encuesta.
-var datos='listar_actividades_diag='+1+'&tipo='+1+'&cod_equipo='+2;
+    var id_elab_diag="<?php echo $id_elab_diag ?>";
+var datos='listar_actividades_diag='+1+'&tipo='+1+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;
     
             $("#cargar2").show();
               $.ajax({
@@ -268,7 +269,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+1+'&cod_equipo='+2;
                   }); 
 
         // Listamos las actividades de los documentos del cliente y lde la encuesta.
-var datos='listar_actividades_diag='+1+'&tipo='+2+'&cod_equipo='+2;
+var datos='listar_actividades_diag='+1+'&tipo='+2+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;
     
             $("#cargar2").show();
               $.ajax({
@@ -284,7 +285,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+2+'&cod_equipo='+2;
                   });
     
     // Listamos las actividades de los documentos del cliente y lde la encuesta.
-var datos='listar_actividades_diag='+1+'&tipo='+3+'&cod_equipo='+2;
+var datos='listar_actividades_diag='+1+'&tipo='+3+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;
     
             $("#cargar2").show();
               $.ajax({
@@ -300,7 +301,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+3+'&cod_equipo='+2;
                   });
 
       // Listamos las actividades de los documentos del cliente y lde la encuesta.
-var datos='listar_actividades_diag='+1+'&tipo='+4+'&cod_equipo='+2;
+var datos='listar_actividades_diag='+1+'&tipo='+4+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;
     
             $("#cargar2").show();
               $.ajax({
@@ -316,7 +317,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+4+'&cod_equipo='+2;
                   });
 
             // Listamos las actividades de los documentos del cliente y lde la encuesta.
-var datos='listar_actividades_diag='+1+'&tipo='+5+'&cod_equipo='+2;
+var datos='listar_actividades_diag='+1+'&tipo='+5+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;;
     
             $("#cargar2").show();
               $.ajax({
@@ -332,7 +333,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+5+'&cod_equipo='+2;
                   });
 
               // Listamos las actividades de los documentos del cliente y lde la encuesta.
-var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2;
+var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;;
     
             $("#cargar2").show();
               $.ajax({

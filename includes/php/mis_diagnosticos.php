@@ -63,7 +63,7 @@ $("#cargando2").hide();
       $("#buscar").click(function(){
             var email=$("#email").val();         
 
-             var datos='mis_servicios='+1+'&email='+email;
+             var datos='mis_diagnosticos='+1+'&email='+email;
 
                 if(email!=""){
 $("#cargando2").show();

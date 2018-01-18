@@ -1,18 +1,11 @@
 <?php
 include('../dependencia/conexion.php');
     
-                    if(isset($_POST['email'])){
-                        $parametro="serv_cliente.cod_usu_resp='".$datos['cod_usuario']."' and ";
-                        
-                        $cod_resp=base64_encode($datos['cod_usuario']);
-                        
-                    }
-                    else
                     $parametro="";   
   
   //if($_SESSION['tipo_usuario']!=6)
 
- $sql="select  distinct cliente.cod_cliente, cliente.nombre as cliente, cliente.telefono_1, cliente.ciudad, cliente.barrio, tipo_cliente.descripcion as tipo_cliente from cliente, diagno_client, tipo_cliente where $parametro cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=diagno_client.cod_cliente and diagno_client.cod_estado=23";
+ $sql="select  distinct diagno_client.id_elab_diag, cliente.cod_cliente, cliente.nombre as cliente, cliente.telefono_1, cliente.ciudad, cliente.barrio, tipo_cliente.descripcion as tipo_cliente from cliente, diagno_client, tipo_cliente where $parametro cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=diagno_client.cod_cliente and diagno_client.cod_estado=23";
           $query=pg_query($conexion, $sql);
 
           $rows=pg_num_rows($query);
@@ -109,16 +102,14 @@ include('../dependencia/conexion.php');
                                 else
                               $sql3="select * from usuarios where tipo_usuario=21  or tipo_usuario=6 ";*/
 
-                        if($_SESSION['tipo_usuario']==1)
-                         $sql3="select * from usuarios where  tipo_usuario=21 or tipo_usuario=6 or tipo_usuario=19  "; 
-                        else if($_SESSION['tipo_usuario']!=6)
-                        $sql3="select * from usuarios where  tipo_usuario=19  ";
-                        else
-                        $sql3="select * from usuarios where  tipo_usuario=21 or tipo_usuario=6 ";
+                      
+                        $sql3="select * from usuarios where  tipo_usuario=19";                      
+                        $sql5="select * from usuarios where  tipo_usuario=21";
 
-                      $query3=pg_query($conexion, $sql3);
+                        $query3=pg_query($conexion, $sql3);
+                         $query4=pg_query($conexion, $sql5);
                               
-                            $sql2="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from serv_cliente, usuarios where serv_cliente.cod_usuario=usuarios.cod_usuario and  serv_cliente.id_serv_cliente='".$datos['id_serv_cliente']."' and serv_cliente.cod_estado=23 and serv_cliente.cod_usuario='".$datos['cod_usuario']."'   ";
+                            $sql2="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from diagno_client, usuarios where diagno_client.cod_usu_legal=usuarios.cod_usuario and  diagno_client.id_elab_diag='".$datos['id_elab_diag']."' and diagno_client.cod_usu_legal='".$datos['cod_usuario']."'   ";
                               $query2=pg_query($conexion, $sql2);
                               $rows2=pg_num_rows($query2);
                                   if($rows2){
@@ -129,9 +120,22 @@ include('../dependencia/conexion.php');
                                   }else
                                   $estado="Sin asignar";
 
+                            $sql21="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from diagno_client, usuarios where diagno_client.cod_usu_tecnico=usuarios.cod_usuario and  diagno_client.id_elab_diag='".$datos['id_elab_diag']."' and diagno_client.cod_usu_tecnico='".$datos['cod_usuario']."'   ";
+                              $query21=pg_query($conexion, $sql21);
+                              $rows21=pg_num_rows($query21);
+                                  if($rows21){
+                                     
+                                          $datos21=pg_fetch_assoc($query21);
+                                    $estado2="Asignado";
+
+                                  }else
+                                  $estado2="Sin asignar";
+
+
+
                             // Buscamoss la fecha de asignaci¨®n: 
 
-                                  $sql4="select fecha_filtro from asigna_serv where id_serv_cliente='".$datos['id_serv_cliente']."' order by id_asig_serv desc limit 1  ";
+                                  $sql4="select fecha_filtro from asigna_diag where id_elab_diag='".$datos['id_elab_diag']."' order by id_elab_diag desc limit 1  ";
                                   $query4=pg_query($conexion, $sql4);
                                   $rows4=pg_num_rows($query4);
                                       if($rows4){
@@ -144,10 +148,9 @@ include('../dependencia/conexion.php');
         <tr>
           <td><?php echo $i; ?></td>
           <td><?php echo $datos['cod_cliente']; ?></td>
-          <td><?php echo ($datos['nombre']); ?></td>       
+          <td><?php echo ($datos['cliente']); ?></td>       
           <td><?php echo ($datos['ciudad']); ?></td>
-          <td><?php?></td>
-          <td id='fecha_filtro<?php echo $i ?>'><?php echo $fecha_filtro; ?></td>
+          <td id='fecha_filtro<?php echo $i ?>'><?php echo $fecha_filtro; ?></td>          
           <td><select name="select" id="cod_usu_resp<?php echo $i ?>">
           
             <option value="0">Sin asignar</option>
@@ -169,6 +172,27 @@ include('../dependencia/conexion.php');
             }
         ?>
           </select></td>
+          <td><select name="select" id="cod_usu_resp<?php echo $i ?>">
+          
+            <option value="0">Sin asignar</option>
+            <
+                    <?php
+                     
+                while($datos31=pg_fetch_assoc($query5)){  
+                    
+                        if($rows21){
+                    
+                  ?>
+                   <option value="<?= $datos3['cod_usuario'] ?>"<?php if($datos31['cod_usuario']==$datos21['cod_usuario']){    ?> selected='selected' <?php } ?> > <?php echo $datos31['nombre']." ". $datos31['apellidos']?></option>
+             <?php
+                }else{
+            ?>
+            <option value="<?= $datos3['cod_usuario'] ?>"> <?php echo $datos31['nombre']." ". $datos31['apellidos']?></option>
+            <?php   
+                }
+            }
+        ?>
+          </select></td>
           <td><input type="button" class="btn btn-primary" id="confir<?php echo $i ?>" name="button"  value="Confirmar"></td>       </tr>
              </tr>
         </td>
@@ -184,9 +208,9 @@ include('../dependencia/conexion.php');
                         $("#confir<?php echo $i ?>").click(function(){
 
                           var cod_usu_resp=$("#cod_usu_resp<?php echo $i ?>").val();
-                          var id_serv_cliente=<?php echo $datos['id_serv_cliente'] ?>;
+                          var id_elab_diag=<?php echo $datos['id_elab_diag'] ?>;
 
-                              var datos='asig_servicio='+1+'&cod_usu_resp='+cod_usu_resp+'&id_serv_cliente='+id_serv_cliente;
+                              var datos='asig_diagnostico='+1+'&cod_usu_resp='+cod_usu_resp+'&id_elab_diag='+id_elab_diag;
 
                               
                                            $.ajax({
@@ -197,7 +221,7 @@ include('../dependencia/conexion.php');
                                                     success: function(valor){
                                                         
                                                             if(valor==1){
-                                                            alert("Servicio asignado correctamente");
+                                                            alert("Diagnóstico asignado correctamente");
                                                             $("#fecha_filtro<?php echo $i ?>").val("jeisson");
                                                            }
                                                             else
@@ -241,7 +265,7 @@ $(document).ready(function () {
             type: 'column'
         },
         title: {
-            text: 'Servicios asignados por responsable'
+            text: 'Diagnósticos asignados por responsable'
         },
         subtitle: {
             text: 'Generado en: <a href="http://platform.suyo.io">Plataforma Suyo (Beta)</a>'
@@ -274,7 +298,7 @@ $(document).ready(function () {
             <?php 
                while($datos4=pg_fetch_assoc($query6)){
 
-                                        $sql2="select * from serv_cliente where cod_usuario='".$datos4['cod_usuario']."' and cod_estado=23 ";
+                                        $sql2="select * from asigna_diag where cod_usu_legal='".$datos4['cod_usuario']."' or cod_usu_tecnico='".$datos4['cod_usuario']."' ";
                                     $query2=pg_query($conexion, $sql2);
                                     $datos2=pg_fetch_assoc($query2);
                                     $rows2=pg_num_rows($query2);
