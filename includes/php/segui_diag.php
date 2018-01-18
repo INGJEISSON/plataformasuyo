@@ -795,7 +795,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     </div>
     <div id="collapse14" class="panel-collapse collapse">
       <div class="panel-body"><div id='history_revi4' align="center">                           </div>
-    <p><a href="../../includes/php/revi_call2.php?cod_cliente=<?php echo $datos1['cod_cliente'] ?>tipo_seguimiento=18&id_serv_cliente=<?php echo $datos1['id_elab_diag'] ?>" class='edicion'>Nueva comunicación</a></p></div>
+    <p><a href="../../includes/php/revi_call2.php?cod_cliente=<?php echo $d['cod_cliente'] ?>tipo_seguimiento=18&id_serv_cliente=<?php echo $datos1['id_elab_diag'] ?>" class='edicion'>Nueva comunicación</a></p></div>
     </div>
   </div>
 
@@ -810,7 +810,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     </div>
     <div id="collapse16" class="panel-collapse collapse">
       <div class="panel-body"><div id='history_revi5' align="center">                           </div>
-    <p><a href="../../includes/php/solicitud.php?cod_cliente=<?php echo $datos1['cod_cliente'] ?>&id_serv_cliente=<?php echo $datos1['id_serv_cliente'] ?>" class='edicion'>Reportar problema</a></p></div>
+    <p><a href="../../includes/php/solicitud.php?cod_cliente=<?php echo $d['cod_cliente'] ?>&id_serv_cliente=<?php echo $datos1['id_serv_cliente'] ?>" class='edicion'>Reportar problema</a></p></div>
     </div>
   </div>
                       </p>
