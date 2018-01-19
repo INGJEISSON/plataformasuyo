@@ -52,9 +52,32 @@ include('../dependencia/conexion.php');
 ?>
  <script src="../../plugins/bower_components/jquery/dist/jquery.min.js"></script>
  <link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">  
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.flash.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.4.2/js/buttons.colVis.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>   
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+
+ <!-- Bootstrap Core JavaScript -->
+    <script src="../../bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="../../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="../../js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="../../js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../../js/custom.min.js"></script> 
 
 
 <script>
@@ -78,7 +101,7 @@ $(document).ready(function(){
 
                     $.ajax({
                             type: "POST",
-                            url: 'includes/php/g_procesos.php',
+                            url: '../../includes/php/g_procesos.php',
                             data: datos,
                             success: function(valor){
 
@@ -97,7 +120,7 @@ $(document).ready(function(){
 
                     $.ajax({
                             type: "POST",
-                            url: 'includes/php/g_procesos.php',
+                            url: '../../includes/php/g_procesos.php',
                             data: datos,
                             success: function(valor){
 
@@ -116,7 +139,7 @@ $(document).ready(function(){
 
                     $.ajax({
                             type: "POST",
-                            url: 'includes/php/g_procesos.php',
+                            url: '../../includes/php/g_procesos.php',
                             data: datos,
                             success: function(valor){
 
@@ -142,7 +165,7 @@ $(document).ready(function(){
                 <div class="row">
                     <div class="col-md-4 col-xs-12">
                         <div class="white-box">
-                            <div class="user-bg"> <img width="50%" alt="user" align="text-center" src="img/Profile.png"> </div>
+                            <div class="user-bg"> <img width="50%" alt="user" align="text-center" src="../../img/Profile.png"> </div>
                             <div class="user-btm-box">
                                 <!-- .row -->
                                 <div class="row text-center m-t-10">
@@ -158,7 +181,7 @@ $(document).ready(function(){
                                 <!-- .row -->
                                 <div class="row text-center m-t-10">
                                     <div class="col-md-6 b-r"><strong>Ubicación de Predios</strong>
-                                        <p><img src='img/map-pin-location.jpg' width='80' height='80'></p>
+                                        <p><img src='../../img/map-pin-location.jpg' width='80' height='80'></p>
                                     </div>
                                     <div class="col-md-6"><strong>Teléfono</strong>
                                         <p><?php echo $datos['telefono_1'] ?> </p>
@@ -388,7 +411,7 @@ $(document).ready(function(){
 
                                         <div class="col-md-3 col-xs-6"> <strong>Encuesta Diagnóstico</strong>
                                             <br>
-                                            <p class="text-muted"><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos2['encuesta'] ?>/procesados/<?php echo $datos2['id_fasfield']."/".$archivo_pdf2 ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></p>
+                                            <p class="text-muted"><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos2['encuesta'] ?>/procesados/<?php echo $datos2['id_fasfield']."/".$archivo_pdf2 ?>" tittle='Revisar'><img src="../../img/icono_pdf.png" width="31" height="31"></a></p>
                                         </div>
 
                                         <div class="col-md-3 col-xs-6"> <strong>Adjuntar archivos</strong>
@@ -486,60 +509,7 @@ $(document).ready(function(){
                 <!-- Right sidebar -->
                 <!-- ============================================================== -->
                 <!-- .right-sidebar -->
-                <div class="right-sidebar">
-                    <div class="slimscrollright">
-                        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
-                        <div class="r-panel-body">
-                            <ul id="themecolors" class="m-t-20">
-                                <li><b>With Light sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-theme="default" class="default-theme">1</a></li>
-                                <li><a href="javascript:void(0)" data-theme="green" class="green-theme">2</a></li>
-                                <li><a href="javascript:void(0)" data-theme="gray" class="yellow-theme">3</a></li>
-                                <li><a href="javascript:void(0)" data-theme="blue" class="blue-theme">4</a></li>
-                                <li><a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a></li>
-                                <li><a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a></li>
-                                <li><b>With Dark sidebar</b></li>
-                                <br/>
-                                <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a></li>
-                                <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a></li>
-                                <li><a href="javascript:void(0)" data-theme="gray-dark" class="yellow-dark-theme">9</a></li>
-                                <li><a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a></li>
-                                <li><a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a></li>
-                                <li><a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme working">12</a></li>
-                            </ul>
-                            <ul class="m-t-20 all-demos">
-                                <li><b>Choose other demos</b></li>
-                            </ul>
-                            <ul class="m-t-20 chatonline">
-                                <li><b>Chat option</b></li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../plugins/images/users/varun.jpg" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../plugins/images/users/genu.jpg" alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../plugins/images/users/ritesh.jpg" alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small class="text-danger">Busy</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../plugins/images/users/arijit.jpg" alt="user-img" class="img-circle"> <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../plugins/images/users/govinda.jpg" alt="user-img" class="img-circle"> <span>Govinda Star <small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../plugins/images/users/hritik.jpg" alt="user-img" class="img-circle"> <span>John Abraham<small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../plugins/images/users/john.jpg" alt="user-img" class="img-circle"> <span>Hritik Roshan<small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../plugins/images/users/pawandeep.jpg" alt="user-img" class="img-circle"> <span>Pwandeep rajan <small class="text-success">online</small></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <
                 <!-- ============================================================== -->
                 <!-- End Right sidebar -->
                 <!-- ============================================================== -->
@@ -581,7 +551,7 @@ $("#cargando2").hide();
                                                 $.ajax({
                                                      type: "POST",
                                                      data: datos,
-                                                     url: 'includes/php/g_procesos.php',
+                                                     url: '../../includes/php/g_procesos.php',
                                                      success: function(valor){
 
                                                                 if(valor==1){

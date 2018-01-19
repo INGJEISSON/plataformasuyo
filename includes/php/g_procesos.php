@@ -1809,9 +1809,37 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                     
 
               if($query){
+
+                 if($_POST['tipo']==1){
+                  $parametro='9 and 19';
+                  
+                }
+
+                elseif($_POST['tipo']==2){
+                   $parametro='24 and 62';
+                 
+                }
+                elseif($_POST['tipo']==3){
+                   $parametro='78 and 85';
+
+
+                }
+
+               elseif($_POST['tipo']==4){
+                 $parametro='65 and 77';                
+                }
+
+                elseif($_POST['tipo']==5 ){ // Listado de variables de  revisión de bases de datos
+                  $parametro='86 and 91'; 
+                
+                }
+
+                elseif($_POST['tipo']==6 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='92 and 97'; 
+                  }
               
                   
-                    $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_diag, activi_etapa where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' order by activ_diag.id_activi_diag desc ";
+                    $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa_diag.descripcion as actividad from usuarios, etapa_activ, activ_diag, activi_etapa_diag where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa_diag.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa_diag.id_activi_diag and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' and activi_etapa_diag.id_activi_diag between $parametro order by activ_diag.id_activi_diag desc ";
                           $query2=pg_query($conexion, $sql2);
                           $rows2=pg_num_rows($query2);
                          include('history_revi2.php');
@@ -1831,9 +1859,37 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
          
          }
          if(isset($_POST['revi_serv_diag'])){ //  Agregar actividades del diagnóstico
-                            
-                     $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_diag, activi_etapa where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' order by activ_diag.id_activi_diag desc ";
-                        $query2=pg_query($conexion, $sql2);
+                      
+                      if($_POST['tipo']==1){
+                  $parametro='9 and 19';
+                  
+                }
+
+                elseif($_POST['tipo']==2){
+                   $parametro='24 and 62';
+                 
+                }
+                elseif($_POST['tipo']==3){
+                   $parametro='78 and 85';
+
+
+                }
+
+               elseif($_POST['tipo']==4){
+                 $parametro='65 and 77';                
+                }
+
+                elseif($_POST['tipo']==5 ){ // Listado de variables de  revisión de bases de datos
+                  $parametro='86 and 91'; 
+                
+                }
+
+                elseif($_POST['tipo']==6 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='92 and 97'; 
+                  }       
+                     
+                  $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa_diag.descripcion as actividad from usuarios, etapa_activ, activ_diag, activi_etapa_diag where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa_diag.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa_diag.id_activi_diag and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' and activi_etapa_diag.id_activi_diag between $parametro order by activ_diag.id_activi_diag desc ";
+                     $query2=pg_query($conexion, $sql2);
                           $rows2=pg_num_rows($query2);
                       include('history_revi2.php');
          

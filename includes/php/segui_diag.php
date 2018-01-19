@@ -91,16 +91,7 @@ $id_elab_diag=base64_decode($_GET['id_elab_diag']);
           height:"100%",
           overlayClose:false,
           //escKey:
-          });
-
-        $(".edicion2").colorbox({
-          iframe:true, 
-          width:"100%", 
-          height:"100%",
-          overlayClose:false,
-          //escKey:
-          });
-          
+          });          
 
 var id_fasfield="<?php echo $id_elab_diag ?>";
 var tipo_seguimiento=8;
@@ -440,15 +431,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <tr>
         <td>(*)Municipio:</td>
         <td><input type="text" name="textfield5" class="form-control" id="textfield5" value="<?php echo $d['ciudad'] ?>"></td>
-      </tr>
-      <tr>
-        <td>(*)Folio de matrícula:</td>
-        <td><input type="text" name="textfield6" class="form-control" id="textfield6" value="<?php echo $d['folio_mat'] ?>"></td>
-      </tr>
-      <tr>
-        <td>(*)Referencia catastral:</td>
-        <td><input type="text" name="textfield7" class="form-control" id="textfield7" value="<?php echo $d['refe_catas'] ?>"></td>
-      </tr>
+      </tr>      
       </table>
 </div>
     </div>
@@ -557,14 +540,63 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse433">
-       Analisis de titularidad </a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4331">
+       Analisis de FMI </a>
         </h4>
       </div>
-      <div id="collapse433" class="panel-collapse collapse">
+      <div id="collapse4331" class="panel-collapse collapse">
         <div class="panel-body">
           
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=4&ficha=<?php echo base64_encode('Analisis de titularidad') ?>" class='edicion'>Registrar/Editar</a>
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=8&ficha=<?php echo base64_encode('Analisis de FMI') ?>" class='edicion'>Registrar/Editar</a>
+
+       </div>
+      </div>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4321">
+       Analisis de la situación actual del impuesto predial </a>
+        </h4>
+      </div>
+      <div id="collapse4321" class="panel-collapse collapse">
+        <div class="panel-body">
+          
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=9&ficha=<?php echo base64_encode('Analisis de la situación actual del impuesto predial') ?>" class='edicion'>Registrar/Editar</a>
+
+       </div>
+      </div>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4322">
+        Análisis situación actual servicios públicos  </a>
+        </h4>
+      </div>
+      <div id="collapse4322" class="panel-collapse collapse">
+        <div class="panel-body">
+          
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=10&ficha=<?php echo base64_encode('Análisis situación actual servicios públicos ') ?>" class='edicion'>Registrar/Editar</a>
+
+       </div>
+      </div>
+    </div>
+          
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse43321">
+       Otras situaciones </a>
+        </h4>
+      </div>
+      <div id="collapse43321" class="panel-collapse collapse">
+        <div class="panel-body">
+          
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=11&ficha=<?php echo base64_encode('Otras situaciones') ?>" class='edicion'>Registrar/Editar</a>
 
        </div>
       </div>
@@ -722,25 +754,6 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </div>
     </div>
 
-
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse11">
-        Otras situaciones</a>
-        </h4>
-      </div>
-      <div id="collapse11" class="panel-collapse collapse">
-        <div class="panel-body">
-          <div id='history_revi3' align="center">
-                    </div>
-   <a href="../../includes/php/revi_servi.php?id_serv_cliente=<?php echo $id_serv_cliente ?>&cod_servicio=<?php echo $datos1['cod_servicio'] ?>&cod_cliente=<?php echo $datos1['cod_cliente'] ?>" class='edicion'>Nueva situación</a>
-
-        </div>
-      </div>
-    </div>
-
-
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -760,7 +773,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse13">
-        Servicios que no se pueden recomendar</a>
+        Servicios ofrecidos</a>
         </h4>
       </div>
       <div id="collapse13" class="panel-collapse collapse">

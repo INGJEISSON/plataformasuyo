@@ -286,7 +286,8 @@ var cod_activi_etapa=$("#cod_activi_etapa").val();
 var observacion=$("#observacion").val();
 var fecha_actividad=$("#fecha_actividad").val();
 var id_serv_cliente="<?php echo "$_GET[id_elab_diag]" ?>";
-var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&add_revi_diag='+1+'&fecha_actividad='+fecha_actividad;
+var tipo="<?php echo "$_GET[tipo]" ?>";
+var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&add_revi_diag='+1+'&fecha_actividad='+fecha_actividad+'&tipo='+tipo;
     
     if(cod_activi_etapa!=1){
 		
@@ -306,33 +307,54 @@ var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+
                                 $("#cargar2").hide();
                                   alert("Se ha agregado su actividad al cliente");   
                                   $("#history_revi").html(valor);
-                                  
-                                   var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&revi_serv2_diag='+1+'&fecha_actividad='+fecha_actividad;
+                                 
+
+                                      var id_elab_diag="<?php echo "$_GET[id_elab_diag]" ?>";
+var datos='listar_actividades_diag='+1+'&tipo='+tipo+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;
     
-            $("#cargar2").show();
+          
               $.ajax({
 
                         type: "POST",
                         data: datos,
                         url: 'g_procesos.php?'+datos,
                         success: function(valor){
+                              if(tipo==1){
+                                 $("#list_revi_docu").empty();                             
+                                   $("#list_revi_docu").html(valor);
+                              }
+                              else if(tipo==2){
+                                 $("#list_revi_docu2").empty();                             
+                                   $("#list_revi_docu2").html(valor);
+                              }
+                              else if(tipo==3){
+                                 $("#list_revi_docu3").empty();
+                             
+                                   $("#list_revi_docu3").html(valor);
+
+                              }
+                              else if(tipo==4){
+                                 $("#list_revi_docu4").empty();
+                              
+                                   $("#list_revi_docu4").html(valor);
+
+                              }
+                              else if(tipo==5){
+                                 $("#list_revi_docu5").empty();
+                            
+                                   $("#list_revi_docu5").html(valor);
+
+                              }
+                              else if(tipo==6){
+                                 $("#list_revi_docu6").empty();
+                              
+                                   $("#list_revi_docu6").html(valor);
+
+                              }
                            
-                               if(valor!=2){
-                                $("#cargar2").hide();
-
-                              //    alert("Se ha agregado su observación al cliente");   
-                                  $("#history_revi3").html(valor);
-                                 
-
-                               }else{
-                                      $("#cargar2").hide();
-                                alert("Ocurrió un error al crear el registro de la observación, por favor intenta de nuevo o comuníquese con el administrador.");
-
-                               }
-
-
                         }
-                  });
+                  }); 
+
 
                                }else{
                                       $("#cargar2").hide();
@@ -352,7 +374,9 @@ var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+
 
 });
 var id_serv_cliente="<?php echo "$_GET[id_elab_diag]" ?>";
-var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&revi_serv_diag='+1+'&fecha_actividad='+fecha_actividad;
+var tipo="<?php echo "$_GET[tipo]" ?>";
+
+var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&revi_serv_diag='+1+'&fecha_actividad='+fecha_actividad+'&tipo='+tipo;
     
             $("#cargar2").show();
               $.ajax({
@@ -379,34 +403,6 @@ var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+
                         }
                   });
                   
-                  var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&revi_serv2_diag='+1+'&fecha_actividad='+fecha_actividad;
-    
-            $("#cargar2").show();
-              $.ajax({
-
-                        type: "POST",
-                        data: datos,
-                        url: 'g_procesos.php?'+datos,
-                        success: function(valor){
-                           
-                               if(valor!=2){
-                                $("#cargar2").hide();
-
-                              //    alert("Se ha agregado su observación al cliente");   
-                                  $("#history_revi3").html(valor);
-                                 
-
-                               }else{
-                                      $("#cargar2").hide();
-                                alert("Ocurrió un error al crear el registro de la observación, por favor intenta de nuevo o comuníquese con el administrador.");
-
-                               }
-
-
-                        }
-                  });
-
-
 
 });
 
