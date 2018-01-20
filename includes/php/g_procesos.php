@@ -1804,7 +1804,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
           else if($_SESSION['cod_grupo']==8 or $_SESSION['cod_grupo']==1) // Asesor...  o Super administrador
             $tipo_revision=3; // Asesor
 
-            $insert="insert into activ_diag (cod_activi_etapa, id_elab_diag, observacion, cod_usu_respon, fecha_actividad) values('".$_POST['cod_activi_etapa']."', '".$_POST['id_elab_diag']."', '".$_POST['observacion']."', '".$_SESSION['cod_usuario']."', '".$_POST['fecha_actividad']."') ";
+            $insert="insert into activ_diag (cod_activi_etapa, id_elab_diag, observacion, cod_usu_respon, fecha_actividad, fecha_registro) values('".$_POST['cod_activi_etapa']."', '".$_POST['id_elab_diag']."', '".$_POST['observacion']."', '".$_SESSION['cod_usuario']."', '".$_POST['fecha_actividad']."', '".$fecha_registro."') ";
             $query=pg_query($conexion, $insert);
                     
 
