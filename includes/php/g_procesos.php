@@ -1,8 +1,8 @@
 <?php
 include('../dependencia/conexion.php');
       // Agregamos archivo....
-date_default_timezone_set('America/Lima');
-$fecha_registro=date('Y-m-d H:mm:ss');
+date_default_timezone_set('America/Bogota');
+$fecha_registro=date('Y-m-d H:m:s');
 $fecha_filtro=date('Y-m-d');
 // Verificamos que el usuario esté autenticado..
 
