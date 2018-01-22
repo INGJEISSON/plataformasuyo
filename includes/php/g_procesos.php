@@ -1540,6 +1540,46 @@ if(isset($_SESSION['cod_usuario'])){
                                    $query3=pg_query($conexion, $sql3); 
                                 
                 }
+
+                elseif($_POST['tipo']==7 ){ // Listado de variables de  analísis fmi
+                  $etapa=2;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 112 and 132 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                
+                }
+
+                elseif($_POST['tipo']==8){ // Listado de variables de  análisis de titularidad
+                  $etapa=2;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 98 and 111 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                
+                }
+
+                 elseif($_POST['tipo']==9){ //Analisis de la situación actual del impuesto predial
+                  $etapa=2;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 133 and 136 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                
+                }
+
+                 elseif($_POST['tipo']==10 ){ // Listado de variables de  revisión de mapas colaborativos
+                  $etapa=2;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 137 and 139 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                
+                }
+
+                 elseif($_POST['tipo']==11){ // Listado de variables de  revisión de mapas colaborativos
+                  $etapa=2;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 140 and 142 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                
+                }
                               
                   // Listar actividades del diagnósticos
                 $query3=pg_query($conexion, $sql3); 
@@ -1837,6 +1877,21 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                 elseif($_POST['tipo']==6 ){ // Listado de variables de  revisión de mapas colaborativos
                  $parametro='92 and 97'; 
                   }
+                  elseif($_POST['tipo']==7 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='112 and 132'; 
+                  }
+                  elseif($_POST['tipo']==8 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='98 and 111'; 
+                  }
+                  elseif($_POST['tipo']==9 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='133 and 136'; 
+                  }
+                  elseif($_POST['tipo']==10 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='137 and 139'; 
+                  }
+                  elseif($_POST['tipo']==11 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='140 and 142'; 
+                  }
               
                   
                     $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa_diag.descripcion as actividad from usuarios, etapa_activ, activ_diag, activi_etapa_diag where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa_diag.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa_diag.id_activi_diag and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' and activi_etapa_diag.id_activi_diag between $parametro order by activ_diag.id_activi_diag desc ";
@@ -1906,7 +1961,13 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                 elseif($_POST['tipo']==6 ){ // Listado de variables de  revisión de mapas colaborativos
                  $parametro='92 and 97'; 
-                  }       
+                  }  
+                   elseif($_POST['tipo']==7 ){ // Listado de variables de análisis FMI
+                 $parametro='92 and 97'; 
+                  } 
+                   elseif($_POST['tipo']==8 ){ // Listado de variables de análisis titularidad
+                 $parametro='92 and 97'; 
+                  }      
                      
                   $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa_diag.descripcion as actividad from usuarios, etapa_activ, activ_diag, activi_etapa_diag where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa_diag.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa_diag.id_activi_diag and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' and activi_etapa_diag.id_activi_diag between $parametro order by activ_diag.id_activi_diag desc ";
                      $query2=pg_query($conexion, $sql2);
@@ -2346,7 +2407,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                       // COnsultamos que el menú no haya sido creado
 
-                        $sql="select tipo_lista from listas_despleg where descripcion='".trim($d['descripcion'])."' ";
+                        $sql="select tipo_lista from listas_despleg where descripcion='".trim($d['descripcion'])."' and tipo_lista='".$_POST['descripcion']."' ";
                         $query=pg_query($conexion, $sql);
                         $rows=pg_num_rows($query);
 

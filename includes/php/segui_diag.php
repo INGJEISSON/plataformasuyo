@@ -338,6 +338,80 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
                                    $("#list_revi_docu6").html(valor);
                         }
                   });
+
+    var datos='listar_actividades_diag='+1+'&tipo='+7+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                            $("#list_revi_docu7").empty();
+                                $("#cargar2").hide();
+                                   $("#list_revi_docu7").html(valor);
+                        }
+                  });
+
+      var datos='listar_actividades_diag='+1+'&tipo='+8+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                            $("#list_revi_docu8").empty();
+                                $("#cargar2").hide();
+                                   $("#list_revi_docu8").html(valor);
+                        }
+                  });
+         var datos='listar_actividades_diag='+1+'&tipo='+9+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                            $("#list_revi_docu9").empty();
+                                $("#cargar2").hide();
+                                   $("#list_revi_docu9").html(valor);
+                        }
+                  });
+
+           var datos='listar_actividades_diag='+1+'&tipo='+10+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                            $("#list_revi_docu10").empty();
+                                $("#cargar2").hide();
+                                   $("#list_revi_docu10").html(valor);
+                        }
+                  });
+
+             var datos='listar_actividades_diag='+1+'&tipo='+11+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                            $("#list_revi_docu11").empty();
+                                $("#cargar2").hide();
+                                   $("#list_revi_docu11").html(valor);
+                        }
+                  });
   });
 </script>
 
@@ -546,8 +620,24 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </div>
       <div id="collapse4331" class="panel-collapse collapse">
         <div class="panel-body">
-          
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=8&ficha=<?php echo base64_encode('Analisis de FMI') ?>" class='edicion'>Registrar/Editar</a>
+           <div id='list_revi_docu7'></div>
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=7&ficha=<?php echo base64_encode('Analisis de FMI') ?>" class='edicion'>Registrar/Editar</a>
+
+       </div>
+      </div>
+    </div>
+
+     <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4332">
+       Analisis de la titularidad </a>
+        </h4>
+      </div>
+      <div id="collapse4332" class="panel-collapse collapse">
+        <div class="panel-body">
+           <div id='list_revi_docu8'></div>
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=8&ficha=<?php echo base64_encode('Analisis de la titularidad') ?>" class='edicion'>Registrar/Editar</a>
 
        </div>
       </div>
@@ -562,7 +652,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </div>
       <div id="collapse4321" class="panel-collapse collapse">
         <div class="panel-body">
-          
+           <div id='list_revi_docu9'></div>
            <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=9&ficha=<?php echo base64_encode('Analisis de la situación actual del impuesto predial') ?>" class='edicion'>Registrar/Editar</a>
 
        </div>
@@ -578,7 +668,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </div>
       <div id="collapse4322" class="panel-collapse collapse">
         <div class="panel-body">
-          
+           <div id='list_revi_docu10'></div>
            <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=10&ficha=<?php echo base64_encode('Análisis situación actual servicios públicos ') ?>" class='edicion'>Registrar/Editar</a>
 
        </div>
@@ -590,12 +680,12 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse43321">
-       Otras situaciones </a>
+       Otras situaciones (Legal) </a>
         </h4>
       </div>
       <div id="collapse43321" class="panel-collapse collapse">
         <div class="panel-body">
-          
+           <div id='list_revi_docu11'></div>
            <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=11&ficha=<?php echo base64_encode('Otras situaciones') ?>" class='edicion'>Registrar/Editar</a>
 
        </div>

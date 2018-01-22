@@ -80,6 +80,65 @@ if($_GET['tipo']==6 ){ // Listado de variables de  revisión de mapas colaborati
 
 }
 
+if($_GET['tipo']==7 ){ // Listado de variables de análisis FMI
+  $etapa=2;
+
+             echo   $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 112 and 132 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+
+}
+
+if($_GET['tipo']==8 ){ // Listado de variables de análisis titularidad
+  $etapa=2;
+
+               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 98 and 111 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+
+}
+if($_GET['tipo']==9 ){ // Listado de variables de análisis titularidad
+  $etapa=2;
+
+               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 133 and 136 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+
+}
+if($_GET['tipo']==10 ){ // Listado de variables de análisis titularidad
+  $etapa=2;
+
+               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 137 and 139 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+
+}
+
+if($_GET['tipo']==11 ){ // Listado de variables de análisis titularidad
+  $etapa=2;
+
+               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 140 and 142 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+
+}
+
+
 
 /*
 // Buscamos la etapa de la última actuación..
@@ -391,6 +450,36 @@ var datos='listar_actividades_diag='+1+'&tipo='+tipo+'&cod_equipo='+2+'&id_elab_
                                  $("#list_revi_docu6").empty();
                               
                                    $("#list_revi_docu6").html(valor);
+
+                              }
+                               else if(tipo==7){
+                                 $("#list_revi_docu7").empty();
+                              
+                                   $("#list_revi_docu7").html(valor);
+
+                              }
+                               else if(tipo==8){
+                                 $("#list_revi_docu8").empty();
+                              
+                                   $("#list_revi_docu8").html(valor);
+
+                              }
+                              else if(tipo==9){
+                                 $("#list_revi_docu9").empty();
+                              
+                                   $("#list_revi_docu9").html(valor);
+
+                              }
+                              else if(tipo==10){
+                                 $("#list_revi_docu10").empty();
+                              
+                                   $("#list_revi_docu10").html(valor);
+
+                              }
+                              else if(tipo==11){
+                                 $("#list_revi_docu11").empty();
+                              
+                                   $("#list_revi_docu11").html(valor);
 
                               }
                            
