@@ -1850,6 +1850,26 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
       } 
 
+      // Buscamos listas desplegables de los campos de los diagnósticos.
+
+      if(isset($_POST['b_lista_despleg_diag'])){
+
+
+              $sql="select  * from deta_list_despleg where tipo_lista='".$_POST['cod_activi_etapa']."' ";
+                      $query=pg_query($conexion, $sql);
+                      $rows=pg_num_rows($query);
+                          if($rows){
+
+                             
+                                while($row_consulta2 = pg_fetch_assoc($query))           
+                            echo   $resp="<option value='".$row_consulta2[descripcion]."'>".($row_consulta2[descripcion])."</option>"; 
+
+                          }else
+                          echo  $resp="<option value=2>Ninguno</option>";
+      }
+
+
+
        if(isset($_POST['revi_serv'])){ //  Agregar actividades del servicio.
                             
                       $sql2="select usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro,  activ_serv.archivo, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$_POST['id_serv_cliente']."' order by activ_serv.id_activi_serv desc ";
@@ -2306,6 +2326,69 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
              if(isset($_POST['vista_docu'])){ // Generador de vistas de documentos. (archivos)
                     include('vistas_docu.php');
+            }
+
+            // Crear listas desplegables
+            if(isset($_POST['g_list_despleg'])){
+              echo "jei";
+
+                 
+                  if(isset($_POST['create'])){
+
+
+
+                                // Consultamos la descripcion real de la lista desplegable
+
+                           $s="select * from activi_etapa_diag where id_activi_diag='".$_POST['descripcion']."' ";
+                              $q=pg_query($conexion, $s);
+                              $d=pg_fetch_assoc($q);
+
+
+                      // COnsultamos que el menú no haya sido creado
+
+                        $sql="select tipo_lista from listas_despleg where descripcion='".trim($d['descripcion'])."' ";
+                        $query=pg_query($conexion, $sql);
+                        $rows=pg_num_rows($query);
+
+                           if($rows==1)
+                                echo "3"; // La lista desplegable ya existe.
+                            else{
+
+                                  $sql="insert into listas_despleg (tipo_lista, categoria, descripcion) values('".$_POST['descripcion']."', 1, '".$d['descripcion']."' ) ";
+                                  $query=pg_query($conexion, $sql);
+
+                                      if($query){
+                                        echo "1";
+                                          include('vistas.php');
+                                      }
+                                      else
+                                        echo "2"; // Problema técnico..
+                            }
+
+                  }
+
+                  if(isset($_POST['det_list'])){ /// Detalle de la lista desplegable
+
+                         $sql="select * from deta_list_despleg where descripcion='".trim($_POST['descripcion'])."' and tipo_lista='".$_POST['tipo_lista']."' ";
+                        $query=pg_query($conexion, $sql);
+                        $rows=pg_num_rows($query);
+                              if($rows==1)
+                                echo "3";  // Ya existe el detalle de la lista desplegable
+                              else{
+
+                                      $sql="insert into deta_list_despleg(tipo_lista, descripcion,descripcion2) values('".$_POST['tipo_lista']."', '".$_POST['descripcion']."', '') ";
+                                     $query=pg_query($conexion, $sql);
+
+                                          if($query){
+                                              echo "1";
+                                                include('vistas.php');
+
+                                          }else
+                                          echo "2"; // Problema técnico..
+                              }
+                  }
+
+            
             }
 
 

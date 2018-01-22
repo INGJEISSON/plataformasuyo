@@ -15,6 +15,12 @@ $sql="select * from cliente ";
 elseif($_POST['vistas']==7) // Vista de clientes en devolución.
 $sql="select cliente.nombre, tipo_cliente.descripcion as tipo_cliente, cliente.ciudad, cliente.cod_cliente from devolucion, serv_cliente, cliente, tipo_cliente where cliente.tipo_cliente=tipo_cliente.tipo_cliente and  cliente.cod_cliente=serv_cliente.cod_cliente and devolucion.id_serv_cliente=serv_cliente.id_serv_cliente ";
 
+elseif($_POST['vistas']==8) // Vista de listas desplegables
+$sql="select * from listas_despleg";
+
+elseif($_POST['vistas']==9) // Vista de opciones listas desplegables
+$sql="select * from deta_list_despleg where tipo_lista='".$_POST['tipo_lista']."' ";
+
 //elseif($_POST['vistas']==7) // Estados de servicios
 //$sql="select * from cliente ";
 //$sql="select documentacion.cod_cliente, documentacion.apellidos, documentacion.nombres, documentacion.ciudad, bodegas.descripcion as bodega, documentacion.cod_estante as estante, documentacion.ubicacion, documentacion.usr_codif from documentacion, bodegas where documentacion.cod_bodega=bodegas.cod_bodega ";
@@ -322,6 +328,87 @@ $sql="select cliente.nombre, tipo_cliente.descripcion as tipo_cliente, cliente.c
                 <td><?php echo ($datos["tipo_cliente"]); ?></td>
                 <td><?php echo $datos["ciudad"]; ?></td> 
                 <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="includes/php/det_devol_client.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>" tittle='Revisar'><p class='icon-note lg'></p></a></td> 
+          </tr>
+             <?php
+       $i++;
+           }
+    ?>
+     </tbody>
+    </table>
+     </div>
+                        </div>
+                    </div>
+  </div>
+
+  <?php
+}
+?> 
+
+
+<?php if($_POST['vistas']==8){ // Vista de listas desplegables..
+?> 
+<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">                           
+                            <div class="table-responsive">
+       <table id="table_id" class='table responsive' cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="2%">#</th>
+                <th width="6%">Nombre</th>
+                <th width="11%">Ver/Editar</th>              
+            </tr>
+        </thead>
+        <tbody>
+         <?php
+                $i=1;
+                while($datos=pg_fetch_assoc($query)){
+                           
+                    ?>
+            <tr>
+                <td><?php echo $i ?></td>
+                <td><?php echo ($datos["descripcion"]) ?></td>
+                <td><a href="includes/php/det_list_desplegable.php?tipo_lista=<?php echo $datos['tipo_lista']; ?>" class="edicion" tittle='Revisar'><p class='icon-note lg'></p></a></td> 
+          </tr>
+             <?php
+       $i++;
+           }
+    ?>
+     </tbody>
+    </table>
+     </div>
+                        </div>
+                    </div>
+  </div>
+
+  <?php
+}
+?> 
+
+<?php if($_POST['vistas']==9){ // Vista de OPCIONES DE listas desplegables..
+?> 
+<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">                           
+                            <div class="table-responsive">
+       <table id="table_id" class='table responsive' cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="2%">#</th>
+                <th width="6%">Nombre</th>
+                <th width="11%">Ver/Editar</th>              
+            </tr>
+        </thead>
+        <tbody>
+         <?php
+                $i=1;
+                while($datos=pg_fetch_assoc($query)){
+                           
+                    ?>
+            <tr>
+                <td><?php echo $i ?></td>
+                <td><?php echo ($datos["descripcion"]) ?></td>
+                <td><a href="includes/php/det_list_desplegable.php?tipo_lista=<?php echo $datos['tipo_lista']; ?>" class="edicion" tittle='Revisar'><p class='icon-note lg'></p></a></td> 
           </tr>
              <?php
        $i++;

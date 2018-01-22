@@ -203,7 +203,12 @@ $etapa=1;
                                <?php } ?>
                              </select></td>
                              <td><label for="textfield"></label></td>
-                             <td><input type="text" class="form-control" name="textfield2" id="observacion"></td>
+                             <td><select name="select" id="observacion" class="form-control">  
+                             <option value="2">Ninguno</option>
+                             </select>
+
+                                <input type=text class="form-control" name="textfield2" id="observacion2">
+                             </td>
                              <td>&nbsp;</td>
                              <td><input type="date" class="form-control" name="textfield2" id="fecha_actividad"></td>
                              <td>&nbsp;</td>
@@ -252,6 +257,9 @@ $("#archrev").hide();
 $("#archrev2").hide();
 $("#pan_add_revision").hide();
 
+$("#observacion").hide();
+$("#observacion2").hide();
+
 $('#fecha_actividad').datepicker({
         autoHide: true,
         zIndex: 2048,
@@ -277,6 +285,37 @@ $("#archrev2").hide();
 
   });
 
+$("#cod_activi_etapa").change(function(){
+  var cod_activi_etapa=$("#cod_activi_etapa").val();
+  var b_lista_despleg_diag=1;
+    var datos='b_lista_despleg_diag='+b_lista_despleg_diag+'&cod_activi_etapa='+cod_activi_etapa;
+$("#observacion").hide();
+  $("#observacion2").hide();
+            $.ajax({
+                  type: "POST",
+                  data: datos,
+                  url: 'g_procesos.php?'+datos,
+                  success: function (valor){
+
+                        if(valor=='<option value=2>Ninguno</option>'){
+                          $("#observacion").empty();
+                          $("#observacion2").show();
+                          $("#observacion").hide();
+                          $("#observacion").html(valor);
+                        }else{
+                          $("#observacion").empty();
+                          $("#observacion").html(valor);
+                          $("#observacion2").hide();
+                           $("#observacion").show();                         
+
+                        }
+                  }
+
+            });
+
+});
+
+
 
 
 
@@ -284,6 +323,9 @@ $("#g_revision").click(function(){  // Abregamos revisión .....
 
 var cod_activi_etapa=$("#cod_activi_etapa").val();
 var observacion=$("#observacion").val();
+  if(observacion==2)
+  var observacion=$("#observacion2").val();
+
 var fecha_actividad=$("#fecha_actividad").val();
 var id_serv_cliente="<?php echo "$_GET[id_elab_diag]" ?>";
 var tipo="<?php echo "$_GET[tipo]" ?>";
