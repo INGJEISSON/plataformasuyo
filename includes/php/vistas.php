@@ -355,6 +355,7 @@ $sql="select * from deta_list_despleg where tipo_lista='".$_POST['tipo_lista']."
         <thead>
             <tr>
                 <th width="2%">#</th>
+                 <th width="6%">Código</th>
                 <th width="6%">Nombre</th>
                 <th width="11%">Ver/Editar</th>              
             </tr>
@@ -367,6 +368,7 @@ $sql="select * from deta_list_despleg where tipo_lista='".$_POST['tipo_lista']."
                     ?>
             <tr>
                 <td><?php echo $i ?></td>
+                <td><?php echo ($datos["tipo_lista"]) ?></td>
                 <td><?php echo ($datos["descripcion"]) ?></td>
                 <td><a href="includes/php/det_list_desplegable.php?tipo_lista=<?php echo $datos['tipo_lista']; ?>" class="edicion" tittle='Revisar'><p class='icon-note lg'></p></a></td> 
           </tr>

@@ -1967,6 +1967,17 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                   } 
                    elseif($_POST['tipo']==8 ){ // Listado de variables de análisis titularidad
                  $parametro='92 and 97'; 
+                  }  
+
+                  elseif($_POST['tipo']==9 ){ // Listado de variables de análisis titularidad
+                 $parametro='133 and 136'; 
+                  }  
+
+                  elseif($_POST['tipo']==10 ){ // Listado de variables de análisis titularidad
+                 $parametro='137 and 139'; 
+                  }  
+                  elseif($_POST['tipo']==11 ){ // Listado de variables de análisis titularidad
+                 $parametro='140 and 142'; 
                   }      
                      
                   $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa_diag.descripcion as actividad from usuarios, etapa_activ, activ_diag, activi_etapa_diag where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa_diag.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa_diag.id_activi_diag and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' and activi_etapa_diag.id_activi_diag between $parametro order by activ_diag.id_activi_diag desc ";
