@@ -15,7 +15,9 @@ $id_elab_diag=base64_decode($_GET['id_elab_diag']);
      $query2=pg_query($conexion, $sql2);
      $datos2=pg_fetch_assoc($query2);
 
-     $f="select * from usuarios where cod_usu_legal='".."' ";
+     $f="select * from usuarios where cod_usuario='".$d['cod_usu_legal']."' ";
+     $g=pg_query($conexion, $f);
+     $d2=pg_fetch_assoc($g);
      
      // Busco el nombre del responsable..
   /*   
@@ -451,7 +453,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </tr>
       <tr>
         <td>Responsable legal:</td>
-        <td>&nbsp;</td>
+        <td><?php echo $d2['nombre']." ".$d2['apellidos'] ?></td>
       </tr>
       <tr>
         <td>Responsable técnico: </td>
@@ -688,7 +690,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div id="collapse43321" class="panel-collapse collapse">
         <div class="panel-body">
            <div id='list_revi_docu11'></div>
-          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=11&ficha=<?php echo base64_encode('Otras situaciones') ?>" class='edicion'>Registrar/Editar</a>  <?php if($_SESSION['tipo_usuario']==22) <?php } ?>
+          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=11&ficha=<?php echo base64_encode('Otras situaciones') ?>" class='edicion'>Registrar/Editar</a>  <?php } ?>
 
        </div>
       </div>
