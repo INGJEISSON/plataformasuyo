@@ -7,6 +7,7 @@
                                <td width="148"><strong>Fecha de actividad</strong></td>
                                <td width="125"><strong>Observación:</strong></td>
                                <td width="126"><strong>Realizado:</strong></td>
+                               <td width="126"><strong>Acción:</strong></td>
                              </tr>
                              <?php
                              $i=1;
@@ -19,6 +20,7 @@
                                <td style="alignment-adjust:auto"><?php echo ($datos2['actividad']) ?></td>
                                <td><?php echo $datos2['fecha_actividad'] ?></td>
                                <td><?php echo $datos2['observacion'] ?></td>
+                               <td><?php echo $datos2['usuario'] ?></td>
                                <td><?php echo $datos2['usuario'] ?></td>
                              </tr>
                               <?php

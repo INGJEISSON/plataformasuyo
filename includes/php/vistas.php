@@ -21,6 +21,9 @@ $sql="select * from listas_despleg";
 elseif($_POST['vistas']==9) // Vista de opciones listas desplegables
 $sql="select * from deta_list_despleg where tipo_lista='".$_POST['tipo_lista']."' ";
 
+elseif($_POST['vistas']==10) // Vista de dependencias de servicios.
+$sql="select distinct servicios.nom_servicio from dependencia_serv, servicios where dependencia_serv.cod_servicio=servicios.cod_servicio ";
+
 //elseif($_POST['vistas']==7) // Estados de servicios
 //$sql="select * from cliente ";
 //$sql="select documentacion.cod_cliente, documentacion.apellidos, documentacion.nombres, documentacion.ciudad, bodegas.descripcion as bodega, documentacion.cod_estante as estante, documentacion.ubicacion, documentacion.usr_codif from documentacion, bodegas where documentacion.cod_bodega=bodegas.cod_bodega ";
@@ -410,6 +413,54 @@ $sql="select * from deta_list_despleg where tipo_lista='".$_POST['tipo_lista']."
             <tr>
                 <td><?php echo $i ?></td>
                 <td><?php echo ($datos["descripcion"]) ?></td>
+                <td><a href="includes/php/det_list_desplegable.php?tipo_lista=<?php echo $datos['tipo_lista']; ?>" class="edicion" tittle='Revisar'><p class='icon-note lg'></p></a></td> 
+          </tr>
+             <?php
+       $i++;
+           }
+    ?>
+     </tbody>
+    </table>
+     </div>
+                        </div>
+                    </div>
+  </div>
+
+  <?php
+}
+?> 
+
+
+
+<?php if($_POST['vistas']==10){ // Vista de depedencias de servicios
+?> 
+<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">                           
+                            <div class="table-responsive">
+       <table id="table_id" class='table responsive' cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="2%">#</th>
+                <th width="6%">Servicio Madre</th>
+                <th width="11%">Dependencia</th> 
+                <th width="11%">Ver/Editar</th>              
+            </tr>
+        </thead>
+        <tbody>
+         <?php
+                $i=1;
+                while($datos=pg_fetch_assoc($query)){
+
+                      // Consultamos el nombre del servicio de la dependencia
+                               // $sql2="select nom_servicio from servicios  where cod_servicio='".$datos['cod_servcio_dep']."' ";
+
+                           
+                    ?>
+            <tr>
+                <td><?php echo $i ?></td>
+                <td><?php echo ($datos["nom_servicio"]) ?></td>
+                <td><?php ?></td>
                 <td><a href="includes/php/det_list_desplegable.php?tipo_lista=<?php echo $datos['tipo_lista']; ?>" class="edicion" tittle='Revisar'><p class='icon-note lg'></p></a></td> 
           </tr>
              <?php

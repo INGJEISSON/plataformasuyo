@@ -1,8 +1,11 @@
 <?php
-@include('../dependencia/conexion.php');
-$cod_resp=0;
+if(empty($_POST['email']))
+include('../dependencia/conexion.php');
                  if(isset($_POST['email'])){
-                        $parametro="(diagno_client.cod_usu_legal='".$datos['cod_usuario']."' or diagno_client.cod_usu_tecnico='".$datos['cod_usuario']."')  and ";
+                      if( $datos['tipo_usuario']==22)
+                        $parametro="diagno_client.cod_usu_legal='".$datos['cod_usuario']."' and ";
+                      else
+                        $parametro="diagno_client.cod_usu_tecnico='".$datos['cod_usuario']."'  and ";  
                         
                         $cod_resp=base64_encode($datos['cod_usuario']);
                         
@@ -10,7 +13,7 @@ $cod_resp=0;
                     else
                     $parametro="";  
 
- $sql="select  distinct cliente.cod_cliente, cliente.nombre as cliente, cliente.telefono_1, cliente.ciudad, cliente.barrio, tipo_cliente.descripcion as tipo_cliente from cliente, diagno_client, tipo_cliente where $parametro cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=diagno_client.cod_cliente and diagno_client.cod_estado=23 ";
+  $sql="select  distinct cliente.cod_cliente, cliente.nombre as cliente, cliente.telefono_1, cliente.ciudad, cliente.barrio, tipo_cliente.descripcion as tipo_cliente from cliente, diagno_client, tipo_cliente where $parametro cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=diagno_client.cod_cliente and diagno_client.cod_estado=23 ";
           $query=pg_query($conexion, $sql);
           $rows=pg_num_rows($query);
 

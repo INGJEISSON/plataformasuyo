@@ -1,6 +1,8 @@
  <?php
 include('../dependencia/conexion.php');
-      
+date_default_timezone_set('America/Bogota');
+$fecha_registro=date('Y-m-d H:i:s');
+$fecha_filtro=date('Y-m-d');     
      /* if(isset($_GET['id_fasfield'])){ // Buscamos las encuestas
 
       $sql="select  enc_procesadas.cod_enc_proc, enc_procesadas.asesor, enc_procesadas.cliente, enc_procesadas.fecha_recepcion, enc_procesadas.fecha_revision, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield, enc_procesadas.ciudad, enc_procesadas.arch_pdf, tipo_encuesta.nombre as tipo_encuesta from enc_procesadas, estado, tipo_encuesta where enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta  and enc_procesadas.id_fasfield='".$_GET['id_fasfield']."' ";
@@ -17,7 +19,7 @@ $_GET['id_elab_diag']=base64_decode($_GET['id_elab_diag']);
   if($_GET['tipo_seguimiento']==9)
     $sql1="select activi_etapa_diag.id_activi_diag as tipo_afect, activi_etapa_diag.descripcion from activi_etapa_diag where id_activi_diag=11 or id_activi_diag=50";
    if($_GET['tipo_seguimiento']==14 or $_GET['tipo_seguimiento']==15)
-    $sql1="select servicios.nom_servicio as descripcion, servicios.cod_servicio as tipo_afect from servicios";
+    $sql1="select servicios.nom_servicio as descripcion, servicios.cod_servicio as tipo_afect from servicios where fecha_2='2018-12-01' and tipo=1 order by nom_servicio";
 
 
 
@@ -48,9 +50,9 @@ $query3=pg_query($conexion, $sql1);
                          </p>
                          <table width="600" border="0" id="pan_add_revision" class="table responsive" cellpadding="1" cellspacing="4">
                            <tr>
-                             <td width="189"><strong>Actuación:</strong></td>
+                             <td width="189"><strong>Actividad:</strong></td>
                              <td width="26">&nbsp;</td>
-                             <td width="227"><strong>Observación:</strong></td>
+                             <td width="227"><strong>Detalle:</strong></td>
                              <td width="11">&nbsp;</td>
                              <td width="113"><strong>Acción</strong></td>
                            </tr>
@@ -67,10 +69,9 @@ $query3=pg_query($conexion, $sql1);
                              <td><label for="textfield"></label></td>
                              <td>
 
-
-
-                             <input type="text" class="form-control" name="textfield2" id="observacion">
-
+                                <select name="select" id="observacion" class="form-control">  
+                             <option value="0">Ninguno</option>
+                             </select>
 
 
                              </td>
@@ -123,6 +124,24 @@ $("#pan_add_revision").show();
 });
 
 
+$("#cod_estado").change(function(){
+  var cod_estado=$("#cod_estado").val();
+  var b_lista_despleg_serv_dep=1;
+  var datos='b_lista_despleg_serv_dep='+b_lista_despleg_serv_dep+'&cod_estado='+cod_estado;
+$("#observacion").hide();
+            $.ajax({
+                  type: "POST",
+                  data: datos,
+                  url: 'g_procesos.php?'+datos,
+                  success: function (valor){
+                      $("#observacion").empty(); 
+                      $("#observacion").html(valor);    
+                      $("#observacion").show();                   
+                  }
+
+            });
+
+});
 
 
 
@@ -150,7 +169,29 @@ var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+o
                                 $("#cargar2").hide();
                                   alert("Información registrada correctamente");   
 								  $("#resul_seguimiento").html(valor); 
-                   $("#history_afect").html(valor);      
+                   $("#history_afect").html(valor);     
+
+                                             // Listamos servicios cotizados
+                              var id_elab_diag="<?php echo "$_GET[id_elab_diag]" ?>";
+                              var datos='id_elab_diag='+id_elab_diag+'&list_servicios='+1;
+                                  
+                                          $("#cargar2").show();
+                                            $.ajax({
+
+                                                      type: "POST",
+                                                      data: datos,
+                                                      url: 'g_procesos.php?'+datos,
+                                                      success: function(valor){
+                                                          $("#history_serv_recom2").empty();
+                                                              $("#cargar2").hide();
+                                                            //    alert("Se ha agregado su observación al cliente");   
+                                                                $("#history_cotizacion").html(valor);
+
+                                                             
+
+
+                                                      }
+                                                });      
                                           
 
                                }else{

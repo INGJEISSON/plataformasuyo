@@ -1277,7 +1277,7 @@ if(isset($_SESSION['cod_usuario'])){
           
          
 
-       $insert="insert into seguimientos (tipo_seguimiento, id_fasfield, cod_usuario, observacion, cod_estado,  fecha_agenda, archivo) values('".$_POST['tipo_seguimiento']."',  '".$_POST['id_fasfield']."', '".$_SESSION['cod_usuario']."',  '".($_POST['observacion'])."', '".$_POST['cod_estado']."', '".$_POST['fecha_agenda']."', '".$_SESSION['nom_archivo']."' ) ";
+       $insert="insert into seguimientos (tipo_seguimiento, id_fasfield, cod_usuario, observacion, cod_estado,  fecha_agenda, archivo, fecha_registro) values('".$_POST['tipo_seguimiento']."',  '".$_POST['id_fasfield']."', '".$_SESSION['cod_usuario']."',  '".($_POST['observacion'])."', '".$_POST['cod_estado']."', '".$_POST['fecha_agenda']."', '".$_SESSION['nom_archivo']."', '".$fecha_registro."') ";
         $query=pg_query($conexion, $insert);
             
             if($_POST['cod_estado']==22){
@@ -1298,13 +1298,11 @@ if(isset($_SESSION['cod_usuario'])){
 
                              else if($_POST['tipo_seguimiento']==14 || $_POST['tipo_seguimiento']==15){
 
-                                   if($_POST['tipo_seguimiento']==14){
-
-                             /// echo "Entró aquí";
+                                if($_POST['tipo_seguimiento']==14){
 
                                   $_POST['pr_servi_n']="";
                                                      // Verificamos que el servicio aún no esté recomendado..
-                                       $sql2="select cod_servicio from serv_recom_diag where cod_servicio='".$_POST['cod_estado']."' ";
+                                       $sql2="select cod_servicio from serv_recom_diag where cod_servicio='".$_POST['cod_estado']."' and id_elab_diag='".$_POST['id_fasfield']."' ";
                                       $query2=pg_query($conexion, $sql2); 
                                       $rows=pg_num_rows($query2);
 
@@ -1315,7 +1313,7 @@ if(isset($_SESSION['cod_usuario'])){
 
                                              // Buscamos el nombre del producto y plazo sugerido del servico (defecto).
 
-                                            $sql3="select * from produc_servi where cod_servicio='".$_POST['cod_estado']."' ";
+                                             $sql3="select * from produc_servi where cod_servicio='".$_POST['cod_estado']."' ";
                                             $query3=pg_query($conexion, $sql3);
                                             $rows3=pg_num_rows($query3);
                                             
@@ -1328,16 +1326,42 @@ if(isset($_SESSION['cod_usuario'])){
                                         $insert="insert into serv_recom_diag (id_elab_diag, cod_servicio, pr_serv_n, cod_produc_serv) values('".$_POST['id_fasfield']."', '".$_POST['cod_estado']."', '".$_POST['pr_servi_n']."', '".$cod_product_serv."' ) ";
                                              
                                              $query=pg_query($conexion, $insert);
-                                               /* if($query)
-                                                  echo "1";
-                                                else
-                                                  echo "2"; // Problema técnico...*/
                                           }
-                              }
 
+                                          // Agregamos el servicio (Dependiente)
+                                              if($_POST['observacion']!=0){
+
+
+                                                   $sql2="select cod_servicio from serv_recom_diag where cod_servicio='".$_POST['observacion']."' and id_elab_diag='".$_POST['id_fasfield']."' ";
+                                                  $query2=pg_query($conexion, $sql2); 
+                                                  $rows=pg_num_rows($query2);
+
+                                                              if($rows==0){   
+                                                                       // Buscamos el nombre del producto y plazo sugerido del servico (defecto).
+
+                                                                $sql3="select * from produc_servi where cod_servicio='".$_POST['observacion']."' ";
+                                                                $query3=pg_query($conexion, $sql3);
+                                                                $rows3=pg_num_rows($query3);
+                                                                
+                                                                        if($rows3){
+                                                                          $dato3=pg_fetch_assoc($query3);
+                                                                          $cod_product_serv=$dato3['cod_produc_serv'];
+                                                                        }
+                                                                        else
+                                                                          $cod_product_serv=0;                                              
+                                                            $insert="insert into serv_recom_diag (id_elab_diag, cod_servicio, pr_serv_n, cod_produc_serv) values('".$_POST['id_fasfield']."', '".$_POST['observacion']."', '".$_POST['pr_servi_n']."', '".$cod_product_serv."' ) ";
+                                                                 
+                                                                 $query=pg_query($conexion, $insert);
+
+                                                              }
+
+                                                  }
+                              } // Fin si tipo seguimiento 14
+
+                               
 
                                   $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, servicios.nom_servicio as estado, usuarios.nombre as usuario from seguimientos, usuarios, servicios where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=servicios.cod_servicio and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";  
-                                }
+                            } // FIn si tipo de seguimineto 14 y 15
 
                        }
 
@@ -1923,6 +1947,22 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                           echo  $resp="<option value=2>Ninguno</option>";
       }
 
+       if(isset($_POST['b_lista_despleg_serv_dep'])){ // Listas dependencia de Servicios
+
+
+              $sql="select servicios.nom_servicio, servicios.cod_servicio from dependencia_serv, servicios where servicios.cod_servicio=dependencia_serv.cod_servicio_dep and dependencia_serv.cod_servicio='".$_POST['cod_estado']."' ";
+                      $query=pg_query($conexion, $sql);
+                      $rows=pg_num_rows($query);
+                          if($rows){
+
+                             
+                                while($row_consulta2 = pg_fetch_assoc($query))           
+                            echo   $resp="<option value='".$row_consulta2[cod_servicio]."'>".($row_consulta2[nom_servicio])."</option>"; 
+
+                          }else
+                          echo  $resp="<option value=0>Ninguno</option>";
+      }
+
 
 
        if(isset($_POST['revi_serv'])){ //  Agregar actividades del servicio.
@@ -2461,6 +2501,28 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                   }
 
             
+            }
+
+            // Registrar dependencia de servicios
+            if(isset($_POST['g_servicios'])){
+
+                    if(isset($_POST['dependencias'])){
+
+                              $sql="select * from dependencia_serv where cod_servicio_dep='".$_POST['cod_servicio2']."' and cod_servicio='".$_POST['cod_servicio']."' ";
+                                $query=pg_query($conexion, $sql);
+                                $rows=pg_num_rows($query);
+                                      if($rows)
+                                        echo "3"; // Dependencia de servicio ya existe.
+                                      else{
+                                              $insert="insert into dependencia_serv(cod_servicio, cod_servicio_dep) values('".$_POST['cod_servicio']."', '".$_POST['cod_servicio2']."') ";
+                                              $query_insert=pg_query($conexion, $insert);
+                                                    if($query_insert)
+                                                      echo "1";
+                                                    else
+                                                      echo "2";
+                                      }
+                    }
+
             }
 
 
