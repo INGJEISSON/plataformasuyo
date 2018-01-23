@@ -1,11 +1,10 @@
 <?php
 include('../dependencia/conexion.php');
     
-                    $parametro="";   
-  
+                    $parametro="";     
   //if($_SESSION['tipo_usuario']!=6)
 
- $sql="select  distinct diagno_client.id_elab_diag, cliente.cod_cliente, cliente.nombre as cliente, cliente.telefono_1, cliente.ciudad, cliente.barrio, tipo_cliente.descripcion as tipo_cliente from cliente, diagno_client, tipo_cliente where $parametro cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=diagno_client.cod_cliente and diagno_client.cod_estado=23";
+ $sql="select  distinct cliente.cod_cliente, cliente.nombre as cliente, cliente.telefono_1, cliente.ciudad, cliente.barrio, tipo_cliente.descripcion as tipo_cliente, diagno_client.id_elab_diag, diagno_client.cod_usu_legal, diagno_client.cod_usu_tecnico from cliente, diagno_client, tipo_cliente where $parametro cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=diagno_client.cod_cliente and diagno_client.cod_estado=23";
           $query=pg_query($conexion, $sql);
 
           $rows=pg_num_rows($query);
@@ -20,27 +19,7 @@ include('../dependencia/conexion.php');
                     $query6=pg_query($conexion, $sql6);
                     $rows6=pg_num_rows($query6);
                   
-                            /*while($datos4=pg_fetch_assoc($query4)){
-                                        
-                                 if($i==$rows4)
-                                     $nom_responsable.="'".$datos4['nombre'].' '.$datos4['apellidos']."'";
-                                     else
-                                     $nom_responsable.="'".$datos4['nombre'].' '.$datos4['apellidos']."', ";
-                                        //Buscamos la carga que tenga el usuario
-                                        
-                                    $sql2="select * from serv_cliente where cod_usu_resp='".$datos4['cod_usuario']."' and cod_estado_caso=23 ";
-                                    $query2=pg_query($conexion, $sql2);
-                                    $datos2=pg_fetch_assoc($query2);
-                                    $rows2=pg_num_rows($query2);
-                                   
-                                     if($i==$rows4)
-                                     $carga.="'".$rows2."'";
-                                     else
-                                     $carga.="'".$rows2."', ";
-                                     $i++;
-                            }*/
-  
-
+                           
 ?>
 
 
@@ -103,13 +82,13 @@ include('../dependencia/conexion.php');
                               $sql3="select * from usuarios where tipo_usuario=21  or tipo_usuario=6 ";*/
 
                       
-                        $sql3="select * from usuarios where  tipo_usuario=19";                      
-                        $sql5="select * from usuarios where  tipo_usuario=21";
+                    $sql3="select * from usuarios where  tipo_usuario=22";  //Legal                    
+                        $sql5="select * from usuarios where  tipo_usuario=23"; //T�cnico
 
                         $query3=pg_query($conexion, $sql3);
                          $query4=pg_query($conexion, $sql5);
                               
-                            $sql2="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from diagno_client, usuarios where diagno_client.cod_usu_legal=usuarios.cod_usuario and  diagno_client.id_elab_diag='".$datos['id_elab_diag']."' and diagno_client.cod_usu_legal='".$datos['cod_usuario']."'   ";
+                            $sql2="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from diagno_client, usuarios where diagno_client.cod_usu_legal=usuarios.cod_usuario and  diagno_client.id_elab_diag='".$datos['id_elab_diag']."' and diagno_client.cod_usu_legal='".$datos['cod_usu_legal']."'   ";
                               $query2=pg_query($conexion, $sql2);
                               $rows2=pg_num_rows($query2);
                                   if($rows2){
@@ -120,7 +99,7 @@ include('../dependencia/conexion.php');
                                   }else
                                   $estado="Sin asignar";
 
-                            $sql21="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from diagno_client, usuarios where diagno_client.cod_usu_tecnico=usuarios.cod_usuario and  diagno_client.id_elab_diag='".$datos['id_elab_diag']."' and diagno_client.cod_usu_tecnico='".$datos['cod_usuario']."'   ";
+                            $sql21="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from diagno_client, usuarios where diagno_client.cod_usu_tecnico=usuarios.cod_usuario and  diagno_client.id_elab_diag='".$datos['id_elab_diag']."' and diagno_client.cod_usu_tecnico='".$datos['cod_usu_tecnico']."'   ";
                               $query21=pg_query($conexion, $sql21);
                               $rows21=pg_num_rows($query21);
                                   if($rows21){
@@ -172,7 +151,7 @@ include('../dependencia/conexion.php');
             }
         ?>
           </select></td>
-          <td><select name="select" id="cod_usu_resp<?php echo $i ?>">
+          <td><select name="select" id="cod_usu_resp2<?php echo $i ?>">
           
             <option value="0">Sin asignar</option>
             <
@@ -183,7 +162,7 @@ include('../dependencia/conexion.php');
                         if($rows21){
                     
                   ?>
-                   <option value="<?= $datos3['cod_usuario'] ?>"<?php if($datos31['cod_usuario']==$datos21['cod_usuario']){    ?> selected='selected' <?php } ?> > <?php echo $datos31['nombre']." ". $datos31['apellidos']?></option>
+                   <option value="<?= $datos31['cod_usuario'] ?>"<?php if($datos31['cod_usuario']==$datos21['cod_usuario']){    ?> selected='selected' <?php } ?> > <?php echo $datos31['nombre']." ". $datos31['apellidos']?></option>
              <?php
                 }else{
             ?>
@@ -208,9 +187,10 @@ include('../dependencia/conexion.php');
                         $("#confir<?php echo $i ?>").click(function(){
 
                           var cod_usu_resp=$("#cod_usu_resp<?php echo $i ?>").val();
+                          var cod_usu_resp2=$("#cod_usu_resp2<?php echo $i ?>").val();
                           var id_elab_diag=<?php echo $datos['id_elab_diag'] ?>;
 
-                              var datos='asig_diagnostico='+1+'&cod_usu_resp='+cod_usu_resp+'&id_elab_diag='+id_elab_diag;
+                              var datos='asig_diagnostico='+1+'&cod_usu_resp='+cod_usu_resp+'&id_elab_diag='+id_elab_diag+'&cod_usu_resp2='+cod_usu_resp2;
 
                               
                                            $.ajax({
@@ -258,7 +238,7 @@ $(document).ready(function () {
             'copy', 'csv', 'excel', 'pdf'
         ]
 } );
- 
+ /*
 
  $('#container').highcharts({
         chart: {
@@ -289,9 +269,7 @@ $(document).ready(function () {
         legend: {
             enabled: false
         },
-        /*tooltip: {
-            pointFormat: 'Population in 2008: <b>{point.y:.1f} millions</b>'
-        },*/
+        
         series: [{
             name: 'Population',
             data: [
@@ -324,31 +302,7 @@ $(document).ready(function () {
         }]
     });
 
-
- 
- var equipo=19;
- 
-                 var datos='consul_carga_usu='+1+'&equipo='+equipo;
- $.ajax({
-
-            type: "POST",
-            data: datos,
-            url: 'includes/php/g_procesos.php',
-            success: function(valor){
-                
-               
-                 
-                 /*if(valor==1){
-                  /*  Push.create("Diagnósticos",{
-                          body: "Tienes diagnósticos pendientes por revisar",
-                          icon: 'img/suyo_colombia_img.jpg',
-                          timeout: 10000 
-                    });
-                 }*/
-
-            }
-      });
-
+*/
     
 });
     </script>

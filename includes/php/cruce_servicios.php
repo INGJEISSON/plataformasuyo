@@ -25,7 +25,7 @@ if($_POST['cod_estado']==6){ // Si aprobado, lo agrgamos al grupo de clientes..
                                                  if($rows4==0){ // SI no está registrado entonces..
 
                                                           echo   $insert="insert into cliente (id_fasfield, cod_cliente, nombre, tipo_cliente, ciudad, barrio, direccion_predio, telefono_1) values('".$_POST['id_fasfield']."', '".$datos['id_cliente']."',  '".$datos['cliente']."', 1, '".$datos['ciudad']."', '".$datos['barrio']."', '', '".$datos['telefono']."') ";
-                                                            // $query4=pg_query($conexion, $insert);
+                                                            $query4=pg_query($conexion, $insert);
 
                                                           // Ahora creamos la carpeta del cliente..
 
@@ -35,7 +35,7 @@ if($_POST['cod_estado']==6){ // Si aprobado, lo agrgamos al grupo de clientes..
 
                                                           $sql2="insert into documentacion (cod_cliente,  nombres, apellidos, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$_POST['id_cliente']."', '".$_POST['cliente']."', '', 2, '', 1, 1, 1, '".$md5_carp."') ";                                                       
                                                                      
-                                                         // $query2=pg_query($conexion, $sql2);
+                                                          $query2=pg_query($conexion, $sql2);
 
                                                                if($query2){
                                                                 /* mkdir('../files/clientes/'.$md5_carp); // Creamos carpeta inicial...
@@ -76,7 +76,7 @@ if($_POST['cod_estado']==6){ // Si aprobado, lo agrgamos al grupo de clientes..
                                                                               
                                                                               if($datos['tipo_pago']=='Contado'){
                                                                              echo  $insert2="insert into serv_cliente (asesor, cod_servicio, cod_estado, cod_cliente, valor, fecha_registro, cod_usuario, cod_acuer_pago, id_list_despleg) values('".$datos['asesor']."', '".$cod_servicio."', 23, '".$datos['id_cliente']."', '".$datos['valor']."', '".$fecha_registro."', 95, 1, 1)  ";
-                                                                                // $queryinser=pg_query($conexion, $insert2); // INsertamos el cliente..
+                                                                                 $queryinser=pg_query($conexion, $insert2); // INsertamos el cliente..
                                                                               }
 
                                                                           }      

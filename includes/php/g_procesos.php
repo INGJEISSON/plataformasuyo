@@ -2106,18 +2106,8 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                           if($query){
 
-                            // Buscamos si el usuario es de legal o de técnico
-                              $sq="select * from usuarios where cod_usuario='".$_POST['cod_usu_resp']."' ";
-                              $qr=pg_query($conexion, $sq);
-                              $rows=pg_num_rows($qr);
-                              $d=pg_fetch_assoc($qr);
-
-                                    if($d['tipo_usuario']==19)
-                                      $parametro='cod_usu_legal=';
-                                    else if($d['tipo_usuario']==21)
-                                      $parametro='cod_usu_tecnico=';
-
-                                   $update="update diagno_client set $parametro'".$_POST['cod_usu_resp']."' where id_elab_diag='".$_POST['id_elab_diag']."' ";
+                           
+                                   $update="update diagno_client set cod_usu_legal='".$_POST['cod_usu_resp']."', cod_usu_tecnico='".$_POST['cod_usu_resp2']."' where id_elab_diag='".$_POST['id_elab_diag']."' ";
                                     $query2=pg_query($conexion, $update);
                                         if($query2)
                                           echo "1"; // Registro exitoso...
