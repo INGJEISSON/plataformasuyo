@@ -2,7 +2,7 @@
 include('../dependencia/conexion.php');
 	if($_SESSION['cod_usuario']==1)
   $sql="select * from usuarios where tipo_usuario=22 or tipo_usuario=6 or tipo_usuario=23";
-  elseif($_SESSION['tipo_usuario']==6){
+  elseif($_SESSION['tipo_usuario']==4){
   $sql="select * from usuarios where tipo_usuario=22 or tipo_usuario=23";
   }
   else
