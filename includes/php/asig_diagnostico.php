@@ -11,11 +11,11 @@ include('../dependencia/conexion.php');
     
           
     if($_SESSION['tipo_usuario']==1)
-      $sql6="select * from usuarios where  tipo_usuario=21 or tipo_usuario=6 or tipo_usuario=19  "; 
+      $sql6="select * from usuarios where  tipo_usuario=22 or tipo_usuario=23   "; 
     else if($_SESSION['tipo_usuario']!=6)
-    $sql6="select * from usuarios where  tipo_usuario=19  ";
+    $sql6="select * from usuarios where   tipo_usuario=22 or tipo_usuario=23  ";
     else
-    $sql6="select * from usuarios where  tipo_usuario=21 or tipo_usuario=6 ";
+    $sql6="select * from usuarios where  tipo_usuario=22 or tipo_usuario=23 ";
                     $query6=pg_query($conexion, $sql6);
                     $rows6=pg_num_rows($query6);
                   
@@ -76,12 +76,7 @@ include('../dependencia/conexion.php');
       <?php
       $i=1;
         while($datos=pg_fetch_assoc($query)){
-                             /* if($_SESSION['tipo_usuario']!=6)
-                                $sql3="select * from usuarios where tipo_usuario=19 ";
-                                else
-                              $sql3="select * from usuarios where tipo_usuario=21  or tipo_usuario=6 ";*/
-
-                      
+                                                  
                     $sql3="select * from usuarios where  tipo_usuario=22";  //Legal                    
                         $sql5="select * from usuarios where  tipo_usuario=23"; //Técnico
 
@@ -238,8 +233,7 @@ $(document).ready(function () {
             'copy', 'csv', 'excel', 'pdf'
         ]
 } );
- /*
-
+ 
  $('#container').highcharts({
         chart: {
             type: 'column'
@@ -276,7 +270,7 @@ $(document).ready(function () {
             <?php 
                while($datos4=pg_fetch_assoc($query6)){
 
-                                        $sql2="select * from asigna_diag where cod_usu_legal='".$datos4['cod_usuario']."' or cod_usu_tecnico='".$datos4['cod_usuario']."' ";
+                                  $sql2="select distinct id_elab_diag from asigna_diag where cod_usu_respon='".$datos4['cod_usuario']."' ";
                                     $query2=pg_query($conexion, $sql2);
                                     $datos2=pg_fetch_assoc($query2);
                                     $rows2=pg_num_rows($query2);
@@ -302,7 +296,6 @@ $(document).ready(function () {
         }]
     });
 
-*/
     
 });
     </script>
