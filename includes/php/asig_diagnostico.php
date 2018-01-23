@@ -238,7 +238,7 @@ $(document).ready(function () {
             'copy', 'csv', 'excel', 'pdf'
         ]
 } );
- 
+ /*
 
  $('#container').highcharts({
         chart: {
@@ -301,6 +301,8 @@ $(document).ready(function () {
             }
         }]
     });
+
+*/
     
 });
     </script>
