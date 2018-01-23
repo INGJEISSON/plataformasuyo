@@ -124,7 +124,6 @@ $carga2=0;
                                                                                   }
 
                                                                                   break; // Salgo del bucle
-                                                                                
 
                                                                            } // Fin  si llegó al último usuario...
 

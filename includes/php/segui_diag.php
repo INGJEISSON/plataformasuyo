@@ -14,6 +14,8 @@ $id_elab_diag=base64_decode($_GET['id_elab_diag']);
      $sql2="select * from cliente where cod_cliente='".$d['cod_cliente']."' ";
      $query2=pg_query($conexion, $sql2);
      $datos2=pg_fetch_assoc($query2);
+
+     $f="select * from usuarios where cod_usu_legal='".."' ";
      
      // Busco el nombre del responsable..
   /*   
@@ -441,7 +443,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <table width="70%" border="0" class="table responsive">
       <tr>
         <td width="155">Fecha de asignación</td>
-        <td width="613">&nbsp;</td>
+        <td width="613">2018-22-01 16:24:02</td>
       </tr>
       <tr>
         <td>Tiempo de vencimiento:</td>
@@ -452,8 +454,8 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <td>Responsable técnico:</td>
-        <td>&nbsp;</td>
+        <td>Responsable técnico: </td>
+        <td>Juan Pablo Montoya</td>
       </tr>
       <tr>
         <td>Etapa:</td>
@@ -686,7 +688,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div id="collapse43321" class="panel-collapse collapse">
         <div class="panel-body">
            <div id='list_revi_docu11'></div>
-          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=11&ficha=<?php echo base64_encode('Otras situaciones') ?>" class='edicion'>Registrar/Editar</a>  <?php if($_SESSION['tipo_usuario']==22)} ?>
+          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=11&ficha=<?php echo base64_encode('Otras situaciones') ?>" class='edicion'>Registrar/Editar</a>  <?php if($_SESSION['tipo_usuario']==22) <?php } ?>
 
        </div>
       </div>
