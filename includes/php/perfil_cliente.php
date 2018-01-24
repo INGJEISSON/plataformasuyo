@@ -20,6 +20,14 @@ include('../dependencia/conexion.php');
         $datos2=pg_fetch_assoc($query_mult);
           $archivo_pdf2=$datos2['arch_pdf'];
 
+          // Buscamos todas las encuestas del diagnóstico reigstrada 
+          //Buscamos la multimedia relacionada con el cliente, 
+         $sql_multr2="select enc_procesadas.id_cliente, enc_procesadas.arch_pdf, enc_procesadas.id_fasfield, tipo_encuesta.nombre as encuesta from enc_procesadas, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and enc_procesadas.id_cliente='".$_GET['cod_cliente']."' and enc_procesadas.tipo_encuesta=1";
+         $query_multr2=pg_query($conexion, $sql_multr2);
+      
+         // $archivo_pdf2=$datos2['arch_pdf'];
+
+
             /// Listamos la multimedia.
          $sql_mult2="select * from archivos where id_fastfield='".$datos2['id_fasfield']."' ";
           $query_mult2=pg_query($conexion, $sql_mult2);
@@ -386,7 +394,22 @@ $(document).ready(function(){
 
                                         <div class="col-md-3 col-xs-6"> <strong>Encuesta Diagnóstico</strong>
                                             <br>
-                                            <p class="text-muted"><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos2['encuesta'] ?>/procesados/<?php echo $datos2['id_fasfield']."/".$archivo_pdf2 ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></p>
+
+                                             <?php 
+                                             while ($datos22r2=pg_fetch_assoc($query_multr2)){ 
+
+                                                $archivo_pdf2=$datos22r2['arch_pdf'];
+
+                                                
+                                        ?> 
+
+                                            <p class="text-muted"><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos22r2['encuesta'] ?>/procesados/<?php echo $datos22r2['id_fasfield']."/".$archivo_pdf2 ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></p>
+
+
+                                            <?php 
+                                             }
+                                            ?> 
+
                                         </div>
 
                                         <div class="col-md-3 col-xs-6"> <strong>Adjuntar archivos</strong>
@@ -404,7 +427,7 @@ $(document).ready(function(){
                                     </div>
 
 
-                              </div> 
+                                </div> 
 
                                 <div class="tab-pane" id="responsables_caso">
                                     <!-- Diagnósticos-->
