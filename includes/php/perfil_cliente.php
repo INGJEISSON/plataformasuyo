@@ -404,7 +404,7 @@ $(document).ready(function(){
                                     </div>
 
 
-                                </div> 
+                           dds     </div> 
 
                                 <div class="tab-pane" id="responsables_caso">
                                     <!-- Diagnósticos-->
