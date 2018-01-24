@@ -852,7 +852,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse12">
-        Servicios recomendados</a>
+        Servicios ofrecidos</a>
         </h4>
       </div>
       <div id="collapse12" class="panel-collapse collapse">
@@ -863,11 +863,11 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
         </div>
       </div>
 
-    <div class="panel panel-primary">
+    <!--<div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse13">
-        Servicios ofrecidos</a>
+        Servicios recomendados</a>
         </h4>
       </div>
       <div id="collapse13" class="panel-collapse collapse">
@@ -876,7 +876,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=15" class='edicion'>Agregar/Editar Servicios</a></p></div>
 
         </div>
-      </div>
+      </div>-->
 
       <div class="panel panel-primary">
       <div class="panel-heading">
