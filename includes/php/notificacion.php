@@ -39,58 +39,24 @@
                         <!-- /.dropdown-messages -->
                     </li>
                     <!-- .Task dropdown -->
-                    <!--<li class="dropdown">
+                    <li class="dropdown">
                         <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-check-circle"></i>
-                            <!-- <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-                        </a>-->
-                      <!--  <ul class="dropdown-menu dropdown-tasks animated slideInUp">
+                             <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-tasks animated slideInUp">
                             <li>
                                 <a href="#">
                                     <div>
-                                        <p> <strong>Task 1</strong> <span class="pull-right text-muted">40% Complete</span> </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
-                                        </div>
+                                        <p> <strong>Servicios</strong> <span class="pull-right text-muted">Tienes servicios nuevos</span></p>
                                     </div>
                                 </a>
                             </li>
-                            <li class="divider"></li>
+
+
+                           <!--  <li class="divider"></li>
                             <li>
-                                <a href="#">
-                                    <div>
-                                        <p> <strong>Task 2</strong> <span class="pull-right text-muted">20% Complete</span> </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%"> <span class="sr-only">20% Complete</span> </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p> <strong>Task 3</strong> <span class="pull-right text-muted">60% Complete</span> </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"> <span class="sr-only">60% Complete (warning)</span> </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p> <strong>Task 4</strong> <span class="pull-right text-muted">80% Complete</span> </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%"> <span class="sr-only">80% Complete (danger)</span> </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#"> <strong>Ver todas las tareas</strong> <i class="fa fa-angle-right"></i> </a>
-                            </li>
+                                <a class="text-center" href="#"> <strong>Ver todas las notificaciones</strong> <i class="fa fa-angle-right"></i> </a>
+                            </li>-->
                         </ul>
                     </li>
                     <!-- .Megamenu -->
