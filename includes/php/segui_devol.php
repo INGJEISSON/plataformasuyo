@@ -295,13 +295,13 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
       <tr>
         <td><!--td {border: 1px solid #ccc;}br {mso-data-placement:same-cell;}-->
           <span data-sheets-value="{'1':2,'2':'Valor ejecutado de conformidad con la etapa'}" data-sheets-userformat="{'2':29695,'3':[null,0],'4':[null,2,16770457],'5':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'6':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'7':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'8':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'9':1,'10':1,'11':4,'12':0,'15':'Arial','16':10,'17':1}">Valor cotizado</span></td>
-        <td><input type="text" id='v_ejecutado'  class="form-control" value="<?php echo $datos1['v_cotizado'] ?>"></td>
+        <td><input type="text" id='v_cotizado'  class="form-control" value="<?php echo $datos1['v_cotizado'] ?>"></td>
       </tr>
 
        <tr>
         <td><!--td {border: 1px solid #ccc;}br {mso-data-placement:same-cell;}-->
           <span data-sheets-value="{'1':2,'2':'Valor ejecutado de conformidad con la etapa'}" data-sheets-userformat="{'2':29695,'3':[null,0],'4':[null,2,16770457],'5':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'6':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'7':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'8':{'1':[{'1':2,'2':0,'5':[null,2,0]},{'1':0,'2':0,'3':3},{'1':1,'2':0,'4':1}]},'9':1,'10':1,'11':4,'12':0,'15':'Arial','16':10,'17':1}">Valor pagador por el cliente</span></td>
-        <td><input type="text" id='v_ejecutado'  class="form-control" value="<?php echo $datos1['v_pago_cliente'] ?>"></td>
+        <td><input type="text" id='v_pago_cliente'  class="form-control" value="<?php echo $datos1['v_pago_cliente'] ?>"></td>
       </tr>
 
       <tr>
