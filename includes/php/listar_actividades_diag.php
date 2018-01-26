@@ -26,7 +26,7 @@
                                               if($i==1)
                                             $obs= $datos1['observacion'];
                                              else
-                                            $obs.=",".$datos1['observacion'];
+                                            $obs.="|".$datos1['observacion'];
                                             $i++;
                                            }
                                       echo  $obs; ?></td>

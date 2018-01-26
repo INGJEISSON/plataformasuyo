@@ -83,7 +83,7 @@ if($_GET['tipo']==6 ){ // Listado de variables de  revisión de mapas colaborati
 if($_GET['tipo']==7 ){ // Listado de variables de análisis FMI
   $etapa=2;
 
-             echo   $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 112 and 132 order by id_activi_diag ";
+              $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 112 and 132 order by id_activi_diag ";
                    $query3=pg_query($conexion, $sql3); 
                               
                    $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
