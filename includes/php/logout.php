@@ -13,3 +13,8 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 echo "1";
 }
+
+?>
+ <script type="text/javascript">   
+parent.location='includes/php/logout.php';
+</script>
