@@ -17,5 +17,5 @@ unset($_SESSION['access_token']);
 
 ?>
  <script type="text/javascript">   
-parent.location='platform.suyo.io';
+parent.location='http://platform.suyo.io';
 </script>
