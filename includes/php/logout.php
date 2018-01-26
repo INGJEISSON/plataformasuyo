@@ -12,9 +12,10 @@ if (ini_get("session.use_cookies")) {
 }
 session_destroy();
 echo "1";
+unset($_SESSION['access_token']);
 }
 
 ?>
  <script type="text/javascript">   
-parent.location='includes/php/logout.php';
+parent.location='platform.suyo.io';
 </script>
