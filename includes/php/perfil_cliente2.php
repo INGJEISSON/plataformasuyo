@@ -416,7 +416,7 @@ $(document).ready(function(){
 
                                         <div class="col-md-3 col-xs-6"> <strong>Adjuntar archivos</strong>
                                             <br>
-                                            <p class="text-muted"><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src='includes/php/add_docu.php?id_cliente=<?php echo $_GET['cod_cliente'] ?>'>Ingresar</a></p>
+                                            <p class="text-muted"><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src='add_docu.php?id_cliente=<?php echo $_GET['cod_cliente'] ?>'>Ingresar</a></p>
                                            
                                         </div>
                                     </div>

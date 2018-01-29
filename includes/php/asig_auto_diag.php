@@ -42,7 +42,19 @@ $carga2=0;
                                                                 if($rows5==0){
 
                                                                       $sql2="insert into documentacion (cod_cliente,  nombres, apellidos, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$_POST['id_cliente']."', '".$_POST['cliente']."', '', 2, '', 1, 1, 1, '".$md5_carp."') ";        
-                                                                  // $query2=pg_query($conexion, $sql2);
+                                                                   $query2=pg_query($conexion, $sql2);
+
+
+                                                                   if($query2){
+                                                                      mkdir('../files/clientes/'.$md5_carp); // Creamos carpeta inicial...
+                                                                            // Creamos subcarpetas
+                                                                           mkdir('../files/clientes/'.$md5_carp."/Documentos de propiedad");
+                                                                           mkdir('../files/clientes/'.$md5_carp."/Facturas y contratos");
+                                                                          mkdir('../files/clientes/'.$md5_carp."/Otros documentos");
+                                                                            mkdir('../files/clientes/'.$md5_carp."/Analisis de caso");
+
+                                                                            echo "1";// Carpeta creada 
+                                                                    }
 
                                                                 }  
                                                       }  
