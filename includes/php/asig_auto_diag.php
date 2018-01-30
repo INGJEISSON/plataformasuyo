@@ -35,29 +35,7 @@ $carga2=0;
                                                         $carpeta_cliente=$datos['cliente'];
                                                         $md5_carp=md5($carpeta_cliente);  
 
-                                                                // Verificamos que no tenga documentación ya realizada
-                                                                  $sql5="select cod_cliente from documentacion where cod_cliente='".$datos['id_cliente']."'";
-                                              $query5=pg_query($conexion, $sql5); 
-                                                $rows5=pg_num_rows($query5);        
-                                                                if($rows5==0){
-
-                                                                     echo  $sql2="insert into documentacion (cod_cliente,  nombres, apellidos, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$_POST['id_cliente']."', '".$_POST['cliente']."', '', 2, '', 1, 1, 1, '".$md5_carp."') ";        
-                                                                  // $query2=pg_query($conexion, $sql2);
-                                                                      $query2=1;
-
-                                                                         if($query2){
-
-                                                                            mkdir('../files/clientes/'.$md5_carp); // Creamos carpeta inicial...
-                                                                                  // Creamos subcarpetas
-                                                                                 mkdir('../files/clientes/'.$md5_carp."/Documentos de propiedad");
-                                                                                 mkdir('../files/clientes/'.$md5_carp."/Facturas y contratos");
-                                                                                mkdir('../files/clientes/'.$md5_carp."/Otros documentos");
-                                                                                  mkdir('../files/clientes/'.$md5_carp."/Analisis de caso");
-
-                                                                                  echo "1";// Carpeta creada 
-                                                                          }
-
-                                                                  }  
+                                                              
                                                       }  
 
                                                // Veriquemos el tipo de encuesta.... no este
