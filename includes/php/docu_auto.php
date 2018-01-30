@@ -6,7 +6,9 @@ $fecha_registro=date('Y-m-d H:i:s');
 $fecha_filtro=date('Y-m-d');
 
   // Buscamos las encuestas que estén en el estado de aprobado
-  $s="select distinct enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and (det_repor_aseso.resul_visita='Visitado y pagado') and enc_procesadas.cod_estado=6   ";
+  //$s="select distinct enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and (det_repor_aseso.resul_visita='Visitado y pagado') and enc_procesadas.cod_estado=6   ";
+
+  $s="select distinct enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and (det_repor_aseso.resul_visita='Visitado y fue gratuito el diagnóstico') ";
   $q=pg_query($conexion, $s);
 $carga2=0;
             while($datos1=pg_fetch_assoc($q)){
@@ -22,7 +24,7 @@ $carga2=0;
                                                         $md5_carp=md5($carpeta_cliente);  
 
                                                                 // Verificamos que no tenga documentación ya realizada
-                                                  $sql5="select cod_cliente from documentacion where cod_cliente='".$datos['id_cliente']."'";
+                                               echo    $sql5="select cod_cliente from documentacion where cod_cliente='".$datos['id_cliente']."'";
                                               $query5=pg_query($conexion, $sql5); 
                                                 $rows5=pg_num_rows($query5);        
                                                                 if($rows5==0){
