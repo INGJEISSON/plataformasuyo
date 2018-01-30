@@ -28,7 +28,7 @@ $carga2=0;
                                                                 if($rows5==0){
 
                                                                      echo  $sql2="insert into documentacion (cod_cliente,  nombres, apellidos, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$datos['id_cliente']."', '".$datos['cliente']."', '', 2, '', 1, 1, 1, '".$md5_carp."') ";        
-                                                                   //$query2=pg_query($conexion, $sql2);
+                                                                   $query2=pg_query($conexion, $sql2);
                                                                       $query2=1;
 
                                                                          if($query2==1){
