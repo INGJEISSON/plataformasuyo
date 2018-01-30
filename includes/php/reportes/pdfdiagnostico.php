@@ -107,10 +107,10 @@
   </tr>
 </table>
 <p>&nbsp;</p>
-<table width="765" border="0">
-  <tr>
-    <td width="27" rowspan="5"><img src="img/Barra_Subtitulo.png" width="23" height="77" /></td>
-    <td width="619"><p class="azul">01 ESTADO ACTUAL DEL USUARIO Y EL PREDIO<br />
+<table width="384" border="0">
+  <tr>sasa
+    <td width="32" rowspan="5"><img src="img/Barra_Subtitulo.png" width="23" height="77" /></td>
+    <td width="342"><p class="azul">01 ESTADO ACTUAL DEL USUARIO Y EL PREDIO<br />
     </p></td>
   </tr>
   <tr>

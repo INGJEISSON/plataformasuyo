@@ -4,7 +4,7 @@ include('../dependencia/conexion.php');
                     $parametro="";     
   //if($_SESSION['tipo_usuario']!=6)
 
- echo $sql="select  distinct cliente.cod_cliente, cliente.nombre as cliente, cliente.telefono_1, cliente.ciudad, cliente.barrio, tipo_cliente.descripcion as tipo_cliente, diagno_client.id_elab_diag, diagno_client.cod_usu_legal, diagno_client.cod_usu_tecnico from cliente, diagno_client, tipo_cliente where $parametro cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=diagno_client.cod_cliente and diagno_client.cod_estado=23";
+ $sql="select  distinct cliente.cod_cliente, cliente.nombre as cliente, cliente.telefono_1, cliente.ciudad, cliente.barrio, tipo_cliente.descripcion as tipo_cliente, diagno_client.id_elab_diag, diagno_client.cod_usu_legal, diagno_client.cod_usu_tecnico from cliente, diagno_client, tipo_cliente where $parametro cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=diagno_client.cod_cliente and diagno_client.cod_estado=23";
           $query=pg_query($conexion, $sql);
 
           $rows=pg_num_rows($query);
@@ -94,10 +94,10 @@ include('../dependencia/conexion.php');
                                   }else
                                   $estado="Sin asignar";
 
-                        echo $sql21="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from diagno_client, usuarios where diagno_client.cod_usu_tecnico=usuarios.cod_usuario and  diagno_client.id_elab_diag='".$datos['id_elab_diag']."' and diagno_client.cod_usu_tecnico='".$datos['cod_usu_tecnico']."'   ";
+                        $sql21="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from diagno_client, usuarios where diagno_client.cod_usu_tecnico=usuarios.cod_usuario and  diagno_client.id_elab_diag='".$datos['id_elab_diag']."' and diagno_client.cod_usu_tecnico='".$datos['cod_usu_tecnico']."'   ";
                               $query21=pg_query($conexion, $sql21);
                               $rows21=pg_num_rows($query21);
-                                  if($rows21){
+                                  if($rows21==1){
                                      
                                           $datos21=pg_fetch_assoc($query21);
                                     $estado2="Asignado";
@@ -154,7 +154,7 @@ include('../dependencia/conexion.php');
                      
                 while($datos31=pg_fetch_assoc($query5)){  
                     
-                        if($rows21){
+                        if($rows21==1){
                     
                   ?>
                    <option value="<?= $datos31['cod_usuario'] ?>"<?php if($datos31['cod_usuario']==$datos21['cod_usuario']){    ?> selected='selected' <?php } ?> > <?php echo $datos31['nombre']." ". $datos31['apellidos']?></option>
