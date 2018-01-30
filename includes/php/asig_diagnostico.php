@@ -78,10 +78,10 @@ include('../dependencia/conexion.php');
         while($datos=pg_fetch_assoc($query)){
                                                   
                     $sql3="select * from usuarios where  tipo_usuario=22";  //Legal                    
-                    echo $sql5="select * from usuarios where  tipo_usuario=23"; //Técnico
+                    $sql5="select * from usuarios where  tipo_usuario=23"; //Técnico
 
                         $query3=pg_query($conexion, $sql3);
-                         $query4=pg_query($conexion, $sql5);
+                         $query5=pg_query($conexion, $sql5);
                               
                             $sql2="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from diagno_client, usuarios where diagno_client.cod_usu_legal=usuarios.cod_usuario and  diagno_client.id_elab_diag='".$datos['id_elab_diag']."' and diagno_client.cod_usu_legal='".$datos['cod_usu_legal']."'   ";
                               $query2=pg_query($conexion, $sql2);
@@ -152,8 +152,10 @@ include('../dependencia/conexion.php');
             <
                     <?php
                      
-                while($datos31=pg_fetch_assoc($query5)){   
-                echo $datos31['nombre']." ". $datos31['apellidos'];                
+                while($datos31=pg_fetch_assoc($query5)){ 
+
+              
+
                         if($rows21==1){                    
                   ?>
                    <option value="<?= $datos31['cod_usuario'] ?>"<?php if($datos31['cod_usuario']==$datos21['cod_usuario']){    ?> selected='selected' <?php } ?> > <?php echo $datos31['nombre']." ". $datos31['apellidos']?></option>
