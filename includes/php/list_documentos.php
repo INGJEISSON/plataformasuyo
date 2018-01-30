@@ -46,7 +46,7 @@ $sql="select documentacion.usr_codif,  detalle_docu.cod_cliente, categorias_docu
                 <td><?php echo ($datos["categoria"]) ?></td>
                 <td><?php echo ($datos['archivo']) ?></td>
                 <td><?php echo ($datos['estado']) ?></td>
-            <td><a href="../files/clientes/<?php echo $datos['usr_codif']; ?>/<?php echo $datos['categoria']; ?>/<?php echo $datos['archivo']; ?>" tittle='Agregar documentacion' class="edicion">Ver</a></td>       
+            <td><a href="files/clientes/<?php echo $datos['usr_codif']; ?>/<?php echo $datos['categoria']; ?>/<?php echo $datos['archivo']; ?>" tittle='Agregar documentacion' class="edicion">Ver</a></td>       
             <td><a href="includes/php/add_docu.php?id_cliente=<?php echo $datos['cod_cliente']; ?>" tittle='Agregar documentacion' class="edicion">Deshabilitar</a></td>             
           </tr>
              <?php
