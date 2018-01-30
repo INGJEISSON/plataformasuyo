@@ -10,7 +10,11 @@ $fecha_filtro=date('Y-m-d');
   $q=pg_query($conexion, $s);
 $carga2=0;
             while($datos1=pg_fetch_assoc($q)){
-            echo   $_POST['id_fasfield']=$datos1['id_fasfield'];
+             $_POST['id_fasfield']=$datos1['id_fasfield'];
+
+             							$sql3="select enc_procesadas.id_cliente, enc_procesadas.cliente, enc_procesadas.asesor, enc_procesadas.ciudad, enc_procesadas.telefono, enc_procesadas.barrio, det_repor_aseso.resul_visita, det_repor_aseso.tom_serv, det_repor_aseso.valor, det_repor_aseso.tipo_pago, det_repor_aseso.servi_tomados  from det_repor_aseso, enc_procesadas where det_repor_aseso.id_fasfield=enc_procesadas.id_fasfield and enc_procesadas.id_fasfield='".$_POST['id_fasfield']."' ";
+                                          $query3=pg_query($conexion, $sql3);
+                                          $datos=pg_fetch_assoc($query3);
 
                
                                                                // insertamos cliente   
@@ -23,8 +27,8 @@ $carga2=0;
                                                 $rows5=pg_num_rows($query5);        
                                                                 if($rows5==0){
 
-                                                                     echo  $sql2="insert into documentacion (cod_cliente,  nombres, apellidos, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$_POST['id_cliente']."', '".$_POST['cliente']."', '', 2, '', 1, 1, 1, '".$md5_carp."') ";        
-                                                                   $query2=pg_query($conexion, $sql2);
+                                                                     echo  $sql2="insert into documentacion (cod_cliente,  nombres, apellidos, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$datos['id_cliente']."', '".$datos['cliente']."', '', 2, '', 1, 1, 1, '".$md5_carp."') ";        
+                                                                   //$query2=pg_query($conexion, $sql2);
                                                                       $query2=1;
 
                                                                          if($query2==1){
