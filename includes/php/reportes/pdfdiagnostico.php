@@ -12,6 +12,7 @@
 }
 .gris_texto{
 		color: #5b5b5f;
+		font-size:11px
 }
 .turquesa{
 	color: #00BEBE
@@ -33,6 +34,7 @@
 }
 .verde{
 	color: #96C832;
+	
 }
 </style>
 </head>
@@ -45,33 +47,88 @@
 </table>
 <table width="438" border="0">
   <tr>
-    <td width="323" style="font-size: 29px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;">DIAGNÍOSTICO DE PROPIEDAD<br><img src="img/Linea_Titulo.png" width="260" height="12" /></td>
+    <td width="323"><p class="azul">DIAGNÍOSTICO DE PROPIEDAD<br><img src="img/Linea_Titulo.png" width="260" height="12" /></p></td>
     <td width="105">&nbsp;</td>
   </tr>
   <tr>
-    <td class="verde">Sr.</td>
+    <td><p class="turquesa">Sr.</p></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td>Calle 13 # 10 -33</td>
+    <td><p class="gris_texto">Calle 13 # 10 -33</p></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td style="color: #5b5b5f">Barranquilla, Colombia</td>
+    <td ><p class="gris_texto">Barranquilla, Colombia</p></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<table width="603" border="0">
+  <tr>
+    <td width="12" height="162"><img src="img/Barra_Parrafo1.png" width="10" height="153" /></td>
+    <td width="330"><p class="gris_texto">Por medio de la presente nos permitimos en<br />
+      primera medida agradecer la confianza que<br />
+      ha depositado en Suyo y en todo el grupo de profesionales que hay detrás de esta empre-<br />
+        sa de impacto social. Respondiendo al servicio que adquirió con nosotros, hacemos 
+        entrega de su documento de diagnóstico de        propiedad en el cual resumimos el análisis        legal y técnico que hemos realizado de su        caso; así mismo señalamos la viabilidad y el        tipo de servicio que requiere, con todos los    costos asociados. Recuerde preguntar a su</p></td>
+    <td width="247"><p class="gris_texto">asesor de ventas por las diferentes opciones<br />
+      de financiación que brindamos a través de<br />
+      nuestros aliados.<br />
+      Finalmente, quisiera reiterarle que sabemos<br />
+      que su hogar es su bien más preciado, por<br />
+      esto no defraudaremos su voto de confianza.<br />
+      Esperamos que pueda tomar los servicios<br />
+      recomendados con nosotros, Suyo y todo su<br />
+      equipo humano estará esperándole para<br />
+    asesorarlo y guiarlo de forma personalizada.</p></td>
+  </tr>
+</table>
+<table width="200" border="0">
+  <tr>
+    <td><img src="img/foto.png" width="684" height="202" /></td>
+  </tr>
+</table>
+<table width="200" border="0">
+  <tr>
+    <td><img src="img/firma_mateo.png" width="149" height="88" /></td>
+  </tr>
+  <tr>
+    <td>MATTHEW ALEXANDER</td>
+  </tr>
+  <tr>
+    <td><p class="gris_texto">Gerente General</p></td>
+  </tr>
+  <tr>
+    <td><p class="gris_texto">Suyo Colombia SAS</p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="765" border="0">
+  <tr>
+    <td width="27" rowspan="5"><img src="img/Barra_Subtitulo.png" width="23" height="77" /></td>
+    <td width="619"><p class="azul">01 ESTADO ACTUAL DEL USUARIO Y EL PREDIO<br />
+    </p></td>
+  </tr>
+  <tr>
+    <td><p class="turquesa">Sr.</p></td>
+  </tr>
+  <tr>
+    <td><p class="gris_texto">Calle 13 # 10 -33</p></td>
+  </tr>
+  <tr>
+    <td ><p class="gris_texto">Barranquilla, Colombia</p></td>
+  </tr>
+  <tr>
     <td>&nbsp;</td>
   </tr>
 </table>
 <p>&nbsp;</p>
-<table width="200" border="0">
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 <p>&nbsp;</p>
 </body>
 </html>
