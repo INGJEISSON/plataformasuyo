@@ -94,13 +94,13 @@ include('../dependencia/conexion.php');
                                   }else
                                   $estado="Sin asignar";
 
-                        $sql21="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from diagno_client, usuarios where diagno_client.cod_usu_tecnico=usuarios.cod_usuario and  diagno_client.id_elab_diag='".$datos['id_elab_diag']."' and diagno_client.cod_usu_tecnico='".$datos['cod_usu_tecnico']."'   ";
+                       echo   $sql21="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from diagno_client, usuarios where diagno_client.cod_usu_tecnico=usuarios.cod_usuario and  diagno_client.id_elab_diag='".$datos['id_elab_diag']."' and diagno_client.cod_usu_tecnico='".$datos['cod_usu_tecnico']."'   ";
                               $query21=pg_query($conexion, $sql21);
-                              $rows21=pg_num_rows($query21);
+                             echo  $rows21=pg_num_rows($query21);
                                   if($rows21==1){
                                      
-                                          $datos21=pg_fetch_assoc($query21);
-                                    $estado2="Asignado";
+                                     $datos21=pg_fetch_assoc($query21);
+                                     $estado2="Asignado";
 
                                   }else
                                   $estado2="Sin asignar";
@@ -161,7 +161,7 @@ include('../dependencia/conexion.php');
              <?php
                 }else{
             ?>
-            <option value="<?= $datos3['cod_usuario'] ?>"> <?php echo $datos31['nombre']." ". $datos31['apellidos']?></option>
+            <option value="<?= $datos31['cod_usuario'] ?>"> <?php echo $datos31['nombre']." ". $datos31['apellidos']?></option>
             <?php   
                 }
             }
