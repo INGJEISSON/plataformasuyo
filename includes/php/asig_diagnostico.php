@@ -78,7 +78,7 @@ include('../dependencia/conexion.php');
         while($datos=pg_fetch_assoc($query)){
                                                   
                     $sql3="select * from usuarios where  tipo_usuario=22";  //Legal                    
-                        $sql5="select * from usuarios where  tipo_usuario=23"; //Técnico
+                    echo $sql5="select * from usuarios where  tipo_usuario=23"; //Técnico
 
                         $query3=pg_query($conexion, $sql3);
                          $query4=pg_query($conexion, $sql5);
@@ -94,7 +94,7 @@ include('../dependencia/conexion.php');
                                   }else
                                   $estado="Sin asignar";
 
-                       echo   $sql21="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from diagno_client, usuarios where diagno_client.cod_usu_tecnico=usuarios.cod_usuario and  diagno_client.id_elab_diag='".$datos['id_elab_diag']."' and diagno_client.cod_usu_tecnico='".$datos['cod_usu_tecnico']."'   ";
+                        $sql21="select usuarios.nombre, usuarios.cod_usuario, usuarios.apellidos from diagno_client, usuarios where diagno_client.cod_usu_tecnico=usuarios.cod_usuario and  diagno_client.id_elab_diag='".$datos['id_elab_diag']."' and diagno_client.cod_usu_tecnico='".$datos['cod_usu_tecnico']."'   ";
                               $query21=pg_query($conexion, $sql21);
                              echo  $rows21=pg_num_rows($query21);
                                   if($rows21==1){
@@ -107,7 +107,7 @@ include('../dependencia/conexion.php');
 
 
 
-                            // Buscamoss la fecha de asignaci¨®n: 
+                               // Buscamoss la fecha de asignaci¨®n: 
 
                                   $sql4="select fecha_filtro from asigna_diag where id_elab_diag='".$datos['id_elab_diag']."' order by id_elab_diag desc limit 1  ";
                                   $query4=pg_query($conexion, $sql4);
@@ -152,20 +152,19 @@ include('../dependencia/conexion.php');
             <
                     <?php
                      
-                while($datos31=pg_fetch_assoc($query5)){  
-                    
-                        if($rows21==1){
-                    
+                while($datos31=pg_fetch_assoc($query5)){   
+                echo $datos31['nombre']." ". $datos31['apellidos'];                
+                        if($rows21==1){                    
                   ?>
                    <option value="<?= $datos31['cod_usuario'] ?>"<?php if($datos31['cod_usuario']==$datos21['cod_usuario']){    ?> selected='selected' <?php } ?> > <?php echo $datos31['nombre']." ". $datos31['apellidos']?></option>
              <?php
-                }else{
+                       }else{
             ?>
-            <option value="<?= $datos31['cod_usuario'] ?>"> <?php echo $datos31['nombre']." ". $datos31['apellidos']?></option>
-            <?php   
+                   <option value="<?= $datos31['cod_usuario'] ?>"> <?php echo $datos31['nombre']." ". $datos31['apellidos']?></option>
+             <?php   
+                      }
                 }
-            }
-        ?>
+              ?>
           </select></td>
           <td><input type="button" class="btn btn-primary" id="confir<?php echo $i ?>" name="button"  value="Confirmar"></td>       </tr>
              </tr>
