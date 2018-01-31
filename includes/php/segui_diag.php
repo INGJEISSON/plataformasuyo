@@ -6,7 +6,7 @@ $id_elab_diag=base64_decode($_GET['id_elab_diag']);
 
 
     // consultamos los datos del servicio
-    $sql="select * from diagno_client where id_elab_diag='".$id_elab_diag."' limit 1 ";
+     $sql="select * from diagno_client where id_elab_diag='".$id_elab_diag."' limit 1 ";
      $query=pg_query($conexion, $sql);
      $d=pg_fetch_assoc($query);
 
@@ -416,6 +416,104 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
                                    $("#list_revi_docu11").html(valor);
                         }
                   });
+
+          // Registramos datos del diagnóstico (Técnico y datos básicos)
+
+ $("#grabar_proc").click(function(){
+        
+        var grupo_usuario=<?php echo $_SESSION['cod_grupo'] ?>;
+        var ciudad= $('#ciudad').val();
+        var fecha= $('#fecha').val();
+        var direccion= $('#direccion').val();
+        var id_usuario= $('#id_usuario').val();
+        var dir_form_igac= $('#dir_form_igac').val();
+        var barrio= $('#barrio').val();
+        var municipio= $('#municipio').val();
+        var f_nec_form= $('#f_nec_form').val();
+        var f_nec_legal= $('#f_nec_legal').val();
+        var f_ubic_coor= $('#f_ubic_coor').val();
+        var f_cons_lic= $('#f_cons_lic').val();       
+        var f_riesg_inun= $('#f_riesg_inun').val();
+        var f_riesg_remo= $('#f_riesg_remo').val();
+        var f_riesg_proct= $('#f_riesg_proct').val();
+        var tipol_cant_constr= $('#tipol_cant_constr').val();
+        var alt_cant_pisos= $('#alt_cant_pisos').val();
+        var area_lote= $('#area_lote').val();
+        var dim_frent_lote= $('#dim_frent_lote').val();
+        var dim_frent_const= $('#dim_frent_const').val();
+        var dist_lad_lot= $('#dist_lad_lot').val();
+        var dist_lot_izq= $('#dist_lot_izq').val();
+        var dist_lot_der= $('#dist_lot_der').val();
+        var area_catastral= $('#area_catastral').val();
+        var area_docu= $('#area_docu').val();
+        var ara_docu_es_de= $('#ara_docu_es_de').val();
+        var area_med_de= $('#area_med_de').val();
+        var raz_cumpl= $('#raz_cumpl').val();
+        var par_predio_client= $('#par_predio_client').val();
+        var analis_client= $('#analis_client').val();
+        var msg_info= $('#msg_info').val();
+        var f_esp_legal= $('#f_esp_legal').val();
+        var f_esp_tecn= $('#f_esp_tecn').val();
+        var foto_graf_all_serv= $('#foto_graf_all_serv').val();
+        var foto_graf_serv= $('#foto_graf_serv').val();
+        var cond_serv= $('#cond_serv').val();
+        var aport_client_legal= $('#aport_client_legal').val();
+        var aport_client_tecni= $('#aport_client_tecni').val();
+        var aport_legal= $('#aport_legal').val();
+        var aport_tecni= $('#aport_tecni').val();
+        var llamada_client= $('#llamada_client').val();
+        var pagina_web= $('#pagina_web').val();
+        var consult_ent= $('#consult_ent').val();
+        var pot= $('#pot').val();
+        var der_peticion= $('#der_peticion').val();
+        var elab_legal= $('#elab_legal').val();
+        var elab_tecnico= $('#elab_tecnico').val();
+        var elab_analitic= $('#elab_analitic').val();
+        var apr_legal= $('#apr_legal').val();
+        var apro_tecnico= $('#apro_tecnico').val();
+        var apr_analitic= $('#apr_analitic').val();
+        var id_fasfield="<?php echo "$_GET[$id_elab_diag]" ?>";
+        var cod_estado_tec= $('#cod_estado_tec').val();
+        var cod_estado_ana= $('#cod_estado_ana').val();
+        var cod_estado_leg= $('#cod_estado_leg').val();
+
+        
+                
+                // Equipo analítico
+                    if(grupo_usuario==3)
+                        var datos='g_elab_diag='+1+'&fecha='+fecha+'&direccion='+direccion+'&cond_serv='+cond_serv+'&elab_analitic='+elab_analitic+'&apr_analitic='+apr_analitic+'&llamada_client='+llamada_client+'&pagina_web='+pagina_web+'&consult_ent='+consult_ent+'&pot='+pot+'&der_peticion='+der_peticion+'&id_fasfield='+id_fasfield+'&cod_estado_ana='+cod_estado_ana;
+
+                // Equipo Legal
+                 else  if(grupo_usuario==4)
+                        var datos='g_elab_diag='+1+'&dir_form_igac='+dir_form_igac+'&barrio='+barrio+'&municipio='+municipio+'&f_nec_form='+f_nec_form+'&par_predio_client='+par_predio_client+'&analis_client='+analis_client+'&msg_info='+msg_info+'&f_esp_legal='+f_esp_legal+'&aport_client_legal='+aport_client_legal+'&elab_legal='+elab_legal+'&apr_legal='+apr_legal+'&llamada_client='+llamada_client+'&pagina_web='+pagina_web+'&consult_ent='+consult_ent+'&pot='+pot+'&der_peticion='+der_peticion+'&aport_legal='+aport_legal+'&id_fasfield='+id_fasfield+'&cod_estado_leg='+cod_estado_leg;
+
+                 // Equipo técnico
+                 else  if(grupo_usuario==5)
+                        var datos='g_elab_diag='+1+'&f_nec_legal='+f_nec_legal+'&f_ubic_coor='+f_ubic_coor+'&f_cons_lic='+f_cons_lic+'&f_riesg_inun='+f_riesg_inun+'&f_riesg_remo='+f_riesg_remo+'&f_riesg_proct='+f_riesg_proct+'&tipol_cant_constr='+tipol_cant_constr+'&alt_cant_pisos='+alt_cant_pisos+'&dim_frent_lote='+dim_frent_lote+'&dim_frent_const='+dim_frent_const+'&dist_lad_lot='+dist_lad_lot+'&dist_lot_izq='+dist_lot_izq+'&dist_lot_der='+dist_lot_der+'&area_catastral='+area_catastral+'&area_docu='+area_docu+'&ara_docu_es_de='+ara_docu_es_de+'&area_med_de='+area_med_de+'&raz_cumpl='+raz_cumpl+'&f_esp_tecn='+f_esp_tecn+'&aport_client_tecni='+aport_client_tecni+'&aport_tecni='+aport_tecni+'&apro_tecnico='+apro_tecnico+'&area_lote='+area_lote+'&elab_tecnico='+elab_tecnico+'&id_fasfield='+id_fasfield+'&cod_estado_tec='+cod_estado_tec;
+                    
+                    // Usuario super administrador..
+                  else  if(grupo_usuario==1)
+                     var datos='g_elab_diag='+1+'&fecha='+fecha+'&direccion='+direccion+'&cond_serv='+cond_serv+'&elab_analitic='+elab_analitic+'&apr_analitic='+apr_analitic+'&llamada_client='+llamada_client+'&pagina_web='+pagina_web+'&consult_ent='+consult_ent+'&pot='+pot+'&der_peticion='+der_peticion+'&direccion='+direccion+'&dir_form_igac='+dir_form_igac+'&barrio='+barrio+'&municipio='+municipio+'&f_nec_form='+f_nec_form+'&par_predio_client='+par_predio_client+'&analis_client='+analis_client+'&msg_info='+msg_info+'&f_esp_legal='+f_esp_legal+'&aport_client_legal='+aport_client_legal+'&elab_legal='+elab_legal+'&apr_legal='+apr_legal+'&f_nec_legal='+f_nec_legal+'&f_ubic_coor='+f_ubic_coor+'&f_cons_lic='+f_cons_lic+'&f_riesg_inun='+f_riesg_inun+'&f_riesg_remo='+f_riesg_remo+'&f_riesg_proct='+f_riesg_proct+'&tipol_cant_constr='+tipol_cant_constr+'&alt_cant_pisos='+alt_cant_pisos+'&dim_frent_lote='+dim_frent_lote+'&dim_frent_const='+dim_frent_const+'&dist_lad_lot='+dist_lad_lot+'&dist_lot_izq='+dist_lot_izq+'&dist_lot_der='+dist_lot_der+'&area_catastral='+area_catastral+'&area_docu='+area_docu+'&ara_docu_es_de='+ara_docu_es_de+'&area_med_de='+area_med_de+'&raz_cumpl='+raz_cumpl+'&f_esp_tecn='+f_esp_tecn+'&aport_client_tecni='+aport_client_tecni+'&aport_tecni='+aport_tecni+'&apro_tecnico='+apro_tecnico+'&area_lote='+area_lote+'&elab_tecnico='+elab_tecnico+'&aport_legal='+aport_legal+'&id_fasfield='+id_fasfield+'&cod_estado_tec='+cod_estado_tec+'&cod_estado_ana='+cod_estado_ana+'&cod_estado_leg='+cod_estado_leg;
+
+                  
+                            $.ajax({
+
+                                 type: "POST",
+                                 data: datos,
+                                 url: 'includes/php/g_procesos.php?'+datos,
+                                 success: function(valor){
+                                            if(valor==1)
+                                                alert("Datos guardados correctamente");
+                                            else
+                                                alert("Ocurrió un error, por favor contacte con el administrador");
+
+                                 }
+
+                            });
+        
+    });
+    
+
   });
 </script>
 
@@ -426,7 +524,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
                 <div class="col-lg-12">
                   <div class="card">
                     <center>
-                    <input type="button" name="guardar" id='guardar' class='btn btn-warning' value='Guardar'></center>
+                    <input type="button" name="guardar" id='grabar_proc' class='btn btn-warning' value='Guardar'></center>
                     <div class="card-body">
                       <p> 
     <div class="panel-group" id="accordion">
@@ -472,6 +570,12 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
         <td>Perfil del cliente:</td>
         <td><a href="perfil_cliente2.php?cod_cliente=<?php echo $datos2['cod_cliente']; ?>" target='_blank'>Ver perfil</a></td>
       </tr>
+      <tr>
+        <td>Documento (Diagnóstico) :</td>
+        <td><a href="reportes/pdfdiagnostico.php?id_elab_diag=<?php echo $_GET['id_elab_diag']; ?>" target='_blank'>Visualizar (Online)</a>
+<a href="reportes/creatediagnostico.php?id_elab_diag=<?php echo $_GET['id_elab_diag']; ?>" target='_blank'>Visualizar (PDF))</a>
+        </td>
+      </tr>
     </table>
 
 </div>
@@ -500,16 +604,20 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </tr>
       <tr>
         <td>(*)Dirección (Formato IGAC):</td>
-        <td><input type="text" name="textfield3" class="form-control" id="textfield3" value="<?php echo $d['dir_form_igac'] ?>"></td>
+        <td><input type="text" name="textfield3" class="form-control" id="dir_form_igac" value="<?php echo $d['dir_form_igac'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Barrio (nombre legal):</td>
-        <td><input type="text" name="textfield4" class="form-control" id="textfield4" value="<?php echo $d['barrio'] ?>"></td>
+        <td><input type="text" name="textfield4" class="form-control" id="barrio" value="<?php echo $d['barrio'] ?>"></td>
       </tr>
       <tr>
+        <td>(*)Ciudad:</td>
+        <td><input type="text" name="textfield5" class="form-control" id="ciudad" readonly="readonly" value="<?php echo $d['ciudad'] ?>"></td>
+      </tr>  
+      <tr>
         <td>(*)Municipio:</td>
-        <td><input type="text" name="textfield5" class="form-control" id="textfield5" value="<?php echo $d['ciudad'] ?>"></td>
-      </tr>      
+        <td><input type="text" name="textfield5" class="form-control" id="municipio" value="<?php echo $d['municipio'] ?>"></td>
+      </tr>            
       </table>
 </div>
     </div>

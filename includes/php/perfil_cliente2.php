@@ -43,11 +43,7 @@ include('../dependencia/conexion.php');
           $q1=pg_query($conexion, $s1);
 
           // Listamos las comunicaciones que ha tenido el cliente...
-
          
-
-
-
           
 ?>
  <script src="../../plugins/bower_components/jquery/dist/jquery.min.js"></script>

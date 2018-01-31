@@ -1,8 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Documento sin título</title>
+<?php
+include('../../dependencia/conexion.php');
+if(isset($_GET['id_elab_diag'])){
+ $id_elab_diag=base64_decode($_GET['id_elab_diag']);
+
+        if(is_numeric($id_elab_diag)){
+
+          $sql="select * from diagno_client where id_elab_diag='".$id_elab_diag."' ";
+          $query=pg_query($conexion, $sql);
+          $rows=pg_num_rows($query);
+          $datos=pg_fetch_assoc($query);
+
+          $sql2="select * from cliente where cod_cliente='".$datos['cod_cliente']."' ";
+          $query2=pg_query($conexion, $sql2);
+          $rows2=pg_num_rows($query2);
+          $datos2=pg_fetch_assoc($query2);
+        }
+
+}
+
+if($rows==1){
+
+?>
 <style type="text/css">
 .fuente_letra {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -62,15 +80,15 @@
     <td width="105">&nbsp;</td>
   </tr>
   <tr>
-    <td><p class="turquesa">Sr.</p></td>
+    <td><p class="turquesa">Sr. <?php echo $datos2['nombre']; ?> </p></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td><p class="gris_texto">Calle 13 # 10 -33</p></td>
+    <td><p class="gris_texto"><?php echo $datos['direccion'] ?></p></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td ><p class="gris_texto">Barranquilla, Colombia</p></td>
+    <td ><p class="gris_texto"><?php echo $datos['ciudad'] ?>, Colombia</p></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -148,9 +166,9 @@
     <td><p class="azul_clarol">MUNICIPIO</p></td>
   </tr>
   <tr>
-    <td><p class="gris_texto"></p></td>
-    <td><p class="gris_texto"></p></td>
-    <td><p class="gris_texto"></p></td>
+    <td><p class="gris_texto"><?php echo $datos['direccion'] ?></p></td>
+    <td><p class="gris_texto"><?php echo $datos['barrio'] ?></p></td>
+    <td><p class="gris_texto"><?php echo $datos['municipio'] ?></p></td>
   </tr>
   <tr>
     <td><p class="azul_clarol">FOLIO MATRÍCULA</p></td>
@@ -320,12 +338,12 @@
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td>$</td>
+    <td style="text-align:right">$</td>
     <td>$</td>
   </tr>
   <tr class="azul" style="font-weight:bold;">
     <td>TOTAL</td>
-    <td>$</td>
+    <td style="text-align:right">$</td>
     <td>$</td>
   </tr>
   <tr style="font-weight:bold; font-style:italic; text-align:right">
@@ -473,40 +491,43 @@
   </tr>
   <tr style="font-size:11px">
     <td>Asesoría y acompañamiento legal y técnica, incluyendo honorarios  de abogados, ingenieros y/o arquitectos</td>
-    <td>&nbsp;</td>
+    <td>$</td>
   </tr>
   <tr style="background-image:url(img/Pie_Pagina.png); background-repeat:no-repeat; background-position:right; background-size:cover">
     <td colspan="2">&nbsp;</td>
   </tr>
-  <tr>
-    <td>Subtotal</td>
-    <td>&nbsp;</td>
+  <tr class="azul" style="font-weight:bold">
+    <td>SUBTOTAL</td>
+    <td>$</td>
   </tr>
   <tr>
     <td>Retención en la fuente</td>
-    <td>&nbsp;</td>
+    <td>$</td>
   </tr>
   <tr>
     <td>IVA</td>
-    <td>&nbsp;</td>
+    <td>$</td>
   </tr>
-  <tr>
+  <tr style="background-image:url(img/Pie_Pagina.png); background-repeat:no-repeat; background-position:right; background-size:cover">
+    <td colspan="2">&nbsp;</td>
+  </tr>
+  <tr class="azul" style="font-weight:bold">
     <td>PRECIO TOTAL</td>
-    <td>&nbsp;</td>
+    <td>$</td>
   </tr>
 </table>
 <p>&nbsp;</p>
-<table width="200" border="0">
+<table width="333" height="98" border="0" style="background-image:url(img/Marco_Texto.png); background-repeat:no-repeat;background-size:cover">
   <tr>
-    <td>A
-      <table width="735" height="96" border="0">
-        <tr>
-          <td height="92" class="gris_texto"><p class="azul" style="font-weight:bold">&nbsp;</p></td>
-          <td class="gris_texto"><p class="azul" style="font-weight:bold">Notas Aclaratorias: </p>
-            La presente oferta tiene una validez de 30 días.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.
-            </p></td>
-          <td  class="gris_texto">La presente oferta tiene una validez de 30 días.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.</td>
-        </tr>
+    <td width="18" height="86"></td>
+    <td width="305"><table width="682" height="91" border="0">
+      <tr>
+        <td width="10" height="87" class="gris_texto"><p class="azul" style="font-weight:bold">&nbsp;</p></td>
+        <td width="378" class="gris_texto"><p class="azul" style="font-weight:bold">Notas Aclaratorias: </p>
+          La presente oferta tiene una validez de 30 días.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.
+          </p></td>
+        <td width="280"  class="gris_texto">La presente oferta tiene una validez de 30 días.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.</td>
+      </tr>
     </table></td>
   </tr>
 </table>
@@ -515,3 +536,7 @@
 <p>&nbsp;</p>
 </body>
 </html>
+<?php
+}else
+echo "Referencia del diagnóstico inexistente";
+?>

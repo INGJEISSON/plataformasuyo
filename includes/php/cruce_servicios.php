@@ -6,7 +6,7 @@ $fecha_registro=date('Y-m-d H:m:s');
 if($_POST['cod_estado']==6){ // Si aprobado, lo agrgamos al grupo de clientes..
 
   // Buscamos las encuestas que estén en el estado de aprobado
-  $s="select distinct enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and det_repor_aseso.tom_serv='Si' and enc_procesadas.cod_estado=6 and tipo_pago='Contado' ";
+  $s="select distinct enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and det_repor_aseso.tom_serv='Si' and enc_procesadas.cod_estado=6 (and tipo_pago='Contado or tipo_pago='Cuotas') ";
   $q=pg_query($conexion, $s);
 
             while($datos1=pg_fetch_assoc($q)){

@@ -137,7 +137,12 @@ $sql="select enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_encuesta.nom
  <script type="text/javascript">
     
 $(document).ready(function () {
-	 $('#table_id').DataTable();
+	 $('#table_id').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'print'
+        ]
+    });     
 	 
 	  $(".edicion").colorbox({
           iframe:false, 

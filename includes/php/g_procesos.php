@@ -111,7 +111,7 @@ if(isset($_SESSION['cod_usuario'])){
 
 
                 // Conustamos que no haya un diagnóstico creado
-             $sql="select id_fasfield from elab_diag where id_fasfield='".$_POST['id_fasfield']."' ";
+             $sql="select id_fasfield from diagno_client where id_elab_diag='".$_POST['id_fasfield']."' ";
               $query=pg_query($conexion, $sql);
               $rows=pg_num_rows($query);
 
@@ -138,29 +138,28 @@ if(isset($_SESSION['cod_usuario'])){
                   }
                      // Usuario super administrador..
                     else{
-                  $update="update elab_diag set fecha='".$_POST['fecha']."', direccion='".$_POST['direccion']."', cond_serv='".$_POST['cond_serv']."', elab_analitic='".$_POST['elab_analitic']."', apr_analitic='".$_POST['apr_analitic']."', llamada_client='".$_POST['llamada_client']."', pagina_web='".$_POST['pagina_web']."', consult_ent='".$_POST['consult_ent']."', pot='".$_POST['pot']."', der_peticion='".$_POST['der_peticion']."', dir_form_igac='".$_POST['dir_form_igac']."', barrio='".$_POST['barrio']."', municipio='".$_POST['municipio']."', f_nec_form='".$_POST['f_nec_form']."', par_predio_client='".$_POST['par_predio_client']."', analis_client='".$_POST['analis_client']."', msg_info='".$_POST['msg_info']."', f_esp_legal='".$_POST['f_esp_legal']."', aport_client_legal='".$_POST['aport_client_legal']."', elab_legal='".$_POST['elab_legal']."', apr_legal='".$_POST['apr_legal']."', f_nec_legal='".$_POST['f_nec_legal']."', f_ubic_coor='".$_POST['f_ubic_coor']."', f_cons_lic='".$_POST['f_cons_lic']."', f_riesg_inun='".$_POST['f_riesg_inun']."', f_riesg_remo='".$_POST['f_riesg_remo']."', f_riesg_proct='".$_POST['f_riesg_proct']."', tipol_cant_constr='".$_POST['tipol_cant_constr']."', alt_cant_pisos='".$_POST['alt_cant_pisos']."', dim_frent_lote='".$_POST['dim_frent_lote']."', dim_frent_const='".$_POST['dim_frent_const']."', dist_lad_lot='".$_POST['dist_lad_lot']."', dist_lot_izq='".$_POST['dist_lot_izq']."', dist_lot_der='".$_POST['dist_lot_der']."', area_catastral='".$_POST['area_catastral']."', area_docu='".$_POST['area_docu']."', ara_docu_es_de='".$_POST['ara_docu_es_de']."', area_med_de='".$_POST['area_med_de']."', raz_cumpl='".$_POST['raz_cumpl']."', f_esp_tecn='".$_POST['f_esp_tecn']."', aport_client_tecni='".$_POST['aport_client_tecni']."', aport_tecni='".$_POST['aport_tecni']."', apro_tecnico='".$_POST['apro_tecnico']."', area_lote='".$_POST['area_lote']."', aport_legal='".$_POST['aport_legal']."', elab_tecnico='".$_POST['elab_tecnico']."'  where id_fasfield='".$_POST['id_fasfield']."' ";
+               echo    $update="update diagno_client set fecha='".$_POST['fecha']."', direccion='".$_POST['direccion']."', cond_serv='".$_POST['cond_serv']."', elab_analitic='".$_POST['elab_analitic']."', apr_analitic='".$_POST['apr_analitic']."', llamada_client='".$_POST['llamada_client']."', pagina_web='".$_POST['pagina_web']."', consult_ent='".$_POST['consult_ent']."', pot='".$_POST['pot']."', der_peticion='".$_POST['der_peticion']."', dir_form_igac='".$_POST['dir_form_igac']."', barrio='".$_POST['barrio']."', municipio='".$_POST['municipio']."', f_nec_form='".$_POST['f_nec_form']."', par_predio_client='".$_POST['par_predio_client']."', analis_client='".$_POST['analis_client']."', msg_info='".$_POST['msg_info']."', f_esp_legal='".$_POST['f_esp_legal']."', aport_client_legal='".$_POST['aport_client_legal']."', elab_legal='".$_POST['elab_legal']."', apr_legal='".$_POST['apr_legal']."', f_nec_legal='".$_POST['f_nec_legal']."', f_ubic_coor='".$_POST['f_ubic_coor']."', f_cons_lic='".$_POST['f_cons_lic']."', f_riesg_inun='".$_POST['f_riesg_inun']."', f_riesg_remo='".$_POST['f_riesg_remo']."', f_riesg_proct='".$_POST['f_riesg_proct']."', tipol_cant_constr='".$_POST['tipol_cant_constr']."', alt_cant_pisos='".$_POST['alt_cant_pisos']."', dim_frent_lote='".$_POST['dim_frent_lote']."', dim_frent_const='".$_POST['dim_frent_const']."', dist_lad_lot='".$_POST['dist_lad_lot']."', dist_lot_izq='".$_POST['dist_lot_izq']."', dist_lot_der='".$_POST['dist_lot_der']."', area_catastral='".$_POST['area_catastral']."', area_docu='".$_POST['area_docu']."', ara_docu_es_de='".$_POST['ara_docu_es_de']."', area_med_de='".$_POST['area_med_de']."', raz_cumpl='".$_POST['raz_cumpl']."', f_esp_tecn='".$_POST['f_esp_tecn']."', aport_client_tecni='".$_POST['aport_client_tecni']."', aport_tecni='".$_POST['aport_tecni']."', apro_tecnico='".$_POST['apro_tecnico']."', area_lote='".$_POST['area_lote']."', aport_legal='".$_POST['aport_legal']."', elab_tecnico='".$_POST['elab_tecnico']."'  where id_fasfield='".$_POST['id_fasfield']."' ";
                 
-                $update2="update estados_diag set estado_anali='".$_POST['cod_estado_ana']."', estado_tecn='".$_POST['cod_estado_tec']."',  estado_legal='".$_POST['cod_estado_leg']."'  where id_fasfield='".$_POST['id_fasfield']."' ";
+               // $update2="update estados_diag set estado_anali='".$_POST['cod_estado_ana']."', estado_tecn='".$_POST['cod_estado_tec']."',  estado_legal='".$_POST['cod_estado_leg']."'  where id_fasfield='".$_POST['id_fasfield']."' ";
                 
                   }
                   
                   // Verificamos los estados de los equipos
-          $sql="select * from estados_diag where estado_legal=2 and estado_tecn=2 and estado_anali=2 and id_fasfield='".$_POST['id_fasfield']."'  ";
+         /* $sql="select * from estados_diag where estado_legal=2 and estado_tecn=2 and estado_anali=2 and id_fasfield='".$_POST['id_fasfield']."'  ";
           $querysql=pg_query($conexion, $sql);
-          $rowsql=pg_num_rows($querysql);
+          $rowsql=pg_num_rows($querysql);*/
           
-                if($rowsql){
+               /* if($rowsql){
                     $fecha_registro=date('Y-m-d H:mm:ss');
                     $update3="update elab_diag set cod_estado=11, fecha_fin_registro='".$fecha_registro."' where id_fasfield='".$_POST['id_fasfield']."'"; 
                     $query3=pg_query($conexion, $update3);
-                }
-
+                }*/
                       $query=pg_query($conexion, $update);
-                    $query2=pg_query($conexion, $update2);
+                  //  $query2=pg_query($conexion, $update2);
                     
               // Actualizamos los estados de los equipos      
 
-                          if($query && $query2)
+                          if($query)
                             echo "1";
                           else
                             echo "2"; // Problema técnico...
