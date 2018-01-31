@@ -298,7 +298,7 @@ $('#container2').highcharts({
 
                        // Consulto la cantidad de prospectos que tiene la regional.
                                         // Consulto la cantidad de prospectos que tiene la regional.
-                                       $sql6=" select count(enc_procesadas.asesor) as total from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='Visitado y pagado' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and  enc_procesadas.asesor='".$datos['asesor']."' ";
+                                       $sql6=" select count(enc_procesadas.asesor) as total from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visita realizada') and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and  enc_procesadas.asesor='".$datos['asesor']."' ";
                                         $query6=pg_query($conexion, $sql6);
                                         $vend5=pg_num_rows($query6);
                                         @$datos5=pg_fetch_assoc($query6);
