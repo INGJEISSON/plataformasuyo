@@ -402,7 +402,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
                         }
                   });
 
-             var datos='listar_actividades_diag='+1+'&tipo='+11+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;;
+             var datos='listar_actividades_diag='+1+'&tipo='+11+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;
     
             $("#cargar2").show();
               $.ajax({
@@ -472,11 +472,10 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
         var apr_legal= $('#apr_legal').val();
         var apro_tecnico= $('#apro_tecnico').val();
         var apr_analitic= $('#apr_analitic').val();
-        var id_fasfield="<?php echo "$_GET[$id_elab_diag]" ?>";
+        var id_fasfield=id_elab_diag;
         var cod_estado_tec= $('#cod_estado_tec').val();
         var cod_estado_ana= $('#cod_estado_ana').val();
         var cod_estado_leg= $('#cod_estado_leg').val();
-
         
                 
                 // Equipo analítico
@@ -500,7 +499,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
 
                                  type: "POST",
                                  data: datos,
-                                 url: 'includes/php/g_procesos.php?'+datos,
+                                 url: 'g_procesos.php?'+datos,
                                  success: function(valor){
                                             if(valor==1)
                                                 alert("Datos guardados correctamente");
