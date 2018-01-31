@@ -605,7 +605,7 @@ if(isset($_SESSION['cod_usuario'])){
                             }
 
 
-                          $sql711="select distinct enc_procesadas.asesor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='Visitado y Pagado' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                          $sql711="select distinct enc_procesadas.asesor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visita realizada') and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query_asesor11=pg_query($conexion, $sql711);
                         $rows=pg_num_rows($query_asesor11);
                               $i=1;
@@ -620,7 +620,7 @@ if(isset($_SESSION['cod_usuario'])){
                                    //COntamos los prospectos realizados del asesor.
 
                                         // Consulto la cantidad de prospectos que tiene la regional.
-                                       $sql6="select count(enc_procesadas.asesor) as total from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='Visitado y Pagado' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and  enc_procesadas.asesor='".$datos['asesor']."' ";
+                                       $sql6="select count(enc_procesadas.asesor) as total from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visita realizada') and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and  enc_procesadas.asesor='".$datos['asesor']."' ";
                                         $query6=pg_query($conexion, $sql6);
                                         $vend5=pg_num_rows($query6);
                                         @$datos5=pg_fetch_assoc($query6);
@@ -795,7 +795,7 @@ if(isset($_SESSION['cod_usuario'])){
                      
                         /// Vistado y pagado.
 
-                       $sql125="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='Visitado y pagado' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                       $sql125="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visita realizada') and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query125=pg_query($conexion, $sql125);
                       $vendidos=pg_num_rows($query125); 
 
@@ -975,7 +975,7 @@ if(isset($_SESSION['cod_usuario'])){
                             }
 
 
-                          $sql711="select distinct enc_procesadas.asesor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='Visitado y Pagado' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                          $sql711="select distinct enc_procesadas.asesor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visita realizada') and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query_asesor11=pg_query($conexion, $sql711);
                         $rows=pg_num_rows($query_asesor11);
                               $i=1;
@@ -992,7 +992,7 @@ if(isset($_SESSION['cod_usuario'])){
                                    //COntamos los prospectos realizados del asesor.
 
                                         // Consulto la cantidad de prospectos que tiene la regional.
-                                       $sql6="select count(enc_procesadas.asesor) as total from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='Visitado y Pagado' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and  enc_procesadas.asesor='".$datos['asesor']."' ";
+                                       $sql6="select count(enc_procesadas.asesor) as total from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visita realizada') and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and  enc_procesadas.asesor='".$datos['asesor']."' ";
                                         $query6=pg_query($conexion, $sql6);
                                         $vend5=pg_num_rows($query6);
                                         @$datos5=pg_fetch_assoc($query6);
@@ -1169,7 +1169,7 @@ if(isset($_SESSION['cod_usuario'])){
                      
                         /// Vistado y pagado.
 
-                       $sql125="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='Visitado y pagado' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                       $sql125="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visita realizada') and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query125=pg_query($conexion, $sql125);
                       $vendidos=pg_num_rows($query125); 
 
