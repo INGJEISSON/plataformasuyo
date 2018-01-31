@@ -319,7 +319,7 @@ if(isset($_SESSION['cod_usuario'])){
                           
 
 
-                           $sql711="select distinct enc_procesadas.asesor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Venta de diagnósticos') and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                           $sql711="select distinct enc_procesadas.asesor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visita realizada') and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query_asesor11=pg_query($conexion, $sql711);
                         $rows=pg_num_rows($query_asesor11);
                               $i=1;
@@ -327,7 +327,7 @@ if(isset($_SESSION['cod_usuario'])){
                                  // SUmamos el dinero recaudado por Diagnóstico Vistado y Pagado
 
 
-                        $sql71="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.result_visita='Venta de diagnósticos') and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $sql71="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visita realizada') and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                           $query71=pg_query($conexion, $sql71);
                         $rows_71=pg_num_rows($query71); 
                                $v_diagnos=0;
@@ -430,7 +430,7 @@ if(isset($_SESSION['cod_usuario'])){
                      
                         /// Vistado y pagado.
 
-                       $sql125="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Venta de diagnósticos') and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                     $sql125="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visita realizada') and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query125=pg_query($conexion, $sql125);
                       $vendidos=pg_num_rows($query125); 
 
