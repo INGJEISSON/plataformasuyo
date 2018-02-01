@@ -421,7 +421,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
 
  $("#grabar_proc").click(function(){
         
-        var grupo_usuario=<?php echo $_SESSION['cod_grupo'] ?>;
+        var grupo_usuario=1;
         var ciudad= $('#ciudad').val();
         var fecha= $('#fecha').val();
         var direccion= $('#direccion').val();
@@ -482,7 +482,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
         var uso_suelo=$("#uso_suelo").val();
                 
                 // Equipo analítico
-                    if(grupo_usuario==3)
+                   /* if(grupo_usuario==3)
                         var datos='g_elab_diag='+1+'&fecha='+fecha+'&direccion='+direccion+'&cond_serv='+cond_serv+'&elab_analitic='+elab_analitic+'&apr_analitic='+apr_analitic+'&llamada_client='+llamada_client+'&pagina_web='+pagina_web+'&consult_ent='+consult_ent+'&pot='+pot+'&der_peticion='+der_peticion+'&id_fasfield='+id_fasfield+'&cod_estado_ana='+cod_estado_ana;
 
                 // Equipo Legal
@@ -492,10 +492,10 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
                  // Equipo técnico
                  else  if(grupo_usuario==5)
                         var datos='g_elab_diag='+1+'&f_nec_legal='+f_nec_legal+'&f_ubic_coor='+f_ubic_coor+'&f_cons_lic='+f_cons_lic+'&f_riesg_inun='+f_riesg_inun+'&f_riesg_remo='+f_riesg_remo+'&f_riesg_proct='+f_riesg_proct+'&tipol_cant_constr='+tipol_cant_constr+'&alt_cant_pisos='+alt_cant_pisos+'&dim_frent_lote='+dim_frent_lote+'&dim_frent_const='+dim_frent_const+'&dist_lad_lot='+dist_lad_lot+'&dist_lot_izq='+dist_lot_izq+'&dist_lot_der='+dist_lot_der+'&area_catastral='+area_catastral+'&area_docu='+area_docu+'&ara_docu_es_de='+ara_docu_es_de+'&area_med_de='+area_med_de+'&raz_cumpl='+raz_cumpl+'&f_esp_tecn='+f_esp_tecn+'&aport_client_tecni='+aport_client_tecni+'&aport_tecni='+aport_tecni+'&apro_tecnico='+apro_tecnico+'&area_lote='+area_lote+'&elab_tecnico='+elab_tecnico+'&id_fasfield='+id_fasfield+'&cod_estado_tec='+cod_estado_tec;
-                    
+                    */
                     // Usuario super administrador..
-                  else  if(grupo_usuario==1)
-                     var datos='g_elab_diag='+1+'&fecha='+fecha+'&direccion='+direccion+'&cond_serv='+cond_serv+'&elab_analitic='+elab_analitic+'&apr_analitic='+apr_analitic+'&llamada_client='+llamada_client+'&pagina_web='+pagina_web+'&consult_ent='+consult_ent+'&pot='+pot+'&der_peticion='+der_peticion+'&direccion='+direccion+'&dir_form_igac='+dir_form_igac+'&barrio='+barrio+'&municipio='+municipio+'&f_nec_form='+f_nec_form+'&par_predio_client='+par_predio_client+'&analis_client='+analis_client+'&msg_info='+msg_info+'&f_esp_legal='+f_esp_legal+'&aport_client_legal='+aport_client_legal+'&elab_legal='+elab_legal+'&apr_legal='+apr_legal+'&f_nec_legal='+f_nec_legal+'&f_ubic_coor='+f_ubic_coor+'&f_cons_lic='+f_cons_lic+'&f_riesg_inun='+f_riesg_inun+'&f_riesg_remo='+f_riesg_remo+'&f_riesg_proct='+f_riesg_proct+'&tipol_cant_constr='+tipol_cant_constr+'&alt_cant_pisos='+alt_cant_pisos+'&dim_frent_lote='+dim_frent_lote+'&dim_frent_const='+dim_frent_const+'&dist_lad_lot='+dist_lad_lot+'&dist_lot_izq='+dist_lot_izq+'&dist_lot_der='+dist_lot_der+'&area_catastral='+area_catastral+'&area_docu='+area_docu+'&ara_docu_es_de='+ara_docu_es_de+'&area_med_de='+area_med_de+'&raz_cumpl='+raz_cumpl+'&f_esp_tecn='+f_esp_tecn+'&aport_client_tecni='+aport_client_tecni+'&aport_tecni='+aport_tecni+'&apro_tecnico='+apro_tecnico+'&area_lote='+area_lote+'&elab_tecnico='+elab_tecnico+'&aport_legal='+aport_legal+'&id_fasfield='+id_fasfield+'&cod_estado_tec='+cod_estado_tec+'&cod_estado_ana='+cod_estado_ana+'&cod_estado_leg='+cod_estado_leg+'&ubu_predio='+ubu_predio;
+                //  else  if(grupo_usuario==1)
+                     var datos='g_elab_diag='+1+'&fecha='+fecha+'&direccion='+direccion+'&cond_serv='+cond_serv+'&elab_analitic='+elab_analitic+'&apr_analitic='+apr_analitic+'&llamada_client='+llamada_client+'&pagina_web='+pagina_web+'&consult_ent='+consult_ent+'&pot='+pot+'&der_peticion='+der_peticion+'&direccion='+direccion+'&dir_form_igac='+dir_form_igac+'&barrio='+barrio+'&municipio='+municipio+'&f_nec_form='+f_nec_form+'&par_predio_client='+par_predio_client+'&analis_client='+analis_client+'&msg_info='+msg_info+'&f_esp_legal='+f_esp_legal+'&aport_client_legal='+aport_client_legal+'&elab_legal='+elab_legal+'&apr_legal='+apr_legal+'&f_nec_legal='+f_nec_legal+'&f_ubic_coor='+f_ubic_coor+'&f_cons_lic='+f_cons_lic+'&f_riesg_inun='+f_riesg_inun+'&f_riesg_remo='+f_riesg_remo+'&f_riesg_proct='+f_riesg_proct+'&tipol_cant_constr='+tipol_cant_constr+'&alt_cant_pisos='+alt_cant_pisos+'&dim_frent_lote='+dim_frent_lote+'&dim_frent_const='+dim_frent_const+'&dist_lad_lot='+dist_lad_lot+'&dist_lot_izq='+dist_lot_izq+'&dist_lot_der='+dist_lot_der+'&area_catastral='+area_catastral+'&area_docu='+area_docu+'&ara_docu_es_de='+ara_docu_es_de+'&area_med_de='+area_med_de+'&raz_cumpl='+raz_cumpl+'&f_esp_tecn='+f_esp_tecn+'&aport_client_tecni='+aport_client_tecni+'&aport_tecni='+aport_tecni+'&apro_tecnico='+apro_tecnico+'&area_lote='+area_lote+'&elab_tecnico='+elab_tecnico+'&aport_legal='+aport_legal+'&id_fasfield='+id_fasfield+'&cod_estado_tec='+cod_estado_tec+'&cod_estado_ana='+cod_estado_ana+'&cod_estado_leg='+cod_estado_leg+'&ubu_predio='+ubu_predio+'&latitud='+latitud+'&longitud='+longitud+'&uso_suelo='+uso_suelo;
 
                   
                             $.ajax({
@@ -823,15 +823,15 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </tr>
       <tr>
         <td>(*)Longitud:</td>
-        <td><input type="text" name="textfield2" class="form-control" id="textfield2" value="<?php echo $d['longitud'] ?>"></td>
+        <td><input type="text" name="textfield2" class="form-control" id="longitud" value="<?php echo $d['longitude'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Latitud:</td>
-        <td><input type="text" name="textfield3" class="form-control" id="textfield3" value="<?php echo $d['latitud'] ?>"></td>
+        <td><input type="text" name="textfield3" class="form-control" id="latitud" value="<?php echo $d['latitude'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Uso de suelo</td>
-        <td><input type="text" name="textfield4" class="form-control" id="textfield4" value="<?php echo $d['uso_suelo'] ?>">></td>
+        <td><input type="text" name="textfield4" class="form-control" id="uso_suelo" value="<?php echo $d['uso_suelo'] ?>">></td>
       </tr>
       <tr>
         <td>(*)Foto o imagen</td>
@@ -987,6 +987,52 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
 
         </div>
       </div>-->
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1311">
+        Párrafos</a>
+        </h4>
+      </div>
+      <div id="collapse1311" class="panel-collapse collapse">
+        <div class="panel-body">
+                <div id='history_parrafos' align="center"> Espere por favor.
+                    </div>
+
+               <tr>
+                  <td width="203">(*)Necesidad identificada:</td>
+                  <td width="259"><textarea name="dist_lad_lot" class="form-control" id="dist_lad_lot" placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['dist_lad_lot'] ?></textarea>
+                 </td>
+              </tr>
+
+               <tr>
+                  <td width="203">(*)Descripción del predio y de la construcción:</td>
+                  <td width="259"><input type="textarea" name="textfield" class="form-control" id="ubu_predio" value="<?php echo $d['ubu_predio'] ?>">
+                 </td>
+              </tr>
+
+              <tr>
+                  <td width="203">(*)Titularidad de predio:</td>
+                  <td width="259"><input type="textarea" name="textfield" class="form-control" id="ubu_predio" value="<?php echo $d['ubu_predio'] ?>">
+                 </td>
+              </tr>
+
+              <tr>
+                  <td width="203">(*)Forma como fue adqurido el predio por el usuario:</td>
+                  <td width="259"><input type="textarea" name="textfield" class="form-control" id="ubu_predio" value="<?php echo $d['ubu_predio'] ?>">
+                 </td>
+              </tr>
+
+              <tr>
+                  <td width="203">(*)Otras situaciones relacionadas con el predio y la construcción:</td>
+                  <td width="259"><input type="textarea" name="textfield" class="form-control" id="ubu_predio" value="<?php echo $d['ubu_predio'] ?>">
+                 </td>
+              </tr>
+
+        </div>
+      </div>
+    </div>
 
       <div class="panel panel-primary">
       <div class="panel-heading">
