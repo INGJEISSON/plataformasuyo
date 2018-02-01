@@ -481,7 +481,10 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
         var longitud=$("#longitud").val();
         var uso_suelo=$("#uso_suelo").val();
                 
-                // Equipo analítico
+
+                if(latitud!="" && ubu_predio!="" && longitud!="" && uso_suelo!=""){
+
+                         // Equipo analítico
                    /* if(grupo_usuario==3)
                         var datos='g_elab_diag='+1+'&fecha='+fecha+'&direccion='+direccion+'&cond_serv='+cond_serv+'&elab_analitic='+elab_analitic+'&apr_analitic='+apr_analitic+'&llamada_client='+llamada_client+'&pagina_web='+pagina_web+'&consult_ent='+consult_ent+'&pot='+pot+'&der_peticion='+der_peticion+'&id_fasfield='+id_fasfield+'&cod_estado_ana='+cod_estado_ana;
 
@@ -512,6 +515,11 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
                                  }
 
                             });
+
+                }
+                else
+                  alert("Por favor complete la siguiente Información: Uso del suelo, latitud, longitud y ubicación del predio");
+               
         
     });
     
