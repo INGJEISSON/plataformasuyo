@@ -833,15 +833,15 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </tr>
       <tr>
         <td>(*)Longitud:</td>
-        <td><input type="text" name="textfield2" class="form-control" id="longitud" value="<?php echo $d['longitude'] ?>"></td>
+        <td><input type="text" name="textfield2" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> class="form-control" id="longitud" value="<?php echo $d['longitude'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Latitud:</td>
-        <td><input type="text" name="textfield3" class="form-control" id="latitud" value="<?php echo $d['latitude'] ?>"></td>
+        <td><input type="text" name="textfield3" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> class="form-control" id="latitud" value="<?php echo $d['latitude'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Uso de suelo</td>
-        <td><input type="text" name="textfield4" class="form-control" id="uso_suelo" value="<?php echo $d['uso_suelo'] ?>">></td>
+        <td><input type="text" name="textfield4" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> class="form-control" id="uso_suelo" value="<?php echo $d['uso_suelo'] ?>">></td>
       </tr>
       <tr>
         <td>(*)Foto o imagen</td>
@@ -883,7 +883,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
             :</label>
         </span></td>
         <td width="258"><span class="col-sm-9">
-          <textarea name="tipol_cant_constr" class="form-control" id="tipol_cant_constr" placeholder=" Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['tipol_cant_constr'] ?></textarea>
+          <textarea name="tipol_cant_constr" class="form-control" id="tipol_cant_constr" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> placeholder=" Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['tipol_cant_constr'] ?></textarea>
         </span></td>
       </tr>
       <tr>
@@ -892,7 +892,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
             :</label>
         </span></td>
         <td><span class="col-sm-9">
-        <textarea name="alt_cant_pisos" class="form-control" id="alt_cant_pisos" placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)
+        <textarea name="alt_cant_pisos" class="form-control" id="alt_cant_pisos" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)
 "><?php echo $d['alt_cant_pisos'] ?></textarea>
         </span></td>
       </tr>
@@ -901,7 +901,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
           <label class="col-sm-9 form-control-label">Area del lote ( Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias) ):</label>
         </span></td>
         <td><span class="col-sm-9">
-          <textarea name="area_lote" class="form-control" id="area_lote" placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['area_lote'] ?></textarea>
+          <textarea name="area_lote" class="form-control" id="area_lote" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['area_lote'] ?></textarea>
         </span></td>
       </tr>
       <tr>
@@ -909,7 +909,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
           <label class="col-sm-9 form-control-label">Dimensión frente del lote  ( Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias) ):</label>
         </span></td>
         <td><span class="col-sm-9">
-          <textarea name="dim_frent_lote" class="form-control" id="dim_frent_lote" placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['dim_frent_lote'] ?></textarea>
+          <textarea name="dim_frent_lote" class="form-control" id="dim_frent_lote" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['dim_frent_lote'] ?></textarea>
         </span></td>
       </tr>
       <tr>
@@ -918,7 +918,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
             :</label>
         </span></td>
         <td><span class="col-sm-9">
-          <textarea name="dim_frent_const" class="form-control" id="dim_frent_const" placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['dim_frent_const'] ?></textarea>
+          <textarea name="dim_frent_const" class="form-control" id="dim_frent_const" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['dim_frent_const'] ?></textarea>
         </span></td>
       </tr>
       <tr>
@@ -927,7 +927,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
             :</label>
         </span></td>
         <td><span class="col-sm-9">
-          <textarea name="dist_lad_lot" class="form-control" id="dist_lad_lot" placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['dist_lad_lot'] ?></textarea>
+          <textarea name="dist_lad_lot" class="form-control" id="dist_lad_lot" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['dist_lad_lot'] ?></textarea>
         </span></td>
       </tr>
       <tr>
@@ -935,7 +935,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
           <label class="col-sm-9 form-control-label">Distancia entre el lado izquierdo del lote y la construcción ( Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias) ):</label>
         </span></td>
         <td><span class="col-sm-9">
-          <textarea name="dist_lot_izq" class="form-control" id="dist_lot_izq" placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['dist_lot_izq'] ?></textarea>
+          <textarea name="dist_lot_izq" class="form-control" id="dist_lot_izq" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['dist_lot_izq'] ?></textarea>
         </span></td>
       </tr>
       <tr>
@@ -943,7 +943,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
           <label class="col-sm-9 form-control-label">Distancia entre el lado derecho del lote y la construcción ( Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)):</label>
         </span></td>
         <td><span class="col-sm-9">
-          <textarea name="dist_lot_der" class="form-control" id="dist_lot_der" placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['dist_lot_der'] ?></textarea>
+          <textarea name="dist_lot_der" class="form-control" id="dist_lot_der" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['dist_lot_der'] ?></textarea>
         </span></td>
       </tr>
       <tr>
@@ -951,7 +951,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
           <label class="col-sm-9 form-control-label">Se toma el área tipo de área (catastral, registral, etc):</label>
         </span></td>
         <td><span class="col-sm-9">
-          <textarea name="area_catastral" class="form-control" id="area_catastral" placeholder="Introduzca tipo de area (Catastral, registral, etc)"><?php echo $d['area_catastral'] ?></textarea>
+          <textarea name="area_catastral" class="form-control" id="area_catastral" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> placeholder="Introduzca tipo de area (Catastral, registral, etc)"><?php echo $d['area_catastral'] ?></textarea>
         </span></td>
       </tr>
       <tr>
@@ -960,7 +960,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
             :</label>
         </span></td>
         <td><span class="col-sm-9">
-          <textarea name="raz_cumpl" class="form-control" id="raz_cumpl" placeholder="Introduzca Lo que cumploe xxxx y xxxxintroducir lo que no cumple y las razones, cuando sea el caso"><?php echo $d['raz_cumpl'] ?></textarea>
+          <textarea name="raz_cumpl" class="form-control" id="raz_cumpl" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> placeholder="Introduzca Lo que cumploe xxxx y xxxxintroducir lo que no cumple y las razones, cuando sea el caso"><?php echo $d['raz_cumpl'] ?></textarea>
         </span></td>
       </tr>
       </table>

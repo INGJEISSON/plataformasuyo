@@ -21,7 +21,7 @@
                                <td><?php echo $datos2['fecha_actividad'] ?></td>
                                <td><?php echo $datos2['observacion'] ?></td>
                                <td><?php echo $datos2['usuario'] ?></td>
-                               <td><?php echo $datos2['usuario'] ?></td>
+                               <td><a href="eliminar_activ.php?">Editar</td>
                              </tr>
                               <?php
                                 $i++;
