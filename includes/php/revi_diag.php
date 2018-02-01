@@ -75,10 +75,11 @@ $query3=pg_query($conexion, $sql1);
 
 
                              </td>
-                             <td><iframe src="subir_archivo.php" scrolling="no" height="200" width="300" /></iframe></iframe>
+                             <!--<td><iframe src="subir_archivo.php" scrolling="no" height="200" width="300" /></iframe></iframe>-->
                              <td><input type="button" class="btn btn-primary" name="button" id="g_revision" value="Registrar"></td>
                            </tr>
                          </table>
+
                            <table width="155" border="0" align="center" cellpadding="0" cellspacing="0">
                              <tr align="center">
                                <td width="106"><strong>Agregar revisión</strong></td>

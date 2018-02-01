@@ -972,7 +972,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse12">
-        Servicios ofrecidos</a>
+        Servicios ofrecidos / Recomendados</a>
         </h4>
       </div>
       <div id="collapse12" class="panel-collapse collapse">
@@ -1073,7 +1073,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
   </div>
 
 
-   
+   <!--
  <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -1085,7 +1085,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div class="panel-body"><div id='history_revi5' align="center">                           </div>
     <p><a href="../../includes/php/solicitud.php?cod_cliente=<?php echo $d['cod_cliente'] ?>&id_serv_cliente=<?php echo $id_elab_diag ?>" class='edicion'>Reportar problema</a></p></div>
     </div>
-  </div>
+  </div>-->
                       </p>
                       <p>&nbsp;</p>
                     </div>
