@@ -624,10 +624,10 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
         <td>(*)Ciudad:</td>
         <td><input type="text" name="textfield5" class="form-control" id="ciudad" <?php if($_SESSION['tipo_usuario']==22 ){ ?> readonly="readonly" <?php } ?>  value="<?php echo $d['ciudad'] ?>"></td>
       </tr>  
-     <!-- <tr>
+      <tr>
         <td>(*)Municipio:</td>
         <td><input type="text" name="textfield5" class="form-control" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?>  id="municipio" value="<?php echo $d['municipio'] ?>"></td>
-      </tr> --   >
+      </tr>            
       </table>
 </div>
     </div>
