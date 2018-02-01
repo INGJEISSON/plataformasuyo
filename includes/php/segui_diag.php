@@ -605,28 +605,28 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
    <table width="42%" border="0" class="table responsive">
       <tr>
         <td width="203">(*)Nombre del cliente:</td>
-        <td width="259"><input type="text" name="textfield" class="form-control" id="textfield" value="<?php echo $datos2['nombre'] ?>">
+        <td width="259"><input type="text" name="textfield" class="form-control" id="nombre" <?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1){ ?> readonly="readonly" <?php } ?>  value="<?php echo $datos2['nombre'] ?>">
        </td>
       </tr>
       <tr>
         <td>(*)Identificación:</td>
-        <td><input type="text" name="textfield2" class="form-control" id="textfield2" value="<?php echo $datos2['cod_cliente'] ?>"></td>
+        <td><input type="text" name="textfield2" class="form-control" <?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1){ ?> readonly="readonly" <?php } ?>  id="cod_cliente" value="<?php echo $datos2['cod_cliente'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Dirección (Formato IGAC):</td>
-        <td><input type="text" name="textfield3" class="form-control" id="dir_form_igac" value="<?php echo $d['dir_form_igac'] ?>"></td>
+        <td><input type="text" name="textfield3" class="form-control" <?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1){ ?> readonly="readonly" <?php } ?>  id="dir_form_igac" value="<?php echo $d['dir_form_igac'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Barrio (nombre legal):</td>
-        <td><input type="text" name="textfield4" class="form-control" id="barrio" value="<?php echo $d['barrio'] ?>"></td>
+        <td><input type="text" name="textfield4" class="form-control" <?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1){ ?> readonly="readonly" <?php } ?> id="barrio" value="<?php echo $d['barrio'] ?>"></td>
       </tr>
       <tr>
         <td>(*)Ciudad:</td>
-        <td><input type="text" name="textfield5" class="form-control" id="ciudad" readonly="readonly" value="<?php echo $d['ciudad'] ?>"></td>
+        <td><input type="text" name="textfield5" class="form-control" id="ciudad" <?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1){ ?> readonly="readonly" <?php } ?>  value="<?php echo $d['ciudad'] ?>"></td>
       </tr>  
       <tr>
         <td>(*)Municipio:</td>
-        <td><input type="text" name="textfield5" class="form-control" id="municipio" value="<?php echo $d['municipio'] ?>"></td>
+        <td><input type="text" name="textfield5" class="form-control" <?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1){ ?> readonly="readonly" <?php } ?>  id="municipio" value="<?php echo $d['municipio'] ?>"></td>
       </tr>            
       </table>
 </div>
