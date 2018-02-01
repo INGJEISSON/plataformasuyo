@@ -862,7 +862,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div id="collapse6" class="panel-collapse collapse">
         <div class="panel-body">
             <div id='history_afect' align="center"> </div>
-    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=8" class='edicion'>Agregar/Editar Afectaciones</a></p></div>
+    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=8" class='edicion'><?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1){ ?> Agregar/Editar Afectaciones <?php } ?></a></p></div>
        
 
        </div>
