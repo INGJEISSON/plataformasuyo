@@ -88,7 +88,7 @@ if($rows==1){
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td ><p class="gris_texto"><?php echo $datos['ciudad'] ?>, Colombia</p></td>
+    <td ><p class="gris_texto"><?php echo $datos['municipio'] ?>, Colombia</p></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
