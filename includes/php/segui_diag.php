@@ -828,7 +828,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
        <table width="42%" border="0" class="table responsive">
       <tr>
         <td width="203">(*)Ubicación del predio:</td>
-        <td width="259"><input type="text" name="textfield" class="form-control" id="ubu_predio" value="<?php echo $d['ubu_predio'] ?>">
+        <td width="259"><input type="text" name="textfield" class="form-control" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> id="ubu_predio" value="<?php echo $d['ubu_predio'] ?>">
        </td>
       </tr>
       <tr>
