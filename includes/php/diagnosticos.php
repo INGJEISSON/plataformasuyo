@@ -51,6 +51,7 @@ include('../dependencia/conexion.php');
          <thead>
         <tr>
           <th width="3%">#</th>
+           <th width="7%">Ver</th>
           <th width="8%">Identificación</th>
           <th width="18%">Cliente</th>  
           <th width="18%">Barrio</th> 
@@ -62,7 +63,7 @@ include('../dependencia/conexion.php');
           <th width="7%">Primer contacto</th>
           <th width="7%">Forma de aquisición</th>
           <th width="7%">Fecha de primer contacto</th>
-          <th width="7%">Ver</th>
+         
         </tr>
       </thead>
       <tbody>
@@ -82,6 +83,7 @@ include('../dependencia/conexion.php');
        
               <tr>
                 <td><?php echo $i; ?></td>
+                 <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="includes/php/det_diag_client.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>&cod_resp=<?php echo $cod_resp; ?>" tittle='Revisar'><p class='icon-note lg'></p></a></td> 
                 <td><?php echo $datos['cod_cliente']; ?></td>
                 <td><?php echo $datos['cliente']; ?></td>             
                 <td><?php echo $datos['barrio']; ?></td>
@@ -93,7 +95,7 @@ include('../dependencia/conexion.php');
                 <td><?php echo $rows2 ?></td>     
                 <td><?php echo $rows2 ?></td>     
                 <td><?php echo $rows2 ?></td>     
-               <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="includes/php/det_diag_client.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>&cod_resp=<?php echo $cod_resp; ?>" tittle='Revisar'><p class='icon-note lg'></p></a></td> 
+              
                 
               </tr>
             <?php   

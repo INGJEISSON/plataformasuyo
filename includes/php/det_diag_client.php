@@ -59,6 +59,7 @@ $datos2=pg_fetch_assoc($query2);
       <thead>
         <tr>
           <th width="3%">#</th>
+          <th>Seguimiento</th>
           <th>Asesor</th>
           <th>Estado</th>
           <th>Ciudad del predio</th>
@@ -73,7 +74,7 @@ $datos2=pg_fetch_assoc($query2);
           <th>Acuerdo(Pago)</th>
           <th>Fuente(Pago)</th>
           <th>Valor pagado</th>
-          <th>Seguimiento</th>
+         
         </tr>
       </thead>
       <tbody>
@@ -89,6 +90,8 @@ $datos2=pg_fetch_assoc($query2);
 	   ?>
         <tr>
           <td><?php echo $i; ?></td>
+          <td><a href="segui_diag.php?&id_elab_diag=<?php echo base64_encode($datos['id_elab_diag']); ?>" tittle='Seguimiento' class='ediicion'><p class='icon-note lg'></p></a>
+          </td>
           <td width="5%"><?php echo ($datos['asesor']); ?></td>
           <td><?php echo ($datos['estado']); ?></td>
           <td><?php echo $datos['ciudad']; ?></td>
@@ -103,9 +106,7 @@ $datos2=pg_fetch_assoc($query2);
           <td></td>
           <td></td>
           <td></td>
-          <td><a href="segui_diag.php?&id_elab_diag=<?php echo base64_encode($datos['id_elab_diag']); ?>" tittle='Seguimiento' class='ediicion'><p class='icon-note lg'></p></a>
-          		
-          </td>
+          
            </tr>
           <?php 
           //78 pg_free_result($query11);
