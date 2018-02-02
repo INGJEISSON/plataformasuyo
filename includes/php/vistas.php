@@ -569,8 +569,8 @@ $sql="select distinct enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_enc
         echo(($datos4['fecha_entrega_diag1'])) ?></td>
               <td><?php echo "(".($datos4['tom_serv']).")"; ?></td>
                <td><?php echo "(".($datos5['estado']).")"; ?></td>
-              <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>"><img src="../../img/icono_pdf.png" width="31" height="31"></a></td>
-                <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="revi_admin.php?id_fasfield=<?php echo $datos['id_fasfield']; ?>" tittle='Revisar'><img src='../../img/edit.png' alt="" width="24" height="24"></a>                 
+              <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>"><img src="img/icono_pdf.png" width="31" height="31"></a></td>
+                <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="includes/php/revi_admin.php?id_fasfield=<?php echo $datos['id_fasfield']; ?>" tittle='Revisar'><img src='img/edit.png' alt="" width="24" height="24"></a>                 
             </tr>
             </td>
             </tr>

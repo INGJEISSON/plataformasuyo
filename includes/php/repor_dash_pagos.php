@@ -162,14 +162,12 @@
 <script type="text/javascript">
 $(document).ready(function () {
 
-	$("#info_general").click(function(){
-	    
-		var fecha_1="<?php echo "$_POST[fecha_1]" ?>";
-		var fecha_2="<?php echo "$_POST[fecha_2]" ?>";
-		var ciudad="<?php echo "$_POST[ciudad]" ?>";
-		var asesor="<?php echo "$_POST[asesor]" ?>";
-		
-		var datos='tipo='+1+'&fecha_1='+fecha_1+'&fecha_2='+fecha_2+'&ciudad='+ciudad+'&asesor='+asesor+'&vistas='+11;
+  var fecha_1="<?php echo "$_POST[fecha_1]" ?>";
+    var fecha_2="<?php echo "$_POST[fecha_2]" ?>";
+    var ciudad="<?php echo "$_POST[ciudad]" ?>";
+    var asesor="<?php echo "$_POST[asesor]" ?>";
+    
+    var datos='tipo='+1+'&fecha_1='+fecha_1+'&fecha_2='+fecha_2+'&ciudad='+ciudad+'&asesor='+asesor+'&vistas='+11;
 
         $.ajax({
               type: "POST",
@@ -182,15 +180,8 @@ $(document).ready(function () {
               }
 
         });
-		
-		/*$.colorbox({
-          iframe:true, 
-          width:"100%", 
-          height:"100%",
-		      href:'includes/php/detalle_dash.php?'+datos,
-          overlayClose:false,
-          });*/
-	 });
+
+	
 
 });
 
