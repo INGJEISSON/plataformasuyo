@@ -18,62 +18,18 @@ $id_elab_diag=base64_decode($_GET['id_elab_diag']);
      $f="select * from usuarios where cod_usuario='".$d['cod_usu_legal']."' ";
      $g=pg_query($conexion, $f);
      $d2=pg_fetch_assoc($g);
+
+     // Buscamos la fecha de la asignación
+
+      $sql4="select fecha_filtro from asigna_diag where id_elab_diag='".$id_elab_diag."' order by id_elab_diag desc limit 1  ";
+                                  $query4=pg_query($conexion, $sql4);
+                                  $rows4=pg_num_rows($query4);
+                                      if($rows4){
+                                        $datos4=pg_fetch_assoc($query4);    
+                                        $fecha_filtro= $datos4['fecha_filtro'];                                   
+                                      }else
+                                      $fecha_filtro="";
      
-     // Busco el nombre del responsable..
-  /*   
-     $sql10="select nombre from usuarios where cod_usuario='".$datos1['cod_usuario']."' ";
-     $query10=pg_query($conexion, $sql10);
-     $datos10=pg_fetch_assoc($query10);
-     
-    // Ultima actuación
-    
-    $sql11="select usuarios.nombre as usuario, activ_serv.observacion, activ_serv.fecha_actividad, activ_serv.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa.descripcion as actividad from usuarios, etapa_activ, activ_serv, activi_etapa where usuarios.cod_usuario=activ_serv.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa.cod_etapa and activ_serv.cod_activi_etapa=activi_etapa.cod_activi_etapa and activ_serv.id_serv_cliente='".$id_serv_cliente."' ORDER BY activ_serv.id_activi_serv desc limit 1 ";
-    $query11=pg_query($conexion, $sql11);
-    @$datos11=pg_fetch_assoc($query11);*/
-        
-        
-            
-//echo "folio: ".$datos1['n_folio_inm'];
-                                        
-                  //  $parametro='AgendaCallCenter';   // Si son llamadas s贸lo para call center.              
-/*$sql9="select * from cliente where cod_cliente='".$datos1['cod_cliente']."' ";
-                    $query9=pg_query($conexion, $sql9);
-                    $datos9=pg_fetch_assoc($query9);
-
-
-    // Consulto la lista de poderes  y autorización necesario
-
-            $sql2="select * from deta_list_despleg where tipo_lista=2";
-            $query2=pg_query($conexion, $sql2);
-            
-            $sql21="select * from deta_list_despleg where tipo_lista=2 and id_list_despleg='".$datos1['poder_aut_nece']."' ";
-            $query21=pg_query($conexion, $sql21);
-            @$datos21=pg_fetch_assoc($query21);
-
-     // Consulto la lista de tiene poder y autorización.
-
-            $sql3="select * from deta_list_despleg where tipo_lista=3";
-            $query3=pg_query($conexion, $sql3);
-            
-            $sql31="select * from deta_list_despleg where tipo_lista=3 and id_list_despleg='".$datos1['poder_aut']."' ";
-            $query31=pg_query($conexion, $sql31);
-            @$datos31=pg_fetch_assoc($query31);
-
-     // Consulto la lista de tiene contrato.
-            $sql4="select * from deta_list_despleg where tipo_lista=1";
-            $query4=pg_query($conexion, $sql4);
-            
-             $sql41="select * from deta_list_despleg where tipo_lista=1 and id_list_despleg='".$datos1['firm_contrato']."' ";
-            $query41=pg_query($conexion, $sql41);
-            @$datos41=pg_fetch_assoc($query41);
-
-     // Consulto la lista de estado de seguimiento (servicio).
-            $sql5="select * from deta_list_despleg where tipo_lista=4";
-            $query5=pg_query($conexion, $sql5);
-            
-            $sql51="select * from deta_list_despleg where tipo_lista=4 and id_list_despleg='".$datos1['id_list_despleg']."' ";
-            $query51=pg_query($conexion, $sql51);
-            @$datos51=pg_fetch_assoc($query51);*/
 
 
 ?>
@@ -553,7 +509,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <table width="70%" border="0" class="table responsive">
       <tr>
         <td width="155">Fecha de asignación</td>
-        <td width="613">2018-22-01 16:24:02</td>
+        <td width="613"><?php echo $fecha_filtro ?></td>
       </tr>
       <tr>
         <td>Tiempo de vencimiento:</td>
@@ -1010,35 +966,31 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
                 <div id='history_parrafos' align="center"> Espere por favor.
                     </div>
 
-               <tr>
-                  <td width="203">(*)Necesidad identificada:</td>
-                  <td width="259"><textarea name="dist_lad_lot" class="form-control" id="dist_lad_lot" placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['dist_lad_lot'] ?></textarea>
-                 </td>
-              </tr>
+         <table width="70%" border="0" class="table responsive">
+                
+                <tr>
+                  <td>Necesidad identificada:</td>                 
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Descripción del predio y de la construcción:</td>                
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Titularidad de predio: </td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Forma como fue adqurido el predio por el usuario:</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Otras situaciones relacionadas con el predio y la construcción:</td>
+                  <td>&nbsp;</td>
+                </tr>               
+           </table>
 
-               <tr>
-                  <td width="203">(*)Descripción del predio y de la construcción:</td>
-                  <td width="259"><input type="textarea" name="textfield" class="form-control" id="ubu_predio" value="<?php echo $d['ubu_predio'] ?>">
-                 </td>
-              </tr>
-
-              <tr>
-                  <td width="203">(*)Titularidad de predio:</td>
-                  <td width="259"><input type="textarea" name="textfield" class="form-control" id="ubu_predio" value="<?php echo $d['ubu_predio'] ?>">
-                 </td>
-              </tr>
-
-              <tr>
-                  <td width="203">(*)Forma como fue adqurido el predio por el usuario:</td>
-                  <td width="259"><input type="textarea" name="textfield" class="form-control" id="ubu_predio" value="<?php echo $d['ubu_predio'] ?>">
-                 </td>
-              </tr>
-
-              <tr>
-                  <td width="203">(*)Otras situaciones relacionadas con el predio y la construcción:</td>
-                  <td width="259"><input type="textarea" name="textfield" class="form-control" id="ubu_predio" value="<?php echo $d['ubu_predio'] ?>">
-                 </td>
-              </tr>
+            <p><a href="../../includes/php/construc_parraf.php?cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo_seguimiento=6&id_serv_cliente=<?php echo $id_elab_diag ?>" class='edicion'>Construcción de parrafos</a></p>
 
         </div>
       </div>

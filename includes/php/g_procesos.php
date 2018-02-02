@@ -1858,6 +1858,9 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                           echo  $resp="<option value=2>Ninguno</option>";
       }
 
+
+       
+
        if(isset($_POST['b_lista_despleg_serv_dep'])){ // Listas dependencia de Servicios
 
 
@@ -1873,6 +1876,61 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                           }else
                           echo  $resp="<option value=0>Ninguno</option>";
       }
+
+
+       // Buscamos listas de párrafos disponibles del titulo
+
+      if(isset($_POST['b_lista_parraf'])){
+
+
+              echo $sql="select  id_detall_parraf, titulo_parraf from detalle_parraf where cod_parrafo='".$_POST['cod_activi_etapa']."' ";
+                      $query=pg_query($conexion, $sql);
+                      $rows=pg_num_rows($query);
+                          if($rows){
+
+                             
+                                while($row_consulta2 = pg_fetch_assoc($query))           
+                            echo   $resp="<option value='".$row_consulta2[id_detalle_parraf]."'>".($row_consulta2[titulo_parraf])."</option>"; 
+
+                          }else
+                          echo  $resp="<option value=2>Ninguno</option>";
+      }
+
+      if(isset($_POST['g_revision_parraf'])){  // Agregar párrafo a construir
+             
+
+                    if(isset($_POST['add_parrafo_diag'])){
+                       // Buscamos si ya se encuentra un párrafo en el diagnóstico
+
+                            $s="select * from parra_diag where id_elab_diag='".$_POST['id_elab_diag']."' and id_detalle_parraf='".$_POST['id_detalle_parraf']."'  ";
+                            $q=pg_query($conexion, $s);
+                            $r=pg_num_rows($q);
+
+                                  if($r==1){
+
+                                          $datos = pg_fetch_assoc($query);
+                                            echo $datos['descripcion'];
+
+
+                                  } else{  // Agrego formato de párrafo...
+                                        $sql="select  * from detalle_parraf where id_detalle_parraf='".$_POST['cod_activi_etapa']."' ";
+                                            $query=pg_query($conexion, $sql);
+                                            $rows=pg_num_rows($query);
+                                                if($rows){
+
+                                                        $row_consulta2 = pg_fetch_assoc($query);
+                                                       echo $row_consulta2['descripcion'];
+
+                                                }
+                                  }
+
+                    }
+
+        
+                        
+      }
+
+
 
 
 
