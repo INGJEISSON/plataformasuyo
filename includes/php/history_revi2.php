@@ -21,7 +21,7 @@
                                <td><?php echo $datos2['fecha_actividad'] ?></td>
                                <td><?php echo $datos2['observacion'] ?></td>
                                <td><?php echo $datos2['usuario'] ?></td>
-                               <td><a href="eliminar_activ.php?">Editar</td>
+                            <td><a href="edit_activi_diag.php?cod_activi_etapa=<?php echo $datos2['cod_activi_etapa'] ?>&id_activi_diag=<?php echo $datos2['id_activi_diag'] ?>&cod_equipo=2&observacion=<?php echo $datos2['observacion'] ?>&id_elab_diag=<?php echo $_POST['id_elab_diag'] ?>&tipo=<?php echo $_POST['tipo'] ?>" target="_blank">Editar</a></td>
                              </tr>
                               <?php
                                 $i++;

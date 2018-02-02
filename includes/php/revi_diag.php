@@ -59,6 +59,7 @@ $query3=pg_query($conexion, $sql1);
                            <tr>
                              <td height="46"><select name="select" id="cod_estado" class="form-control">
                                <option value="0" selected="selected">Sin revisar</option>
+                               <option value="0" selected="selected">Ninguno</option>
                               <?php while($datos2=pg_fetch_assoc($query3)){ ?>
                                
                                <option value="<?= $datos2['tipo_afect'] ?>"> <?php echo ($datos2['descripcion'])?></option>

@@ -435,8 +435,8 @@ if(isset($_SESSION['cod_usuario'])){
                         $query125=pg_query($conexion, $sql125);
                       $vendidos=pg_num_rows($query125); 
 
-                          /// Entrega de diagnóstico.
-                      
+                        /// Entrega de diagnóstico.
+
                        $sql126="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".('Entrega de diagnÃ³stico')."'  and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query126=pg_query($conexion, $sql126);
                       $entr_diag=pg_num_rows($query126); 
@@ -444,8 +444,8 @@ if(isset($_SESSION['cod_usuario'])){
 
 
                           $sql126="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".('Entrega de diagnÃ³stico')."' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
-                        $query126=pg_query($conexion, $sql126);
-                      $entr_diag=pg_num_rows($query126); 
+                          $query126=pg_query($conexion, $sql126);
+                          $entr_diag=pg_num_rows($query126); 
                         // Sumamos los servicios express..
 
 
@@ -516,6 +516,266 @@ if(isset($_SESSION['cod_usuario'])){
                         
                         // if($_SESSION['cod_grupo']==1)
                            include('repor_dash_direc2.php');    
+                          //  else
+                           // echo "Estamos trabajandoa aquí, por favor intenta mas tarde.";                   
+
+                  }else{ // Reporte en excel...
+                       
+
+                        include('repor_dash_excel_direc.php');  
+
+                  }
+                  
+
+           }
+
+
+            if(isset($_POST['repor_pagos'])){  // GGenerar dashboard  para contabilidad...
+
+
+                  if($_POST['tipo_informe']==1){
+
+                      if($_POST['ciudad']=='Todos')  // Si son todas las ciudad
+                      $parametro='';
+                      else if($_POST['ciudad']=='solbaq')  // Si son todas las ciudad
+                      $parametro="(enc_procesadas.ciudad='Barranquilla' or enc_procesadas.ciudad='Soledad')  and ";
+                      else
+                      $parametro="enc_procesadas.ciudad='".($_POST['ciudad'])."' and";
+
+                    
+
+                        // Consulto la cantidad de prospectos que tiene la regional.
+                        $sql="select cod_enc_proc from enc_procesadas where $parametro tipo_encuesta=5 and fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $query=pg_query($conexion, $sql);
+                        $prospectos=pg_num_rows($query);
+
+                         // Consulto la cantidad de diagnósticos que tiene la regional.
+                       $sql2="select cod_enc_proc from enc_procesadas where $parametro tipo_encuesta=1 and fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                        $query2=pg_query($conexion, $sql2);
+                        $diagnosticos=pg_num_rows($query2);
+
+                         // Consulto la cantidad de prreporte de asesores que tiene la regional.
+                        $sql3="select cod_enc_proc from enc_procesadas where $parametro tipo_encuesta=2 and fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                        $query3=pg_query($conexion, $sql3);
+                        $repor_asesores=pg_num_rows($query3);
+
+
+                         // Consulto la cantidad de numero de prospectos de promotores  que tiene la regional.
+                        $sql4="select sum(n_pros_prom) as n_pros_nom from enc_procesadas where $parametro tipo_encuesta=3 and fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                        $query4=pg_query($conexion, $sql4);
+                        $repor_promotores=pg_num_rows($query4);
+                            if($repor_promotores){
+                                $datos_prom=pg_fetch_assoc($query4);
+                              $n_pros_nom=$datos_prom['n_pros_nom'];
+                            }
+
+                        //Buscamos los asesores de la ciudad específica.
+
+                        $sql_asesor="select distinct asesor from enc_procesadas where $parametro fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and tipo_encuesta=5 ";
+                        $query_asesor=pg_query($conexion, $sql_asesor);
+                        $rows=pg_num_rows($query_asesor);
+                              $i=1;
+                              $nom_asesor=0;
+                               $prospectos_ase=0;
+                          
+
+
+                           $sql711="select distinct enc_procesadas.asesor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visita realizada') and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $query_asesor11=pg_query($conexion, $sql711);
+                        $rows=pg_num_rows($query_asesor11);
+                              $i=1;
+
+                                 // SUmamos el dinero recaudado por Diagnóstico Vistado y Pagado
+
+
+                        $sql71="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visita realizada') and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                          $query71=pg_query($conexion, $sql71);
+                        $rows_71=pg_num_rows($query71); 
+                               $v_diagnos=0;
+                              if($rows_71){                                 
+
+                                  $v_diagnos=0;
+                                  while($datos71=pg_fetch_assoc($query71)){
+                                    $v_diagnos=$datos71['valor']+$v_diagnos;
+                                  }                                 
+                              }
+                            
+                           /* while($datos=pg_fetch_assoc($query_asesor11)){
+
+                                   
+                                     if($i==$rows)
+                                     $nom_asesor2.="'".$datos['asesor']."'";
+                                     else
+                                     $nom_asesor2.="'".$datos['asesor']."', ";
+
+                                   //COntamos los prospectos realizados del asesor.
+
+                                        // Consulto la cantidad de prospectos que tiene la regional.
+                                       $sql6="select count(enc_procesadas.asesor) as total from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and  enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='Visitado y Pagado' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and  enc_procesadas.asesor='".$datos['asesor']."' ";
+                                        $query6=pg_query($conexion, $sql6);
+                                        $vend5=pg_num_rows($query6);
+                                        @$datos5=pg_fetch_assoc($query6);
+
+                                            if($i==$rows)
+                                           $vend_ase.=$datos5['total'];
+                                               else
+                                             $vend_ase.=$datos5['total'].", ";
+
+                              $i++;
+                            }*/
+
+                       $sql78="select distinct det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where  $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (resul_visita='".('Visitado y no interesado')."' or resul_visita='".('Visitado y reagendado (Se fue hasta la vivienda y el cliente pidió un cambio en la agenda de la visita)')."' or  resul_visita='".('Llamado y no se logró contactar (antes de la visita no se logró confirmación)')."' or  resul_visita='".('Visitado y no se logró contactar (se fue hasta la vivienda y no se logró confirmación)')."') and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                            $query78=pg_query($conexion, $sql78);
+                        $rows78=pg_num_rows($query78);
+                                  $i=1;
+
+                         
+
+                         
+  // Consulto los diagnósticos que no tomaron el servicio
+                       $sql8="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro  enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='No' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $query8=pg_query($conexion, $sql8);
+                        $tom_servno=pg_num_rows($query8);
+                       // Consulto los diagnósticos que tomaron el servicio
+                       
+                        $sql9="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $query9=pg_query($conexion, $sql9);
+                        $tom_servsi=pg_num_rows($query9); 
+                        
+                         // Consulto los diagnósticos pendientes por venta
+                        $sql10="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Pendiente de venta' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $query10=pg_query($conexion, $sql10);
+                        $tom_servpendventa=pg_num_rows($query10); 
+                        
+                          // Consulto los diagnósticos pendientes por venta
+                        $sql11="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='No viable' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $query11=pg_query($conexion, $sql11);
+                        $tom_servnoviable=pg_num_rows($query11);
+                        
+
+                        /// Recuado de cuotas..
+                           $sql127="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tipo_visita='".'Recuado de cuotas'."' and enc_procesadas.cod_estado=6 and  enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                           $query127=pg_query($conexion, $sql127);
+                         $rows_recaudo=pg_num_rows($query127); 
+                              $recaudo_cuotas=0;
+                              if($rows_recaudo){                                  
+
+                                  $recaudo_cuotas=0;
+                                  while($datosrec=pg_fetch_assoc($query127)){
+                                    $recaudo_cuotas=$datosrec['valor']+$recaudo_cuotas;
+                                  }
+
+
+                              }
+
+                         /// Servicios express
+                          $sql1278="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".'Servicio Express'."' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                           $query1278=pg_query($conexion, $sql1278);
+                         $rows_recaudo8=pg_num_rows($query1278); 
+                               $recaudo_express=0;
+                              if($rows_recaudo8){
+                                  
+                                  $recaudo_express=0;
+                                  while($datosrec=pg_fetch_assoc($query1278)){
+                                    $recaudo_express=$datosrec['valor']+$recaudo_express;
+                                  }
+
+                              }
+                        
+                          /// Gratuitos.
+
+                      $sql124="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".('Visitado y fue gratuito el diagnóstico')."' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $query124=pg_query($conexion, $sql124);
+                     $gratuito=pg_num_rows($query124); 
+                     
+                     
+                        /// Vistado y pagado.
+
+                     $sql125="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='Visitado y pagado' or det_repor_aseso.resul_visita='Visita realizada') and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $query125=pg_query($conexion, $sql125);
+                      $vendidos=pg_num_rows($query125); 
+
+                        /// Entrega de diagnóstico.
+
+                       $sql126="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".('Entrega de diagnÃ³stico')."'  and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $query126=pg_query($conexion, $sql126);
+                      $entr_diag=pg_num_rows($query126); 
+                        
+
+
+                          $sql126="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".('Entrega de diagnÃ³stico')."' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                          $query126=pg_query($conexion, $sql126);
+                          $entr_diag=pg_num_rows($query126); 
+                        // Sumamos los servicios express..
+
+
+
+                        //Consulto creditos por aliado
+
+                          $s1="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='FMSD' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $q1=pg_query($conexion, $s1);
+                          $r1=pg_num_rows($q1);
+
+                          $s2="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Creditos Orbe' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $q2=pg_query($conexion, $s2);
+                          $r2=pg_num_rows($q2);
+
+                          $s3="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Interactuar' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $q3=pg_query($conexion, $s3);
+                          $r3=pg_num_rows($q3);
+
+                          $s4="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Av villas' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $q4=pg_query($conexion, $s4);
+                          $r4=pg_num_rows($q4);
+
+                          // Sumo el valor ingresado por los aliados y aprobados... 
+
+                           $s5="select sum(det_repor_aseso.valor) as valor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and enc_procesadas.cod_estado=6 and det_repor_aseso.tipo_pago='Credito'  and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $q5=pg_query($conexion, $s5);
+                          $r5=pg_num_rows($q5);
+                              if($r5){
+                                $datos5=pg_fetch_assoc($q5);
+                                $valor_credito=$datos5['valor'];
+                              }
+
+                          // Consulto los creditos aprobados por aliados..
+
+                          $s6="select  distinct enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and enc_procesadas.cod_estado=6  and det_repor_aseso.tipo_pago='Credito' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $q6=pg_query($conexion, $s6);
+                          $aprob_credito=pg_num_rows($q6);
+
+
+                          $s7="select distinct enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and  det_repor_aseso.tipo_pago='Credito' and (enc_procesadas.cod_estado=7 or enc_procesadas.cod_estado=1) and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $q7=pg_query($conexion, $s7);
+                          $repro_credito=pg_num_rows($q7);
+
+
+
+                            // SUmar todos los valores 
+
+                         $sql91="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and det_repor_aseso.aliado='' ";
+                        $query91=pg_query($conexion, $sql91);
+                        $rows91=pg_num_rows($query91);
+                              $valor_serv=0;
+                              if($rows91){
+
+                                $valor_serv=0;
+                                while($datos91=pg_fetch_assoc($query91)){
+
+                                      $valor_serv=$valor_serv+$datos91['valor'];
+                                }
+                              }
+
+                      //  @$valor_serv=pg_fetch_assoc($query91); 
+
+                            //$valor_serv=$valor_serv['valor'];
+                        
+                        
+                        // Diagnósticos gratuitos....
+                        $_POST['asesor']=0;
+                        
+                        // if($_SESSION['cod_grupo']==1)
+                           include('repor_dash_pagos.php');    
                           //  else
                            // echo "Estamos trabajandoa aquí, por favor intenta mas tarde.";                   
 
@@ -1490,7 +1750,87 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                   }
               
                   
-                    $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa_diag.descripcion as actividad from usuarios, etapa_activ, activ_diag, activi_etapa_diag where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa_diag.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa_diag.id_activi_diag and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' and activi_etapa_diag.id_activi_diag between $parametro order by activ_diag.id_activi_diag desc ";
+                    $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa_diag.descripcion as actividad, activ_diag.id_activi_diag from usuarios, etapa_activ, activ_diag, activi_etapa_diag where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa_diag.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa_diag.id_activi_diag and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' and activi_etapa_diag.id_activi_diag between $parametro order by activ_diag.id_activi_diag desc ";
+                          $query2=pg_query($conexion, $sql2);
+                          $rows2=pg_num_rows($query2);
+                         include('history_revi2.php');
+                  
+              }
+              else
+                echo "2"; // Problema interno (técnico).            
+
+      } 
+
+
+      if(isset($_POST['edit_revi_diag'])){ // Editar  activiades...
+
+          // Verificamos quién está realizando la revisión.....
+          if($_SESSION['cod_grupo']==6 or $_SESSION['cod_grupo']==1) // Coordiandor de operaciones.  o Super administrador
+            $tipo_revision=1; // Control de calidad
+          else if($_SESSION['cod_grupo']==3 or $_SESSION['cod_grupo']==1) // Analítico....  o Super administrador
+            $tipo_revision=2; 
+          else if($_SESSION['cod_grupo']==8 or $_SESSION['cod_grupo']==1) // Asesor...  o Super administrador
+            $tipo_revision=3; // Asesor
+
+              if($_POST['edit']){
+                    $insert="update activ_diag set observacion='".$_POST['observacion']."', fecha_actividad='".$_POST['fecha_actividad']."', fecha_registro='".$fecha_registro."', cod_usu_respon='".$_SESSION['cod_usuario']."' where id_activi_diag='".$_POST['id_activi_diag']."' ";
+
+              }
+              else if($_POST['elim']){
+                  $insert="delete from activ_diag where id_activi_diag='".$_POST['id_activi_diag']."' ";
+              }            
+
+            //$insert="insert into activ_diag (cod_activi_etapa, id_elab_diag, observacion, cod_usu_respon, fecha_actividad, fecha_registro) values('".$_POST['cod_activi_etapa']."', '".$_POST['id_elab_diag']."', '".$_POST['observacion']."', '".$_SESSION['cod_usuario']."', '".$_POST['fecha_actividad']."', '".$fecha_registro."') ";
+            $query=pg_query($conexion, $insert);
+                    
+
+              if($query){
+
+                 if($_POST['tipo']==1){
+                  $parametro='9 and 19';
+                  
+                }
+
+                elseif($_POST['tipo']==2){
+                   $parametro='24 and 62';
+                 
+                }
+                elseif($_POST['tipo']==3){
+                   $parametro='78 and 85';
+
+
+                }
+
+               elseif($_POST['tipo']==4){
+                 $parametro='65 and 77';                
+                }
+
+                elseif($_POST['tipo']==5 ){ // Listado de variables de  revisión de bases de datos
+                  $parametro='86 and 91'; 
+                
+                }
+
+                elseif($_POST['tipo']==6 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='92 and 97'; 
+                  }
+                  elseif($_POST['tipo']==7 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='112 and 132'; 
+                  }
+                  elseif($_POST['tipo']==8 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='98 and 111'; 
+                  }
+                  elseif($_POST['tipo']==9 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='133 and 136'; 
+                  }
+                  elseif($_POST['tipo']==10 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='137 and 139'; 
+                  }
+                  elseif($_POST['tipo']==11 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='140 and 142'; 
+                  }
+              
+                  
+                    $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa_diag.descripcion as actividad, activ_diag.id_activi_diag from usuarios, etapa_activ, activ_diag, activi_etapa_diag where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa_diag.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa_diag.id_activi_diag and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' and activi_etapa_diag.id_activi_diag between $parametro order by activ_diag.id_activi_diag desc ";
                           $query2=pg_query($conexion, $sql2);
                           $rows2=pg_num_rows($query2);
                          include('history_revi2.php');
@@ -1592,7 +1932,7 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                  $parametro='140 and 142'; 
                   }      
                      
-                  $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa_diag.descripcion as actividad from usuarios, etapa_activ, activ_diag, activi_etapa_diag where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa_diag.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa_diag.id_activi_diag and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' and activi_etapa_diag.id_activi_diag between $parametro order by activ_diag.id_activi_diag desc ";
+                  $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa_diag.descripcion as actividad, activ_diag.id_activi_diag, activ_diag.cod_activi_etapa from usuarios, etapa_activ, activ_diag, activi_etapa_diag where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa_diag.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa_diag.id_activi_diag and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' and activi_etapa_diag.id_activi_diag between $parametro order by activ_diag.id_activi_diag desc ";
                      $query2=pg_query($conexion, $sql2);
                           $rows2=pg_num_rows($query2);
                       include('history_revi2.php');
