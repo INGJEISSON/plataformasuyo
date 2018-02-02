@@ -638,7 +638,7 @@ if(isset($_SESSION['cod_usuario'])){
                         $tom_servno=pg_num_rows($query8);
                        // Consulto los diagnósticos que tomaron el servicio
                        
-                        $sql9="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                       echo  $sql9="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query9=pg_query($conexion, $sql9);
                         $tom_servsi=pg_num_rows($query9); 
                         
@@ -753,7 +753,7 @@ if(isset($_SESSION['cod_usuario'])){
 
                             // SUmar todos los valores 
 
-                         $sql91="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and det_repor_aseso.aliado='' ";
+                        echo  $sql91="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and det_repor_aseso.aliado='' ";
                         $query91=pg_query($conexion, $sql91);
                         $rows91=pg_num_rows($query91);
                               $valor_serv=0;
