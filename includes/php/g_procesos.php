@@ -373,28 +373,28 @@ if(isset($_SESSION['cod_usuario'])){
 
                          
   // Consulto los diagnósticos que no tomaron el servicio
-                       $sql8="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro  enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='No' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                       $sql8="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro  enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='No'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query8=pg_query($conexion, $sql8);
                         $tom_servno=pg_num_rows($query8);
                        // Consulto los diagnósticos que tomaron el servicio
                        
-                        $sql9="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $sql9="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query9=pg_query($conexion, $sql9);
                         $tom_servsi=pg_num_rows($query9); 
                         
                          // Consulto los diagnósticos pendientes por venta
-                        $sql10="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Pendiente de venta' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $sql10="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Pendiente de venta'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query10=pg_query($conexion, $sql10);
                         $tom_servpendventa=pg_num_rows($query10); 
                         
                           // Consulto los diagnósticos pendientes por venta
-                        $sql11="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='No viable' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $sql11="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='No viable'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query11=pg_query($conexion, $sql11);
                         $tom_servnoviable=pg_num_rows($query11);
                         
 
                         /// Recuado de cuotas..
-                           $sql127="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tipo_visita='".'Recuado de cuotas'."' and enc_procesadas.cod_estado=6 and  enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                           $sql127="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tipo_visita='".'Recuado de cuotas'."'  and enc_procesadas.cod_estado=6 and enc_procesadas.cod_estado=6 and  enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                            $query127=pg_query($conexion, $sql127);
                          $rows_recaudo=pg_num_rows($query127); 
                               $recaudo_cuotas=0;
@@ -452,25 +452,25 @@ if(isset($_SESSION['cod_usuario'])){
 
                         //Consulto creditos por aliado
 
-                          $s1="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='FMSD' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $s1="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='FMSD'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
                           $q1=pg_query($conexion, $s1);
                           $r1=pg_num_rows($q1);
 
-                          $s2="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Creditos Orbe' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $s2="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Creditos Orbe'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
                           $q2=pg_query($conexion, $s2);
                           $r2=pg_num_rows($q2);
 
-                          $s3="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Interactuar' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $s3="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Interactuar'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
                           $q3=pg_query($conexion, $s3);
                           $r3=pg_num_rows($q3);
 
-                          $s4="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Av villas' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $s4="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Av villas'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
                           $q4=pg_query($conexion, $s4);
                           $r4=pg_num_rows($q4);
 
                           // Sumo el valor ingresado por los aliados y aprobados... 
 
-                           $s5="select sum(det_repor_aseso.valor) as valor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and enc_procesadas.cod_estado=6 and det_repor_aseso.tipo_pago='Credito'  and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                           $s5="select sum(det_repor_aseso.valor) as valor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and enc_procesadas.cod_estado=6 and det_repor_aseso.tipo_pago='Credito'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
                           $q5=pg_query($conexion, $s5);
                           $r5=pg_num_rows($q5);
                               if($r5){
@@ -493,7 +493,7 @@ if(isset($_SESSION['cod_usuario'])){
 
                             // SUmar todos los valores 
 
-                         $sql91="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and det_repor_aseso.aliado='' ";
+                        $sql91="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and det_repor_aseso.aliado='' ";
                         $query91=pg_query($conexion, $sql91);
                         $rows91=pg_num_rows($query91);
                               $valor_serv=0;
@@ -505,7 +505,6 @@ if(isset($_SESSION['cod_usuario'])){
                                       $valor_serv=$valor_serv+$datos91['valor'];
                                 }
                               }
-
                       //  @$valor_serv=pg_fetch_assoc($query91); 
 
                             //$valor_serv=$valor_serv['valor'];
@@ -633,28 +632,28 @@ if(isset($_SESSION['cod_usuario'])){
 
                          
   // Consulto los diagnósticos que no tomaron el servicio
-                       $sql8="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro  enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='No' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                       $sql8="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro  enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='No'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query8=pg_query($conexion, $sql8);
                         $tom_servno=pg_num_rows($query8);
                        // Consulto los diagnósticos que tomaron el servicio
                        
-                       echo  $sql9="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $sql9="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query9=pg_query($conexion, $sql9);
                         $tom_servsi=pg_num_rows($query9); 
                         
                          // Consulto los diagnósticos pendientes por venta
-                        $sql10="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Pendiente de venta' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $sql10="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Pendiente de venta'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query10=pg_query($conexion, $sql10);
                         $tom_servpendventa=pg_num_rows($query10); 
                         
                           // Consulto los diagnósticos pendientes por venta
-                        $sql11="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='No viable' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                        $sql11="select det_repor_aseso.tom_serv from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='No viable'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query11=pg_query($conexion, $sql11);
                         $tom_servnoviable=pg_num_rows($query11);
                         
 
                         /// Recuado de cuotas..
-                           $sql127="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tipo_visita='".'Recuado de cuotas'."' and enc_procesadas.cod_estado=6 and  enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                           $sql127="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tipo_visita='".'Recuado de cuotas'."'  and enc_procesadas.cod_estado=6 and enc_procesadas.cod_estado=6 and  enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                            $query127=pg_query($conexion, $sql127);
                          $rows_recaudo=pg_num_rows($query127); 
                               $recaudo_cuotas=0;
@@ -712,25 +711,25 @@ if(isset($_SESSION['cod_usuario'])){
 
                         //Consulto creditos por aliado
 
-                          $s1="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='FMSD' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $s1="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='FMSD'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
                           $q1=pg_query($conexion, $s1);
                           $r1=pg_num_rows($q1);
 
-                          $s2="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Creditos Orbe' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $s2="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Creditos Orbe'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
                           $q2=pg_query($conexion, $s2);
                           $r2=pg_num_rows($q2);
 
-                          $s3="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Interactuar' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $s3="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Interactuar'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
                           $q3=pg_query($conexion, $s3);
                           $r3=pg_num_rows($q3);
 
-                          $s4="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Av villas' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                          $s4="select enc_procesadas.id_fasfield, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.aliado='Av villas'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
                           $q4=pg_query($conexion, $s4);
                           $r4=pg_num_rows($q4);
 
                           // Sumo el valor ingresado por los aliados y aprobados... 
 
-                           $s5="select sum(det_repor_aseso.valor) as valor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and enc_procesadas.cod_estado=6 and det_repor_aseso.tipo_pago='Credito'  and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
+                           $s5="select sum(det_repor_aseso.valor) as valor from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and enc_procesadas.cod_estado=6 and det_repor_aseso.tipo_pago='Credito'  and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'";
                           $q5=pg_query($conexion, $s5);
                           $r5=pg_num_rows($q5);
                               if($r5){
@@ -753,7 +752,7 @@ if(isset($_SESSION['cod_usuario'])){
 
                             // SUmar todos los valores 
 
-                        echo  $sql91="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and det_repor_aseso.aliado='' ";
+                        $sql91="select distinct enc_procesadas.cliente, det_repor_aseso.valor, enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.tom_serv='Si' and enc_procesadas.cod_estado=6 and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' and det_repor_aseso.aliado='' ";
                         $query91=pg_query($conexion, $sql91);
                         $rows91=pg_num_rows($query91);
                               $valor_serv=0;
