@@ -69,8 +69,6 @@ include('../dependencia/conexion.php');
                              <td><select name="select" id="observacion" class="form-control">  
                              <option value="2">Ninguno</option>
                              </select>
-
-                                <input type=text class="form-control" name="textfield2" id="observacion2">
                              </td>
                              <td>&nbsp;</td>
                              <td><input type="button" class="btn btn-primary" name="button" id="g_revision_parraf" value="Registrar/Editar"></td>
@@ -78,10 +76,7 @@ include('../dependencia/conexion.php');
                          </table>
 
                           <div  align="justify" id="pan_add_campos" style="font-weight: bold">Nota: Sólo podrás agregar seleccionar campos donde hayas registrado información 
-                         
-
                                   <table width="870" border="0"  class="table responsive" cellpadding="1" cellspacing="4">
-
                                    <tr>
                                      <td width="189"><strong>Ficha</strong></td>
                                      <td width="26">&nbsp;</td>
@@ -91,15 +86,25 @@ include('../dependencia/conexion.php');
                                      <td width="113"><strong>Agregar</strong></td>
                                    </tr>
                                    <tr>
-                                     <td height="46"><select name="select" id="cod_activi_etapa" class="form-control">
-                                       <option value="1" selected="selected">Seleccione</option>
-                                      <?php while($datos2=pg_fetch_assoc($query3)){ ?>
+                                     <td height="46"><select name="select" id="b_ficha" class="form-control">
+                                       <option value="0" selected="selected">Seleccione</option>
+                                      <?php // while($datos2=pg_fetch_assoc($query3)){ ?>
                                        
-                                       <option value="<?= $datos2['cod_activi_etapa'] ?>"> <?php echo ($datos2['descripcion'])?></option>
-                                       <?php } ?>
+                                       <option value=1>Revisión de los documentos del cliente y de la encuesta</option>
+                                       <option value=2>Identificar cadena de tradiciones</option>
+                                       <option value=3>Revisión páginas de mapas</option>
+                                       <option value=4>Revisión páginas impuestos</option>
+                                       <option value=5>Revisión bases de datos</option>
+                                       <option value=6>Revisión de mapas colaborativos</option>
+                                       <option value=7>Analisis de FMI</option>
+                                       <option value=8>Analisis de la titularidad</option>
+                                       <option value=9>Analisis de la situación actual del impuesto predial </option>
+                                       <option value=10>Análisis situación actual servicios públicos</option>
+                                       <option value=11>Otras situaciones (Legal)</option>
+                                       <?php // } ?>
                                      </select></td>
                                      <td><label for="textfield"></label></td>
-                                     <td><select name="select" id="observacion" class="form-control">  
+                                     <td><select name="select" id="actividad" class="form-control">  
                                      <option value="2">Ninguno</option>
                                      </select>
                                      </td>
@@ -112,10 +117,10 @@ include('../dependencia/conexion.php');
                             <hr>&nbsp;</hr>
                                <table width="155" border="0" cellpadding="0" cellspacing="0" id='editparrafo'>
                                  <tr align="center">
-                                   <td width="106"><strong>Edición  de Párrafo</strong></td>
+                                   <td width="106"><strong>Edición de Párrafo</strong></td>
                                  </tr>
                                  <tr align="center">
-                                   <td><textarea id="edit_parrafo" class="form-control" style=" width: 500px; height: 200px"></textarea><br><input type="button" class="btn btn-primary" name="button" id="g_revision_parraf" value="Actualizar"></td>
+                                   <td><textarea id="edit_parrafo" class="form-control" style=" width: 800px; height: 400px"></textarea><br><input type="button" class="btn btn-primary" name="button" id="actuali_parraf" value="Actualizar"></td>
                                  </tr>
                                </table>
                            
@@ -143,6 +148,8 @@ include('../dependencia/conexion.php');
   <script>
 
 $(document).ready(function(){
+
+  var id_elab_diag="<?php echo "$_GET[id_elab_diag]" ?>";
 $("#cargar2").hide();
 $("#archrev").hide();
 $("#archrev2").hide();
@@ -161,7 +168,7 @@ $('#fecha_actividad').datepicker({
 
 $("#add_revision").click(function(){
 $("#pan_add_revision").show();
-$("#pan_add_campos").show();
+
 
 });
 	
@@ -182,6 +189,8 @@ $("#archrev2").hide();
 $("#cod_activi_etapa").change(function(){
   var cod_activi_etapa=$("#cod_activi_etapa").val();
   var b_lista_parraf=1;
+$("#pan_add_campos").hide();
+$("#editparrafo").hide();
     var datos='b_lista_parraf='+b_lista_parraf+'&cod_activi_etapa='+cod_activi_etapa;
 $("#observacion").hide();
   $("#observacion2").hide();
@@ -209,69 +218,140 @@ $("#observacion").hide();
 
 });
 
+$("#b_ficha").change(function(){
+  var b_ficha=$("#b_ficha").val();
+  var cod_equipo=2;
+    var datos='b_ficha='+b_ficha+'&cod_equipo='+cod_equipo+'&id_elab_diag='+id_elab_diag;
+            $.ajax({
+                  type: "POST",
+                  data: datos,
+                  url: 'g_procesos.php?'+datos,
+                  success: function (valor){
 
-
-
-$("#g_revision").click(function(){  // Abregamos revisión .....
-
-var cod_activi_etapa=$("#cod_activi_etapa").val();
-var observacion=$("#observacion").val();
-  if(observacion==2)
-  var observacion=$("#observacion2").val();
-
-var id_serv_cliente="<?php echo "$_GET[id_elab_diag]" ?>";
-var tipo="<?php echo "$_GET[tipo]" ?>";
-var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&add_parrafo_diag='+1+'&tipo='+tipo+'&g_revision_parraf='+1;
-    
-    if(cod_activi_etapa!=1){
-		
-			if(fecha_actividad==""){
-						alert("Por favor introduzca la fecha que ha realizado la actividad.");
-			}else{
-
-            $("#cargar2").show();
-              $.ajax({
-
-                        type: "POST",
-                        data: datos,
-                        url: 'g_procesos.php?'+datos,
-                        success: function(valor){
-                           
-                               if(valor!=2){
-                                $("#cargar2").hide();
-                                  alert("Se ha agregado su actividad al cliente");   
-                                  $("#history_revi").html(valor);                                
-
-                             /*  var id_elab_diag="<?php echo "$_GET[id_elab_diag]" ?>";
-                              var datos='listar_actividades_diag='+1+'&tipo='+tipo+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;    
-                                        
-                                               $.ajax({
-
-                                                      type: "POST",
-                                                      data: datos,
-                                                      url: 'g_procesos.php?'+datos,
-                                                      success: function(valor){
-                                                                               
-                                                      }
-                                                 }); */
-
-                               }else{
-                                      $("#cargar2").hide();
-                                alert("Ocurrió un error al crear el registro de la observación, por favor intenta de nuevo o comuníquese con el administrador.");
-
-                               }
-
+                        if(valor=='<option value=2>Ninguno</option>'){
+                          $("#observacion").empty();
+                          $("#observacion2").show();
+                          $("#observacion").hide();
+                          $("#observacion").html(valor);
+                        }else{
+                          $("#actividad").empty();
+                          $("#actividad").html(valor);
+                          $("#actividad").show();                         
 
                         }
-                  });
-			}
+                  }
 
-    }
-    else
-      alert("Por favor selecione un estado de la actividad. ");
+            });
 
 });
 
+    $("#g_revision_parraf").click(function(){  // Abregamos revisión .....
+
+    var cod_activi_etapa=$("#cod_activi_etapa").val();
+    var observacion=$("#observacion").val();    
+
+        
+          var datos='id_elab_diag='+id_elab_diag+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&add_parrafo_diag='+1+'&g_revision_parraf='+1;
+        
+        if(cod_activi_etapa!=0){
+                $("#cargar2").show();
+                  $.ajax({
+
+                            type: "POST",
+                            data: datos,
+                            url: 'g_procesos.php?'+datos,
+                            success: function(valor){                               
+                                   if(valor!=2){
+                                    $("#cargar2").hide();
+                                   
+                                    $("#edit_parrafo").empty();
+                                    $("#edit_parrafo").html(valor); // Mostramos párrafo .. 
+                                    $("#editparrafo").show();
+                                    $("#editparrafo").focus();
+                                    $("#pan_add_campos").show();  
+
+                                   }else if(valor==3){
+                                          $("#cargar2").hide();
+                                    alert("Ocurrió un error al crear el párrafo, por favor intenta de nuevo o comuníquese con el administrador.");
+
+                                   }
+
+
+                            }
+                      });
+
+        }
+        else
+          alert("Por favor selecione un título de párrafo.");
+
+    });
+
+
+    // Agregar información al parráfo
+
+         $("#g_add_campo_parr").click(function(){
+
+          var actividad=$("#actividad").val();
+          var edit_parrafo=$("#edit_parrafo").val();
+          var datos='g_revision_parraf='+1+'&g_add_campo_parr='+1+'&actividad='+actividad+'&id_elab_diag='+id_elab_diag+'&edit_parrafo='+edit_parrafo;
+
+
+                    if(actividad!=""){
+
+                            $.ajax({
+                                    type: "POST",
+                                    data: datos,
+                                    url: 'g_procesos.php?'+datos,
+                                    success: function(valor2){
+                                     // alert("Jei");
+                                              
+                                   //$("#edit_parrafo").empty();
+                                   $("#edit_parrafo").html("");
+                                   $("#edit_parrafo").html(valor2); // Mostramos párrafo .. 
+                                    /* $("#editparrafo").show();
+                                     $("#editparrafo").focus();
+                                    $("#pan_add_campos").show();*/
+
+
+                                    }
+
+                              });
+                    }else
+                      alert("No se encontró ninguna actividad en la ficha seleccionada");
+              
+
+
+
+
+         });
+
+            // Actualizamos párrafo..
+
+          $("#actuali_parraf").click(function(){
+
+          var observacion=$("#observacion").val();   // Párrafo seleccionado..         
+          var edit_parrafo=$("#edit_parrafo").val();
+          var datos='g_revision_parraf='+1+'&actuali_parraf='+1+'&id_elab_diag='+id_elab_diag+'&edit_parrafo='+edit_parrafo+'&observacion='+observacion;
+
+                    if(actividad!=""){
+                            $.ajax({
+                                    type: "POST",
+                                    data: datos,
+                                    url: 'g_procesos.php?'+datos,
+                                    success: function(valor4){
+
+                                        if(valor4==1)
+                                          alert("Párrafo construido y actualizado correctamente");
+                                        else
+                                          alert("Ocurrió un error técnico, por favor comuníquese con el administrador");
+                                    }
+
+                              });
+                    }else
+                      alert("No se encontró ninguna actividad en la ficha seleccionada");
+
+
+         });
 
 });
 

@@ -990,7 +990,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
                 </tr>               
            </table>
 
-            <p><a href="../../includes/php/construc_parraf.php?cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo_seguimiento=6&id_serv_cliente=<?php echo $id_elab_diag ?>" class='edicion'>Construcción de parrafos</a></p>
+            <p><a href="../../includes/php/construc_parraf.php?cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo_seguimiento=6&id_elab_diag=<?php echo $id_elab_diag ?>" class='edicion'>Construcción de parrafos</a></p>
 
         </div>
       </div>

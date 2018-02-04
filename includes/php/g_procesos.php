@@ -1883,50 +1883,309 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
       if(isset($_POST['b_lista_parraf'])){
 
 
-              echo $sql="select  id_detall_parraf, titulo_parraf from detalle_parraf where cod_parrafo='".$_POST['cod_activi_etapa']."' ";
+              $sql="select  id_detall_parraf, titulo_parraf from detalle_parraf where cod_parrafo='".$_POST['cod_activi_etapa']."' ";
                       $query=pg_query($conexion, $sql);
                       $rows=pg_num_rows($query);
                           if($rows){
 
                              
                                 while($row_consulta2 = pg_fetch_assoc($query))           
-                            echo   $resp="<option value='".$row_consulta2[id_detalle_parraf]."'>".($row_consulta2[titulo_parraf])."</option>"; 
+                            echo   $resp="<option value='".$row_consulta2[id_detall_parraf]."'>".($row_consulta2[titulo_parraf])."</option>"; 
 
                           }else
                           echo  $resp="<option value=2>Ninguno</option>";
+      }
+      if(isset($_POST['b_ficha'])){
+
+                if($_POST['b_ficha']==1){
+                  $etapa=1;
+
+                                $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 9 and 19 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+
+                                  // $i=1;
+                                                
+                                       while($row_consulta2 = pg_fetch_assoc($query3))  {
+
+                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
+                                        $q=pg_query($conexion, $s);
+                                        $r=pg_num_rows($q);
+                                                    if($r==1){
+                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                    }
+                                           // $i++;
+                                        } 
+                  }
+
+                if($_POST['b_ficha']==2){
+                  $etapa=1;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 24 and 62 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                              
+                                   while($row_consulta2 = pg_fetch_assoc($query3))  {
+
+                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
+                                        $q=pg_query($conexion, $s);
+                                        $r=pg_num_rows($q);
+                                                    if($r==1){
+                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                    }
+                                           // $i++;
+                                        } 
+
+                }
+                if($_POST['b_ficha']==3){
+                  $etapa=1;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 78 and 85 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                              
+                                    while($row_consulta2 = pg_fetch_assoc($query3))  {
+
+                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
+                                        $q=pg_query($conexion, $s);
+                                        $r=pg_num_rows($q);
+                                                    if($r==1){
+                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                    }
+                                           // $i++;
+                                        } 
+
+                }
+
+                if($_POST['b_ficha']==4){
+                  $etapa=1;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 65 and 77 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                   
+
+                                   while($row_consulta2 = pg_fetch_assoc($query3))  {
+
+                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
+                                        $q=pg_query($conexion, $s);
+                                        $r=pg_num_rows($q);
+                                                    if($r==1){
+                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                    }
+                                           // $i++;
+                                        } 
+
+                }
+
+                if($_POST['b_ficha']==5 ){ // Listado de variables de  revisión de bases de datos
+                  $etapa=1;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 86 and 91 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                              
+                                  while($row_consulta2 = pg_fetch_assoc($query3))  {
+
+                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
+                                        $q=pg_query($conexion, $s);
+                                        $r=pg_num_rows($q);
+                                                    if($r==1){
+                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                    }
+                                           // $i++;
+                                        } 
+
+                }
+
+                if($_POST['b_ficha']==6 ){ // Listado de variables de  revisión de mapas colaborativos
+                  $etapa=1;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 92 and 97 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                              
+                                   while($row_consulta2 = pg_fetch_assoc($query3))  {
+
+                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
+                                        $q=pg_query($conexion, $s);
+                                        $r=pg_num_rows($q);
+                                                    if($r==1){
+                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                    }
+                                           // $i++;
+                                        } 
+
+                }
+
+                if($_POST['b_ficha']==7 ){ // Listado de variables de análisis FMI
+                  $etapa=2;
+
+                              $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 112 and 132 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                              
+                                   while($row_consulta2 = pg_fetch_assoc($query3))  {
+
+                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
+                                        $q=pg_query($conexion, $s);
+                                        $r=pg_num_rows($q);
+                                                    if($r==1){
+                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                    }
+                                           // $i++;
+                                        } 
+
+                }
+
+                if($_POST['b_ficha']==8 ){ // Listado de variables de análisis titularidad
+                  $etapa=2;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 98 and 111 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                              
+                                    while($row_consulta2 = pg_fetch_assoc($query3))  {
+
+                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
+                                        $q=pg_query($conexion, $s);
+                                        $r=pg_num_rows($q);
+                                                    if($r==1){
+                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                    }
+                                           // $i++;
+                                        } 
+
+                }
+                if($_POST['b_ficha']==9 ){ // Listado de variables de análisis titularidad
+                  $etapa=2;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 133 and 136 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                              
+                                    while($row_consulta2 = pg_fetch_assoc($query3))  {
+
+                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
+                                        $q=pg_query($conexion, $s);
+                                        $r=pg_num_rows($q);
+                                                    if($r==1){
+                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                    }
+                                           // $i++;
+                                        }   
+
+                }
+                if($_POST['b_ficha']==10 ){ // Listado de variables de análisis titularidad
+                  $etapa=2;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 137 and 139 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                              
+                                   while($row_consulta2 = pg_fetch_assoc($query3))  {
+
+                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
+                                        $q=pg_query($conexion, $s);
+                                        $r=pg_num_rows($q);
+                                                    if($r==1){
+                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                    }
+                                           // $i++;
+                                        } 
+
+                }
+
+                if($_POST['b_ficha']==11 ){ // Listado de variables de análisis titularidad
+                  $etapa=2;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 140 and 142 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                              
+                                    while($row_consulta2 = pg_fetch_assoc($query3))  {
+
+                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
+                                        $q=pg_query($conexion, $s);
+                                        $r=pg_num_rows($q);
+                                                    if($r==1){
+                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                    }
+                                           // $i++;
+                                        } 
+
+                }
+
       }
 
       if(isset($_POST['g_revision_parraf'])){  // Agregar párrafo a construir
              
 
                     if(isset($_POST['add_parrafo_diag'])){
-                       // Buscamos si ya se encuentra un párrafo en el diagnóstico
+                      
 
-                            $s="select * from parra_diag where id_elab_diag='".$_POST['id_elab_diag']."' and id_detalle_parraf='".$_POST['id_detalle_parraf']."'  ";
+                         // Buscamos si ya se encuentra un párrafo en el diagnóstico
+                             $s="select * from parraf_diag where id_elab_diag='".$_POST['id_elab_diag']."' and id_detall_parraf='".$_POST['observacion']."'  ";
                             $q=pg_query($conexion, $s);
-                            $r=pg_num_rows($q);
+                            $r=pg_num_rows($q);                            
 
                                   if($r==1){
 
-                                          $datos = pg_fetch_assoc($query);
+                                           $datos = pg_fetch_assoc($q);
                                             echo $datos['descripcion'];
 
-
-                                  } else{  // Agrego formato de párrafo...
-                                        $sql="select  * from detalle_parraf where id_detalle_parraf='".$_POST['cod_activi_etapa']."' ";
+                                  } else if($r==0){  // Agrego formato de párrafo...
+                                            $sql="select  * from detalle_parraf where id_detall_parraf='".$_POST['observacion']."' ";
                                             $query=pg_query($conexion, $sql);
                                             $rows=pg_num_rows($query);
                                                 if($rows){
 
                                                         $row_consulta2 = pg_fetch_assoc($query);
-                                                       echo $row_consulta2['descripcion'];
+                                                       echo $row_consulta2['descripcion']; // Imprimimos párrafo seleccionado..
+                                                }else
+                                                echo "3"; // Problema técnico..
+                                  }else
+                                  echo "3"; // Problema técnico.. 
 
-                                                }
-                                  }
+                    }
+                    if(isset($_POST['g_add_campo_parr'])){ // Agregamos información de variable al párrafo seleccionado..
+
+                      $parrafo=$_POST['edit_parrafo'];
+
+                          //buscamos información del párrafo..
+
+                           $s="select observacion from activ_diag where cod_activi_etapa='".$_POST['actividad']."' and id_elab_diag='".$_POST['id_elab_diag']."'  ";
+                            $q=pg_query($conexion, $s);
+                         
+                                 $obs="";
+                                            $i=1;
+                                         while($datos1=pg_fetch_assoc($q)){
+                                              if($i==1)
+                                            $obs= $datos1['observacion'];
+                                             else
+                                            $obs.=" ".$datos1['observacion'];
+                                            $i++;
+                                           }
+                                  
+                                     // echo  $obs; 
+                                     echo  $parrafo.=" ",$obs;
 
                     }
 
-        
+                    // Actualizamos información del párrafo..
+                    if(isset($_POST['actuali_parraf'])){
+
+                      // Buscamos si ya se encuentra un párrafo en el diagnóstico
+                              $s="select * from parraf_diag where id_elab_diag='".$_POST['id_elab_diag']."' and id_detall_parraf='".$_POST['observacion']."'  ";
+                            $q=pg_query($conexion, $s);
+                            $r=pg_num_rows($q);   
+                                if($r){
+                                   $sql="update parraf_diag set descripcion='".$_POST['edit_parrafo']."' where id_elab_diag='".$_POST['id_elab_diag']."' and id_detall_parraf='".$_POST['observacion']."' ";
+
+                                }else{
+                                   /// INsertamos dato
+                                  $sql="insert into parraf_diag (id_elab_diag, id_detall_parraf, descripcion) values('".$_POST['id_elab_diag']."', '".$_POST['observacion']."', '".$_POST['edit_parrafo']."') ";
+                                }                      
+
+                                  $query=pg_query($conexion, $sql);
+                                         if($query)
+                                         echo "1";
+                                         else
+                                         echo "2";  
+
+
+
+
+                    }
                         
       }
 
