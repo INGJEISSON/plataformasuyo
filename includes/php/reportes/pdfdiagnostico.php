@@ -526,11 +526,11 @@ if($rows==1){
                       <td>DEVOLUCIONES SUYO</td>
                     </tr>
                   </table>
-                  <table width="549" border="0">
+                  <table width="549" border="0" class="gris_texto">
                     <tr>
                       <td width="12" height="114"><p><img src="img/Barra_Parrafo1.png" alt="" width="12" height="75" /></p>
                       <p>&nbsp;</p></td>
-                      <td width="527"><p class="gris_texto">Aunque no podemos asegurarle con 100% de seguridad que su servicio podrá llevarse a buen  término, pues pueden presentarse situaciones extraordinarias que lo impidan. Podemos  asegurarle que, en caso de que esto pase, nosotros asumimos los riesgos y por lo tanto, el  cliente recibirá reembolso total de su dinero si Suyo no puede lograr la entrega del producto  final del servicio dentro del plazo de tiempo establecido en el contrato.  Esta política aplica sólo si decide adquirir los servicios bajo la modalidad 2 de servicio  completo (asesoría, análisis, acompañamiento, trámites) (Iva incluido).  Esta política no aplica cuando: </p></td>
+                      <td width="527" style="text-align: justify;">Aunque no podemos asegurarle con 100% de seguridad que su servicio podrá llevarse a buen  término, pues pueden presentarse situaciones extraordinarias que lo impidan. Podemos  asegurarle que, en caso de que esto pase, nosotros asumimos los riesgos y por lo tanto, el  cliente recibirá reembolso total de su dinero si Suyo no puede lograr la entrega del producto  final del servicio dentro del plazo de tiempo establecido en el contrato.  Esta política aplica sólo si decide adquirir los servicios bajo la modalidad 2 de servicio  completo (asesoría, análisis, acompañamiento, trámites) (Iva incluido).  Esta política no aplica cuando:</td>
                     </tr>
                   </table>
                   <table width="549" border="0" class="gris_texto">
