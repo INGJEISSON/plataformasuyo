@@ -373,6 +373,21 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
                         }
                   });
 
+            var datos='listar_actividades_diag='+1+'&tipo='+12+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;
+    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: 'g_procesos.php?'+datos,
+                        success: function(valor){
+                            $("#list_revi_docu12").empty();
+                                $("#cargar2").hide();
+                                   $("#list_revi_docu12").html(valor);
+                        }
+                  });
+
           // Registramos datos del diagnóstico (Técnico y datos básicos)
 
  $("#grabar_proc").click(function(){
@@ -490,7 +505,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
                 <div class="col-lg-12">
                   <div class="card">
                     <center>
-                    <input type="button" name="guardar" id='grabar_proc' class='btn btn-warning' value='Guardar'></center>
+                   <?php if($_SESSION['tipo_usuario']==23 || $_SESSION['tipo_usuario']==1 ){   ?> <input type="button" name="guardar" id='grabar_proc' class='btn btn-warning' value='Guardar'><?php } ?></center>
                     <div class="card-body">
                       <p> 
     <div class="panel-group" id="accordion">
@@ -538,7 +553,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </tr>
       <tr>
         <td>Documento (Diagnóstico) :</td>
-        <td><a href="reportes/pdfdiagnostico.php?id_elab_diag=<?php echo $_GET['id_elab_diag']; ?>" target='_blank'>Visualizar (Online)</a>
+        <td><a href="reportes/pdfdiagnostico_online.php?id_elab_diag=<?php echo $_GET['id_elab_diag']; ?>" target='_blank'>Visualizar (Online)</a>
 <a href="reportes/creatediagnostico.php?id_elab_diag=<?php echo $_GET['id_elab_diag']; ?>" target='_blank'>Visualizar (PDF))</a>
         </td>
       </tr>
@@ -963,34 +978,8 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </div>
       <div id="collapse1311" class="panel-collapse collapse">
         <div class="panel-body">
-                <div id='history_parrafos' align="center"> Espere por favor.
-                    </div>
-
-         <table width="70%" border="0" class="table responsive">
-                
-                <tr>
-                  <td>Necesidad identificada:</td>                 
-                  <td>&nbsp;</td>
-                </tr>
-                <tr>
-                  <td>Descripción del predio y de la construcción:</td>                
-                  <td>&nbsp;</td>
-                </tr>
-                <tr>
-                  <td>Titularidad de predio: </td>
-                  <td>&nbsp;</td>
-                </tr>
-                <tr>
-                  <td>Forma como fue adqurido el predio por el usuario:</td>
-                  <td>&nbsp;</td>
-                </tr>
-                <tr>
-                  <td>Otras situaciones relacionadas con el predio y la construcción:</td>
-                  <td>&nbsp;</td>
-                </tr>               
-           </table>
-
-            <p><a href="../../includes/php/construc_parraf.php?cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo_seguimiento=6&id_elab_diag=<?php echo $id_elab_diag ?>" class='edicion'>Construcción de parrafos</a></p>
+             <div id='list_revi_docu12'></div>
+            <p><a href="../../includes/php/construc_parraf.php?cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=12&id_elab_diag=<?php echo $id_elab_diag ?>" class='edicion'>Construcción de parrafos</a></p>
 
         </div>
       </div>

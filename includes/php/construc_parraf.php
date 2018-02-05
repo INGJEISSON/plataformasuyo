@@ -10,7 +10,7 @@ include('../dependencia/conexion.php');
 // Listamos las fichas de párrafos
 
 
-          $sql3="select  cod_parrafo as cod_activi_etapa, descripcion from parrafos";
+       $sql3="select  cod_parrafo as cod_activi_etapa, descripcion from parrafos";
         $query3=pg_query($conexion, $sql3); 
 
 
@@ -228,11 +228,10 @@ $("#b_ficha").change(function(){
                   url: 'g_procesos.php?'+datos,
                   success: function (valor){
 
-                        if(valor=='<option value=2>Ninguno</option>'){
-                          $("#observacion").empty();
-                          $("#observacion2").show();
-                          $("#observacion").hide();
-                          $("#observacion").html(valor);
+                        if(valor=='<option value=2>Ninguno</option>'){                          
+                           $("#actividad").empty();
+                          $("#actividad").html(valor);
+                          $("#actividad").show();  
                         }else{
                           $("#actividad").empty();
                           $("#actividad").html(valor);
@@ -265,7 +264,7 @@ $("#b_ficha").change(function(){
                                     $("#cargar2").hide();
                                    
                                     $("#edit_parrafo").empty();
-                                    $("#edit_parrafo").html(valor); // Mostramos párrafo .. 
+                                    $("#edit_parrafo").val(valor); // Mostramos párrafo .. 
                                     $("#editparrafo").show();
                                     $("#editparrafo").focus();
                                     $("#pan_add_campos").show();  
@@ -295,7 +294,6 @@ $("#b_ficha").change(function(){
           var edit_parrafo=$("#edit_parrafo").val();
           var datos='g_revision_parraf='+1+'&g_add_campo_parr='+1+'&actividad='+actividad+'&id_elab_diag='+id_elab_diag+'&edit_parrafo='+edit_parrafo;
 
-
                     if(actividad!=""){
 
                             $.ajax({
@@ -305,9 +303,8 @@ $("#b_ficha").change(function(){
                                     success: function(valor2){
                                      // alert("Jei");
                                               
-                                   //$("#edit_parrafo").empty();
-                                   $("#edit_parrafo").html("");
-                                   $("#edit_parrafo").html(valor2); // Mostramos párrafo .. 
+                                   //$("#edit_parrafo").empty();                                 
+                                   $("#edit_parrafo").val(valor2); // Mostramos párrafo .. 
                                     /* $("#editparrafo").show();
                                      $("#editparrafo").focus();
                                     $("#pan_add_campos").show();*/
@@ -331,7 +328,8 @@ $("#b_ficha").change(function(){
 
           var observacion=$("#observacion").val();   // Párrafo seleccionado..         
           var edit_parrafo=$("#edit_parrafo").val();
-          var datos='g_revision_parraf='+1+'&actuali_parraf='+1+'&id_elab_diag='+id_elab_diag+'&edit_parrafo='+edit_parrafo+'&observacion='+observacion;
+          var cod_activi_etapa=$("#cod_activi_etapa").val(); // Titulo del párrafo..
+          var datos='g_revision_parraf='+1+'&actuali_parraf='+1+'&id_elab_diag='+id_elab_diag+'&edit_parrafo='+edit_parrafo+'&observacion='+observacion+'&cod_parrafo='+cod_activi_etapa;
 
                     if(actividad!=""){
                             $.ajax({
@@ -340,8 +338,23 @@ $("#b_ficha").change(function(){
                                     url: 'g_procesos.php?'+datos,
                                     success: function(valor4){
 
-                                        if(valor4==1)
+                                        if(valor4==1){
                                           alert("Párrafo construido y actualizado correctamente");
+
+                                            var datos5='listar_actividades_diag='+1+'&tipo='+12+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;    
+                                              $("#cargar2").show();
+                                                $.ajax({
+
+                                                          type: "POST",
+                                                          data: datos5,
+                                                          url: 'g_procesos.php?',
+                                                          success: function(valor5){
+                                                              $("#list_revi_docu12").empty();
+                                                                  $("#cargar2").hide();
+                                                                     $("#list_revi_docu12").html(valor5);
+                                                          }
+                                                    });
+                                        }
                                         else
                                           alert("Ocurrió un error técnico, por favor comuníquese con el administrador");
                                     }

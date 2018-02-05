@@ -14,6 +14,75 @@ if(isset($_GET['id_elab_diag'])){
           $query2=pg_query($conexion, $sql2);
           $rows2=pg_num_rows($query2);
           $datos2=pg_fetch_assoc($query2);
+
+          // Buscamos los servicios cotizados
+
+          $sql21="select serv_recom_diag.id_serv_recom, servicios.nom_servicio, servicios.cod_servicio from serv_recom_diag, servicios where serv_recom_diag.cod_servicio=servicios.cod_servicio and id_elab_diag='".$id_elab_diag."' ";
+          $query21=pg_query($conexion, $sql21);
+          $query22=pg_query($conexion, $sql21);
+          // Buscamos los párrafos  realizados por el diagnóstico
+
+          $sql3="select id_parraf_diag from parraf_diag where id_elab_diag='".$id_elab_diag."' limit 1 ";
+          $query3=pg_query($conexion, $sql3);
+          $rows3=pg_num_rows($query3);
+        
+                if($rows3){
+                                $sql1="select descripcion as observacion from parraf_diag where id_elab_diag='".$id_elab_diag."' and cod_parrafo=1 ";
+                                   $query1=pg_query($conexion, $sql1);
+                                   $datos1=pg_fetch_assoc($query1);
+
+                                  $nec_ident=$datos1['observacion'];
+
+                                      $sql1="select descripcion as observacion from parraf_diag where id_elab_diag='".$id_elab_diag."' and cod_parrafo=2 ";
+                                   $query1=pg_query($conexion, $sql1);
+                                   $datos1=pg_fetch_assoc($query1);
+
+                                   $situa_actual=$datos1['observacion'];
+
+                                     $sql1="select descripcion as observacion from parraf_diag where id_elab_diag='".$id_elab_diag."' and cod_parrafo=3 ";
+                                   $query1=pg_query($conexion, $sql1);
+                                   $datos1=pg_fetch_assoc($query1);
+
+                                   $ana_fis_amb=$datos1['observacion'];
+
+                                     $sql1="select descripcion as observacion from parraf_diag where id_elab_diag='".$id_elab_diag."' and cod_parrafo=4 ";
+                                   $query1=pg_query($conexion, $sql1);
+                                   $datos1=pg_fetch_assoc($query1);
+
+                                   $ana_fis_pro=$datos1['observacion'];
+
+                                $sql1="select descripcion as observacion from parraf_diag where id_elab_diag='".$id_elab_diag."' and cod_parrafo=5 ";
+                                   $query1=pg_query($conexion, $sql1);
+                                   $datos1=pg_fetch_assoc($query1);
+
+                                     $titula_predio=$datos1['observacion'];
+
+                                    $sql1="select descripcion as observacion from parraf_diag where id_elab_diag='".$id_elab_diag."' and cod_parrafo=6 ";
+                                   $query1=pg_query($conexion, $sql1);
+                                   $datos1=pg_fetch_assoc($query1);
+
+                                     $form_predio=$datos1['observacion'];
+
+                                     $sql1="select descripcion as observacion from parraf_diag where id_elab_diag='".$id_elab_diag."' and cod_parrafo=7 ";
+                                   $query1=pg_query($conexion, $sql1);
+                                   $datos1=pg_fetch_assoc($query1);
+
+                                     $otrs_situa=$datos1['observacion'];
+
+                }
+
+
+$tipol_cant_constr=explode(",",$datos['tipol_cant_constr']);
+
+$area_lote=explode(",",$datos['area_lote']);
+$alt_cant_pisos=explode(",",$datos['alt_cant_pisos']);
+
+$dim_frent_lote=explode(",",$datos['dim_frent_lote']);
+$dim_frent_const=explode(",",$datos['dim_frent_const']);
+$dist_lad_lot=explode(",",$datos['dist_lad_lot']);
+$dist_lot_izq=explode(",",$datos['dist_lot_izq']);
+$dist_lot_der=explode(",",$datos['dist_lot_der']);
+
         }
 
 }
@@ -21,10 +90,11 @@ if(isset($_GET['id_elab_diag'])){
 if($rows==1){
 
 ?>
+<page>
 <style type="text/css">
-.fuente_letra {
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-}
+/*.fuente_letra {
+	font-family: "Arial";
+}*/
 
 .gris_texto{
 		color: #5b5b5f;
@@ -56,7 +126,9 @@ if($rows==1){
 	background-image:url(img/Imagen1.png);
 	background-position:center;
 	background-repeat:no-repeat;
-	text-align:center
+	text-align:center;
+  color: #255590;
+  font-weight: bold; font-size: 10px
 
 }
 .tabla_tecnico2{
@@ -68,10 +140,10 @@ if($rows==1){
 </style>
 </head>
 
-<body class="fuente_letra">
-<table width="921" border="0">
+<body>
+<table width="598" border="0">
   <tr>
-    <td width="915" align="right"><img src="img/Logo.png" width="124" height="49" /></td>
+    <td width="592" align="right"><img src="img/Logo.png" width="124" height="49" /></td>
   </tr>
 </table>
 <table width="438" border="0">
@@ -143,7 +215,7 @@ if($rows==1){
     </p></td>
   </tr>
   <tr>
-    <td><p class="azul" style="font-size:24px; font-weight: bold">ESTADO ACTUAL </span></p></td>
+    <td><p class="azul" style="font-size:24px; font-weight: bold">ESTADO ACTUAL</p></td>
   </tr>
   <tr>
     <td height="23"><p class="gris_texto"><span class="azul" style="font-size:17px; bold">DEL USUARIO Y EL PREDIO</span></p></td>
@@ -156,8 +228,8 @@ if($rows==1){
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td><p class="gris_texto"></p></td>
-    <td><p class="gris_texto"></p></td>
+    <td><p class="gris_texto"><?php echo $datos2['nombre'] ?></p></td>
+    <td><p class="gris_texto"><?php echo $datos['cod_cliente'] ?></p></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -166,7 +238,7 @@ if($rows==1){
     <td><p class="azul_clarol">MUNICIPIO</p></td>
   </tr>
   <tr>
-    <td><p class="gris_texto"><?php echo $datos['direccion'] ?></p></td>
+    <td><p class="gris_texto"><?php echo $datos['dir_form_igac'] ?></p></td>
     <td><p class="gris_texto"><?php echo $datos['barrio'] ?></p></td>
     <td><p class="gris_texto"><?php echo $datos['municipio'] ?></p></td>
   </tr>
@@ -185,12 +257,8 @@ if($rows==1){
 <table width="603" border="0">
   <tr>
     <td width="12" height="162"><img src="img/Barra_Parrafo1.png" alt="" width="10" height="153" /></td>
-    <td width="330"><p class="gris_texto">Por medio de la presente nos permitimos en<br />
-      primera medida agradecer la confianza que<br />
-      ha depositado en Suyo y en todo el grupo de profesionales que hay detrás de esta empre-<br />
-      sa de impacto social. Respondiendo al servicio que adquirió con nosotros, hacemos 
-      entrega de su documento de diagnóstico de        propiedad en el cual resumimos el análisis        legal y técnico que hemos realizado de su        caso; así mismo señalamos la viabilidad y el        tipo de servicio que requiere, con todos los    costos asociados. Recuerde preguntar a su</p></td>
-    <td width="247"><p class="gris_texto">asesor de ventas por las diferentes opciones<br />
+    <td width="330" class="gris_texto" style="text-align: justify;"><?php echo $nec_ident ?></td>
+    <!--<td width="247"><p class="gris_texto">asesor de ventas por las diferentes opciones<br />
       de financiación que brindamos a través de<br />
       nuestros aliados.<br />
       Finalmente, quisiera reiterarle que sabemos<br />
@@ -199,7 +267,7 @@ if($rows==1){
       Esperamos que pueda tomar los servicios<br />
       recomendados con nosotros, Suyo y todo su<br />
       equipo humano estará esperándole para<br />
-      asesorarlo y guiarlo de forma personalizada.</p></td>
+      asesorarlo y guiarlo de forma personalizada.</p></td>-->
   </tr>
 </table>
 <p style="font-style:italic; font-size:11px">A continuación presentamos el análisis de su caso y las posibilidades de servicios para darle respuesta a sus deseso y, en caso de no ser posible, las diferentes alternativas que le podemos brindar</p>
@@ -221,44 +289,96 @@ if($rows==1){
 <table width="200" border="0">
   <tr>
     <td width="19">&nbsp;</td>
-    <td width="171"><p class="gris_texto" style="font-size:11px; font-weight:bold">&nbsp;</p></td>
+    <td width="171"><p class="gris_texto" style="font-size:11px; font-weight:bold"><?php echo $ana_fis_amb ?></p></td>
   </tr>
 </table>
 <p class="turquesa" style="font-size:11px; font-weight:bold"><span class="turquesa" style="font-size:11px; font-weight:bold">Análisis del cumplimiento del plan de ordanimiento territorial con respecto a las características físicas de la propiedad:</span></p>
-<table width="782" height="557" border="0" class="tabla_tecnico">
-  <tr>
-    <td width="176">dsadda</td>
-    <td width="333" style="text-align:center">dasdadadadad</td>
-    <td width="259">&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td><p>dadasdadada</p></td>
-  </tr>
-  <tr>
-    <td height="115"><p>dasdadada</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>dsadadadasd</td>
-    <td>&nbsp;</td>
-    <td>dsaddadadadadda</td>
-  </tr>
-  <tr>
-    <td>adsadaddadda</td>
-    <td>dsadadadadadad</td>
-    <td>&nbsp;</td>
-  </tr>
+<table width="782" height="442" border="0" cellpadding="0" cellspacing="0" class="tabla_tecnico">
+<tr>
+  <td height="52"><table width="782" height="486" border="0" cellpadding="0" cellspacing="0" class="tabla_tecnico">
+    <tr>
+      <td height="32" colspan="3">ALTURA: Cantidad de pisos construidos</td>
+      <td width="233" style="text-align:center">TIPOLOGIA: Cantidad de viviendas por construcción<br></td>
+      <td width="273" rowspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="18" colspan="3"><span style="text-align:center"><?php echo $alt_cant_pisos[0]." | ".$alt_cant_pisos[1]." | ".$alt_cant_pisos[2] ?></span></td>
+      <td style="text-align:center"><?php echo $tipol_cant_constr[0]." | ".$tipol_cant_constr[1]." | ".$tipol_cant_constr[2] ?></td>
+    </tr>
+    <tr>
+      <td colspan="3">&nbsp;</td>
+      <td rowspan="4">&nbsp;</td>
+      <td rowspan="4">Distancia entre el lado izquierdo
+        del lote y la construcción <br>
+        <?php echo $dist_lot_izq[0]." | ".$dist_lot_izq[1]." | ".$dist_lot_izq[2] ?> <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br></td>
+    </tr>
+    <tr>
+      <td height="62"><p>Distancia entre el lado
+        derecho del lote
+        y la construcción</p></td>
+      <td height="62">&nbsp;</td>
+      <td rowspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="18"><span style="text-align:center"><?php echo $dist_lot_der[0]." | ".$dist_lot_der[1]." | ".$dist_lot_der[2] ?></span></td>
+      <td height="18">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="48" colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="49" colspan="2"><p>&nbsp;</p>
+        <p>&nbsp;</p></td>
+      <td width="83">&nbsp;</td>
+      <td rowspan="3">&nbsp;</td>
+      <td height="81" rowspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="66">Dimensión frente de la
+          construcción</td>
+      <td height="66">&nbsp;</td>
+      <td height="66">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="30"><span style="text-align:center"><?php echo $dim_frent_const[0]." | ".$dim_frent_const[1]." | ".$dim_frent_const[2] ?></span></td>
+      <td height="30">&nbsp;</td>
+      <td height="30">&nbsp;</td>
+      <td height="30">Distancia entre el lado posterior del lote y la construcción</td>
+    </tr>
+    <tr>
+      <td height="45" colspan="2">&nbsp;</td>
+      <td height="45">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td><span style="text-align:center"><?php echo $dist_lad_lot[0]." | ".$dist_lad_lot[1]." | ".$dist_lad_lot[2] ?></span></td>
+    </tr>
+    <tr>
+      <td height="30"><span style="text-align:center">Dimensión frente del lote</span></td>
+      <td>&nbsp;</td>
+      <td height="30">&nbsp;</td>
+      <td>Área del lote según las escritura</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="138" height="18"><span style="text-align:center"><?php echo $dim_frent_lote[0]." | ".$dim_frent_lote[1]." | ".$dim_frent_lote[2] ?></span></td>
+      <td width="55">&nbsp;</td>
+      <td height="18">&nbsp;</td>
+      <td><span style="text-align:center"><?php echo $area_lote[0]." | ".$area_lote[1]." | ".$area_lote[2] ?></span></td>
+      <td>&nbsp;</td>
+    </tr>
+    </table>   </td>
+</tr>
 </table>
+<p>&nbsp;</p>
 <table width="746" border="0" class="gris_texto" style="font-weight:bold">
   <tr>
     <td>CARACTERÍSTICAS</td>
@@ -273,28 +393,27 @@ if($rows==1){
   </tr>
 </table>
 <p><span class="turquesa" style="font-size:11px; font-weight:bold">TITULARIDAD DEL PREDIO</span></p>
-<table width="200" border="0" class="gris_texto">
+<table width="200" border="0" class="gris_texto" style="text-align: justify;">
   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+     <td><?php echo $nec_ident ?></td>
+    
   </tr>
 </table>
 <p><span class="turquesa" style="font-size:11px; font-weight:bold">FORMA COMO ADQUIRIO EL PREDIO POR EL USUARIO</span></p>
-<table width="200" border="0" class="gris_texto">
+<table width="200" border="0" class="gris_texto" style="text-align: justify;">
   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td><?php echo $form_predio ?></td>
   </tr>
 </table>
 <p><span class="turquesa" style="font-size:11px; font-weight:bold">OTRAS SITUACIONES RELACIONADAS CON EL PREDIO Y LA CONSTRUCCION</span></p>
 <table width="200" border="0" class="gris_texto">
   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+  <td><?php echo $form_predio ?></td>
+ 
   </tr>
 </table>
 <table width="280" border="0" cellpadding="0" cellspacing="0">
-  <tr>sasa
+  <tr>
     <td width="35" rowspan="3"><img src="img/Barra_Subtitulo.png" alt="" width="23" height="111" /></td>
     <td width="245"><p class="azul" style="font-size:40px">02<br />
     </p></td>
@@ -336,11 +455,18 @@ if($rows==1){
     <td width="170">COSTOS MODALIDAD 1 (SÓLO ASESORÍA)</td>
     <td width="218">COSTOS MODALIDAD 2:  SERVICIO COMPLETO  (Asesoría, Análisis,  Acompañamiento y Trámites) </td>
   </tr>
+   <?php
+         $i=1;
+           while($datos21=pg_fetch_assoc($query21)){
+  ?>
   <tr>
-    <td>&nbsp;</td>
+    <td><?php echo ($datos21['nom_servicio']) ?></td>
     <td style="text-align:right">$</td>
     <td>$</td>
   </tr>
+   <?php
+          }
+   ?>
   <tr class="azul" style="font-weight:bold;">
     <td>TOTAL</td>
     <td style="text-align:right">$</td>
@@ -392,7 +518,7 @@ if($rows==1){
   <tr>
     <td width="12" height="66"><p>&nbsp;</p>
       <p>&nbsp;</p></td>
-    <td width="527">El tiempo del servicio se extiende por a) casos fortuitos o de fuerza mayor, como paros  judiciales, cierres de las entidades y/o b) el cliente no responde a solicitudes de firmas y  documentación adicional dentro del plazo máximo establecido en tales casos (aplica al  cliente y las otras personas involucradas en el caso).</p></td>
+    <td width="527">El tiempo del servicio se extiende por a) casos fortuitos o de fuerza mayor, como paros  judiciales, cierres de las entidades y/o b) el cliente no responde a solicitudes de firmas y  documentación adicional dentro del plazo máximo establecido en tales casos (aplica al  cliente y las otras personas involucradas en el caso)</td>
   </tr>
   <tr>
     <td height="18">&nbsp;</td>
@@ -482,41 +608,86 @@ if($rows==1){
   </tr>
 </table>
 <table width="543" border="0">
+<?php 
+			 while($datos22=pg_fetch_assoc($query22)){
+?>
   <tr class="azul" style="font-weight:bold">
-    <td width="461">PERTENENCIA CGP</td>
+    <td width="461"><?php echo ($datos22['nom_servicio']) ?></td>
     <td width="72">VALOR</td>
   </tr>
-  <tr class="turquesa" style="font-weight:bold">
-    <td colspan="2">Opción 1:</td>
-  </tr>
-  <tr style="font-size:11px">
-    <td>Asesoría y acompañamiento legal y técnica, incluyendo honorarios  de abogados, ingenieros y/o arquitectos</td>
-    <td>$</td>
-  </tr>
-  <tr style="background-image:url(img/Pie_Pagina.png); background-repeat:no-repeat; background-position:right; background-size:cover">
-    <td colspan="2">&nbsp;</td>
-  </tr>
-  <tr class="azul" style="font-weight:bold">
-    <td>SUBTOTAL</td>
-    <td>$</td>
-  </tr>
-  <tr>
-    <td>Retención en la fuente</td>
-    <td>$</td>
-  </tr>
-  <tr>
-    <td>IVA</td>
-    <td>$</td>
-  </tr>
-  <tr style="background-image:url(img/Pie_Pagina.png); background-repeat:no-repeat; background-position:right; background-size:cover">
-    <td colspan="2">&nbsp;</td>
-  </tr>
-  <tr class="azul" style="font-weight:bold">
-    <td>PRECIO TOTAL</td>
-    <td>$</td>
-  </tr>
+  				<?php 
+						// Listamos los OPCIONES del servicio
+              $s="select * from tipo_mod_cost";
+              $q=pg_query($conexion, $s);
+
+                      while($d=pg_fetch_assoc($q)){
+
+                                // Buscamos los detalles de la opción
+                          $s1="select * from opc_cotiz_serv where tipo_mod_cost='".$d['tipo_mod_cost']."' ";
+                          $q1=pg_query($conexion, $s1);
+
+                                                                       
+
+				?>
+              <tr class="turquesa" style="font-weight:bold">
+                <td colspan="2">Opción <?php echo ($d['tipo_mod_cost']) ?>: <?php echo ($d['descripcion']) ?></td>
+              </tr>
+                <?php 
+                      $sum=0;
+                          while($d1=pg_fetch_assoc($q1)){   
+                              // Buscamos el valor cotizado
+                                  $d2="select valor from cotiz_serv where cod_op_cotiz='".$d1['cod_op_cotiz']."' and id_serv_recom='".$datos22['id_serv_recom']."'  ";
+                                  $q2=pg_query($conexion, $d2);
+                                  $d2=pg_fetch_assoc($q2);
+                                  $sum=$sum+$d2['valor'];
+                ?>  
+              <tr style="font-size:11px">
+                <td><?php echo ($d1['descripcion']) ?></td>
+                <td style="text-align: right;">$<?php echo (number_format($d2['valor'])) ?></td>
+              </tr>
+                  <?php
+                                    }// Fin detalle de la cotización
+
+                              // Realizamos cálculos (Subtota, retención y total a pagar).
+                            $subtotal=$sum; // sub total
+                            $retencion=($subtotal*11)/100; // retención
+                            $iva=($subtotal*19)/100; // IVA
+                            $total_apagar=$subtotal+$iva+$retencion; // total a pagar..
+                        ?> 
+
+              <tr style="background-image:url(img/Pie_Pagina.png); background-repeat:no-repeat; background-position:right; background-size:cover">
+                <td colspan="2">&nbsp;</td>
+              </tr>
+              <tr class="azul" style="font-weight:bold">
+                <td>SUBTOTAL</td>
+                <td style="text-align: right;">$<?php echo (number_format($subtotal)) ?></td>
+              </tr>
+              <tr>
+                <td>Retención en la fuente - 11%</td>
+                <td style="text-align: right;">$<?php echo (number_format($retencion)) ?></td>
+              </tr>
+              <tr>
+                <td>IVA - 19%</td>
+                <td style="text-align: right;">$<?php echo (number_format($iva)) ?></td>
+              </tr>
+              <tr style="background-image:url(img/Pie_Pagina.png); background-repeat:no-repeat; background-position:right; background-size:cover">
+                <td colspan="2">&nbsp;</td>
+              </tr>
+              <tr class="azul" style="font-weight:bold">
+                <td>PRECIO TOTAL</td>
+                <td style="text-align: right;">$<?php echo (number_format($total_apagar)) ?></td>
+              </tr>
+              			<?php
+                                  
+                      }
+						
+			             	?>
+  <?php 
+    } // Fin listamos los servicios cotizados (Detalle)
+  ?>
+  <p>&nbsp;</p>
 </table>
-<p>&nbsp;</p>
+
 <table width="333" height="98" border="0" style="background-image:url(img/Marco_Texto.png); background-repeat:no-repeat;background-size:cover">
   <tr>
     <td width="18" height="86"></td>
@@ -525,18 +696,15 @@ if($rows==1){
         <td width="10" height="87" class="gris_texto"><p class="azul" style="font-weight:bold">&nbsp;</p></td>
         <td width="378" class="gris_texto"><p class="azul" style="font-weight:bold">Notas Aclaratorias: </p>
           La presente oferta tiene una validez de 30 días.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.
-          </p></td>
+          </td>
         <td width="280"  class="gris_texto">La presente oferta tiene una validez de 30 días.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.</td>
       </tr>
     </table></td>
   </tr>
 </table>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 </body>
-</html>
 <?php
 }else
 echo "Referencia del diagnóstico inexistente";
 ?>
+</page>

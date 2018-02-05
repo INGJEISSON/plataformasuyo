@@ -1435,6 +1435,14 @@ if(isset($_SESSION['cod_usuario'])){
                                    $query3=pg_query($conexion, $sql3); 
                                 
                 }
+
+                elseif($_POST['tipo']==12){ // Listado de párrafos
+
+                          $sql3="select  cod_parrafo as cod_activi_etapa, descripcion from parrafos";
+                          $query3=pg_query($conexion, $sql3); 
+                  
+
+                }
                               
                   // Listar actividades del diagnósticos
                 $query3=pg_query($conexion, $sql3); 
@@ -1903,43 +1911,11 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                                 $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 9 and 19 order by id_activi_diag ";
                                    $query3=pg_query($conexion, $sql3); 
 
-                                  // $i=1;
-                                                
-                                       while($row_consulta2 = pg_fetch_assoc($query3))  {
+                                  $r3=pg_num_rows($query3);
+                                   
 
-                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
-                                        $q=pg_query($conexion, $s);
-                                        $r=pg_num_rows($q);
-                                                    if($r==1){
-                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
-                                                    }
-                                           // $i++;
-                                        } 
-                  }
-
-                if($_POST['b_ficha']==2){
-                  $etapa=1;
-
-                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 24 and 62 order by id_activi_diag ";
-                                   $query3=pg_query($conexion, $sql3); 
-                                              
-                                   while($row_consulta2 = pg_fetch_assoc($query3))  {
-
-                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
-                                        $q=pg_query($conexion, $s);
-                                        $r=pg_num_rows($q);
-                                                    if($r==1){
-                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
-                                                    }
-                                           // $i++;
-                                        } 
-
-                }
-                if($_POST['b_ficha']==3){
-                  $etapa=1;
-
-                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 78 and 85 order by id_activi_diag ";
-                                   $query3=pg_query($conexion, $sql3); 
+                                    $enc=0;
+                                  $i=1;
                                               
                                     while($row_consulta2 = pg_fetch_assoc($query3))  {
 
@@ -1948,8 +1924,66 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                                         $r=pg_num_rows($q);
                                                     if($r==1){
                                                        echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                       $enc=1;
                                                     }
-                                           // $i++;
+                                                    else if($i==$r3 && $enc==0)
+                                                      echo  $resp="<option value=''>Ninguno</option>";
+
+                                            $i++;
+                                        } 
+                  }
+
+                if($_POST['b_ficha']==2){
+                  $etapa=1;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 24 and 62 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+                                   $r3=pg_num_rows($query3);
+                                   
+
+                                    $enc=0;
+                                  $i=1;
+                                              
+                                    while($row_consulta2 = pg_fetch_assoc($query3))  {
+
+                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
+                                        $q=pg_query($conexion, $s);
+                                        $r=pg_num_rows($q);
+                                                    if($r==1){
+                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                       $enc=1;
+                                                    }
+                                                    else if($i==$r3 && $enc==0)
+                                                      echo  $resp="<option value=''>Ninguno</option>";
+
+                                            $i++;
+                                        } 
+
+                }
+                if($_POST['b_ficha']==3){
+                  $etapa=1;
+
+                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 78 and 85 order by id_activi_diag ";
+                                   $query3=pg_query($conexion, $sql3); 
+ $r3=pg_num_rows($query3);
+                                   
+
+                                    $enc=0;
+                                  $i=1;
+                                              
+                                    while($row_consulta2 = pg_fetch_assoc($query3))  {
+
+                                        $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
+                                        $q=pg_query($conexion, $s);
+                                        $r=pg_num_rows($q);
+                                                    if($r==1){
+                                                       echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                       $enc=1;
+                                                    }
+                                                    else if($i==$r3 && $enc==0)
+                                                      echo  $resp="<option value=''>Ninguno</option>";
+
+                                            $i++;
                                         } 
 
                 }
@@ -1959,17 +1993,25 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                                $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 65 and 77 order by id_activi_diag ";
                                    $query3=pg_query($conexion, $sql3); 
+                                   $r3=pg_num_rows($query3);
                                    
 
-                                   while($row_consulta2 = pg_fetch_assoc($query3))  {
+                                    $enc=0;
+                                  $i=1;
+                                              
+                                    while($row_consulta2 = pg_fetch_assoc($query3))  {
 
                                         $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
                                         $q=pg_query($conexion, $s);
                                         $r=pg_num_rows($q);
                                                     if($r==1){
                                                        echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                       $enc=1;
                                                     }
-                                           // $i++;
+                                                    else if($i==$r3 && $enc==0)
+                                                      echo  $resp="<option value=''>Ninguno</option>";
+
+                                            $i++;
                                         } 
 
                 }
@@ -1979,16 +2021,25 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                                $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 86 and 91 order by id_activi_diag ";
                                    $query3=pg_query($conexion, $sql3); 
+                                    $r3=pg_num_rows($query3);
+                                   
+
+                                    $enc=0;
+                                  $i=1;
                                               
-                                  while($row_consulta2 = pg_fetch_assoc($query3))  {
+                                    while($row_consulta2 = pg_fetch_assoc($query3))  {
 
                                         $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
                                         $q=pg_query($conexion, $s);
                                         $r=pg_num_rows($q);
                                                     if($r==1){
                                                        echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                       $enc=1;
                                                     }
-                                           // $i++;
+                                                    else if($i==$r3 && $enc==0)
+                                                      echo  $resp="<option value=''>Ninguno</option>";
+
+                                            $i++;
                                         } 
 
                 }
@@ -1998,16 +2049,25 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                                $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 92 and 97 order by id_activi_diag ";
                                    $query3=pg_query($conexion, $sql3); 
+                                    $r3=pg_num_rows($query3);
+                                   
+
+                                    $enc=0;
+                                  $i=1;
                                               
-                                   while($row_consulta2 = pg_fetch_assoc($query3))  {
+                                    while($row_consulta2 = pg_fetch_assoc($query3))  {
 
                                         $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
                                         $q=pg_query($conexion, $s);
                                         $r=pg_num_rows($q);
                                                     if($r==1){
                                                        echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                       $enc=1;
                                                     }
-                                           // $i++;
+                                                    else if($i==$r3 && $enc==0)
+                                                      echo  $resp="<option value=''>Ninguno</option>";
+
+                                            $i++;
                                         } 
 
                 }
@@ -2017,16 +2077,25 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                               $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 112 and 132 order by id_activi_diag ";
                                    $query3=pg_query($conexion, $sql3); 
+                                    $r3=pg_num_rows($query3);
+                                   
+
+                                    $enc=0;
+                                  $i=1;
                                               
-                                   while($row_consulta2 = pg_fetch_assoc($query3))  {
+                                    while($row_consulta2 = pg_fetch_assoc($query3))  {
 
                                         $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
                                         $q=pg_query($conexion, $s);
                                         $r=pg_num_rows($q);
                                                     if($r==1){
                                                        echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                       $enc=1;
                                                     }
-                                           // $i++;
+                                                    else if($i==$r3 && $enc==0)
+                                                      echo  $resp="<option value=''>Ninguno</option>";
+
+                                            $i++;
                                         } 
 
                 }
@@ -2036,6 +2105,11 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                                $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 98 and 111 order by id_activi_diag ";
                                    $query3=pg_query($conexion, $sql3); 
+                                     $r3=pg_num_rows($query3);
+                                   
+
+                                    $enc=0;
+                                  $i=1;
                                               
                                     while($row_consulta2 = pg_fetch_assoc($query3))  {
 
@@ -2044,8 +2118,12 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                                         $r=pg_num_rows($q);
                                                     if($r==1){
                                                        echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                       $enc=1;
                                                     }
-                                           // $i++;
+                                                    else if($i==$r3 && $enc==0)
+                                                      echo  $resp="<option value=''>Ninguno</option>";
+
+                                            $i++;
                                         } 
 
                 }
@@ -2054,6 +2132,11 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                                $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 133 and 136 order by id_activi_diag ";
                                    $query3=pg_query($conexion, $sql3); 
+                                         $r3=pg_num_rows($query3);
+                                   
+
+                                    $enc=0;
+                                  $i=1;
                                               
                                     while($row_consulta2 = pg_fetch_assoc($query3))  {
 
@@ -2062,9 +2145,13 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                                         $r=pg_num_rows($q);
                                                     if($r==1){
                                                        echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                       $enc=1;
                                                     }
-                                           // $i++;
-                                        }   
+                                                    else if($i==$r3 && $enc==0)
+                                                      echo  $resp="<option value=''>Ninguno</option>";
+
+                                            $i++;
+                                        } 
 
                 }
                 if($_POST['b_ficha']==10 ){ // Listado de variables de análisis titularidad
@@ -2072,16 +2159,25 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
 
                                $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 137 and 139 order by id_activi_diag ";
                                    $query3=pg_query($conexion, $sql3); 
+                                       $r3=pg_num_rows($query3);
+                                   
+
+                                    $enc=0;
+                                  $i=1;
                                               
-                                   while($row_consulta2 = pg_fetch_assoc($query3))  {
+                                    while($row_consulta2 = pg_fetch_assoc($query3))  {
 
                                         $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
                                         $q=pg_query($conexion, $s);
                                         $r=pg_num_rows($q);
                                                     if($r==1){
                                                        echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                       $enc=1;
                                                     }
-                                           // $i++;
+                                                    else if($i==$r3 && $enc==0)
+                                                      echo  $resp="<option value=''>Ninguno</option>";
+
+                                            $i++;
                                         } 
 
                 }
@@ -2092,6 +2188,12 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                                $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_POST['cod_equipo']."'  and id_activi_diag between 140 and 142 order by id_activi_diag ";
                                    $query3=pg_query($conexion, $sql3); 
                                               
+                                     $r3=pg_num_rows($query3);
+                                   
+
+                                    $enc=0;
+                                  $i=1;
+                                              
                                     while($row_consulta2 = pg_fetch_assoc($query3))  {
 
                                         $s="select observacion from activ_diag where cod_activi_etapa='".$row_consulta2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."' limit 1  ";
@@ -2099,8 +2201,12 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                                         $r=pg_num_rows($q);
                                                     if($r==1){
                                                        echo   $resp="<option value='".$row_consulta2[cod_activi_etapa]."'>".($row_consulta2[descripcion])."</option>";
+                                                       $enc=1;
                                                     }
-                                           // $i++;
+                                                    else if($i==$r3 && $enc==0)
+                                                      echo  $resp="<option value=''>Ninguno</option>";
+
+                                            $i++;
                                         } 
 
                 }
@@ -2164,24 +2270,27 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                     // Actualizamos información del párrafo..
                     if(isset($_POST['actuali_parraf'])){
 
-                      // Buscamos si ya se encuentra un párrafo en el diagnóstico
-                              $s="select * from parraf_diag where id_elab_diag='".$_POST['id_elab_diag']."' and id_detall_parraf='".$_POST['observacion']."'  ";
-                            $q=pg_query($conexion, $s);
-                            $r=pg_num_rows($q);   
-                                if($r){
-                                   $sql="update parraf_diag set descripcion='".$_POST['edit_parrafo']."' where id_elab_diag='".$_POST['id_elab_diag']."' and id_detall_parraf='".$_POST['observacion']."' ";
+                        
 
-                                }else{
-                                   /// INsertamos dato
-                                  $sql="insert into parraf_diag (id_elab_diag, id_detall_parraf, descripcion) values('".$_POST['id_elab_diag']."', '".$_POST['observacion']."', '".$_POST['edit_parrafo']."') ";
-                                }                      
+                            // Buscamos si ya se encuentra un párrafo en el diagnóstico
+                                 $s="select * from parraf_diag where cod_parrafo='".$_POST['cod_parrafo']."'  and id_elab_diag='".$_POST['id_elab_diag']."' ";
+                                    $q=pg_query($conexion, $s);
+                                    $r=pg_num_rows($q);   
+                                    if($r){
+                                       $sql="update parraf_diag set descripcion='".$_POST['edit_parrafo']."', id_detall_parraf='".$_POST['observacion']."', cod_usuario='".$_SESSION['cod_usuario']."', fecha_registro='".$fecha_registro."' where id_elab_diag='".$_POST['id_elab_diag']."' and cod_parrafo='".$_POST['cod_parrafo']."' ";
 
-                                  $query=pg_query($conexion, $sql);
+                                    }else{
+                                       /// INsertamos dato
+                                      $sql="insert into parraf_diag (id_elab_diag, id_detall_parraf, descripcion, cod_parrafo,  cod_usuario, fecha_registro) values('".$_POST['id_elab_diag']."', '".$_POST['observacion']."', '".$_POST['edit_parrafo']."', '".$_POST['cod_parrafo']."', '".$_SESSION['cod_usuario']."', '".$fecha_registro."') ";
+                                    }                     
+
+                                      $query=pg_query($conexion, $sql);
                                          if($query)
                                          echo "1";
                                          else
-                                         echo "2";  
+                                         echo "2";
 
+                         
 
 
 

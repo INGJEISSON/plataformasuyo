@@ -8,10 +8,17 @@
                                    while($datos2=pg_fetch_assoc($query3)){
 
                                           // Consultamos la última observacion de la actividad... 
+                                        if($_POST['tipo']==12){
 
-                                 $sql1="select observacion from activ_diag where cod_activi_etapa='".$datos2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."'   ";
-                                   $query1=pg_query($conexion, $sql1);
-                                  
+                                                $sql1="select descripcion as observacion from parraf_diag where id_elab_diag='".$_POST['id_elab_diag']."' and cod_parrafo='".$datos2['cod_activi_etapa']."' ";
+
+                                        }
+                                        else{
+                                           $sql1="select observacion from activ_diag where cod_activi_etapa='".$datos2['cod_activi_etapa']."' and id_elab_diag='".$_POST['id_elab_diag']."'   ";
+
+                                        } 
+                                           $query1=pg_query($conexion, $sql1);
+                                
 
 
 

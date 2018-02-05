@@ -15,14 +15,14 @@
 <table width="916" border="0" class="table responsive">
                                     <tr>
                                       <td width="159"><strong>Servicio a cotizar: </strong></td>
-                                      <td width="161"><strong>Costo opción 1</strong></td>
-                                     <td width="161"><strong>Costo opción 2</strong></td>                                
+                                      <td width="161"><strong>Costo opción 1 (Sólo asesoría)</strong></td>
+                                     <td width="161"><strong>Costo opción 2 (Servicio completo)</strong></td>                                
                                       <td width="66"><strong>Cotizar</strong></td>
                                     </tr>
                                      <?php
-                              $i=1;
-                              while($datos2=pg_fetch_assoc($query2)){
-                      ?>
+                                        $i=1;
+                                        while($datos2=pg_fetch_assoc($query2)){
+                                         ?>
                                     <tr>
                                      
                                       <td height="46"><?php echo ($datos2['nom_servicio']) ?></td>
