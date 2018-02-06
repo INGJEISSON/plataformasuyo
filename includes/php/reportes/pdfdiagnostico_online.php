@@ -394,7 +394,7 @@ if($rows==1){
 <p><span class="turquesa" style="font-size:11px; font-weight:bold">TITULARIDAD DEL PREDIO</span></p>
 <table width="200" border="0" class="gris_texto" style="text-align: justify;">
   <tr>
-     <td><?php echo $nec_ident ?></td>
+     <td><?php echo $titula_predio ?></td>
     
   </tr>
 </table>
