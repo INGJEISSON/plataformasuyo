@@ -67,7 +67,7 @@ if(isset($_GET['id_elab_diag'])){
                                    $query1=pg_query($conexion, $sql1);
                                    $datos1=pg_fetch_assoc($query1);
 
-                                     $otrs_situa=$datos1['observacion'];
+                                     $otra_situa=$datos1['observacion'];
 
                 }
 
@@ -407,7 +407,7 @@ if($rows==1){
 <p><span class="turquesa" style="font-size:11px; font-weight:bold">OTRAS SITUACIONES RELACIONADAS CON EL PREDIO Y LA CONSTRUCCION</span></p>
 <table width="200" border="0" class="gris_texto">
   <tr>
-  <td><?php echo $form_predio ?></td>
+  <td><?php echo $otra_situa ?></td>
  
   </tr>
 </table>
