@@ -596,7 +596,6 @@ elseif($_POST['vistas']==12){ // Vista de crédito orbe.
 }
 ?> 
 
-
 <?php if($_POST['vistas']==12){ // Vista aliado crédito orbet.
 ?> 
 <div class="row">
@@ -618,10 +617,34 @@ elseif($_POST['vistas']==12){ // Vista de crédito orbe.
                 <th width="5%">DIRECCION RESIDENCIA</th>
                 <th width="5%">BARRIO</th>
                 <th width="5%">ESTADO CIVIL</th>
-                <th width="5%">TIPO DE CONTRATO</th>
-                <th width="5%">FECHA DE INGRESO</th>
+              <?php if($_POST['tipo']==1){ 
+               ?>  
+          <th width="5%">TIPO DE CONTRATO</th>
+          <?php
+                 }
+              ?>
+          <?php if($_POST['tipo']==2){ 
+          ?>  
+        <th width="5%">ACTIVIDAD ECONOMICA</th>
+          }
+          ?>
+                
+              <?php if($_POST['tipo']==1){ 
+               ?>   <th width="5%">FECHA DE INGRESO</th>
                 <th width="5%">CARGO</th>
                 <th width="5%">NOMBRE EMPRESA</th>
+                <?php
+                 }
+              ?>
+
+               <?php if($_POST['tipo']==2){ 
+               ?>   <th width="5%">NOMBRE DE LA EMPRESA</th>
+                <th width="5%">DESCRIPCION NEGOCIO</th>
+                <th width="5%">NUMERO EMPLEADOS</th>
+                <?php
+                 }
+              ?>
+
                 <th width="5%">DIRECCION EMPRESA</th>
                 <th width="5%">PRIMER APELLIDO(CONYUGUE)</th>
                 <th width="5%">NOMBRES (CONYUGUE)</th>
