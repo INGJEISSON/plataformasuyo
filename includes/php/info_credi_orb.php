@@ -23,7 +23,21 @@ include('../dependencia/conexion.php');
                             <div class="panel-wrapper collapse in" aria-expanded="true">
                                 <div class="panel-body">
                                     <form action="#">
-                                        <div class="form-body">                                        
+                                        <div class="form-body">    
+
+                                          <div class="row">
+                                                <div class="col-md-12 ">
+                                                    <div class="form-group">
+                                                        <label>TIPO DE REPORTE</label>
+                                                       <select name="select" id="tipo" class='form-control'>
+                                                   
+                                                                <option value="1">Empleado</option>
+                                                                 <option value="2">Independientes</option>
+                                                      </select>
+
+                                                </div>
+                                                </div>
+                                            </div>                                    
                                            
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -76,8 +90,9 @@ $("#cargando2").hide();
 
             var fecha_1=$("#fecha_1").val();
             var fecha_2=$("#fecha_2").val();
+            var tipo=$("#tipo").val();
 
-                var datos='vistas='+12;
+                var datos='vistas='+12+'&tipo='+tipo;
                 if(fecha_1!="" && fecha_2!=""){
                       $("#cargando2").show();
                       $.ajax({
