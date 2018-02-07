@@ -626,6 +626,7 @@ elseif($_POST['vistas']==12){ // Vista de crédito orbe.
           <?php if($_POST['tipo']==2){ 
           ?>  
         <th width="5%">ACTIVIDAD ECONOMICA</th>
+           <?php
           }
           ?>
                 
@@ -644,7 +645,6 @@ elseif($_POST['vistas']==12){ // Vista de crédito orbe.
                 <?php
                  }
               ?>
-
                 <th width="5%">DIRECCION EMPRESA</th>
                 <th width="5%">PRIMER APELLIDO(CONYUGUE)</th>
                 <th width="5%">NOMBRES (CONYUGUE)</th>
