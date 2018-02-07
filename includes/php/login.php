@@ -16,12 +16,6 @@
 <link href="css/style.css" rel="stylesheet">
 <!-- color CSS -->
 <link href="css/colors/blue.css" id="theme"  rel="stylesheet">
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 <body>
 <!-- Preloader -->
@@ -41,12 +35,13 @@
           <a class="btn btn-danger btn-lg btn-block text-uppercase waves-effect waves-light" href='<?php echo $authUrl  ?>'>Log In</a>
           </div>
         </div>
-       
-        <!--<div class="form-group m-b-0">
-          <div class="col-sm-12 text-center">
-            <p>¿Problemas al iniciar sesión? <a href="register2.html" class="text-primary m-l-5"><b>Ayuda</b></a></p>
+
+        <div class="form-group text-center m-t-20">
+          <div class="col-xs-12">
+          <a class="btn btn-blue btn-lg btn-block text-uppercase waves-effect waves-light" id="acces_exter">Usuarios externos</a>
           </div>
-        </div>-->
+        </div>
+       
         <div class="form-group m-b-0">
           <div class="col-sm-12 text-center">
             <p>Descargue e instale Suyo Security</p>
@@ -54,7 +49,31 @@
              <img src='img/qr_suyosecurity.png'>
           </div>
         </div>
+      </form>
 
+
+       <form class="form-horizontal form-material" id="login_externo">
+            <a href="javascript:void(0)" class="text-center db"><img src="img/suyo_colombia_img.jpg" width="264" height="164" alt="Home" /></a>
+            <br><br><br>
+            <div class="form-group text-center m-t-20">
+                  <div class="col-xs-12">
+                       <label>CORREO ELECTRÓNICO: </label>
+                       <input type="text" class="form-control"  id="user" />
+                  </div>
+                  
+            </div>   
+            <div class="form-group text-center m-t-20">
+                   <div class="col-xs-12">
+                    <label>CONTRASEÑA: </label>
+                        <input type="text"  id="clave" class="form-control" type="password" />
+                  </div>                  
+            </div>   
+
+             <a class="btn btn-danger btn-lg btn-block text-uppercase waves-effect waves-light" id="ingresar">Log In</a>
+
+             <div class="col-xs-12">
+          <a class="btn btn-blue btn-lg btn-block text-uppercase waves-effect waves-light" id="acces_suyo">Usuarios (SUYO)</a>
+          </div>
 
       </form>
       
@@ -78,3 +97,51 @@
 <script src="plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
 </body>
 </html>
+<script type="text/javascript">
+  
+    $(document).ready(function(){
+
+            $("#acces_exter").click(function(){
+
+                  $("#loginform").hide();
+                  $("#login_externo").show();
+
+            });
+
+             $("#acces_suyo").click(function(){
+
+                  $("#loginform").show();
+                  $("#login_externo").hide();
+
+            });
+
+            $("#ingresar").click(function(){
+
+                    var clave=$("#clave").val();
+                    var user=$("#user").val();
+                    var datos='login='+1+'&calve='+clave+'&user='+user;
+                    if(clave=!"" && user!=""){
+                       $.ajax({    
+                            type: "POST",
+                            data: datos,
+                            url: "includes/php/g_procesos.php",
+                            success: function(valor){
+                                  if(valor==1)
+                                    parent.location='';
+                                  else
+                                    alert("Usuario y contrsaseña inválidos");
+                            }
+
+                          });
+
+                    }else{
+                      alert("Por favor ingrese correo electrónico y contraseña");
+                    }
+                         
+
+            });
+
+    });
+
+
+</script>
