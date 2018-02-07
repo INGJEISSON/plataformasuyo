@@ -47,6 +47,11 @@ $sql="select distinct enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_enc
       $sql="select distinct enc_procesadas.id_cliente, enc_procesadas.asesor, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, estado, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'  and enc_procesadas.asesor='".$_POST['asesor']."' ";
     }
 } 
+
+elseif($_POST['vistas']==12){ // Vista de crédito orbe.
+
+  $sql="select distinct enc_procesadas.id_fasfield, enc_procesadas.id_cliente, estado.descripcion as estado, enc_procesadas.asesor, enc_procesadas.ciudad, det_repor_aseso.valor, det_repor_aseso.aliado, enc_procesadas.fecha_filtro, enc_procesadas.cliente FROM det_repor_aseso, enc_procesadas, estado where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and det_repor_aseso.tipo_pago='Credito' and det_repor_aseso.aliado='Creditos Orbe' and estado.cod_estado=enc_procesadas.cod_estado";
+}
 //elseif($_POST['vistas']==7) // Estados de servicios
 //$sql="select * from cliente ";
 //$sql="select documentacion.cod_cliente, documentacion.apellidos, documentacion.nombres, documentacion.ciudad, bodegas.descripcion as bodega, documentacion.cod_estante as estante, documentacion.ubicacion, documentacion.usr_codif from documentacion, bodegas where documentacion.cod_bodega=bodegas.cod_bodega ";
@@ -571,6 +576,116 @@ $sql="select distinct enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_enc
                <td><?php echo "(".($datos5['estado']).")"; ?></td>
               <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>"><img src="img/icono_pdf.png" width="31" height="31"></a></td>
                 <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="includes/php/revi_admin.php?id_fasfield=<?php echo $datos['id_fasfield']; ?>" tittle='Revisar'><img src='img/edit.png' alt="" width="24" height="24"></a>                 
+            </tr>
+            </td>
+            </tr>
+             <?php
+       $i++;
+           }
+    ?>
+     </tbody>
+    </table>
+     </div>
+                        </div>
+                    </div>
+  </div>
+
+  <?php
+}
+?> 
+
+
+<?php if($_POST['vistas']==12){ // Vista aliado crédito orbet.
+?> 
+<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">                           
+                            <div class="table-responsive">
+       <table id="table_id" class='table responsive' cellspacing="0" width="100%">
+       <thead>
+            <tr>
+                <th width="4%">SOLNUMERO</th>
+                <th width="10%">CEDULA</th>
+                <th width="21%">COLOR</th>
+                <th width="21%">PRODUCTO</th>
+                <th width="9%">CELULAR</th>
+                <th width="11%">TELEFONO</th>
+                <th width="8%">CORREO</th>
+                <th width="12%">PERSONAS A CARGO</th>
+                <th width="12%">TIPO VIVIENDA</th>
+                <th width="5%">DIRECCION RESIDENCIA</th>
+                <th width="5%">BARRIO</th>
+                <th width="5%">ESTADO CIVIL</th>
+                <th width="5%">TIPO DE CONTRATO</th>
+                <th width="5%">FECHA DE INGRESO</th>
+                <th width="5%">CARGO</th>
+                <th width="5%">NOMBRE EMPRESA</th>
+                <th width="5%">DIRECCION EMPRESA</th>
+                <th width="5%">PRIMER APELLIDO(CONYUGUE)</th>
+                <th width="5%">NOMBRES (CONYUGUE)</th>
+                <th width="5%">TELEFONO (CONYUGUE)</th>
+                <th width="5%">TIPO INMUBLE</th>
+                <th width="5%">ESTADO CIVIL</th>
+                <th width="5%">AVALUADO (COMERCIAL INMUEBLE)</th>
+                <th width="5%">VALOR (ARRIENDO)</th>
+                <th width="5%">ARRENDATARIO</th>
+                <th width="5%">VALOR ENDEUDAMIENTO</th>
+                <th width="5%">FECHA_PREFERENCIA_PAGO</th>
+                <th width="5%">TIPO CLIENTE</th>
+                <th width="5%">SUBTIPO CLIENTE</th>
+                <th width="5%">NUMERO DE WHATSAPP</th>
+                <th width="5%">INGRESOS MENSUALES</th>
+                <th width="5%">EGRESOS MENSUALES</th>
+                <th width="5%">FOTO CLIENTE</th>
+                <th width="5%">FOTO DE LA FACHADA</th>
+                <th width="5%">FOTO DE LA CEDULA (AMBAS CARAS)</th>
+                <th width="5%">NOTA DE VOZ(LOCALIZACION CLIENTE)</th>
+
+            </tr>
+        </thead>
+       <tbody>
+         <?php
+                $i=1;
+                while($datos=pg_fetch_assoc($query)){        
+
+                    ?>
+            <tr>
+                <td><?php  ?></td>
+               <td><?php echo ($datos['id_cliente']) ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "CREDISUYO"; ?></td>
+                <td><?php  echo "PRUEBA"; ?></td>
+                <td><?php  echo "PRUEBA"; ?></td>
+                <td><?php  echo "PRUEBA";   ?></td>
+                <td><?php  echo "PRUEBA";   ?></td>
+                <td><?php  echo "PRUEBA";   ?></td>
+                <td><?php  echo "PRUEBA";   ?></td>
+                <td><?php  echo "PRUEBA";   ?></td>
+                <td><?php  echo "PRUEBA";   ?></td>
+                <td><?php  echo "PRUEBA";   ?></td>
+                <td><?php  echo "PRUEBA";   ?></td>
+                <td><?php  echo "PRUEBA";   ?></td>
+                <td><?php  echo "PRUEBA";   ?></td>
+                <td><?php  echo "PRUEBA";   ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";   ?></td>
+                <td><?php echo "PRUEBA";   ?></td>
+                <td><?php echo "PRUEBA";  ?></td>
+                <td><?php echo "PRUEBA";   ?></td>
+                <td><?php echo "PRUEBA";    ?></td>  
+               <td><?php echo "PRUEBA";    ?></td>                         
             </tr>
             </td>
             </tr>
