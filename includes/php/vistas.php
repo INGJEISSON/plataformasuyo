@@ -26,6 +26,12 @@ $sql="select distinct servicios.nom_servicio from dependencia_serv, servicios wh
 
 elseif($_POST['vistas']==11 && $_GET['vistas']==11){
 
+  if($_GET['vistas']==11){
+    $_POST['fecha_1']='2017-10-01';
+    $_POST['fecha_2']='2018-31-12';
+
+  }
+
     // Vista (Detalle dashboard Clientes pagos)
     $sql="select distinct servicios.nom_servicio from dependencia_serv, servicios where dependencia_serv.cod_servicio=servicios.cod_servicio ";
 
