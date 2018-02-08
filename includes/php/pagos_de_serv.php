@@ -52,6 +52,7 @@ $cod_resp=0;
           <th width="18%">Servicios Tomados</th>
           <th width="7%">Fecha de recepción</th>
           <th width="7%">Tipo de visita</th>
+          <th width="7%">Tomó el servicio</th>
           <th width="9%">Ciudad</th>
           <th width="9%">Costo</th>
           <th width="7%">Aliado</th>
@@ -80,6 +81,7 @@ $cod_resp=0;
                 <td><?php echo $datos['det_servi_tomado']; ?></td>
                 <td><?php echo $datos['fecha_filtro']; ?></td>
                 <td><?php if($datos4['resul_visita']=='') echo ($datos4['tipo_visita']); else  echo ($datos4['resul_visita']) ?></td>
+                <td><?php echo ($datos4['tom_serv']);  ?></td>
                 <td><?php echo ($datos['ciudad']) ?></td>
                 <td><?php echo number_format($datos['valor']); ?></td>
                 <td><?php echo $datos['aliado']; ?></td>
