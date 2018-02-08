@@ -1,5 +1,5 @@
 <?php
-@include('../dependencia/conexion.php');
+//@include('../dependencia/conexion.php');
 if($_POST['vistas']==2) // Vista de menús.
 $sql="select * from menu ";
 elseif($_POST['vistas']==3) // Vista de submenús.
