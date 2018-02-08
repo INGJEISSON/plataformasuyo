@@ -28,6 +28,7 @@ $sql="select distinct servicios.nom_servicio from dependencia_serv, servicios wh
 elseif($_POST['vistas']==11 || $_GET['vistas']==11){
 
   if($_GET['vistas']==11){
+   // $_POST['fecha_1']='2017-10-01';
     $_POST['fecha_1']='2017-10-01';
     $_POST['fecha_2']='2018-31-12';
      $_POST['ciudad']=$_GET['ciudad'];
@@ -45,7 +46,7 @@ elseif($_POST['vistas']==11 || $_GET['vistas']==11){
                           $parametro="enc_procesadas.ciudad='".($_POST['ciudad'])."' and";
                     
                         
-                        if($_SESSION['tipo_usuario']==2 or $_SESSION['tipo_usuario']==19)
+                        if($_SESSION['tipo_usuario']==2 or $_SESSION['tipo_usuario']==19 or $_GET['parse']==1)
       $sql="select distinct enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, det_repor_aseso, estado, tipo_encuesta where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.valor>0 or det_repor_aseso.tipo_pago='Credito')  ";
             else
           $sql="select distinct enc_procesadas.asesor,  enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, estado, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'  ";
