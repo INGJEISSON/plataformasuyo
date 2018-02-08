@@ -78,7 +78,7 @@ include('../dependencia/conexion.php');
         while($datos=pg_fetch_assoc($query)){
                                                   
                     $sql3="select * from usuarios where  tipo_usuario=22";  //Legal                    
-                    $sql5="select * from usuarios where  tipo_usuario=23"; //Técnico
+                    $sql5="select * from usuarios where  tipo_usuario=23 or tipo_usuario=21 or tipo_usuario=6"; //Técnico
 
                         $query3=pg_query($conexion, $sql3);
                          $query5=pg_query($conexion, $sql5);

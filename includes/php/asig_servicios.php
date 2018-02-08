@@ -113,9 +113,9 @@ include('../dependencia/conexion.php');
                         if($_SESSION['tipo_usuario']==1)
                          $sql3="select * from usuarios where  tipo_usuario=21 or tipo_usuario=6 or tipo_usuario=19  "; 
                         else if($_SESSION['tipo_usuario']!=6)
-                        $sql3="select * from usuarios where  tipo_usuario=19  ";
+                        $sql3="select * from usuarios where  tipo_usuario=19   ";
                         else
-                        $sql3="select * from usuarios where  tipo_usuario=21 or tipo_usuario=6 ";
+                        $sql3="select * from usuarios where  tipo_usuario=21 or tipo_usuario=6";
 
                       $query3=pg_query($conexion, $sql3);
                               
@@ -314,15 +314,7 @@ $(document).ready(function () {
             url: 'includes/php/g_procesos.php',
             success: function(valor){
                 
-               
-                 
-                 /*if(valor==1){
-                  /*  Push.create("Diagnósticos",{
-                          body: "Tienes diagnósticos pendientes por revisar",
-                          icon: 'img/suyo_colombia_img.jpg',
-                          timeout: 10000 
-                    });
-                 }*/
+            
 
             }
       });

@@ -24,28 +24,28 @@ $sql="select * from deta_list_despleg where tipo_lista='".$_POST['tipo_lista']."
 elseif($_POST['vistas']==10) // Vista de dependencias de servicios.
 $sql="select distinct servicios.nom_servicio from dependencia_serv, servicios where dependencia_serv.cod_servicio=servicios.cod_servicio ";
 
-elseif($_POST['vistas']==11){
+elseif($_POST['vistas']==11 && $_GET['vistas']==11){
 
-// Vista (Detalle dashboard Clientes pagos)
-$sql="select distinct servicios.nom_servicio from dependencia_serv, servicios where dependencia_serv.cod_servicio=servicios.cod_servicio ";
+    // Vista (Detalle dashboard Clientes pagos)
+    $sql="select distinct servicios.nom_servicio from dependencia_serv, servicios where dependencia_serv.cod_servicio=servicios.cod_servicio ";
 
-if($_POST['ciudad']!=''){    
-                    if($_POST['ciudad']=='Todos')  // Si son todas las ciudad
-                      $parametro='';
-                      else if($_POST['ciudad']=='solbaq')  // Si son todas las ciudad
-                      $parametro="(enc_procesadas.ciudad='Barranquilla' or enc_procesadas.ciudad='Soledad')  and ";
-                      else
-                      $parametro="enc_procesadas.ciudad='".($_POST['ciudad'])."' and";
-                
+    if($_POST['ciudad']!=''){    
+                        if($_POST['ciudad']=='Todos')  // Si son todas las ciudad
+                          $parametro='';
+                          else if($_POST['ciudad']=='solbaq')  // Si son todas las ciudad
+                          $parametro="(enc_procesadas.ciudad='Barranquilla' or enc_procesadas.ciudad='Soledad')  and ";
+                          else
+                          $parametro="enc_procesadas.ciudad='".($_POST['ciudad'])."' and";
                     
-                  if($_SESSION['tipo_usuario']==2 or $_SESSION['tipo_usuario']==19)
-$sql="select distinct enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, det_repor_aseso, estado, tipo_encuesta where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.valor>0 or det_repor_aseso.tipo_pago='Credito')  ";
-      else
-    $sql="select distinct enc_procesadas.asesor,  enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, estado, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'  ";
-    }
-    else{
-      $sql="select distinct enc_procesadas.id_cliente, enc_procesadas.asesor, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, estado, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'  and enc_procesadas.asesor='".$_POST['asesor']."' ";
-    }
+                        
+                      if($_SESSION['tipo_usuario']==2 or $_SESSION['tipo_usuario']==19)
+    $sql="select distinct enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, det_repor_aseso, estado, tipo_encuesta where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.valor>0 or det_repor_aseso.tipo_pago='Credito')  ";
+          else
+        $sql="select distinct enc_procesadas.asesor,  enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, estado, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'  ";
+        }
+        else{
+          $sql="select distinct enc_procesadas.id_cliente, enc_procesadas.asesor, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, estado, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'  and enc_procesadas.asesor='".$_POST['asesor']."' ";
+        }
 } 
 
 elseif($_POST['vistas']==12){ // Vista de crédito orbe.
@@ -510,7 +510,7 @@ elseif($_POST['vistas']==12){ // Vista de crédito orbe.
 
 
 
-<?php if($_POST['vistas']==11){ // Vista detalle clientes..
+<?php if($_POST['vistas']==11 || $_GET['vistas']==11){ // Vista detalle clientes..
 ?> 
 <div class="row">
                     <div class="col-sm-12">
