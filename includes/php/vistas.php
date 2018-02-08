@@ -25,9 +25,40 @@ $sql="select * from deta_list_despleg where tipo_lista='".$_POST['tipo_lista']."
 elseif($_POST['vistas']==10) // Vista de dependencias de servicios.
 $sql="select distinct servicios.nom_servicio from dependencia_serv, servicios where dependencia_serv.cod_servicio=servicios.cod_servicio ";
 
-elseif($_POST['vistas']==11 || $_GET['vistas']==11){
+elseif($_POST['vistas']==11){
+    // Vista (Detalle dashboard Clientes pagos)
+    $sql="select distinct servicios.nom_servicio from dependencia_serv, servicios where dependencia_serv.cod_servicio=servicios.cod_servicio ";
 
-  if($_GET['vistas']==11){
+               if($_POST['ciudad']!=''){    
+                        if($_POST['ciudad']=='Todos')  // Si son todas las ciudad
+                          $parametro='';
+                          else if($_POST['ciudad']=='solbaq')  // Si son todas las ciudad
+                          $parametro="(enc_procesadas.ciudad='Barranquilla' or enc_procesadas.ciudad='Soledad')  and ";
+                          else
+                          $parametro="enc_procesadas.ciudad='".($_POST['ciudad'])."' and";
+                    
+                        
+                        if($_SESSION['tipo_usuario']==2 or $_SESSION['tipo_usuario']==19)
+      $sql="select distinct enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, det_repor_aseso, estado, tipo_encuesta where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.valor>0 or det_repor_aseso.tipo_pago='Credito')  ";
+            else
+          $sql="select distinct enc_procesadas.asesor,  enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, estado, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'  ";
+        }
+        else{
+       $sql="select distinct enc_procesadas.id_cliente, enc_procesadas.asesor, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, estado, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'  and enc_procesadas.asesor='".$_POST['asesor']."' ";
+        }
+} 
+
+elseif($_POST['vistas']==12){ // Vista de crédito orbe.
+
+        $sql="select distinct enc_procesadas.id_fasfield, enc_procesadas.id_cliente, estado.descripcion as estado, enc_procesadas.asesor, enc_procesadas.ciudad, det_repor_aseso.valor, det_repor_aseso.aliado, enc_procesadas.fecha_filtro, enc_procesadas.cliente FROM det_repor_aseso, enc_procesadas, estado where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and det_repor_aseso.tipo_pago='Credito' and det_repor_aseso.aliado='Creditos Orbe' and estado.cod_estado=enc_procesadas.cod_estado";
+
+ 
+}
+
+
+elseif($_GET['vistas']==13){
+
+  if($_GET['vistas']==13){
    // $_POST['fecha_1']='2017-10-01';
     $_POST['fecha_1']='2017-10-01';
     $_POST['fecha_2']='2018-31-12';
@@ -47,7 +78,7 @@ elseif($_POST['vistas']==11 || $_GET['vistas']==11){
                     
                         
                         if($_SESSION['tipo_usuario']==2 or $_SESSION['tipo_usuario']==19 or $_GET['parse']==1)
-      $sql="select distinct enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, det_repor_aseso, estado, tipo_encuesta where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.valor>0 or det_repor_aseso.tipo_pago='Credito')  ";
+      $sql="select distinct enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_filtro, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, det_repor_aseso, estado, tipo_encuesta where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.valor>0 or det_repor_aseso.tipo_pago='Credito')   ";
             else
           $sql="select distinct enc_procesadas.asesor,  enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, estado, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'  ";
         }
@@ -56,12 +87,6 @@ elseif($_POST['vistas']==11 || $_GET['vistas']==11){
         }
 } 
 
-elseif($_POST['vistas']==12){ // Vista de crédito orbe.
-
-        $sql="select distinct enc_procesadas.id_fasfield, enc_procesadas.id_cliente, estado.descripcion as estado, enc_procesadas.asesor, enc_procesadas.ciudad, det_repor_aseso.valor, det_repor_aseso.aliado, enc_procesadas.fecha_filtro, enc_procesadas.cliente FROM det_repor_aseso, enc_procesadas, estado where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and det_repor_aseso.tipo_pago='Credito' and det_repor_aseso.aliado='Creditos Orbe' and estado.cod_estado=enc_procesadas.cod_estado";
-
- 
-}
 
 
 
@@ -581,9 +606,9 @@ elseif($_POST['vistas']==12){ // Vista de crédito orbe.
                 <td><?php if($datos4['fecha_entrega_diag1']=='') echo $datos4['fecha_compros_pago1']; else        
         echo(($datos4['fecha_entrega_diag1'])) ?></td>
               <td><?php echo "(".($datos4['tom_serv']).")"; ?></td>
-               <td><?php echo "(".($datos5['estado']).")"; ?></td>
-              <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>"><img src="img/icono_pdf.png" width="31" height="31"></a></td>
-                <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="includes/php/revi_admin.php?id_fasfield=<?php echo $datos['id_fasfield']; ?>" tittle='Revisar'><img src='img/edit.png' alt="" width="24" height="24"></a>                 
+               <td><?php echo "(".($datos5['estado']).")"; ?></td>            
+               <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>"><img src="img/icono_pdf.png" width="31" height="31"></a></td>
+                <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="includes/php/revi_admin.php?id_fasfield=<?php echo $datos['id_fasfield']; ?>" tittle='Revisar'><img src='img/edit.png' alt="" width="24" height="24"></a>              
             </tr>
             </td>
             </tr>
@@ -717,6 +742,94 @@ elseif($_POST['vistas']==12){ // Vista de crédito orbe.
                 <td><?php echo "PRUEBA";   ?></td>
                 <td><?php echo "PRUEBA";    ?></td>  
                <td><?php echo "PRUEBA";    ?></td>                         
+            </tr>
+            </td>
+            </tr>
+             <?php
+       $i++;
+           }
+    ?>
+     </tbody>
+    </table>
+     </div>
+                        </div>
+                    </div>
+  </div>
+
+  <?php
+}
+?> 
+
+
+
+<?php if($_GET['vistas']==13){ // Vista Carlos Mario
+?> 
+<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">                           
+                            <div class="table-responsive">
+       <table id="table_id" class='table responsive' cellspacing="0" width="100%">
+       <thead>
+            <tr>
+                <th width="4%">#</th>
+                <th width="10%">Asesor</th>
+                <th width="21%">Identificación</th>
+                <th width="21%">Cliente</th>
+                <th width="9%">Tipo de Encuesta</th>
+                <th width="11%">Detalle Encuesta</th>
+                <th width="8%">Valor</th>
+                <th width="12%">Fecha Entrega/Pago</th>
+              <th width="12%">Tomó el servicio</th>
+               <th width="5%">Estado</th>
+              <th width="5%">Fecha de recepción</th>
+
+            </tr>
+        </thead>
+       <tbody>
+         <?php
+                $i=1;
+                while($datos=pg_fetch_assoc($query)){
+        if($datos['tipo_encuesta']==1)
+         $tipo_encuesta="Diagnóstico";
+         if($datos['tipo_encuesta']==2)
+         $tipo_encuesta="Asesor y Líderes";
+         if($datos['tipo_encuesta']==3)
+         $tipo_encuesta="Promotor";     
+         if($datos['tipo_encuesta']==5)
+         $tipo_encuesta="Prospectos";
+                        $sql3="select cliente, asesor, arch_pdf from enc_procesadas where id_fasfield='".$datos['id_fasfield']."' ";
+                        $query3=pg_query($conexion, $sql3);
+                         $rows3=pg_num_rows($query3);
+
+                             if($query3){
+                                  $datos3=pg_fetch_assoc($query3);
+                   $archivo_pdf=$datos3['arch_pdf']; 
+               }
+               // Buscamos informaci贸n del reporte de visita
+               
+          $sql4="select * from det_repor_aseso where id_fasfield='".$datos['id_fasfield']."' and (det_repor_aseso.resul_visita<>'actuali_contrato' or  det_repor_aseso.tipo_visita<>'actuali_contrato') ";
+               $query4=pg_query($conexion, $sql4);
+                           @$datos4=pg_fetch_assoc($query4);
+               
+               $sql5="select seguimientos.fecha_registro, estado.descripcion as estado from seguimientos, estado where seguimientos.cod_estado=estado.cod_estado and  seguimientos.id_fasfield='".$datos['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.cod_estado!=0 order by seguimientos.id_segui_llam desc ";
+               $query5=pg_query($conexion, $sql5);
+               $datos5=pg_fetch_assoc($query5);
+
+                    ?>
+            <tr>
+                <td><?php echo $i ?></td>
+                <td><?php echo $datos3["asesor"] ?></td>
+                 <td><?php echo @utf8_encode($datos['id_cliente']) ?></td>
+                <td><?php echo utf8_encode($datos3['cliente']) ?></td>
+                <td><?php echo($tipo_encuesta) ?></td>
+                <td><?php if($datos4['resul_visita']=='') echo ($datos4['tipo_visita']); else  echo ($datos4['resul_visita']) ?></td>
+                <td><?php echo(number_format($datos4['valor'])) ?></td>
+                <td><?php if($datos4['fecha_entrega_diag1']=='') echo $datos4['fecha_compros_pago1']; else        
+        echo(($datos4['fecha_entrega_diag1'])) ?></td>
+              <td><?php echo "(".($datos4['tom_serv']).")"; ?></td>
+               <td><?php echo "(".($datos5['estado']).")"; ?></td>             
+
+                  <td><?php echo "(".($datos['fecha_filtro']).")"; ?></td>                   
             </tr>
             </td>
             </tr>
