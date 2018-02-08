@@ -1,9 +1,9 @@
 <?php
-include('../dependencia/conexion.php');
+include('../../dependencia/conexion.php');
    
 //decodificamo id_serv_cliente
-$id_elab_diag=base64_decode($_GET['id_elab_diag']);
-
+//$id_elab_diag=base64_decode($_GET['id_elab_diag']);
+$id_elab_diag=($_GET['id_elab_diag']);
 
     // consultamos los datos del servicio
      $sql="select * from diagno_client where id_elab_diag='".$id_elab_diag."' limit 1 ";
@@ -28,30 +28,18 @@ $id_elab_diag=base64_decode($_GET['id_elab_diag']);
                                         $datos4=pg_fetch_assoc($query4);    
                                         $fecha_filtro= $datos4['fecha_filtro'];                                   
                                       }else
-                                      $fecha_filtro="";
-     
-
-
+      $fecha_filtro="";
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../../js/colorbox-master/example1/colorbox.css" />
-<script src="../../js/colorbox-master/jquery.colorbox-min.js"></script>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="../../js/datepicker-master/dist/datepicker.js"></script>
 <link rel="stylesheet" href="../../js/datepicker-master/dist/datepicker.css">
 
 
 <script>
-  $(document).ready(function(){
-        
-        $(".edicion").colorbox({
-          iframe:false, 
-          width:"100%", 
-          height:"100%",
-          overlayClose:false,
-          //escKey:
-          });          
+  $(document).ready(function(){        
+              
 
 var id_fasfield="<?php echo $id_elab_diag ?>";
 var tipo_seguimiento=8;
@@ -61,7 +49,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
 
                         type: "POST",
                         data: datos,
-                        url: '../../includes/php/g_procesos.php?'+datos,
+                        url: '../../includes/php/../g_procesos.php?'+datos,
                         success: function(valor){
                            
                                if(valor!=2){
@@ -86,7 +74,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
 
                         type: "POST",
                         data: datos,
-                        url: '../../includes/php/g_procesos.php?'+datos,
+                        url: '../../includes/php/../g_procesos.php?'+datos,
                         success: function(valor){
                            
                                if(valor!=2){
@@ -103,7 +91,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
 
                                                       type: "POST",
                                                       data: datos,
-                                                      url: 'g_procesos.php?'+datos,
+                                                      url: '../g_procesos.php?'+datos,
                                                       success: function(valor){
                                                           $("#history_serv_recom2").empty();
                                                               $("#cargar2").hide();
@@ -132,7 +120,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
 
                         type: "POST",
                         data: datos,
-                        url: '../../includes/php/g_procesos.php?'+datos,
+                        url: '../../includes/php/../g_procesos.php?'+datos,
                         success: function(valor){
                             
                                if(valor!=2){
@@ -161,7 +149,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call2='+1+'&tipo_seguimiento='+
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                            
                                if(valor!=2){
@@ -188,7 +176,7 @@ var datos='id_elab_diag='+id_elab_diag+'&list_servicios='+1;
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                             $("#history_serv_recom2").empty();
                                 $("#cargar2").hide();
@@ -211,7 +199,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+1+'&cod_equipo='+2+'&id_elab_dia
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                             $("#list_revi_docu").empty();
                                 $("#cargar2").hide();
@@ -227,7 +215,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+2+'&cod_equipo='+2+'&id_elab_dia
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                             $("#list_revi_docu2").empty();
                                 $("#cargar2").hide();
@@ -243,7 +231,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+3+'&cod_equipo='+2+'&id_elab_dia
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                             $("#list_revi_docu3").empty();
                                 $("#cargar2").hide();
@@ -259,7 +247,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+4+'&cod_equipo='+2+'&id_elab_dia
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                             $("#list_revi_docu4").empty();
                                 $("#cargar2").hide();
@@ -275,7 +263,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+5+'&cod_equipo='+2+'&id_elab_dia
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                             $("#list_revi_docu5").empty();
                                 $("#cargar2").hide();
@@ -291,7 +279,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                             $("#list_revi_docu6").empty();
                                 $("#cargar2").hide();
@@ -306,7 +294,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                             $("#list_revi_docu7").empty();
                                 $("#cargar2").hide();
@@ -321,7 +309,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                             $("#list_revi_docu8").empty();
                                 $("#cargar2").hide();
@@ -335,7 +323,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                             $("#list_revi_docu9").empty();
                                 $("#cargar2").hide();
@@ -350,7 +338,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                             $("#list_revi_docu10").empty();
                                 $("#cargar2").hide();
@@ -365,7 +353,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                             $("#list_revi_docu11").empty();
                                 $("#cargar2").hide();
@@ -380,120 +368,13 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
 
                         type: "POST",
                         data: datos,
-                        url: 'g_procesos.php?'+datos,
+                        url: '../g_procesos.php?'+datos,
                         success: function(valor){
                             $("#list_revi_docu12").empty();
                                 $("#cargar2").hide();
                                    $("#list_revi_docu12").html(valor);
                         }
                   });
-
-          // Registramos datos del diagnóstico (Técnico y datos básicos)
-
- $("#grabar_proc").click(function(){
-        
-        var grupo_usuario=1;
-        var ciudad= $('#ciudad').val();
-        var fecha= $('#fecha').val();
-        var direccion= $('#direccion').val();
-        var id_usuario= $('#id_usuario').val();
-        var dir_form_igac= $('#dir_form_igac').val();
-        var barrio= $('#barrio').val();
-        var municipio= $('#municipio').val();
-        var f_nec_form= $('#f_nec_form').val();
-        var f_nec_legal= $('#f_nec_legal').val();
-        var f_ubic_coor= $('#f_ubic_coor').val();
-        var f_cons_lic= $('#f_cons_lic').val();       
-        var f_riesg_inun= $('#f_riesg_inun').val();
-        var f_riesg_remo= $('#f_riesg_remo').val();
-        var f_riesg_proct= $('#f_riesg_proct').val();
-        var tipol_cant_constr= $('#tipol_cant_constr').val();
-        var alt_cant_pisos= $('#alt_cant_pisos').val();
-        var area_lote= $('#area_lote').val();
-        var dim_frent_lote= $('#dim_frent_lote').val();
-        var dim_frent_const= $('#dim_frent_const').val();
-        var dist_lad_lot= $('#dist_lad_lot').val();
-        var dist_lot_izq= $('#dist_lot_izq').val();
-        var dist_lot_der= $('#dist_lot_der').val();
-        var area_catastral= $('#area_catastral').val();
-        var area_docu= $('#area_docu').val();
-        var ara_docu_es_de= $('#ara_docu_es_de').val();
-        var area_med_de= $('#area_med_de').val();
-        var raz_cumpl= $('#raz_cumpl').val();
-        var par_predio_client= $('#par_predio_client').val();
-        var analis_client= $('#analis_client').val();
-        var msg_info= $('#msg_info').val();
-        var f_esp_legal= $('#f_esp_legal').val();
-        var f_esp_tecn= $('#f_esp_tecn').val();
-        var foto_graf_all_serv= $('#foto_graf_all_serv').val();
-        var foto_graf_serv= $('#foto_graf_serv').val();
-        var cond_serv= $('#cond_serv').val();
-        var aport_client_legal= $('#aport_client_legal').val();
-        var aport_client_tecni= $('#aport_client_tecni').val();
-        var aport_legal= $('#aport_legal').val();
-        var aport_tecni= $('#aport_tecni').val();
-        var llamada_client= $('#llamada_client').val();
-        var pagina_web= $('#pagina_web').val();
-        var consult_ent= $('#consult_ent').val();
-        var pot= $('#pot').val();
-        var der_peticion= $('#der_peticion').val();
-        var elab_legal= $('#elab_legal').val();
-        var elab_tecnico= $('#elab_tecnico').val();
-        var elab_analitic= $('#elab_analitic').val();
-        var apr_legal= $('#apr_legal').val();
-        var apro_tecnico= $('#apro_tecnico').val();
-        var apr_analitic= $('#apr_analitic').val();
-        var id_fasfield=id_elab_diag;
-        var cod_estado_tec= $('#cod_estado_tec').val();
-        var cod_estado_ana= $('#cod_estado_ana').val();
-        var cod_estado_leg= $('#cod_estado_leg').val();
-        var ubu_predio=$("#ubu_predio").val();
-        var latitud=$("#latitud").val();
-        var longitud=$("#longitud").val();
-        var uso_suelo=$("#uso_suelo").val();
-                
-
-                if(latitud!="" && ubu_predio!="" && longitud!="" && uso_suelo!=""){
-
-                         // Equipo analítico
-                   /* if(grupo_usuario==3)
-                        var datos='g_elab_diag='+1+'&fecha='+fecha+'&direccion='+direccion+'&cond_serv='+cond_serv+'&elab_analitic='+elab_analitic+'&apr_analitic='+apr_analitic+'&llamada_client='+llamada_client+'&pagina_web='+pagina_web+'&consult_ent='+consult_ent+'&pot='+pot+'&der_peticion='+der_peticion+'&id_fasfield='+id_fasfield+'&cod_estado_ana='+cod_estado_ana;
-
-                // Equipo Legal
-                 else  if(grupo_usuario==4)
-                        var datos='g_elab_diag='+1+'&dir_form_igac='+dir_form_igac+'&barrio='+barrio+'&municipio='+municipio+'&f_nec_form='+f_nec_form+'&par_predio_client='+par_predio_client+'&analis_client='+analis_client+'&msg_info='+msg_info+'&f_esp_legal='+f_esp_legal+'&aport_client_legal='+aport_client_legal+'&elab_legal='+elab_legal+'&apr_legal='+apr_legal+'&llamada_client='+llamada_client+'&pagina_web='+pagina_web+'&consult_ent='+consult_ent+'&pot='+pot+'&der_peticion='+der_peticion+'&aport_legal='+aport_legal+'&id_fasfield='+id_fasfield+'&cod_estado_leg='+cod_estado_leg;
-
-                 // Equipo técnico
-                 else  if(grupo_usuario==5)
-                        var datos='g_elab_diag='+1+'&f_nec_legal='+f_nec_legal+'&f_ubic_coor='+f_ubic_coor+'&f_cons_lic='+f_cons_lic+'&f_riesg_inun='+f_riesg_inun+'&f_riesg_remo='+f_riesg_remo+'&f_riesg_proct='+f_riesg_proct+'&tipol_cant_constr='+tipol_cant_constr+'&alt_cant_pisos='+alt_cant_pisos+'&dim_frent_lote='+dim_frent_lote+'&dim_frent_const='+dim_frent_const+'&dist_lad_lot='+dist_lad_lot+'&dist_lot_izq='+dist_lot_izq+'&dist_lot_der='+dist_lot_der+'&area_catastral='+area_catastral+'&area_docu='+area_docu+'&ara_docu_es_de='+ara_docu_es_de+'&area_med_de='+area_med_de+'&raz_cumpl='+raz_cumpl+'&f_esp_tecn='+f_esp_tecn+'&aport_client_tecni='+aport_client_tecni+'&aport_tecni='+aport_tecni+'&apro_tecnico='+apro_tecnico+'&area_lote='+area_lote+'&elab_tecnico='+elab_tecnico+'&id_fasfield='+id_fasfield+'&cod_estado_tec='+cod_estado_tec;
-                    */
-                    // Usuario super administrador..
-                //  else  if(grupo_usuario==1)
-                     var datos='g_elab_diag='+1+'&fecha='+fecha+'&direccion='+direccion+'&cond_serv='+cond_serv+'&elab_analitic='+elab_analitic+'&apr_analitic='+apr_analitic+'&llamada_client='+llamada_client+'&pagina_web='+pagina_web+'&consult_ent='+consult_ent+'&pot='+pot+'&der_peticion='+der_peticion+'&direccion='+direccion+'&dir_form_igac='+dir_form_igac+'&barrio='+barrio+'&municipio='+municipio+'&f_nec_form='+f_nec_form+'&par_predio_client='+par_predio_client+'&analis_client='+analis_client+'&msg_info='+msg_info+'&f_esp_legal='+f_esp_legal+'&aport_client_legal='+aport_client_legal+'&elab_legal='+elab_legal+'&apr_legal='+apr_legal+'&f_nec_legal='+f_nec_legal+'&f_ubic_coor='+f_ubic_coor+'&f_cons_lic='+f_cons_lic+'&f_riesg_inun='+f_riesg_inun+'&f_riesg_remo='+f_riesg_remo+'&f_riesg_proct='+f_riesg_proct+'&tipol_cant_constr='+tipol_cant_constr+'&alt_cant_pisos='+alt_cant_pisos+'&dim_frent_lote='+dim_frent_lote+'&dim_frent_const='+dim_frent_const+'&dist_lad_lot='+dist_lad_lot+'&dist_lot_izq='+dist_lot_izq+'&dist_lot_der='+dist_lot_der+'&area_catastral='+area_catastral+'&area_docu='+area_docu+'&ara_docu_es_de='+ara_docu_es_de+'&area_med_de='+area_med_de+'&raz_cumpl='+raz_cumpl+'&f_esp_tecn='+f_esp_tecn+'&aport_client_tecni='+aport_client_tecni+'&aport_tecni='+aport_tecni+'&apro_tecnico='+apro_tecnico+'&area_lote='+area_lote+'&elab_tecnico='+elab_tecnico+'&aport_legal='+aport_legal+'&id_fasfield='+id_fasfield+'&cod_estado_tec='+cod_estado_tec+'&cod_estado_ana='+cod_estado_ana+'&cod_estado_leg='+cod_estado_leg+'&ubu_predio='+ubu_predio+'&latitud='+latitud+'&longitud='+longitud+'&uso_suelo='+uso_suelo;
-
-                  
-                            $.ajax({
-
-                                 type: "POST",
-                                 data: datos,
-                                 url: 'g_procesos.php?'+datos,
-                                 success: function(valor){
-                                            if(valor==1)
-                                                alert("Datos guardados correctamente");
-                                            else
-                                                alert("Ocurrió un error, por favor contacte con el administrador");
-
-                                 }
-
-                            });
-
-                }
-                else
-                  alert("Por favor complete la siguiente Información: Uso del suelo, latitud, longitud y ubicación del predio");
-               
-        
-    });
-    
 
   });
 </script>
@@ -504,85 +385,23 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
               <div class="row">
                 <div class="col-lg-12">
                   <div class="card">
-                    <center>
-                   <?php if($_SESSION['tipo_usuario']==23 || $_SESSION['tipo_usuario']==1 ){   ?> <input type="button" name="guardar" id='grabar_proc' class='btn btn-warning' value='Guardar'><?php } ?></center>
+                    
                     <div class="card-body">
                       <p> 
-    <div class="panel-group" id="accordion">
+    <div class="panel-group" id="">
  
 
 
-    <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-      Estado del diagnóstico</a>
-      </h4>
-    </div>
-    <div id="collapse2" class="panel-collapse collapse in">
-      <div class="panel-body">
-      <table width="70%" border="0" class="table responsive">
-      <tr>
-        <td width="155">Fecha de asignación</td>
-        <td width="613"><?php echo $fecha_filtro ?></td>
-      </tr>
-      <tr>
-        <td>Tiempo de vencimiento:</td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        <td>Responsable legal:</td>
-        <td><?php echo $d2['nombre']." ".$d2['apellidos'] ?></td>
-      </tr>
-      <tr>
-        <td>Responsable técnico: </td>
-        <td>Juan Pablo Montoya</td>
-      </tr>
-      <tr>
-        <td>Etapa:</td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        <td>Última actuación:</td>
-        <td>&nbsp;</td>
-      </tr>
-
-      <tr>
-        <td>Perfil del cliente:</td>
-        <td><a href="perfil_cliente2.php?cod_cliente=<?php echo $datos2['cod_cliente']; ?>" target='_blank'>Ver perfil</a></td>
-      </tr>
-
-      <tr>
-        <td>Documento (Diagnóstico) :</td>
-        <td><a href="reportes/pdfdiagnostico_online.php?id_elab_diag=<?php echo $_GET['id_elab_diag']; ?>" target='_blank'>Visualizar (Online)</a>
-<a href="reportes/creatediagnostico.php?id_elab_diag=<?php echo $_GET['id_elab_diag']; ?>" target='_blank'>Visualizar (PDF))</a>
-        </td>
-      </tr>
-
-      <tr>
-        <td>Ver ficha:</td>
-        <td><a href="reportes/ficha_diagno.php?id_elab_diag=<?php echo $id_elab_diag; ?>" target='_blank'>Ver ficha</a>
-        </td>
-      </tr>
-
-
-
-
-    </table>
-
-</div>
-
-    </div>
-  </div>
+    
 
    <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+        <a data-toggle="" data-parent="#" href="#3">
        Información básica del usuario</a>
       </h4>
     </div>
-    <div id="collapse3" class="panel-collapse collapse">
+    <div id="3" class="panel- ">
       <div class="panel-body">
    <table width="42%" border="0" class="table responsive">
       <tr>
@@ -621,16 +440,16 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
 <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+          <a data-toggle="" data-parent="#" href="#4">
         Revisión de los documentos del cliente y de la encuesta </a>
         </h4>
       </div>
-      <div id="collapse4" class="panel-collapse collapse">
+      <div id="4" class="panel- ">
         <div class="panel-body">
 
         <div id='list_revi_docu'></div>
 
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=1&ficha=<?php echo base64_encode('Revisión de los documentos del cliente y de la encuesta') ?>" class='edicion'>Registrar/Editar</a>
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=1&ficha=<?php echo base64_encode('Revisión de los documentos del cliente y de la encuesta') ?>" class='edicion'></a>
           </div>
        </div>
   </div>
@@ -638,15 +457,15 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
   <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse41">
+          <a data-toggle="" data-parent="#" href="#41">
         Identificar cadena de tradiciones  </a>
         </h4>
       </div>
-      <div id="collapse41" class="panel-collapse collapse">
+      <div id="41" class="panel- ">
         <div class="panel-body">
            <div id='list_revi_docu2'></div>
 
-        <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=2&ficha=<?php echo base64_encode('Identificar cadena de tradiciones') ?>" class='edicion'>Registrar/Editar</a>
+        <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=2&ficha=<?php echo base64_encode('Identificar cadena de tradiciones') ?>" class='edicion'></a>
        </div>
       </div>
   </div>
@@ -654,15 +473,15 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
   <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse42">
+          <a data-toggle="" data-parent="#" href="#42">
         Revisión páginas de mapas </a>
         </h4>
       </div>
-      <div id="collapse42" class="panel-collapse collapse">
+      <div id="42" class="panel- ">
         <div class="panel-body">
 
            <div id='list_revi_docu3'></div>
-       <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=3&ficha=<?php echo base64_encode('Revisión páginas de mapas') ?>" class='edicion'>Registrar/Editar</a>
+       <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=3&ficha=<?php echo base64_encode('Revisión páginas de mapas') ?>" class='edicion'></a>
        </div>
       </div>
   </div>
@@ -670,14 +489,14 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
    <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse43">
+          <a data-toggle="" data-parent="#" href="#43">
        Revisión páginas impuestos </a>
         </h4>
       </div>
-      <div id="collapse43" class="panel-collapse collapse">
+      <div id="43" class="panel- ">
         <div class="panel-body">
            <div id='list_revi_docu4'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=4&ficha=<?php echo base64_encode('Revisión páginas impuestos') ?>" class='edicion'>Registrar/Editar</a>
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=4&ficha=<?php echo base64_encode('Revisión páginas impuestos') ?>" class='edicion'></a>
 
        </div>
       </div>
@@ -687,14 +506,14 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse431">
+          <a data-toggle="" data-parent="#" href="#431">
        Revisión bases de datos </a>
         </h4>
       </div>
-      <div id="collapse431" class="panel-collapse collapse">
+      <div id="431" class="panel- ">
         <div class="panel-body">
            <div id='list_revi_docu5'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=5&ficha=<?php echo base64_encode('Revisión bases de datos') ?>" class='edicion'>Registrar/Editar</a>
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=5&ficha=<?php echo base64_encode('Revisión bases de datos') ?>" class='edicion'></a>
 
        </div>
       </div>
@@ -703,14 +522,14 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse432">
+          <a data-toggle="" data-parent="#" href="#432">
        Revisión de mapas colaborativos </a>
         </h4>
       </div>
-      <div id="collapse432" class="panel-collapse collapse">
+      <div id="432" class="panel- ">
         <div class="panel-body">
            <div id='list_revi_docu6'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=6&ficha=<?php echo base64_encode('Revisión mapas colaboartivos') ?>" class='edicion'>Registrar/Editar</a>
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=6&ficha=<?php echo base64_encode('Revisión mapas colaboartivos') ?>" class='edicion'></a>
 
        </div>
       </div>
@@ -720,14 +539,14 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4331">
+          <a data-toggle="" data-parent="#" href="#4331">
        Analisis de FMI </a>
         </h4>
       </div>
-      <div id="collapse4331" class="panel-collapse collapse">
+      <div id="4331" class="panel- ">
         <div class="panel-body">
            <div id='list_revi_docu7'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=7&ficha=<?php echo base64_encode('Analisis de FMI') ?>" class='edicion'>Registrar/Editar</a>
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=7&ficha=<?php echo base64_encode('Analisis de FMI') ?>" class='edicion'></a>
 
        </div>
       </div>
@@ -736,14 +555,14 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
      <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4332">
+          <a data-toggle="" data-parent="#" href="#4332">
        Analisis de la titularidad </a>
         </h4>
       </div>
-      <div id="collapse4332" class="panel-collapse collapse">
+      <div id="4332" class="panel- ">
         <div class="panel-body">
            <div id='list_revi_docu8'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=8&ficha=<?php echo base64_encode('Analisis de la titularidad') ?>" class='edicion'>Registrar/Editar</a>
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=8&ficha=<?php echo base64_encode('Analisis de la titularidad') ?>" class='edicion'></a>
 
        </div>
       </div>
@@ -752,14 +571,14 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4321">
+          <a data-toggle="" data-parent="#" href="#4321">
        Analisis de la situación actual del impuesto predial </a>
         </h4>
       </div>
-      <div id="collapse4321" class="panel-collapse collapse">
+      <div id="4321" class="panel- ">
         <div class="panel-body">
            <div id='list_revi_docu9'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=9&ficha=<?php echo base64_encode('Analisis de la situación actual del impuesto predial') ?>" class='edicion'>Registrar/Editar</a>
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=9&ficha=<?php echo base64_encode('Analisis de la situación actual del impuesto predial') ?>" class='edicion'></a>
 
        </div>
       </div>
@@ -768,14 +587,14 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4322">
+          <a data-toggle="" data-parent="#" href="#4322">
         Análisis situación actual servicios públicos  </a>
         </h4>
       </div>
-      <div id="collapse4322" class="panel-collapse collapse">
+      <div id="4322" class="panel- ">
         <div class="panel-body">
            <div id='list_revi_docu10'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=10&ficha=<?php echo base64_encode('Análisis situación actual servicios públicos ') ?>" class='edicion'>Registrar/Editar</a>
+           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=10&ficha=<?php echo base64_encode('Análisis situación actual servicios públicos ') ?>" class='edicion'></a>
 
        </div>
       </div>
@@ -785,14 +604,14 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse43321">
+          <a data-toggle="" data-parent="#" href="#43321">
        Otras situaciones (Legal) </a>
         </h4>
       </div>
-      <div id="collapse43321" class="panel-collapse collapse">
+      <div id="43321" class="panel- ">
         <div class="panel-body">
            <div id='list_revi_docu11'></div>
-          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=11&ficha=<?php echo base64_encode('Otras situaciones') ?>" class='edicion'>Registrar/Editar</a>  <?php } ?>
+          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=11&ficha=<?php echo base64_encode('Otras situaciones') ?>" class='edicion'></a>  <?php } ?>
 
        </div>
       </div>
@@ -801,11 +620,11 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
 <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+        <a data-toggle="" data-parent="#" href="#5">
        Situación actual y ubicación del predio</a>
       </h4>
     </div>
-    <div id="collapse5" class="panel-collapse collapse">
+    <div id="5" class="panel- ">
       <div class="panel-body">
        <table width="42%" border="0" class="table responsive">
       <tr>
@@ -837,11 +656,11 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+          <a data-toggle="" data-parent="#" href="#6">
         Afectaciones</a>
         </h4>
       </div>
-      <div id="collapse6" class="panel-collapse collapse">
+      <div id="6" class="panel- ">
         <div class="panel-body">
             <div id='history_afect' align="center"> </div>
     <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=8" class='edicion'><?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1){ ?> Agregar/Editar Afectaciones <?php } ?></a></p></div>
@@ -853,11 +672,11 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse8">
+          <a data-toggle="" data-parent="#" href="#8">
         Análisis del cumplimento y ordenamiento territorial</a>
         </h4>
       </div>
-      <div id="collapse8" class="panel-collapse collapse">
+      <div id="8" class="panel- ">
         <div class="panel-body"> <table width="68%" border="0" class="table responsive">
       <tr>
         <td width="487">(*)<span class="form-group row">
@@ -950,44 +769,15 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse12">
-        Servicios ofrecidos </a>
-        </h4>
-      </div>
-      <div id="collapse12" class="panel-collapse collapse">
-        <div class="panel-body">
-          <div id='history_serv_recom' align="center"> </div>
-    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=14" class='edicion'>Agregar/Editar Servicios</a></p></div>
-
-        </div>
-      </div>
-
-      <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse12">
-        Servicios recomendados </a>
-        </h4>
-      </div>
-      <div id="collapse12" class="panel-collapse collapse">
-        <div class="panel-body">
-          <div id='history_serv_recom' align="center"> </div>
-    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=14" class='edicion'>Agregar/Editar Servicios</a></p></div>
-
-        </div>
-      </div>
 
     <!--<div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse13">
+          <a data-toggle="" data-parent="#" href="#13">
         Servicios recomendados</a>
         </h4>
       </div>
-      <div id="collapse13" class="panel-collapse collapse">
+      <div id="13" class="panel- ">
         <div class="panel-body">
              <div id='history_serv_recom2' align="center"> </div>
     <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=15" class='edicion'>Agregar/Editar Servicios</a></p></div>
@@ -995,60 +785,19 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
         </div>
       </div>-->
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1311">
-        Párrafos</a>
-        </h4>
-      </div>
-      <div id="collapse1311" class="panel-collapse collapse">
-        <div class="panel-body">
-             <div id='list_revi_docu12'></div>
-            <p><a href="../../includes/php/construc_parraf.php?cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=12&id_elab_diag=<?php echo $id_elab_diag ?>" class='edicion'>Construcción de parrafos</a></p>
-
-        </div>
-      </div>
-    </div>
-
-      <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse131">
-        Cotización</a>
-        </h4>
-      </div>
-      <div id="collapse131" class="panel-collapse collapse">
-        <div class="panel-body">
-                <div id='history_cotizacion' align="center"> Espere por favor.
-                    </div>
-        </div>
-      </div>
-    </div>
-
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse14">
-      Política de comunicación (Última comunicación)</a>
-      </h4>
-    </div>
-    <div id="collapse14" class="panel-collapse collapse">
-      <div class="panel-body"><div id='history_revi4' align="center">                           </div>
-    <p><a href="../../includes/php/revi_call2.php?cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo_seguimiento=6&id_serv_cliente=<?php echo $id_elab_diag ?>" class='edicion'>Nueva comunicación</a></p></div>
-    </div>
-  </div>
-
+  
+   
+ 
 
    <!--
  <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse16">
+        <a data-toggle="" data-parent="#" href="#16">
      Soporte técnico</a>
       </h4>
     </div>
-    <div id="collapse16" class="panel-collapse collapse">
+    <div id="16" class="panel- ">
       <div class="panel-body"><div id='history_revi5' align="center">                           </div>
     <p><a href="../../includes/php/solicitud.php?cod_cliente=<?php echo $d['cod_cliente'] ?>&id_serv_cliente=<?php echo $id_elab_diag ?>" class='edicion'>Reportar problema</a></p></div>
     </div>
