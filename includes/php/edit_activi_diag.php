@@ -328,7 +328,7 @@ $("#observacion").hide();
 
                                       type: "POST",
                                       data: datos,
-                                      url: '../g_procesos.php?'+datos,
+                                      url: 'g_procesos.php?'+datos,
                                       success: function(valor){
                                          
                                              if(valor!=2){
