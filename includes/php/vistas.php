@@ -1,4 +1,5 @@
 <?php
+@include('../dependencia/conexion.php');
 if($_POST['vistas']==2) // Vista de menús.
 $sql="select * from menu ";
 elseif($_POST['vistas']==3) // Vista de submenús.
@@ -29,7 +30,7 @@ elseif($_POST['vistas']==11 || $_GET['vistas']==11){
   if($_GET['vistas']==11){
     $_POST['fecha_1']='2017-10-01';
     $_POST['fecha_2']='2018-31-12';
-
+     $_POST['ciudad']=$_GET['ciudad'];
   }
 
     // Vista (Detalle dashboard Clientes pagos)
@@ -50,7 +51,7 @@ elseif($_POST['vistas']==11 || $_GET['vistas']==11){
           $sql="select distinct enc_procesadas.asesor,  enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, estado, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'  ";
         }
         else{
-          $sql="select distinct enc_procesadas.id_cliente, enc_procesadas.asesor, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, estado, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'  and enc_procesadas.asesor='".$_POST['asesor']."' ";
+       $sql="select distinct enc_procesadas.id_cliente, enc_procesadas.asesor, tipo_encuesta.nombre as encuesta, enc_procesadas.tipo_encuesta, enc_procesadas.cliente,  enc_procesadas.fecha_recepcion, enc_procesadas.fecha_fin_registro, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield from  enc_procesadas, estado, tipo_encuesta where enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta and $parametro enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."'  and enc_procesadas.asesor='".$_POST['asesor']."' ";
         }
 } 
 
@@ -60,9 +61,7 @@ elseif($_POST['vistas']==12){ // Vista de crédito orbe.
 
  
 }
-//elseif($_POST['vistas']==7) // Estados de servicios
-//$sql="select * from cliente ";
-//$sql="select documentacion.cod_cliente, documentacion.apellidos, documentacion.nombres, documentacion.ciudad, bodegas.descripcion as bodega, documentacion.cod_estante as estante, documentacion.ubicacion, documentacion.usr_codif from documentacion, bodegas where documentacion.cod_bodega=bodegas.cod_bodega ";
+
 
 
           $query=pg_query($conexion, $sql);
