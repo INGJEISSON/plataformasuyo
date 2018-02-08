@@ -1787,8 +1787,8 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                   $insert="delete from activ_diag where id_activi_diag='".$_POST['id_activi_diag']."' ";
               }            
 
-            //$insert="insert into activ_diag (cod_activi_etapa, id_elab_diag, observacion, cod_usu_respon, fecha_actividad, fecha_registro) values('".$_POST['cod_activi_etapa']."', '".$_POST['id_elab_diag']."', '".$_POST['observacion']."', '".$_SESSION['cod_usuario']."', '".$_POST['fecha_actividad']."', '".$fecha_registro."') ";
-            $query=pg_query($conexion, $insert);
+         
+          $query=pg_query($conexion, $insert);
                     
 
               if($query){

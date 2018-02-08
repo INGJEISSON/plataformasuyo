@@ -6,9 +6,6 @@ include('../dependencia/conexion.php');
           $rows=pg_num_rows($query);
           $datos=pg_fetch_assoc($query);        
 */
-
-
-
            $etapa=1;
                    $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag='".$_GET['cod_activi_etapa']."'  ";
                    $query3=pg_query($conexion, $sql3);   
@@ -187,14 +184,14 @@ $("#observacion").hide();
               var fecha_actividad=$("#fecha_actividad").val();
               var id_serv_cliente="<?php echo "$_GET[id_elab_diag]" ?>";
               var tipo="<?php echo "$_GET[tipo]" ?>";
-              var id_activi_diag="<?php echo "$_GET['id_activi_diag']" ?>";
-              var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&edit_revi_diag='+1+'&fecha_actividad='+fecha_actividad+'&tipo='+tipo+'&edit='+1;
+              var id_activi_diag="<?php echo "$_GET[id_activi_diag]" ?>";
+              var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&edit_revi_diag='+1+'&fecha_actividad='+fecha_actividad+'&tipo='+tipo+'&edit='+1+'&id_activi_diag='+id_activi_diag;
                   
                   if(cod_activi_etapa!=1){
               		
-              			if(fecha_actividad==""){
-              						alert("Por favor introduzca la fecha que ha realizado la actividad.");
-              			}else{
+                			if(fecha_actividad==""){
+                						alert("Por favor introduzca la fecha que ha realizado la actividad.");
+                			}else{
 
                           $("#cargar2").show();
                             $.ajax({
@@ -206,7 +203,7 @@ $("#observacion").hide();
                                          
                                              if(valor!=2){
                                               $("#cargar2").hide();
-                                                alert("Se ha agregado su actividad al cliente");   
+                                                alert("Se ha actualizado la actividad");   
                                                 $("#history_revi").html(valor);
                                                
 
@@ -218,7 +215,7 @@ $("#observacion").hide();
 
                                       type: "POST",
                                       data: datos,
-                                      url: 'g_procesos.php?'+datos,
+                                      url: '../g_procesos.php?'+datos,
                                       success: function(valor){
                                             if(tipo==1){
                                                $("#list_revi_docu").empty();                             
@@ -317,8 +314,8 @@ $("#observacion").hide();
               var fecha_actividad=$("#fecha_actividad").val();
               var id_serv_cliente="<?php echo "$_GET[id_elab_diag]" ?>";
               var tipo="<?php echo "$_GET[tipo]" ?>";
-              var id_activi_diag="<?php echo "$_GET['id_activi_diag']" ?>";
-              var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&edit_revi_diag='+1+'&fecha_actividad='+fecha_actividad+'&tipo='+tipo+'&elim='+1;
+              var id_activi_diag="<?php echo "$_GET[id_activi_diag]" ?>";
+              var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&edit_revi_diag='+1+'&fecha_actividad='+fecha_actividad+'&tipo='+tipo+'&elim='+1+'&id_activi_diag='+id_activi_diag;
                   
                   if(cod_activi_etapa!=1){
                   
@@ -331,12 +328,12 @@ $("#observacion").hide();
 
                                       type: "POST",
                                       data: datos,
-                                      url: 'g_procesos.php?'+datos,
+                                      url: '../g_procesos.php?'+datos,
                                       success: function(valor){
                                          
                                              if(valor!=2){
                                               $("#cargar2").hide();
-                                                alert("Se ha agregado su actividad al cliente");   
+                                                alert("Se ha eliminado la actividad del diagnóstico del cliente");   
                                                 $("#history_revi").html(valor);
                                                
 
@@ -348,7 +345,7 @@ $("#observacion").hide();
 
                                       type: "POST",
                                       data: datos,
-                                      url: 'g_procesos.php?'+datos,
+                                      url: '../g_procesos.php?'+datos,
                                       success: function(valor){
                                             if(tipo==1){
                                                $("#list_revi_docu").empty();                             
