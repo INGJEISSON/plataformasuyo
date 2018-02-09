@@ -57,8 +57,9 @@ $cod_resp=0;
           <th width="9%">Costo</th>
           <th width="7%">Aliado</th>
           <th width="7%">Cuotas</th>
+          <th width="7%">Tipo de pago</th>
+          <th width="7%">Aliado</th>
           <th width="11%">Comprobante</th>
-          <th width="9%">Acción</th>
           <?php if($_SESSION['tipo_usuario']==1){ ?><th width="9%">Editar</th><?php }  ?>
         </tr>
       </thead>
@@ -86,8 +87,9 @@ $cod_resp=0;
                 <td><?php echo number_format($datos['valor']); ?></td>
                 <td><?php echo $datos['aliado']; ?></td>
                 <td><?php echo "(".$datos['n_cuotas'].")"; ?></td>
-                <td><?php  ?></td>
-                <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></td> 
+                <td><?php echo "(".$datos4['tipo_pago'].")"; ?></td>
+                <td><?php echo "(".$datos4['aliado'].")"; ?></td>
+                <td><<a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>" tittle='Revisar'><img src="img/icono_pdf.png" width="31" height="31"></a></td>
                 <td><a href="includes/php/edicion_usu.php?cod_cliente=<?php echo $datos['cod_cliente']; ?>&cod_resp=<?php echo $cod_resp; ?>" tittle='Revisar' class="edicion"><p class='icon-note lg'></p></a></td>
                 
               </tr>

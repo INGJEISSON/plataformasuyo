@@ -148,8 +148,12 @@ if($rows==1){
 
 
 <body>
-  <br>
-  <br><br><br><br><br><br><br><br>
+   <page_header style='text-align: right;'> 
+               <img src="img/Logo.png" width="124" height="49" />
+          
+          </page_header> 
+     <br>
+  <br><br><br><br><br><br>
 <table width="438" border="0">
   <tr>
     <td width="323"><p class="azul">DIAGNÓSTICO DE PROPIEDAD<br><img src="img/Linea_Titulo.png" width="260" height="12" /></p></td>
@@ -295,8 +299,6 @@ if($rows==1){
                     </tr>
                   </table>
 
-      
-
       </page>
 
 <p class="turquesa" style="font-size:11px; font-weight:bold"><span class="turquesa" style="font-size:11px; font-weight:bold">Análisis del cumplimiento del plan de ordanimiento territorial con respecto a las características ambientales:</span></p>
@@ -312,20 +314,23 @@ if($rows==1){
                       <tr>
                         <td height="52"><table width="782" height="486" border="0" cellpadding="0" cellspacing="0" class="tabla_tecnico">
                           <tr>
-                            <td height="32" colspan="3">ALTURA: Cantidad de pisos construidos</td>
-                            <td width="233" style="text-align:center">TIPOLOGIA: Cantidad de viviendas por construcción<br></td>
-                            <td width="273" rowspan="2">&nbsp;</td>
+                            <td height="32">ALTURA: Cantidad de pisos construidos</td>
+                            <td height="32">&nbsp;</td>
+                            <td height="32">&nbsp;</td>
+                            <td width="207" style="text-align:center">TIPOLOGIA: Cantidad de viviendas por construcción<br></td>
+                            <td colspan="4" rowspan="2">&nbsp;</td>
                           </tr>
                           <tr>
-                            <td height="18" colspan="3"><span style="text-align:center"><?php echo $alt_cant_pisos[0]." | ".$alt_cant_pisos[1]." | ".$alt_cant_pisos[2] ?></span></td>
+                            <td height="18"><span style="text-align:center"><?php echo $alt_cant_pisos[0]." | ".$alt_cant_pisos[1]." | ".$alt_cant_pisos[2] ?></span></td>
+                            <td height="18">&nbsp;</td>
+                            <td height="18">&nbsp;</td>
                             <td style="text-align:center"><?php echo $tipol_cant_constr[0]." | ".$tipol_cant_constr[1]." | ".$tipol_cant_constr[2] ?></td>
                           </tr>
                           <tr>
                             <td colspan="3">&nbsp;</td>
                             <td rowspan="4">&nbsp;</td>
-                            <td rowspan="4">Distancia entre el lado izquierdo
-                              del lote y la construcción <br>
-                              <?php echo $dist_lot_izq[0]." | ".$dist_lot_izq[1]." | ".$dist_lot_izq[2] ?> <br>
+                            <td width="29" rowspan="4"><br>
+                              <br>
                               <br>
                               <br>
                               <br>
@@ -336,6 +341,10 @@ if($rows==1){
                               <br>
                               <br>
                               <br></td>
+                            <td width="209">Distancia entre el lado izquierdo
+                            del lote y la construcción</td>
+                            <td width="3" rowspan="4">&nbsp;</td>
+                            <td width="3" rowspan="4">&nbsp;</td>
                           </tr>
                           <tr>
                             <td height="62"><p>Distancia entre el lado
@@ -343,20 +352,23 @@ if($rows==1){
                               y la construcción</p></td>
                             <td height="62">&nbsp;</td>
                             <td rowspan="2">&nbsp;</td>
+                            <td width="209"><?php echo $dist_lot_izq[0]." | ".$dist_lot_izq[1]." | ".$dist_lot_izq[2] ?></td>
                           </tr>
                           <tr>
                             <td height="18"><span style="text-align:center"><?php echo $dist_lot_der[0]." | ".$dist_lot_der[1]." | ".$dist_lot_der[2] ?></span></td>
                             <td height="18">&nbsp;</td>
+                            <td width="209">&nbsp;</td>
                           </tr>
                           <tr>
                             <td height="48" colspan="3">&nbsp;</td>
+                            <td width="209">&nbsp;</td>
                           </tr>
                           <tr>
                             <td height="49" colspan="2"><p>&nbsp;</p>
                               <p>&nbsp;</p></td>
-                            <td width="83">&nbsp;</td>
+                            <td width="71">&nbsp;</td>
                             <td rowspan="3">&nbsp;</td>
-                            <td height="81" rowspan="2">&nbsp;</td>
+                            <td height="81" colspan="4" rowspan="2">&nbsp;</td>
                           </tr>
                           <tr>
                             <td height="66">Dimensión frente de la
@@ -368,27 +380,27 @@ if($rows==1){
                             <td height="30"><span style="text-align:center"><?php echo $dim_frent_const[0]." | ".$dim_frent_const[1]." | ".$dim_frent_const[2] ?></span></td>
                             <td height="30">&nbsp;</td>
                             <td height="30">&nbsp;</td>
-                            <td height="30">Distancia entre el lado posterior del lote y la construcción</td>
+                            <td height="30" colspan="4">Distancia entre el lado posterior del lote y la construcción</td>
                           </tr>
                           <tr>
                             <td height="45" colspan="2">&nbsp;</td>
                             <td height="45">&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td><span style="text-align:center"><?php echo $dist_lad_lot[0]." | ".$dist_lad_lot[1]." | ".$dist_lad_lot[2] ?></span></td>
+                            <td colspan="4"><span style="text-align:center"><?php echo $dist_lad_lot[0]." | ".$dist_lad_lot[1]." | ".$dist_lad_lot[2] ?></span></td>
                           </tr>
                           <tr>
                             <td height="30"><span style="text-align:center">Dimensión frente del lote</span></td>
                             <td>&nbsp;</td>
                             <td height="30">&nbsp;</td>
                             <td>Área del lote según las escritura</td>
-                            <td>&nbsp;</td>
+                            <td colspan="4">&nbsp;</td>
                           </tr>
                           <tr>
-                            <td width="138" height="18"><span style="text-align:center"><?php echo $dim_frent_lote[0]." | ".$dim_frent_lote[1]." | ".$dim_frent_lote[2] ?></span></td>
-                            <td width="55">&nbsp;</td>
+                            <td width="213" height="18"><span style="text-align:center"><?php echo $dim_frent_lote[0]." | ".$dim_frent_lote[1]." | ".$dim_frent_lote[2] ?></span></td>
+                            <td width="47">&nbsp;</td>
                             <td height="18">&nbsp;</td>
                             <td><span style="text-align:center"><?php echo $area_lote[0]." | ".$area_lote[1]." | ".$area_lote[2] ?></span></td>
-                            <td>&nbsp;</td>
+                            <td colspan="4">&nbsp;</td>
                           </tr>
                           </table>   </td>
                       </tr>
