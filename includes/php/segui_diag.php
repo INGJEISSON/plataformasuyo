@@ -19,6 +19,10 @@ $id_elab_diag=base64_decode($_GET['id_elab_diag']);
      $g=pg_query($conexion, $f);
      $d2=pg_fetch_assoc($g);
 
+       $f3="select * from usuarios where cod_usuario='".$d['cod_usu_tecnico']."' ";
+     $g3=pg_query($conexion, $f3);
+     $d3=pg_fetch_assoc($g3);
+
      // Buscamos la fecha de la asignación
 
       $sql4="select fecha_filtro from asigna_diag where id_elab_diag='".$id_elab_diag."' order by id_elab_diag desc limit 1  ";
@@ -536,7 +540,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </tr>
       <tr>
         <td>Responsable técnico: </td>
-        <td>Juan Pablo Montoya</td>
+        <td><?php echo $d3['nombre']." ".$d3['apellidos'] ?></td>
       </tr>
       <tr>
         <td>Etapa:</td>
