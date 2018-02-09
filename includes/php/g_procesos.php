@@ -2340,10 +2340,10 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                  $parametro='92 and 97'; 
                   }  
                    elseif($_POST['tipo']==7 ){ // Listado de variables de análisis FMI
-                 $parametro='92 and 97'; 
+                 $parametro='112 and 132'; 
                   } 
                    elseif($_POST['tipo']==8 ){ // Listado de variables de análisis titularidad
-                 $parametro='92 and 97'; 
+                 $parametro='98 and 111'; 
                   }  
 
                   elseif($_POST['tipo']==9 ){ // Listado de variables de análisis titularidad

@@ -6,7 +6,7 @@ include('../dependencia/conexion.php');
           $rows=pg_num_rows($query);
           $datos=pg_fetch_assoc($query);        
 */
-           $etapa=1;
+           $etapa=$_GET['etapa'];
                    $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag='".$_GET['cod_activi_etapa']."'  ";
                    $query3=pg_query($conexion, $sql3);   
 

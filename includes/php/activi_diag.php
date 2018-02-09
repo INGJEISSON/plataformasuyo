@@ -388,7 +388,8 @@ var observacion=$("#observacion").val();
 var fecha_actividad=$("#fecha_actividad").val();
 var id_serv_cliente="<?php echo "$_GET[id_elab_diag]" ?>";
 var tipo="<?php echo "$_GET[tipo]" ?>";
-var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&add_revi_diag='+1+'&fecha_actividad='+fecha_actividad+'&tipo='+tipo;
+var etapa="<?php echo $etapa ?>";
+var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&add_revi_diag='+1+'&fecha_actividad='+fecha_actividad+'&tipo='+tipo+'&etapa='+etapa;
     
     if(cod_activi_etapa!=1){
 		
@@ -411,7 +412,7 @@ var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+
                                  
 
                                       var id_elab_diag="<?php echo "$_GET[id_elab_diag]" ?>";
-var datos='listar_actividades_diag='+1+'&tipo='+tipo+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag;
+var datos='listar_actividades_diag='+1+'&tipo='+tipo+'&cod_equipo='+2+'&id_elab_diag='+id_elab_diag+'&etapa='+etapa;
     
           
               $.ajax({
@@ -506,8 +507,9 @@ var datos='listar_actividades_diag='+1+'&tipo='+tipo+'&cod_equipo='+2+'&id_elab_
 });
 var id_serv_cliente="<?php echo "$_GET[id_elab_diag]" ?>";
 var tipo="<?php echo "$_GET[tipo]" ?>";
+var etapa="<?php echo $etapa ?>";
 
-var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&revi_serv_diag='+1+'&fecha_actividad='+fecha_actividad+'&tipo='+tipo;
+var datos='id_elab_diag='+id_serv_cliente+'&cod_activi_etapa='+cod_activi_etapa+'&observacion='+observacion+'&revi_serv_diag='+1+'&fecha_actividad='+fecha_actividad+'&tipo='+tipo+'&etapa='+etapa;
     
             $("#cargar2").show();
               $.ajax({
