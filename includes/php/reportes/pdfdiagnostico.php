@@ -20,6 +20,7 @@ if(isset($_GET['id_elab_diag'])){
           $sql21="select serv_recom_diag.id_serv_recom, servicios.nom_servicio, servicios.cod_servicio from serv_recom_diag, servicios where serv_recom_diag.cod_servicio=servicios.cod_servicio and id_elab_diag='".$id_elab_diag."' ";
           $query21=pg_query($conexion, $sql21);
           $query22=pg_query($conexion, $sql21);
+		  $rows22=pg_num_rows($conexion, $sql21);
           // Buscamos los párrafos  realizados por el diagnóstico
 
           $sql3="select id_parraf_diag from parraf_diag where id_elab_diag='".$id_elab_diag."' limit 1 ";
@@ -151,7 +152,7 @@ if($rows==1){
    <page_header style='text-align: right;'> 
                <img src="img/Logo.png" width="124" height="49" />
           
-          </page_header> 
+</page_header> 
      <br>
   <br><br><br><br><br><br>
 <table width="438" border="0">
@@ -201,7 +202,8 @@ if($rows==1){
     <td><img src="img/foto.png" width="684" height="202" /></td>
   </tr>
 </table>
-<table width="200" border="0">
+<br><br><br>
+<table width="200" border="0" cellpadding="0" cellspacing="0">
   <tr>
     <td><img src="img/firma_mateo.png" width="149" height="88" /></td>
   </tr>
@@ -225,7 +227,8 @@ if($rows==1){
               ALGO ALGO
           </page_footer>
 
-
+   <br>
+  <br><br><br><br><br><br>
         <table width="280" border="0" cellpadding="0" cellspacing="0" class="azul" >
           <tr>
             <td width="35"><img src="img/Barra_Subtitulo.png" alt="" width="23" height="111" /></td>
@@ -299,7 +302,7 @@ if($rows==1){
                     </tr>
                   </table>
 
-      </page>
+</page>
 
 <p class="turquesa" style="font-size:11px; font-weight:bold"><span class="turquesa" style="font-size:11px; font-weight:bold">Análisis del cumplimiento del plan de ordanimiento territorial con respecto a las características ambientales:</span></p>
 <table width="200" border="0">
@@ -309,21 +312,19 @@ if($rows==1){
   </tr>
 </table>
             <page pageset="old"> 
+               <br>
+  <br><br><br><br><br><br>
                       <p class="turquesa" style="font-size:11px; font-weight:bold"><span class="turquesa" style="font-size:11px; font-weight:bold">Análisis del cumplimiento del plan de ordanimiento territorial con respecto a las características físicas de la propiedad:</span></p>
                       <table width="782" height="442" border="0" cellpadding="0" cellspacing="0" class="tabla_tecnico">
                       <tr>
                         <td height="52"><table width="782" height="486" border="0" cellpadding="0" cellspacing="0" class="tabla_tecnico">
                           <tr>
-                            <td height="32">ALTURA: Cantidad de pisos construidos</td>
-                            <td height="32">&nbsp;</td>
-                            <td height="32">&nbsp;</td>
+                            <td height="32" colspan="3">ALTURA: Cantidad de pisos construidos</td>
                             <td width="207" style="text-align:center">TIPOLOGIA: Cantidad de viviendas por construcción<br></td>
                             <td colspan="4" rowspan="2">&nbsp;</td>
                           </tr>
                           <tr>
-                            <td height="18"><span style="text-align:center"><?php echo $alt_cant_pisos[0]." | ".$alt_cant_pisos[1]." | ".$alt_cant_pisos[2] ?></span></td>
-                            <td height="18">&nbsp;</td>
-                            <td height="18">&nbsp;</td>
+                            <td height="18" colspan="3"><span style="text-align:center"><?php echo $alt_cant_pisos[0]." | ".$alt_cant_pisos[1]." | ".$alt_cant_pisos[2] ?></span></td>
                             <td style="text-align:center"><?php echo $tipol_cant_constr[0]." | ".$tipol_cant_constr[1]." | ".$tipol_cant_constr[2] ?></td>
                           </tr>
                           <tr>
@@ -423,6 +424,8 @@ if($rows==1){
                 </page>
 
          <page pageset="old"> 
+            <br>
+  <br><br><br><br><br><br>
 
                   <p><span class="turquesa" style="font-size:11px; font-weight:bold">TITULARIDAD DEL PREDIO</span></p>
                   <table width="200" border="0" class="gris_texto" style="text-align: justify;">
@@ -460,6 +463,8 @@ if($rows==1){
       </page>
 
        <page pageset="old">
+          <br>
+  <br><br><br><br><br><br>
          <table width="280" border="0" cellpadding="0" cellspacing="0" class="azul" >
            <tr>
              <td width="35"><img src="img/Barra_Subtitulo.png" alt="" width="23" height="111" /></td>
@@ -522,12 +527,14 @@ if($rows==1){
               </page>
 
        <page pageset="old">
+          <br>
+  <br><br><br><br><br><br>
          <table width="280" border="0" cellpadding="0" cellspacing="0" class="azul" >
            <tr>
              <td width="35"><img src="img/Barra_Subtitulo.png" alt="" width="23" height="111" /></td>
              <td width="245"><span style="font-size:40px">04</span><span style="font-size:24px; font-weight: bold"><br>
-               GARANTÍAS<span style="font-size:17px;"><br>
-                 Y DEVOLUCIONES</span></span></td>
+               POLÍTICA DE<span style="font-size:17px;"><br>
+                 DEVOLUCIONES</span></span></td>
            </tr>
          </table>
          <table width="364" border="0" class="azul">
@@ -575,6 +582,8 @@ if($rows==1){
             </page>
 
        <page pageset="old">
+          <br>
+  <br><br><br><br><br><br>
          <table width="280" border="0" cellpadding="0" cellspacing="0" class="azul" >
            <tr>
              <td width="35"><img src="img/Barra_Subtitulo.png" alt="" width="23" height="111" /></td>
@@ -618,7 +627,7 @@ if($rows==1){
         </page>
 
        <page pageset="old"> 
-        <nobreak>
+         
           <table width="280" border="0" cellpadding="0" cellspacing="0" class="azul" >
             <tr>
               <td width="35"><img src="img/Barra_Subtitulo.png" alt="" width="23" height="111" /></td>
@@ -637,83 +646,88 @@ if($rows==1){
                   </table>
       <table width="543" border="0">
           <?php 
+		  	$j=1;
                  while($datos22=pg_fetch_assoc($query22)){
-          ?>
-              <tr class="azul" style="font-weight:bold">
-                <td width="461"><?php echo ($datos22['nom_servicio']) ?></td>
-                <td width="72">VALOR</td>
-              </tr>
-                      <?php 
-                        // Listamos los OPCIONES del servicio
-                          $s="select * from tipo_mod_cost";
-                          $q=pg_query($conexion, $s);
 
-                                  while($d=pg_fetch_assoc($q)){
+                      					 		if($j==3){
+                      								$j=1;
+                      				      	?>  
+                                      JEISSON
+                                 <br><br><br><br><br><br><br><br><br><br><br>
+                                 					 <?php 
+                      							}	
+                               			 ?>
+                            <tr class="azul" style="font-weight:bold">
+                              <td width="461"><?php echo ($datos22['nom_servicio']) ?></td>
+                              <td width="72">VALOR</td>
+                            </tr>
+                                    <?php 
+                                      // Listamos los OPCIONES del servicio
+                                        $s="select * from tipo_mod_cost";
+                                        $q=pg_query($conexion, $s);
 
-                                            // Buscamos los detalles de la opción
-                                      $s1="select * from opc_cotiz_serv where tipo_mod_cost='".$d['tipo_mod_cost']."' ";
-                                      $q1=pg_query($conexion, $s1);
+                                           while($d=pg_fetch_assoc($q)){
 
-                                                                                   
+                                                          // Buscamos los detalles de la opción
+                                                    $s1="select * from opc_cotiz_serv where tipo_mod_cost='".$d['tipo_mod_cost']."' ";
+                                                    $q1=pg_query($conexion, $s1);
 
-                    ?>
-                          <tr class="turquesa" style="font-weight:bold">
-                            <td colspan="2">Opción <?php echo ($d['tipo_mod_cost']) ?>: <?php echo ($d['descripcion']) ?></td>
-                          </tr>
-                            <?php 
-                                  $sum=0;
-                                      while($d1=pg_fetch_assoc($q1)){   
-                                          // Buscamos el valor cotizado
-                                              $d2="select valor from cotiz_serv where cod_op_cotiz='".$d1['cod_op_cotiz']."' and id_serv_recom='".$datos22['id_serv_recom']."'  ";
-                                              $q2=pg_query($conexion, $d2);
-                                              $d2=pg_fetch_assoc($q2);
-                                              $sum=$sum+$d2['valor'];
-                            ?>  
-                          <tr style="font-size:11px">
-                            <td><?php echo ($d1['descripcion']) ?></td>
-                            <td style="text-align: right;">$<?php echo (number_format($d2['valor'])) ?></td>
-                          </tr>
-                              <?php
-                                                }// Fin detalle de la cotización
+                                                                                                 
 
-                                          // Realizamos cálculos (Subtota, retención y total a pagar).
-                                        $subtotal=$sum; // sub total
-                                        $retencion=($subtotal*11)/100; // retención
-                                        $iva=($subtotal*19)/100; // IVA
-                                        $total_apagar=$subtotal+$iva+$retencion; // total a pagar..
-                                    ?> 
+                                  ?>
+                                        <tr class="turquesa" style="font-weight:bold">
+                                          <td colspan="2">Opción <?php echo ($d['tipo_mod_cost']) ?>: <?php echo ($d['descripcion']) ?></td>
+                                        </tr>
+                                          <?php 
+                                                $sum=0;
+                                                    while($d1=pg_fetch_assoc($q1)){   
+                                                        // Buscamos el valor cotizado
+                                                            $d2="select valor from cotiz_serv where cod_op_cotiz='".$d1['cod_op_cotiz']."' and id_serv_recom='".$datos22['id_serv_recom']."'  ";
+                                                            $q2=pg_query($conexion, $d2);
+                                                            $d2=pg_fetch_assoc($q2);
+                                                            $sum=$sum+$d2['valor'];
+                                          ?>  
+                                        <tr style="font-size:11px">
+                                          <td><?php echo ($d1['descripcion']) ?></td>
+                                          <td style="text-align: right;">$<?php echo (number_format($d2['valor'])) ?></td>
+                                        </tr>
+                                            <?php
+                                                              }// Fin detalle de la cotización
 
-                          <tr style="background-image:url(img/Pie_Pagina.png); background-repeat:no-repeat; background-position:right; background-size:cover">
-                            <td colspan="2">&nbsp;</td>
-                          </tr>
-                          <tr class="azul" style="font-weight:bold">
-                            <td>SUBTOTAL</td>
-                            <td style="text-align: right;">$<?php echo (number_format($subtotal)) ?></td>
-                          </tr>
-                          <tr>
-                            <td>Retención en la fuente - 11%</td>
-                            <td style="text-align: right;">$<?php echo (number_format($retencion)) ?></td>
-                          </tr>
-                          <tr>
-                            <td>IVA - 19%</td>
-                            <td style="text-align: right;">$<?php echo (number_format($iva)) ?></td>
-                          </tr>
-                          <tr style="background-image:url(img/Pie_Pagina.png); background-repeat:no-repeat; background-position:right; background-size:cover">
-                            <td colspan="2">&nbsp;</td>
-                          </tr>
-                          <tr class="azul" style="font-weight:bold">
-                            <td>PRECIO TOTAL</td>
-                            <td style="text-align: right;">$<?php echo (number_format($total_apagar)) ?></td>
-                          </tr>
-                                <?php
-                                              
-                                  }
-                        
-                                ?>
-  <?php 
+                                                        // Realizamos cálculos (Subtota, retención y total a pagar).
+                                                      $subtotal=$sum; // sub total
+                                                      $retencion=($subtotal*11)/100; // retención
+                                                      $iva=($subtotal*19)/100; // IVA
+                                                      $total_apagar=$subtotal+$iva+$retencion; // total a pagar..
+                                                  ?> 
+
+                                        <tr style="background-image:url(img/Pie_Pagina.png); background-repeat:no-repeat; background-position:right; background-size:cover">
+                                          <td colspan="2">&nbsp;</td>
+                                        </tr>
+                                        <tr class="azul" style="font-weight:bold">
+                                          <td>SUBTOTAL</td>
+                                          <td style="text-align: right;">$<?php echo (number_format($subtotal)) ?></td>
+                                        </tr>
+                                        <tr>
+                                          <td>Retención en la fuente - 11%</td>
+                                          <td style="text-align: right;">$<?php echo (number_format($retencion)) ?></td>
+                                        </tr>
+                                        <tr>
+                                          <td>IVA - 19%</td>
+                                          <td style="text-align: right;">$<?php echo (number_format($iva)) ?></td>
+                                        </tr>
+                                        <tr style="background-image:url(img/Pie_Pagina.png); background-repeat:no-repeat; background-position:right; background-size:cover">
+                                          <td colspan="2">&nbsp;</td>
+                                        </tr>
+                                        <tr class="azul" style="font-weight:bold">
+                                          <td>PRECIO TOTAL</td>
+                                          <td style="text-align: right;">$<?php echo (number_format($total_apagar)) ?></td>
+                                        </tr>
+                                <?php                                              
+                                      }   
+        $j++;               
     } // Fin listamos los servicios cotizados (Detalle)
   ?>
-  <p>&nbsp;</p>
 </table>
 
                 <table width="333" height="98" border="0" style="background-image:url(img/Marco_Texto.png); background-repeat:no-repeat;background-size:cover">
@@ -730,9 +744,6 @@ if($rows==1){
                     </table></td>
                   </tr>
                 </table>
-
-                </nobreak>
-                
                 
        </page>
 </body>
