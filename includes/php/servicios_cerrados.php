@@ -35,7 +35,7 @@ $sql="select  distinct cliente.cod_cliente, cliente.nombre, cliente.telefono_1, 
 <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">CLIENTES CON SERVICIOS</h4> </div>
+                        <h4 class="page-title">CLIENTES CON SERVICIOS CERRADOS (EXCEL)</h4> </div>
                 </div>
 
  <div class="row">
