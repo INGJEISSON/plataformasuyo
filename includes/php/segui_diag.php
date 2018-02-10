@@ -509,7 +509,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
                 <div class="col-lg-12">
                   <div class="card">
                     <center>
-                   <?php if($_SESSION['tipo_usuario']==23 || $_SESSION['tipo_usuario']==1 ){   ?> <input type="button" name="guardar" id='grabar_proc' class='btn btn-warning' value='Guardar'><?php } ?></center>
+                   <?php if($_SESSION['tipo_usuario']==23 || $_SESSION['tipo_usuario']==1 || $_SESSION['tipo_usuario']==21 ){   ?> <input type="button" name="guardar" id='grabar_proc' class='btn btn-warning' value='Guardar'><?php } ?></center>
                     <div class="card-body">
                       <p> 
     <div class="panel-group" id="accordion">
