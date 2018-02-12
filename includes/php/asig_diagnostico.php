@@ -121,7 +121,7 @@ include('../dependencia/conexion.php');
 
                                     $sql5="select fecha_filtro from enc_procesadas where id_fasfield='".$datos['id_fasfield']."' ";
                                     $query4=pg_query($conexion, $sql5);
-                                    $datos4=pg_fetch_assoc($sql5);
+                                    $datos4=pg_fetch_assoc($query4);
 
       ?>
 
@@ -130,7 +130,7 @@ include('../dependencia/conexion.php');
           <td><?php echo $datos['cod_cliente']; ?></td>
           <td><?php echo ($datos['cliente']); ?></td>       
           <td><?php echo ($datos['ciudad']); ?></td>
-          <td><?php echo ($datos4['fecha_filtro']); ?></td>
+          <td><?php echo $datos4['fecha_filtro']; ?></td>
           <td id='fecha_filtro<?php echo $i ?>'><?php if ($fecha_filtro=="") echo "(Sin asignar)"; else echo $fecha_filtro; ?></td>          
           <td><select name="select" id="cod_usu_resp<?php echo $i ?>">
           
