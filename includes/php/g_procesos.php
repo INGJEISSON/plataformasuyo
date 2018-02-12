@@ -1127,7 +1127,7 @@ if(isset($_SESSION['cod_usuario'])){
                             if($_POST['tipo_seguimiento']==8)
                                 $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, afectaciones.descripcion as estado, usuarios.nombre as usuario from seguimientos, usuarios, afectaciones where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=afectaciones.tipo_afect and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
 
-                             else if($_POST['tipo_seguimiento']==14 || $_POST['tipo_seguimiento']==15){
+                             else if($_POST['tipo_seguimiento']==14){
 
                                 if($_POST['tipo_seguimiento']==14){
 

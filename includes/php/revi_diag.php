@@ -18,8 +18,12 @@ $_GET['id_elab_diag']=base64_decode($_GET['id_elab_diag']);
     $sql1="select * from afectaciones";
   if($_GET['tipo_seguimiento']==9)
     $sql1="select activi_etapa_diag.id_activi_diag as tipo_afect, activi_etapa_diag.descripcion from activi_etapa_diag where id_activi_diag=11 or id_activi_diag=50";
-   if($_GET['tipo_seguimiento']==14 or $_GET['tipo_seguimiento']==15)
+   if($_GET['tipo_seguimiento']==14)
     $sql1="select servicios.nom_servicio as descripcion, servicios.cod_servicio as tipo_afect from servicios where fecha_2='2018-12-01' and tipo=1 order by nom_servicio";
+
+     if($_GET['tipo_seguimiento']==15)
+    $sql1="select servicios.nom_servicio as descripcion, servicios.cod_servicio as tipo_afect from servicios where fecha_2='2018-12-01' and tipo=2 order by nom_servicio";
+
 
 
 
@@ -59,7 +63,8 @@ $query3=pg_query($conexion, $sql1);
                            <tr>
                              <td height="46"><select name="select" id="cod_estado" class="form-control">
                                <option value="0" selected="selected">Sin revisar</option>
-                               <option value="0" selected="selected">Ninguno</option>
+                               <option value="86">Ninguno</option>
+                               <option value="87">No viable</option>
                               <?php while($datos2=pg_fetch_assoc($query3)){ ?>
                                
                                <option value="<?= $datos2['tipo_afect'] ?>"> <?php echo ($datos2['descripcion'])?></option>

@@ -972,14 +972,14 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse12">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse121">
         Servicios recomendados </a>
         </h4>
       </div>
-      <div id="collapse12" class="panel-collapse collapse">
+      <div id="collapse121" class="panel-collapse collapse">
         <div class="panel-body">
           <div id='history_serv_recom' align="center"> </div>
-    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=14" class='edicion'>Agregar/Editar Servicios</a></p></div>
+    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=15" class='edicion'>Agregar/Editar Servicios</a></p></div>
 
         </div>
       </div>
@@ -1015,6 +1015,22 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </div>
     </div>
 
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1212">
+        Finalizar (Concepto) </a>
+        </h4>
+      </div>
+      <div id="collapse1212" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div id='history_serv_recom' align="center"> </div>
+    <p>   <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=13&ficha=<?php echo base64_encode('Finalizar concepto') ?>" class='edicion'>Registrar/Editar Observaciones</a>
+</p></div>
+
+        </div>
+      </div>
+
       <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -1029,6 +1045,8 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
         </div>
       </div>
     </div>
+
+     
 
   <div class="panel panel-primary">
     <div class="panel-heading">

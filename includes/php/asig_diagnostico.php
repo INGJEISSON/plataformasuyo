@@ -231,7 +231,7 @@ $(document).ready(function () {
     //paging: false
       dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf'
+            'copy', 'csv', 'excel', 'printf'
         ]
 } );
  

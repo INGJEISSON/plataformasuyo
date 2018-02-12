@@ -203,6 +203,7 @@ if($rows==1){
   </tr>
 </table>
 <br><br><br>
+<br>
 <table width="200" border="0" cellpadding="0" cellspacing="0">
   <tr>
     <td><img src="img/firma_mateo.png" width="149" height="88" /></td>

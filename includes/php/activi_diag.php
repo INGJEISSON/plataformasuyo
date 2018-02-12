@@ -138,6 +138,45 @@ if($_GET['tipo']==11 ){ // Listado de variables de análisis titularidad
 
 }
 
+if($_GET['tipo']==12){ // Listado para afectaciones.. (Técnico)
+
+}
+if($_GET['tipo']==13){ // Registro de FInalización de concepto.
+
+   $etapa=8; 
+       $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and id_activi_diag between 143 and 144 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+
+}
+
+if($_GET['tipo']==14){ // REgistro de Finalización de cotización
+
+   $etapa=10; 
+       $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 145 and 142 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+
+}
+if($_GET['tipo']==15){ // Registro de  control de calidad (Equipo)
+
+   $etapa=9; 
+       $sql3="select id_activi_diag as cod_activi_etapa, descripcion  from activi_etapa_diag where cod_etapa='".$etapa."' and cod_equipo='".$_GET['cod_equipo']."'  and id_activi_diag between 147 and 149 order by id_activi_diag ";
+                   $query3=pg_query($conexion, $sql3); 
+                              
+                   $sql4="select * from etapa_activ where cod_etapa='".$etapa."' ";
+                  $query4=pg_query($conexion, $sql4);
+                  $datos4=pg_fetch_assoc($query4);   
+   
+}
+
+
 
 
 /*
