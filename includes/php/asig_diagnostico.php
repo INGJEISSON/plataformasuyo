@@ -4,7 +4,7 @@ include('../dependencia/conexion.php');
                     $parametro="";     
   //if($_SESSION['tipo_usuario']!=6)
 
- $sql="select  distinct cliente.cod_cliente, cliente.nombre as cliente, cliente.telefono_1, cliente.ciudad, cliente.barrio, tipo_cliente.descripcion as tipo_cliente, diagno_client.id_elab_diag, diagno_client.cod_usu_legal, diagno_client.cod_usu_tecnico from cliente, diagno_client, tipo_cliente where $parametro cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=diagno_client.cod_cliente and diagno_client.cod_estado=23";
+ $sql="select  distinct cliente.cod_cliente, diagno_client.id_fasfield, cliente.nombre as cliente, cliente.telefono_1, cliente.ciudad, cliente.barrio, tipo_cliente.descripcion as tipo_cliente, diagno_client.id_elab_diag, diagno_client.cod_usu_legal, diagno_client.cod_usu_tecnico from cliente, diagno_client, tipo_cliente where $parametro cliente.tipo_cliente=tipo_cliente.tipo_cliente and cliente.cod_cliente=diagno_client.cod_cliente and diagno_client.cod_estado=23";
           $query=pg_query($conexion, $sql);
 
           $rows=pg_num_rows($query);
@@ -64,7 +64,8 @@ include('../dependencia/conexion.php');
           <th width="34">#</th>
           <th width="110">Identificaci√≥n</th>
           <th width="147">Cliente</th>        
-           <th width="300">Ciudad</th>       
+           <th width="300">Ciudad</th>  
+          <th width="137">Recepcion</th>     
           <th width="137">Asignaci&oacute;n</th>
           <th width="175">Asignado/Reasignar (Legal)</th>
           <th width="175">Asignado/Reasignar (TÈcnico)</th>
@@ -117,6 +118,11 @@ include('../dependencia/conexion.php');
                                         $fecha_filtro= $datos4['fecha_filtro'];                                   
                                       }else
                                       $fecha_filtro="";
+
+                                    $sql5="select fecha_filtro from enc_procesadas where id_fasfield='".$datos['id_fasfield']."' ";
+                                    $query4=pg_query($conexion, $sql5);
+                                    $datos4=pg_fetch_assoc($sql5);
+
       ?>
 
         <tr>
@@ -124,6 +130,7 @@ include('../dependencia/conexion.php');
           <td><?php echo $datos['cod_cliente']; ?></td>
           <td><?php echo ($datos['cliente']); ?></td>       
           <td><?php echo ($datos['ciudad']); ?></td>
+          <td><?php echo ($datos4['fecha_filtro']); ?></td>
           <td id='fecha_filtro<?php echo $i ?>'><?php if ($fecha_filtro=="") echo "(Sin asignar)"; else echo $fecha_filtro; ?></td>          
           <td><select name="select" id="cod_usu_resp<?php echo $i ?>">
           
