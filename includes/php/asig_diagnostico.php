@@ -23,10 +23,6 @@ include('../dependencia/conexion.php');
 ?>
 
 
-
-
-
-
 <link rel="stylesheet" href="js/colorbox-master/example1/colorbox.css" />
 <script src="js/colorbox-master/jquery.colorbox-min.js"></script>
 

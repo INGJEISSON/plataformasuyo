@@ -827,12 +827,12 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </tr>
       <tr>
         <td>(*)Uso de suelo</td>
-        <td><input type="text" name="textfield4" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> class="form-control" id="uso_suelo" value="<?php echo $d['uso_suelo'] ?>">></td>
+        <td><input type="text" name="textfield4" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> class="form-control" id="uso_suelo" value="<?php echo $d['uso_suelo'] ?>"></td>
       </tr>
-      <tr>
+      <!--<tr>
         <td>(*)Foto o imagen</td>
         <td>Ver/Visualizar</td>
-      </tr>
+      </tr>-->
       </table>
 </div>
     </div>
@@ -848,7 +848,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div id="collapse6" class="panel-collapse collapse">
         <div class="panel-body">
             <div id='history_afect' align="center"> </div>
-    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=8" class='edicion'><?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1){ ?> Agregar/Editar Afectaciones <?php } ?></a></p></div>
+    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=8" class='edicion'><?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1  or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?> Agregar/Editar Afectaciones <?php } ?></a></p></div>
        
 
        </div>

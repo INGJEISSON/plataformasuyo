@@ -1755,6 +1755,18 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                   elseif($_POST['tipo']==11 ){ // Listado de variables de  revisión de mapas colaborativos
                  $parametro='140 and 142'; 
                   }
+
+                  elseif($_POST['tipo']==13 ){ // Listado de variables de análisis titularidad
+                 $parametro='143 and 144'; 
+                  }   
+
+                    elseif($_POST['tipo']==14 ){ // Listado de variables de análisis titularidad
+                 $parametro='145 and 142'; 
+                  }   
+
+                    elseif($_POST['tipo']==15 ){ // Listado de variables de análisis titularidad
+                 $parametro='147 and 149'; 
+                  }      
               
                   
                     $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa_diag.descripcion as actividad, activ_diag.id_activi_diag from usuarios, etapa_activ, activ_diag, activi_etapa_diag where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa_diag.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa_diag.id_activi_diag and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' and activi_etapa_diag.id_activi_diag between $parametro order by activ_diag.id_activi_diag desc ";
@@ -1833,6 +1845,13 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                  $parametro='137 and 139'; 
                   }
                   elseif($_POST['tipo']==11 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='140 and 142'; 
+                  }
+
+                  elseif($_POST['tipo']==12 ){ // Listado de variables de  revisión de mapas colaborativos
+                 $parametro='140 and 142'; 
+                  }
+                  elseif($_POST['tipo']==13 ){ // Listado de variables de  revisión de mapas colaborativos
                  $parametro='140 and 142'; 
                   }
               
@@ -2353,8 +2372,19 @@ $insert5="insert into usuarios (email, nombre, apellidos, tipo_usuario, cod_esta
                   elseif($_POST['tipo']==10 ){ // Listado de variables de análisis titularidad
                  $parametro='137 and 139'; 
                   }  
-                  elseif($_POST['tipo']==11 ){ // Listado de variables de análisis titularidad
+                  elseif($_POST['tipo']==12 ){ // Listado de variables de análisis titularidad
                  $parametro='140 and 142'; 
+                  }   
+                    elseif($_POST['tipo']==13 ){ // Listado de variables de análisis titularidad
+                 $parametro='143 and 144'; 
+                  }   
+
+                    elseif($_POST['tipo']==14 ){ // Listado de variables de análisis titularidad
+                 $parametro='145 and 142'; 
+                  }   
+
+                    elseif($_POST['tipo']==15 ){ // Listado de variables de análisis titularidad
+                 $parametro='147 and 149'; 
                   }      
                      
                   $sql2="select usuarios.nombre as usuario, activ_diag.observacion, activ_diag.fecha_actividad, activ_diag.fecha_registro, etapa_activ.descripcion as etapa, activi_etapa_diag.descripcion as actividad, activ_diag.id_activi_diag, activ_diag.cod_activi_etapa from usuarios, etapa_activ, activ_diag, activi_etapa_diag where usuarios.cod_usuario=activ_diag.cod_usu_respon and etapa_activ.cod_etapa=activi_etapa_diag.cod_etapa and activ_diag.cod_activi_etapa=activi_etapa_diag.id_activi_diag and activ_diag.id_elab_diag='".$_POST['id_elab_diag']."' and activi_etapa_diag.id_activi_diag between $parametro order by activ_diag.id_activi_diag desc ";

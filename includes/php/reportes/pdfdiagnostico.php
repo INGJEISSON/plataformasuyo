@@ -292,7 +292,7 @@ if($rows==1){
                   <p class="turquesa" style="font-size:11px; font-weight:bold">DESCRIPCIÓN DEL PREDIO Y DE LA CONSTRUCCIÓN</p>
                   <table width="200" border="0">
                     <tr>
-                      <td><p class="gris_texto" style="font-size:11px;">Dsafdadad</p>
+                      <td><p class="gris_texto" style="font-size:11px;"><?php echo $situa_actual ?></p>
                   </td>
                     </tr>
                   </table>
