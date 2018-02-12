@@ -796,7 +796,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div id="collapse43321" class="panel-collapse collapse">
         <div class="panel-body">
            <div id='list_revi_docu11'></div>
-          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=11&ficha=<?php echo base64_encode('Otras situaciones') ?>" class='edicion'>Registrar/Editar</a>  <?php } ?>
+          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=11&ficha=<?php echo base64_encode('Otras situaciones') ?>" class='edicion'>Registrar/Editar</a>  <?php } ?>
 
        </div>
       </div>
