@@ -316,22 +316,20 @@ if($rows==1){
                <br>
   <br><br><br><br><br><br>
                       <p class="turquesa" style="font-size:11px; font-weight:bold"><span class="turquesa" style="font-size:11px; font-weight:bold">Análisis del cumplimiento del plan de ordanimiento territorial con respecto a las características físicas de la propiedad:</span></p>
-                      <table width="782" height="442" border="0" cellpadding="0" cellspacing="0" class="tabla_tecnico">
-                      <tr>
-                        <td height="52"><table width="782" height="486" border="0" cellpadding="0" cellspacing="0" class="tabla_tecnico">
+                    <table width="577" height="440" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla_tecnico">
                           <tr>
-                            <td height="32" colspan="3">ALTURA: Cantidad de pisos construidos</td>
-                            <td width="207" style="text-align:center">TIPOLOGIA: Cantidad de viviendas por construcción<br></td>
-                            <td colspan="4" rowspan="2">&nbsp;</td>
+                            <td height="32" colspan="4">ALTURA: Cantidad de pisos construidos</td>
+                            <td width="157" style="text-align:center">TIPOLOGIA: Cantidad de viviendas por construcción<br></td>
+                            <td colspan="5" rowspan="2">&nbsp;</td>
                           </tr>
                           <tr>
-                            <td height="18" colspan="3"><span style="text-align:center"><?php echo $alt_cant_pisos[0]." | ".$alt_cant_pisos[1]." | ".$alt_cant_pisos[2] ?></span></td>
+                            <td height="18" colspan="4"><span style="text-align:center"><?php echo $alt_cant_pisos[0]." | ".$alt_cant_pisos[1]." | ".$alt_cant_pisos[2] ?></span></td>
                             <td style="text-align:center"><?php echo $tipol_cant_constr[0]." | ".$tipol_cant_constr[1]." | ".$tipol_cant_constr[2] ?></td>
                           </tr>
                           <tr>
-                            <td colspan="3">&nbsp;</td>
+                            <td colspan="4">&nbsp;</td>
                             <td rowspan="4">&nbsp;</td>
-                            <td width="29" rowspan="4"><br>
+                            <td width="56" rowspan="4"><br>
                               <br>
                               <br>
                               <br>
@@ -343,70 +341,71 @@ if($rows==1){
                               <br>
                               <br>
                               <br></td>
-                            <td width="209">Distancia entre el lado izquierdo
+                            <td width="101">&nbsp;</td>
+                            <td width="101">Distancia entre el lado izquierdo
                             del lote y la construcción</td>
                             <td width="3" rowspan="4">&nbsp;</td>
-                            <td width="3" rowspan="4">&nbsp;</td>
+                            <td width="9" rowspan="4">&nbsp;</td>
                           </tr>
                           <tr>
-                            <td height="62"><p>Distancia entre el lado
+                            <td width="72" height="62"><p>Distancia entre el lado
                               derecho del lote
                               y la construcción</p></td>
+                            <td width="123">&nbsp;</td>
                             <td height="62">&nbsp;</td>
                             <td rowspan="2">&nbsp;</td>
-                            <td width="209"><?php echo $dist_lot_izq[0]." | ".$dist_lot_izq[1]." | ".$dist_lot_izq[2] ?></td>
+                            <td width="202" colspan="2"><?php echo $dist_lot_izq[0]." | ".$dist_lot_izq[1]." | ".$dist_lot_izq[2] ?></td>
                           </tr>
                           <tr>
                             <td height="18"><span style="text-align:center"><?php echo $dist_lot_der[0]." | ".$dist_lot_der[1]." | ".$dist_lot_der[2] ?></span></td>
                             <td height="18">&nbsp;</td>
-                            <td width="209">&nbsp;</td>
+                            <td height="18">&nbsp;</td>
+                            <td width="202" colspan="2">&nbsp;</td>
                           </tr>
                           <tr>
-                            <td height="48" colspan="3">&nbsp;</td>
-                            <td width="209">&nbsp;</td>
+                            <td height="48" colspan="4">&nbsp;</td>
+                            <td width="202" colspan="2">&nbsp;</td>
                           </tr>
                           <tr>
-                            <td height="49" colspan="2"><p>&nbsp;</p>
+                            <td height="49" colspan="3"><p>&nbsp;</p>
                               <p>&nbsp;</p></td>
-                            <td width="71">&nbsp;</td>
+                            <td width="3">&nbsp;</td>
                             <td rowspan="3">&nbsp;</td>
-                            <td height="81" colspan="4" rowspan="2">&nbsp;</td>
+                            <td height="81" colspan="5" rowspan="2">&nbsp;</td>
                           </tr>
                           <tr>
-                            <td height="66">Dimensión frente de la
+                            <td height="66" colspan="2">Dimensión frente de la
                                 construcción</td>
                             <td height="66">&nbsp;</td>
                             <td height="66">&nbsp;</td>
                           </tr>
                           <tr>
-                            <td height="30"><span style="text-align:center"><?php echo $dim_frent_const[0]." | ".$dim_frent_const[1]." | ".$dim_frent_const[2] ?></span></td>
+                            <td height="30" colspan="2"><span style="text-align:center"><?php echo $dim_frent_const[0]." | ".$dim_frent_const[1]." | ".$dim_frent_const[2] ?></span></td>
                             <td height="30">&nbsp;</td>
                             <td height="30">&nbsp;</td>
-                            <td height="30" colspan="4">Distancia entre el lado posterior del lote y la construcción</td>
+                            <td height="30" colspan="5">Distancia entre el lado posterior del lote y la construcción</td>
                           </tr>
                           <tr>
-                            <td height="45" colspan="2">&nbsp;</td>
+                            <td height="45" colspan="3">&nbsp;</td>
                             <td height="45">&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td colspan="4"><span style="text-align:center"><?php echo $dist_lad_lot[0]." | ".$dist_lad_lot[1]." | ".$dist_lad_lot[2] ?></span></td>
+                            <td colspan="5"><span style="text-align:center"><?php echo $dist_lad_lot[0]." | ".$dist_lad_lot[1]." | ".$dist_lad_lot[2] ?></span></td>
                           </tr>
                           <tr>
-                            <td height="30"><span style="text-align:center">Dimensión frente del lote</span></td>
+                            <td height="30" colspan="2"><span style="text-align:center">Dimensión frente del lote</span></td>
                             <td>&nbsp;</td>
                             <td height="30">&nbsp;</td>
                             <td>Área del lote según las escritura</td>
-                            <td colspan="4">&nbsp;</td>
+                            <td colspan="5">&nbsp;</td>
                           </tr>
                           <tr>
-                            <td width="213" height="18"><span style="text-align:center"><?php echo $dim_frent_lote[0]." | ".$dim_frent_lote[1]." | ".$dim_frent_lote[2] ?></span></td>
-                            <td width="47">&nbsp;</td>
+                            <td height="18" colspan="2"><span style="text-align:center"><?php echo $dim_frent_lote[0]." | ".$dim_frent_lote[1]." | ".$dim_frent_lote[2] ?></span></td>
+                            <td width="37">&nbsp;</td>
                             <td height="18">&nbsp;</td>
                             <td><span style="text-align:center"><?php echo $area_lote[0]." | ".$area_lote[1]." | ".$area_lote[2] ?></span></td>
-                            <td colspan="4">&nbsp;</td>
+                            <td colspan="5">&nbsp;</td>
                           </tr>
-                          </table>   </td>
-                      </tr>
-                      </table>
+                        </table>
                       <p>&nbsp;</p>
                       <table width="746" border="0" class="gris_texto" style="font-weight:bold">
                         <tr>
@@ -418,7 +417,7 @@ if($rows==1){
                       </table>
                       <table width="735" height="96" border="0" class="tabla_tecnico2">
                         <tr>
-                          <td height="92"><p>sdsdsdmnmnmnmnm</p></td>
+                          <td height="92"><p>&nbsp;</p></td>
                         </tr>
                       </table>
 
@@ -427,27 +426,28 @@ if($rows==1){
          <page pageset="old"> 
             <br>
   <br><br><br><br><br><br>
-
-                  <p><span class="turquesa" style="font-size:11px; font-weight:bold">TITULARIDAD DEL PREDIO</span></p>
-                  <table width="200" border="0" class="gris_texto" style="text-align: justify;">
+			<div style="text-align:center">
+                  <p style="text-align:left"><span class="turquesa" style="font-size:11px; font-weight:bold">TITULARIDAD DEL PREDIO</span></p>
+                  <table width="200" border="0" align="center" class="gris_texto" style="text-align: justify;">
                     <tr>
                        <td><?php echo $titula_predio ?></td>
                       
                     </tr>
                   </table>
-                  <p><span class="turquesa" style="font-size:11px; font-weight:bold">FORMA COMO ADQUIRIO EL PREDIO POR EL USUARIO</span></p>
-                  <table width="200" border="0" class="gris_texto" style="text-align: justify;">
+                  <p style="text-align:left"><span class="turquesa" style="font-size:11px; font-weight:bold">FORMA COMO ADQUIRIO EL PREDIO POR EL USUARIO</span></p>
+                  <table width="200" border="0" align="center" class="gris_texto" style="text-align: justify;">
                     <tr>
                       <td><?php echo $form_predio ?></td>
                     </tr>
                   </table>
-                  <p><span class="turquesa" style="font-size:11px; font-weight:bold">OTRAS SITUACIONES RELACIONADAS CON EL PREDIO Y LA CONSTRUCCION</span></p>
-                  <table width="200" border="0" class="gris_texto">
+                  <p style="text-align:left"><span class="turquesa" style="font-size:11px; font-weight:bold">OTRAS SITUACIONES RELACIONADAS CON EL PREDIO Y LA CONSTRUCCION</span></p>
+                  <table width="200" border="0" align="center" class="gris_texto" style="text-align: justify;">
                     <tr>
                     <td><?php echo $form_predio ?></td>
                    
                     </tr>
                   </table>
+           </div>
         </page>
 
         <page pageset="old"> 
@@ -459,7 +459,7 @@ if($rows==1){
                 </tr>
               </table>
          
-<p>Teniendo en cuenta la situación actual y lo que el señor desea, le recomendamos los siguientes servicios</p>
+<p>Teniendo en cuenta la situación actual y lo que el señor desea, le ofrecemos los siguientes servicios</p>
 
       </page>
 
@@ -601,8 +601,8 @@ if($rows==1){
                       <td>A LA SIGUIENTE INFORMACIÓN</td>
                     </tr>
                   </table>
-                  <p><img src="img/Documento-Diagnostico_03.png" width="358" height="218" /></p>
-                  <table width="364" border="0" class="azul">
+                  <p style="text-align:center"><img src="img/Documento-Diagnostico_03.png" width="633" height="306" /></p>
+                  <table width="364" border="0" align="center" class="azul">
                     <tr>
                       <td style="font-weight:bold">EN ESTE DIAGNÓSTICO</td>
                     </tr>
@@ -610,7 +610,7 @@ if($rows==1){
                       <td>PARTICIPARON</td>
                     </tr>
                   </table>
-                  <table width="200" border="0">
+                  <table width="200" border="0" align="center">
                     <tr class="azul" style="font-weight:bold">
                       <td colspan="2">ELABORÓ</td>
                       <td colspan="2">APROBÓ</td>
@@ -734,13 +734,13 @@ if($rows==1){
                 <table width="333" height="98" border="0" style="background-image:url(img/Marco_Texto.png); background-repeat:no-repeat;background-size:cover">
                   <tr>
                     <td width="18" height="86"></td>
-                    <td width="305"><table width="682" height="91" border="0">
-                      <tr>
-                        <td width="10" height="87" class="gris_texto"><p class="azul" style="font-weight:bold">&nbsp;</p></td>
-                        <td width="378" class="gris_texto"><p class="azul" style="font-weight:bold">Notas Aclaratorias: </p>
-                          La presente oferta tiene una validez de 30 días.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.
+                    <td width="305"><table width="443" height="91" border="0">
+                      <tr >
+                        <td width="10" height="87" class="gris_texto"></td>
+                        <td width="181" class="gris_texto" style="text-align:left"><p class="azul" style="font-weight:bold">Notas Aclaratorias: </p>
+                         <p> La presente oferta tiene una validez de 30 días.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.</p>
                           </td>
-                        <td width="280"  class="gris_texto">La presente oferta tiene una validez de 30 días.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.</td>
+                        <td width="238"  class="gris_texto" style="text-align:left">La presente oferta tiene una validez de 30 días.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.</td>
                       </tr>
                     </table></td>
                   </tr>
