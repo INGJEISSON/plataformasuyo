@@ -100,9 +100,9 @@ if($rows==1){
               ALGO ALGO
           </page_footer>
 <style type="text/css">
-/*.fuente_letra {
-  font-family: "Arial";
-}*/
+.fuente_letra {
+  font-family: "Trebuchet MS";
+}
 
 .gris_texto{
     color: #5b5b5f;
@@ -148,7 +148,7 @@ if($rows==1){
 </style>
 
 
-<body>
+<body class="fuente_letra">
    <page_header style='text-align: right;'> 
                <img src="img/Logo.png" width="124" height="49" />
           

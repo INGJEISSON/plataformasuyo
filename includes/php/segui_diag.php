@@ -634,7 +634,8 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
 
         <div id='list_revi_docu'></div>
 
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=1&ficha=<?php echo base64_encode('Revisión de los documentos del cliente y de la encuesta') ?>" class='edicion'>Registrar/Editar</a>
+          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=1&ficha=<?php echo base64_encode('Revisión de los documentos del cliente y de la encuesta') ?>" class='edicion'>Registrar/Editar</a> <?php } ?>
+
           </div>
        </div>
   </div>
@@ -650,7 +651,8 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
         <div class="panel-body">
            <div id='list_revi_docu2'></div>
 
-        <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=2&ficha=<?php echo base64_encode('Identificar cadena de tradiciones') ?>" class='edicion'>Registrar/Editar</a>
+      <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?>  <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=2&ficha=<?php echo base64_encode('Identificar cadena de tradiciones') ?>" class='edicion'>Registrar/Editar</a> <?php } ?>
+
        </div>
       </div>
   </div>
@@ -666,7 +668,8 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
         <div class="panel-body">
 
            <div id='list_revi_docu3'></div>
-       <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=3&ficha=<?php echo base64_encode('Revisión páginas de mapas') ?>" class='edicion'>Registrar/Editar</a>
+      <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=3&ficha=<?php echo base64_encode('Revisión páginas de mapas') ?>" class='edicion'>Registrar/Editar</a> <?php } ?>
+
        </div>
       </div>
   </div>
@@ -681,7 +684,8 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div id="collapse43" class="panel-collapse collapse">
         <div class="panel-body">
            <div id='list_revi_docu4'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=4&ficha=<?php echo base64_encode('Revisión páginas impuestos') ?>" class='edicion'>Registrar/Editar</a>
+          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=4&ficha=<?php echo base64_encode('Revisión páginas impuestos') ?>" class='edicion'>Registrar/Editar</a> <?php } ?>
+
 
        </div>
       </div>
@@ -698,7 +702,8 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div id="collapse431" class="panel-collapse collapse">
         <div class="panel-body">
            <div id='list_revi_docu5'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=5&ficha=<?php echo base64_encode('Revisión bases de datos') ?>" class='edicion'>Registrar/Editar</a>
+          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=5&ficha=<?php echo base64_encode('Revisión bases de datos') ?>" class='edicion'>Registrar/Editar</a> <?php } ?>
+
 
        </div>
       </div>
@@ -714,7 +719,8 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div id="collapse432" class="panel-collapse collapse">
         <div class="panel-body">
            <div id='list_revi_docu6'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=6&ficha=<?php echo base64_encode('Revisión mapas colaboartivos') ?>" class='edicion'>Registrar/Editar</a>
+         <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?>  <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=6&ficha=<?php echo base64_encode('Revisión mapas colaboartivos') ?>" class='edicion'>Registrar/Editar</a> <?php } ?>
+
 
        </div>
       </div>
@@ -731,7 +737,8 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div id="collapse4331" class="panel-collapse collapse">
         <div class="panel-body">
            <div id='list_revi_docu7'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=7&ficha=<?php echo base64_encode('Analisis de FMI') ?>" class='edicion'>Registrar/Editar</a>
+          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=7&ficha=<?php echo base64_encode('Analisis de FMI') ?>" class='edicion'>Registrar/Editar</a> <?php } ?>
+
 
        </div>
       </div>
@@ -747,7 +754,8 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div id="collapse4332" class="panel-collapse collapse">
         <div class="panel-body">
            <div id='list_revi_docu8'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=8&ficha=<?php echo base64_encode('Analisis de la titularidad') ?>" class='edicion'>Registrar/Editar</a>
+         <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?>  <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=8&ficha=<?php echo base64_encode('Analisis de la titularidad') ?>" class='edicion'>Registrar/Editar</a> <?php } ?>
+
 
        </div>
       </div>
@@ -763,7 +771,8 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div id="collapse4321" class="panel-collapse collapse">
         <div class="panel-body">
            <div id='list_revi_docu9'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=9&ficha=<?php echo base64_encode('Analisis de la situación actual del impuesto predial') ?>" class='edicion'>Registrar/Editar</a>
+          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=9&ficha=<?php echo base64_encode('Analisis de la situación actual del impuesto predial') ?>" class='edicion'>Registrar/Editar</a>  <?php } ?>
+
 
        </div>
       </div>
@@ -779,7 +788,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div id="collapse4322" class="panel-collapse collapse">
         <div class="panel-body">
            <div id='list_revi_docu10'></div>
-           <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=10&ficha=<?php echo base64_encode('Análisis situación actual servicios públicos ') ?>" class='edicion'>Registrar/Editar</a>
+          <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=10&ficha=<?php echo base64_encode('Análisis situación actual servicios públicos ') ?>" class='edicion'>Registrar/Editar</a><?php  } ?>
 
        </div>
       </div>
