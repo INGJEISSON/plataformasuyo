@@ -124,7 +124,7 @@ include('../dependencia/conexion.php');
           <td><?php echo $datos['cod_cliente']; ?></td>
           <td><?php echo ($datos['cliente']); ?></td>       
           <td><?php echo ($datos['ciudad']); ?></td>
-          <td id='fecha_filtro<?php echo $i ?>'><?php if ($fecha_filtro=="") echo "(Sin asignar"); else echo $fecha_filtro; ?></td>          
+          <td id='fecha_filtro<?php echo $i ?>'><?php if ($fecha_filtro=="") echo "(Sin asignar)"; else echo $fecha_filtro; ?></td>          
           <td><select name="select" id="cod_usu_resp<?php echo $i ?>">
           
             <option value="0">Sin asignar</option>
