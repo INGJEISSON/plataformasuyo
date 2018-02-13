@@ -69,6 +69,11 @@ if(isset($_GET['id_elab_diag'])){
                                    $datos1=pg_fetch_assoc($query1);
 
                                      $otrs_situa=$datos1['observacion'];
+									 
+									 
+								// Buscamos las amenanzas registradas
+								
+								
 
                 }
 
@@ -101,15 +106,16 @@ if($rows==1){
           </page_footer>
 <style type="text/css">
 .fuente_letra {
-  font-family: "Trebuchet MS";
+ /* font-family: "TrebuchetMS";*/
 }
 
 .gris_texto{
     color: #5b5b5f;
-    font-size:11px
+    font-size:14px
 }
 .turquesa{
-  color: #00BEBE
+  color: #00BEBE;
+  font-size:12px
 }
 .verde{
   color: #96C832;
@@ -154,15 +160,20 @@ if($rows==1){
           
 </page_header> 
      <br>
-  <br><br><br><br><br><br>
+  <br><br><br><br>
+  <table width="260" border="0" cellpadding="0" cellspacing="0" class="azul" >
+    <tr>
+      <td>12 de Febrero de 2017</td>
+    </tr>
+    <tr>
+      <td width="260"><span style="font-size:27px; font-weight: bold">DIAGNÓSTICO<br>
+      DE PROPIEDAD</span><span class="azul" style="font-size:"><img src="img/Linea_Titulo.png" width="260" height="12" /></span></td>
+    </tr>
+  </table>
 <table width="438" border="0">
   <tr>
-    <td width="323"><p class="azul">DIAGNÓSTICO DE PROPIEDAD<br><img src="img/Linea_Titulo.png" width="260" height="12" /></p></td>
+    <td width="323" class="turquesa"><p >Sr. <?php echo $datos2['nombre']; ?> </p></td>
     <td width="105">&nbsp;</td>
-  </tr>
-  <tr>
-    <td><p class="turquesa">Sr. <?php echo $datos2['nombre']; ?> </p></td>
-    <td>&nbsp;</td>
   </tr>
   <tr>
     <td><p class="gris_texto"><?php echo $datos['direccion'] ?></p></td>
@@ -177,26 +188,22 @@ if($rows==1){
     <td>&nbsp;</td>
   </tr>
 </table>
-<table width="603" border="0">
-  <tr>
-    <td width="12" height="162"><img src="img/Barra_Parrafo1.png" width="10" height="153" /></td>
-    <td width="330"><p class="gris_texto">Por medio de la presente nos permitimos en<br />
-      primera medida agradecer la confianza que<br />
-      ha depositado en Suyo y en todo el grupo de profesionales que hay detrás de esta empre-<br />
-        sa de impacto social. Respondiendo al servicio que adquirió con nosotros, hacemos 
-        entrega de su documento de diagnóstico de        propiedad en el cual resumimos el análisis        legal y técnico que hemos realizado de su        caso; así mismo señalamos la viabilidad y el        tipo de servicio que requiere, con todos los    costos asociados. Recuerde preguntar a su</p></td>
-    <td width="247"><p class="gris_texto">asesor de ventas por las diferentes opciones<br />
-      de financiación que brindamos a través de<br />
-      nuestros aliados.<br />
-      Finalmente, quisiera reiterarle que sabemos<br />
-      que su hogar es su bien más preciado, por<br />
-      esto no defraudaremos su voto de confianza.<br />
-      Esperamos que pueda tomar los servicios<br />
-      recomendados con nosotros, Suyo y todo su<br />
-      equipo humano estará esperándole para<br />
+<table width="670" border="0" >
+  <tr style="text-align:justify">
+    <td width="19" height="155"><img src="img/Barra_Parrafo1.png" width="10" height="153" /></td>
+    <td width="354"><p class="gris_texto">Por medio de la presente nos permitimos en
+      primera medida agradecer la confianza quen ha depositado en Suyo y en todo el grupo de profesionales que hay detrás de esta empre
+        sa de impacto social. Respondiendo al servicio que adquirió con nosotros, hacemos entrega de su documento de diagnóstico de propiedad en el cual resumimos el análisis  legal y técnico que hemos realizado de su caso; así mismo señalamos la viabilidad y el tipo de servicio que requiere, con todos los costos asociados. Recuerde preguntar a su</p></td>
+    <td width="283"><p class="gris_texto">asesor de ventas por las diferentes opciones de financiación que brindamos a través de nuestros aliados.Finalmente, quisiera reiterarle que sabemos
+      que su hogar es su bien más preciado, por
+      esto no defraudaremos su voto de confianza.
+      Esperamos que pueda tomar los servicios
+      recomendados con nosotros, Suyo y todo su
+      equipo humano estará esperándole para
     asesorarlo y guiarlo de forma personalizada.</p></td>
   </tr>
 </table>
+<p>&nbsp;</p>
 <table width="200" border="0">
   <tr>
     <td><img src="img/foto.png" width="684" height="202" /></td>
@@ -209,13 +216,13 @@ if($rows==1){
     <td><img src="img/firma_mateo.png" width="149" height="88" /></td>
   </tr>
   <tr>
-    <td>MATTHEW ALEXANDER</td>
+    <td><strong>MATTHEW ALEXANDER</strong></td>
   </tr>
-  <tr>
-    <td><p class="gris_texto">Gerente General</p></td>
+  <tr class="gris_texto">
+    <td>Gerente General></td>
   </tr>
-  <tr>
-    <td><p class="gris_texto">Suyo Colombia SAS</p></td>
+  <tr class="gris_texto">
+    <td>Suyo Colombia SAS</td>
   </tr>
 </table>
       <page pageset="old">
@@ -233,16 +240,16 @@ if($rows==1){
         <table width="280" border="0" cellpadding="0" cellspacing="0" class="azul" >
           <tr>
             <td width="35"><img src="img/Barra_Subtitulo.png" alt="" width="23" height="111" /></td>
-            <td width="245"><span style="font-size:40px">01</span><span style="font-size:24px; font-weight: bold"><br>
+            <td width="245"><span style="font-size:40px">01</span><span style="font-size:27px; font-weight: bold"><br>
               ESTADO ACTUAL<span style="font-size:17px;"><br>
                 DEL USUARIO Y EL PREDIO</span></span></td>
           </tr>
-        </table>
-        <table width="456" border="0">
+        </table><br>
+        <table width="691" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tr>
-                      <td><p class="azul_clarol">USUARIO</p></td>
-                      <td><p class="azul_clarol">IDENTIFICACIÓN</p></td>
-                      <td>&nbsp;</td>
+                      <td width="286"><p class="azul_clarol">USUARIO</p></td>
+                      <td width="252"><p class="azul_clarol">IDENTIFICACIÓN</p></td>
+                      <td width="139">&nbsp;</td>
                     </tr>
                     <tr>
                       <td><p class="gris_texto"><?php echo $datos2['nombre'] ?></p></td>
@@ -270,53 +277,58 @@ if($rows==1){
                       <td>&nbsp;</td>
                     </tr>
                   </table>
-                  <p class="azul" style="font-size:15px; font-weight:bold">NECESIDAD IDENTIFICADA</p>
-                  <table width="603" border="0">
+                  <table width="200" border="0" align="center">
                     <tr>
-                      <td width="12" height="162"><img src="img/Barra_Parrafo1.png" alt="" width="10" height="153" /></td>
-                      <td width="330" class="gris_texto" style="text-align: justify;"><?php echo $nec_ident ?></td>
-                      <!--<td width="247"><p class="gris_texto">asesor de ventas por las diferentes opciones<br />
-                        de financiación que brindamos a través de<br />
-                        nuestros aliados.<br />
-                        Finalmente, quisiera reiterarle que sabemos<br />
-                        que su hogar es su bien más preciado, por<br />
-                        esto no defraudaremos su voto de confianza.<br />
-                        Esperamos que pueda tomar los servicios<br />
-                        recomendados con nosotros, Suyo y todo su<br />
-                        equipo humano estará esperándole para<br />
-                        asesorarlo y guiarlo de forma personalizada.</p></td>-->
+                      <td><img src="img/foto_chada.png" width="683" height="249"></td>
                     </tr>
                   </table>
-                  <p style="font-style:italic; font-size:11px">A continuación presentamos el análisis de su caso y las posibilidades de servicios para darle respuesta a sus deseso y, en caso de no ser posible, las diferentes alternativas que le podemos brindar</p>
-                  <p class="azul" style="font-size:15px; font-weight:bold">SITUACIÓN ACTUAL</p>
-                  <p class="turquesa" style="font-size:11px; font-weight:bold">DESCRIPCIÓN DEL PREDIO Y DE LA CONSTRUCCIÓN</p>
-                  <table width="200" border="0">
-                    <tr>
-                      <td><p class="gris_texto" style="font-size:11px;"><?php echo $situa_actual ?></p>
-                  </td>
+                  <p>&nbsp;</p>
+                  <p class="azul" style="font-size:17px; font-weight:bold">NECESIDAD IDENTIFICADA</p>
+                  <table width="931" border="0">
+                    <tr style="text-align: justify;">
+                      <td width="11" height="162"><img src="img/Barra_Parrafo1.png" alt="" width="10" height="153" /></td>
+                      <td width="910" class="gris_texto"  style="width:auto" ><?php echo $nec_ident ?></td>                      
                     </tr>
                   </table>
-                  <table width="782" border="0">
-                    <tr>
-                      <td width="70"><span class="turquesa" style="font-size:11px; font-weight:bold"><img src="img/Barra_Foto.png" alt="" width="70" height="143" /></span></td>
-                      <td width="702">&nbsp;</td>
-                    </tr>
-                  </table>
+                  <p style="font-style:italic; font-size:14px; width:auto" >A continuación presentamos el análisis de su caso y las posibilidades de servicios para darle respuesta a sus deseso y, en caso de no ser posible, las diferentes alternativas que le podemos brindar</p>
+                 
 
 </page>
 
-<p class="turquesa" style="font-size:11px; font-weight:bold"><span class="turquesa" style="font-size:11px; font-weight:bold">Análisis del cumplimiento del plan de ordanimiento territorial con respecto a las características ambientales:</span></p>
-<table width="200" border="0">
-  <tr>
-    <td width="19">&nbsp;</td>
-    <td width="171"><p class="gris_texto" style="font-size:11px; font-weight:bold"><?php echo $ana_fis_amb ?></p></td>
-  </tr>
-</table>
             <page pageset="old"> 
                <br>
   <br><br><br><br><br><br>
-                      <p class="turquesa" style="font-size:11px; font-weight:bold"><span class="turquesa" style="font-size:11px; font-weight:bold">Análisis del cumplimiento del plan de ordanimiento territorial con respecto a las características físicas de la propiedad:</span></p>
-                    <table width="577" height="440" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla_tecnico">
+   
+                  <p class="azul" style="font-size:15px; font-weight:bold">SITUACIÓN ACTUAL</p>
+                  <p class="turquesa" style="font-size:11px; font-weight:bold">DESCRIPCIÓN DEL PREDIO Y DE LA CONSTRUCCIÓN</p>
+              <table width="200" border="0">
+                <tr style="text-align:justify">
+                      <td><p class="gris_texto" style="font-size:14px; width:auto;"><?php echo $situa_actual ?></p>
+                  </td>
+                    </tr>
+                  </table><br>
+              <table width="782" border="0">
+                <tr>
+                      <td width="70"><span class="turquesa" style="font-size:11px; font-weight:bold"><img src="img/Barra_Foto.png" alt="" width="70" height="143" /></span></td>
+                      <td width="702">&nbsp;</td>
+                </tr>
+              </table>
+<p class="turquesa" style="font-size:11px; font-weight:bold"><span class="turquesa" style="font-size:11px; font-weight:bold">Análisis del cumplimiento del plan de ordanimiento territorial con respecto a las características ambientales:</span></p>
+<table width="752" border="0">
+  <tr style="text-align:justify">
+    <td width="11" height="24"><img src="img/Vineta_Verde.png" width="11" height="22"></td>
+    <td width="731"><p class="gris_texto" style="font-size:14px; width:auto">No se encuentra en zona de amenaza y riesgo por inundación</p></td>
+  </tr>
+</table>
+                      
+
+</page>
+
+         <page pageset="old"> 
+            <br>
+  <br><br><br><br><br><br>
+  <p class="turquesa" style="font-size:11px; font-weight:bold"><span class="turquesa" style="font-size:11px; font-weight:bold">Análisis del cumplimiento del plan de ordanimiento territorial con respecto a las características físicas de la propiedad:</span></p>
+                      <table width="577" height="440" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla_tecnico">
                           <tr>
                             <td height="32" colspan="4">ALTURA: Cantidad de pisos construidos</td>
                             <td width="157" style="text-align:center">TIPOLOGIA: Cantidad de viviendas por construcción<br></td>
@@ -405,7 +417,7 @@ if($rows==1){
                             <td><span style="text-align:center"><?php echo $area_lote[0]." | ".$area_lote[1]." | ".$area_lote[2] ?></span></td>
                             <td colspan="5">&nbsp;</td>
                           </tr>
-                        </table>
+              </table>
                       <p>&nbsp;</p>
                       <table width="746" border="0" class="gris_texto" style="font-weight:bold">
                         <tr>
@@ -420,36 +432,36 @@ if($rows==1){
                           <td height="92"><p>&nbsp;</p></td>
                         </tr>
                       </table>
-
-                </page>
-
-         <page pageset="old"> 
-            <br>
+			
+           </page>
+				 <page pageset="old">
+                 
+                  <br>
   <br><br><br><br><br><br>
-			<div style="text-align:center">
-                  <p style="text-align:left"><span class="turquesa" style="font-size:11px; font-weight:bold">TITULARIDAD DEL PREDIO</span></p>
-                  <table width="200" border="0" align="center" class="gris_texto" style="text-align: justify;">
-                    <tr>
-                       <td><?php echo $titula_predio ?></td>
-                      
-                    </tr>
-                  </table>
-                  <p style="text-align:left"><span class="turquesa" style="font-size:11px; font-weight:bold">FORMA COMO ADQUIRIO EL PREDIO POR EL USUARIO</span></p>
-                  <table width="200" border="0" align="center" class="gris_texto" style="text-align: justify;">
-                    <tr>
-                      <td><?php echo $form_predio ?></td>
-                    </tr>
-                  </table>
-                  <p style="text-align:left"><span class="turquesa" style="font-size:11px; font-weight:bold">OTRAS SITUACIONES RELACIONADAS CON EL PREDIO Y LA CONSTRUCCION</span></p>
-                  <table width="200" border="0" align="center" class="gris_texto" style="text-align: justify;">
-                    <tr>
-                    <td><?php echo $form_predio ?></td>
-                   
-                    </tr>
-                  </table>
-           </div>
-        </page>
-
+                             <div style="text-align:center">
+                              <p style="text-align:left"><span class="turquesa" style="font-size:17px; font-weight:bold">TITULARIDAD DEL PREDIO</span></p>
+                              <table width="200" border="0" align="center" class="gris_texto" style="text-align: justify;">
+                                <tr style="text-align:justify; font-size:14px; width:auto">
+                                   <td><?php echo $titula_predio ?></td>
+                                  
+                                </tr>
+                              </table>
+                              <p style="text-align:left"><span class="turquesa" style="font-size:17px; font-weight:bold">FORMA COMO ADQUIRIO EL PREDIO POR EL USUARIO</span></p>
+                              <table width="200" border="0" align="center" class="gris_texto" style="text-align: justify;">
+                                <tr style="text-align:justify; font-size:14px; width:auto">
+                                  <td><?php echo $form_predio ?></td>
+                                </tr>
+                              </table>
+                              <p style="text-align:left"><span class="turquesa" style="font-size:17px; font-weight:bold">OTRAS SITUACIONES RELACIONADAS CON EL PREDIO Y LA CONSTRUCCION</span></p>
+                              <table width="200" border="0" align="center" class="gris_texto" style="text-align: justify;">
+                                <tr style="text-align:justify; font-size:14px; width:auto">
+                                <td><?php echo $form_predio ?></td>
+                               
+                                </tr>
+                              </table>
+                       </div>
+                 
+                 </page>
         <page pageset="old"> 
 
               <table width="280" border="0" cellpadding="0" cellspacing="0" class="azul" >
@@ -475,15 +487,15 @@ if($rows==1){
            </tr>
          </table>
          <p><span class="azul" style="font-size:15px; font-weight:bold">COTIZACIÓN</span></p>
-                <table width="603" border="0">
-                  <tr>
-                    <td width="12" height="162"><img src="img/Barra_Parrafo1.png" alt="" width="10" height="153" /></td>
-                    <td width="330"><p class="gris_texto">Suyo ofrece sus servicios en dos  modalidades, la primera en donde se  incluye sólo la asesoría, análisis y  acompañamiento legal y técnico, así como  la preparación de documentos  relacionados con el servicio final. Sin  embargo, en este caso es el cliente quien  se hace responsable tanto por realizar  personalmente los trámites relacionados,  como por hacer el pago de los costos  asociados, ante cada entidad  gubernamental correspondiente. En esta  opción el tiempo requerido para realizar  el servicio dependerá en buena parte del  cliente, dado que sería directamente el </p></td>
-                    <td width="247"><p class="gris_texto">responsable de realizar los trámites del  proceso.  La segunda modalidad que incluye toda la  asesoría, análisis y acompañamiento de la  opción 1, además del pago de todos los  trámites, costos gubernamentales y  judiciales, e impuestos del servicio (si  aplican). De igual forma, Suyo realizará  directamente todos los trámites  personalmente. En esta opción, sí podemos  estimar el tiempo requerido del servicio,  dado que la misma empresa realiza los  trámites.</p></td>
+                <table width="794" border="0">
+                  <tr style="text-align:justify">
+                    <td width="15" height="162"><img src="img/Barra_Parrafo1.png" alt="" width="10" height="153" /></td>
+                    <td width="405"><p class="gris_texto">Suyo ofrece sus servicios en dos  modalidades, la primera en donde se  incluye sólo la asesoría, análisis y  acompañamiento legal y técnico, así como  la preparación de documentos  relacionados con el servicio final. Sin  embargo, en este caso es el cliente quien  se hace responsable tanto por realizar  personalmente los trámites relacionados,  como por hacer el pago de los costos  asociados, ante cada entidad  gubernamental correspondiente. En esta  opción el tiempo requerido para realizar  el servicio dependerá en buena parte del  cliente, dado que sería directamente el </p></td>
+                    <td width="360"><p class="gris_texto">responsable de realizar los trámites del  proceso.  La segunda modalidad que incluye toda la  asesoría, análisis y acompañamiento de la  opción 1, además del pago de todos los  trámites, costos gubernamentales y  judiciales, e impuestos del servicio (si  aplican). De igual forma, Suyo realizará  directamente todos los trámites  personalmente. En esta opción, sí podemos  estimar el tiempo requerido del servicio,  dado que la misma empresa realiza los  trámites.</p></td>
                   </tr>
                 </table>
-                <p><span style="font-style:italic; font-size:11px">A continuación se resumen los costos para una y otra modalidad de los servicios ofrecidos. Para más detalle de los costos consulte el anexo.</span></p>
-                <table width="645" border="0" class="gris_texto">
+                <p><span style="font-style:italic; font-size:14px; width:auto">A continuación se resumen los costos para una y otra modalidad de los servicios ofrecidos. Para más detalle de los costos consulte el anexo.</span></p>
+                <table width="645" border="0" class="gris_texto" style="width:auto; text-align:justify">
                   <tr style="font-weight:bold">
                     <td width="243">SERVICIO</td>
                     <td width="170">COSTOS MODALIDAD 1 (SÓLO ASESORÍA)</td>
