@@ -591,12 +591,12 @@ elseif($_GET['vistas']==13){
                            @$datos4=pg_fetch_assoc($query4);
                
                $fecha_entre_pago=explode("T", $datos4['fecha_entrega_diag']);
-                    $fecha_entre_pago=$datos4['fecha_entrega_diag'][0];
+                    $fecha_entre_pago= $fecha_entre_pago[0];
 
                       if($fecha_entre_pago==''){
 
                               $fecha_entre_pago=explode("T", $datos4['fecha_compros_pago']);
-                               $fecha_entre_pago=$datos4['fecha_compros_pago'][0];
+                               $fecha_entre_pago= $fecha_entre_pago[0];
 
                          }
 
