@@ -9,7 +9,7 @@ $cod_resp=0;
                     }
                     else
                     $parametro="";   
- $sql="select distinct det_repor_aseso.aliado,  enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.arch_pdf, enc_procesadas.cliente, enc_procesadas.fecha_filtro, enc_procesadas.ciudad, enc_procesadas.id_fasfield, det_repor_aseso.det_servi_tomado, det_repor_aseso.n_cuotas, det_repor_aseso.valor, det_repor_aseso.tipo_pago, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso, tipo_encuesta where tipo_encuesta.tipo_encuesta=enc_procesadas.tipo_encuesta and enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.cod_estado=6 and enc_procesadas.tipo_encuesta=2  and (det_repor_aseso.tom_serv='Si' or det_repor_aseso.tipo_visita='Recuado de cuotas') order by enc_procesadas.fecha_filtro desc";
+ $sql="select distinct det_repor_aseso.aliado,  enc_procesadas.id_cliente, tipo_encuesta.nombre as encuesta, enc_procesadas.arch_pdf, enc_procesadas.cliente, enc_procesadas.fecha_filtro, enc_procesadas.ciudad, enc_procesadas.id_fasfield, det_repor_aseso.fecha_entrega_diag, det_repor_aseso.det_servi_tomado, det_repor_aseso.n_cuotas, det_repor_aseso.valor, det_repor_aseso.tipo_pago, det_repor_aseso.aliado from enc_procesadas, det_repor_aseso, tipo_encuesta where tipo_encuesta.tipo_encuesta=enc_procesadas.tipo_encuesta and enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.cod_estado=6 and enc_procesadas.tipo_encuesta=2  and (det_repor_aseso.tom_serv='Si' or det_repor_aseso.tipo_visita='Recuado de cuotas') order by enc_procesadas.fecha_filtro desc";
           $query=pg_query($conexion, $sql);
           $rows=pg_num_rows($query);
 
@@ -51,6 +51,7 @@ $cod_resp=0;
           <th width="18%">Cliente</th>
           <th width="18%">Servicios Tomados</th>
           <th width="7%">Fecha de recepción</th>
+          <th width="7%">Fecha de Entrega(Diag)</th>
           <th width="7%">Tipo de visita</th>
           <th width="7%">Tomó el servicio</th>
           <th width="9%">Ciudad</th>
@@ -72,6 +73,9 @@ $cod_resp=0;
                         $sql4="select * from det_repor_aseso where id_fasfield='".$datos['id_fasfield']."' ";
                         $query4=pg_query($conexion, $sql4);
                         @$datos4=pg_fetch_assoc($query4);
+
+                        $datos['fecha_entrega_diag']=explode("T", $datos['fecha_entrega_diag']);
+                        $datos['fecha_entrega_diag']=$datos['fecha_entrega_diag'][0];
       ?>
 
        
@@ -81,6 +85,7 @@ $cod_resp=0;
                 <td><?php echo $datos['cliente']; ?></td>
                 <td><?php echo $datos['det_servi_tomado']; ?></td>
                 <td><?php echo $datos['fecha_filtro']; ?></td>
+                 <td><?php echo $datos['fecha_entrega_diag']; ?></td>
                 <td><?php if($datos4['resul_visita']=='') echo ($datos4['tipo_visita']); else  echo ($datos4['resul_visita']) ?></td>
                 <td><?php echo ($datos4['tom_serv']);  ?></td>
                 <td><?php echo ($datos['ciudad']) ?></td>

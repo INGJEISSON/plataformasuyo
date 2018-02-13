@@ -1224,14 +1224,14 @@ if(isset($_SESSION['cod_usuario'])){
                                   if($_POST['cod_estado']==6){        
 
                                      // Buscamos las encuestas que estén en el estado de aprobado
-                                $s="select distinct enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and det_repor_aseso.tom_serv='Si' and enc_procesadas.cod_estado=6 and ( tipo_pago='Contado' or tipo_pago='Cuotas') ";
+                                $s="select distinct enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and det_repor_aseso.tom_serv='Si' and enc_procesadas.cod_estado=6 and ( tipo_pago='Contado' or tipo_pago='Cuotas') and  enc_procesadas.id_fasfield='".$_POST['id_fasfield']."' ";
                                 $q=pg_query($conexion, $s);
 
                                       while($datos1=pg_fetch_assoc($q)){
                                           $_POST['id_fasfield']=$datos1['id_fasfield'];
 
                                             //Consultamos los datos del cliente
-                                            $sql3="select enc_procesadas.id_cliente, enc_procesadas.cliente, enc_procesadas.asesor, enc_procesadas.ciudad, enc_procesadas.telefono, enc_procesadas.barrio, det_repor_aseso.resul_visita, det_repor_aseso.tom_serv, det_repor_aseso.valor, det_repor_aseso.tipo_pago, det_repor_aseso.servi_tomados  from det_repor_aseso, enc_procesadas where det_repor_aseso.id_fasfield=enc_procesadas.id_fasfield and enc_procesadas.id_fasfield='".$_POST['id_fasfield']."' ";
+                                         $sql3="select enc_procesadas.id_cliente, enc_procesadas.cliente, enc_procesadas.asesor, enc_procesadas.ciudad, enc_procesadas.telefono, enc_procesadas.barrio, det_repor_aseso.resul_visita, det_repor_aseso.tom_serv, det_repor_aseso.valor, det_repor_aseso.tipo_pago, det_repor_aseso.servi_tomados  from det_repor_aseso, enc_procesadas where det_repor_aseso.id_fasfield=enc_procesadas.id_fasfield and enc_procesadas.id_fasfield='".$_POST['id_fasfield']."' ";
                                           $query3=pg_query($conexion, $sql3);
                                           $datos=pg_fetch_assoc($query3);
 
@@ -1249,21 +1249,30 @@ if(isset($_SESSION['cod_usuario'])){
 
                                                                // insertamos cliente   
                                                         $carpeta_cliente=$datos['cliente'];
-                                                        $md5_carp=md5($carpeta_cliente);                                                                                
+                                                        $md5_carp=md5($carpeta_cliente);                                          
 
-                                                          $sql2="insert into documentacion (cod_cliente,  nombres, apellidos, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$_POST['id_cliente']."', '".$_POST['cliente']."', '', 2, '', 1, 1, 1, '".$md5_carp."') ";                                                       
-                                                                     
-                                                          $query2=pg_query($conexion, $sql2);
+                                                          // Verificamos que no tenga documentación
 
-                                                               if($query2){
-                                                                mkdir('../files/clientes/'.$md5_carp); // Creamos carpeta inicial...
-                                                                        // Creamos subcarpetas
-                                                                       mkdir('../files/clientes/'.$md5_carp."/Documentos de propiedad");
-                                                                       mkdir('../files/clientes/'.$md5_carp."/Facturas y contratos");
-                                                                      mkdir('../files/clientes/'.$md5_carp."/Otros documentos");
-                                                                        mkdir('../files/clientes/'.$md5_carp."/Analisis de caso");
-                                                                        echo "1";// Carpeta creada 
-                                                                }
+                                                          $s="select * from documentacion where cod_cliente='".$_POST['id_cliente']."' ";
+                                                          $q2=pg_query($conexion, $sql2); 
+                                                          $r2=pg_num_rows($q2);
+                                                              if($r2==0) {
+
+                                                                     $sql2="insert into documentacion (cod_cliente,  nombres, apellidos, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$_POST['id_cliente']."', '".$_POST['cliente']."', '', 2, '', 1, 1, 1, '".$md5_carp."') ";
+                                                                      $query2=pg_query($conexion, $sql2);
+
+                                                                     if($query2){
+                                                                      mkdir('../files/clientes/'.$md5_carp); // Creamos carpeta inicial...
+                                                                              // Creamos subcarpetas
+                                                                             mkdir('../files/clientes/'.$md5_carp."/Documentos de propiedad");
+                                                                             mkdir('../files/clientes/'.$md5_carp."/Facturas y contratos");
+                                                                            mkdir('../files/clientes/'.$md5_carp."/Otros documentos");
+                                                                              mkdir('../files/clientes/'.$md5_carp."/Analisis de caso");
+                                                                              echo "1";// Carpeta creada 
+                                                                      }
+
+                                                              }    
+
                                                     } // Fin si no encontró el cliente...
                                                    
                                                    if($datos['tom_serv']=='Si'){ // Es un servicio nuevo 
