@@ -104,12 +104,25 @@ $sql="select distinct enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_enc
 							 $sql4="select * from det_repor_aseso where id_fasfield='".$datos['id_fasfield']."' ";
 							 $query4=pg_query($conexion, $sql4);
                          	 @$datos4=pg_fetch_assoc($query4);
+
+
+                   $fecha_entre_pago=explode("T", $datos4['fecha_entrega_diag']);
+                    $fecha_entre_pago=$datos4['fecha_entrega_diag'][0];
+
+                      if($fecha_entre_pago==''){
+
+                              $fecha_entre_pago=explode("T", $datos4['fecha_compros_pago']);
+                               $fecha_entre_pago=$datos4['fecha_compros_pago'][0];
+
+                         }
+
 							 
 							 $sql5="select seguimientos.fecha_registro, estado.descripcion as estado from seguimientos, estado where seguimientos.cod_estado=estado.cod_estado and  seguimientos.id_fasfield='".$datos['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.cod_estado!=0 order by seguimientos.id_segui_llam desc ";
 							 $query5=pg_query($conexion, $sql5);
 							 $datos5=pg_fetch_assoc($query5);
 
                     ?>
+                     
             <tr>
                 <td><?php echo $i ?></td>
                 <td><?php echo $datos3["asesor"] ?></td>
@@ -118,8 +131,7 @@ $sql="select distinct enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_enc
                 <td><?php echo($tipo_encuesta) ?></td>
                 <td><?php if($datos4['resul_visita']=='') echo ($datos4['tipo_visita']); else  echo ($datos4['resul_visita']) ?></td>
                 <td><?php echo(number_format($datos4['valor'])) ?></td>
-                <td><?php if($datos4['fecha_entrega_diag']=='') echo $datos4['fecha_compros_pago']; else				
-				echo(($datos4['fecha_entrega_diag'])) ?></td>
+                <td><?php echo $fecha_entre_pago; ?></td>
               <td><?php echo "(".($datos4['tom_serv']).")"; ?></td>
                <td><?php echo "(".($datos5['estado']).")"; ?></td>
               <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>"><img src="../../img/icono_pdf.png" width="31" height="31"></a></td>
