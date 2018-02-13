@@ -118,8 +118,8 @@ $sql="select distinct enc_procesadas.asesor, enc_procesadas.id_cliente, tipo_enc
                 <td><?php echo($tipo_encuesta) ?></td>
                 <td><?php if($datos4['resul_visita']=='') echo ($datos4['tipo_visita']); else  echo ($datos4['resul_visita']) ?></td>
                 <td><?php echo(number_format($datos4['valor'])) ?></td>
-                <td><?php if($datos4['fecha_entrega_diag1']=='') echo $datos4['fecha_compros_pago1']; else				
-				echo(($datos4['fecha_entrega_diag1'])) ?></td>
+                <td><?php if($datos4['fecha_entrega_diag']=='') echo $datos4['fecha_compros_pago']; else				
+				echo(($datos4['fecha_entrega_diag'])) ?></td>
               <td><?php echo "(".($datos4['tom_serv']).")"; ?></td>
                <td><?php echo "(".($datos5['estado']).")"; ?></td>
               <td><a data-fancybox data-type="iframe" style="cursor: pointer;" data-src="http://52.40.169.155/fastfield/<?php echo $datos['encuesta'] ?>/procesados/<?php echo $datos['id_fasfield']."/".$archivo_pdf ?>"><img src="../../img/icono_pdf.png" width="31" height="31"></a></td>
