@@ -22,7 +22,7 @@ $_GET['id_elab_diag']=base64_decode($_GET['id_elab_diag']);
     $sql1="select servicios.nom_servicio as descripcion, servicios.cod_servicio as tipo_afect from servicios where fecha_2='2018-12-01' and tipo=1 order by nom_servicio";
 
      if($_GET['tipo_seguimiento']==15)
-    $sql1="select servicios.nom_servicio as descripcion, servicios.cod_servicio as tipo_afect from servicios where fecha_2='2018-12-01' and tipo=2 order by nom_servicio";
+    $sql1="select servicios.nom_servicio as descripcion, servicios.cod_servicio as tipo_afect from servicios where fecha_2='2018-12-01' and tipo=2 or tipo=0 order by nom_servicio";
 
 
 

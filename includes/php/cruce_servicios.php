@@ -38,12 +38,12 @@ if($_POST['cod_estado']==6){ // Si aprobado, lo agrgamos al grupo de clientes..
                                                           $query2=pg_query($conexion, $sql2);
 
                                                                if($query2){
-                                                                /* mkdir('../files/clientes/'.$md5_carp); // Creamos carpeta inicial...
+                                                                mkdir('../files/clientes/'.$md5_carp); // Creamos carpeta inicial...
                                                                         // Creamos subcarpetas
                                                                        mkdir('../files/clientes/'.$md5_carp."/Documentos de propiedad");
                                                                        mkdir('../files/clientes/'.$md5_carp."/Facturas y contratos");
                                                                       mkdir('../files/clientes/'.$md5_carp."/Otros documentos");
-                                                                        mkdir('../files/clientes/'.$md5_carp."/Analisis de caso");*/
+                                                                        mkdir('../files/clientes/'.$md5_carp."/Analisis de caso");
                                                                         echo "1";// Carpeta creada 
                                                                 }
                                                     } // Fin si no encontró el cliente...
