@@ -57,9 +57,30 @@ $sql="select documentacion.usr_codif,  detalle_docu.cod_cliente, categorias_docu
                if($_POST['id_cate_docu']==3){
                     ?>
 
-            <div id="visual_docu"> Espere;          
-
-            </div>
+     <table id="table_id61" class='table responsive' cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="2%">#</th>              
+                <th width="11%">Archivo</th>                
+                <th width="15%">Ver</th>             
+            </tr>
+        </thead>
+        <tbody>
+         <?php
+                $i=1;
+                   while ($d_archivos=pg_fetch_assoc($query_mult2)){       
+          ?>
+            <tr>
+                <td><?php echo $i ?></td>              
+                <td><img src="http://52.40.169.155/fastfield/diagnosticos_2017/<?php echo $d_archivos['ruta'] ?>" height="64" width="64"></td>             
+            <td><a data-fancybox="images" data-width="1500" data-height="1000" href="http://52.40.169.155/fastfield/diagnosticos_2017/<?php echo $d_archivos['ruta'] ?>"" tittle='Agregar documentacion' >Ver</a></td>   
+          </tr>
+             <?php
+       $i++;
+           }
+    ?>
+     </tbody>
+    </table>
    <?php
                }// Fin si estoy mostrando solo documentos..
    ?>
@@ -114,21 +135,6 @@ $(document).ready(function () {
  $('#table_id6').DataTable();
   $('#table_id61').DataTable();
 $('#table_id62').DataTable();
-
-  var id_fasfield="<?php echo "$_POST[id_fasfield]" ?>";
-  var datos='id_fasfield='+id_fasfield+'&b_archivo='+1;
-  $.ajax({
-     type: "POST",
-     url: "http://52.40.169.155/fastfield/diagnosticos_2017/visualizar.php",
-     data: datos,
-     success: function(data)
-      {
-         
-         $("#visual_docu").html(data);
-        $("#visual_docu").show();
-
-      } 
-  });
 
    
 });

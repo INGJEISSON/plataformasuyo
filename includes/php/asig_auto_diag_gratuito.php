@@ -6,7 +6,7 @@ $fecha_registro=date('Y-m-d H:i:s');
 $fecha_filtro=date('Y-m-d');
 
   // Buscamos las encuestas que estén en el estado de aprobado
-  $s="select distinct enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and (det_repor_aseso.resul_visita='Visitado y fue gratuito el diagnóstico') ";
+  $s="select distinct enc_procesadas.id_fasfield from enc_procesadas, det_repor_aseso where enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and (det_repor_aseso.resul_visita='Visitado y fue gratuito el diagnóstico' or det_repor_aseso.resul_visita='Visitado y se dejó factura (Quiere decir que paga luego, él solo)') ";
   $q=pg_query($conexion, $s);
 $carga2=0;
             while($datos1=pg_fetch_assoc($q)){
