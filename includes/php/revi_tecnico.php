@@ -1,15 +1,20 @@
  <?php
 include('../dependencia/conexion.php');
+   $_GET['id_elab_diag']=base64_decode($_GET['id_elab_diag']);
+   
+      if(isset($_GET['id_fasfield'])){ // Buscamos las encuestas
 
-      if(isset($_GET['cod_cliente'])){ // Buscamos las encuestas
-
-      $sql="select * from cliente where cod_cliente='".$_GET['cod_cliente']."' ";
-      $query=mysqli_query($conexion, $sql);
-          $rows=mysqli_num_rows($query);
-          $datos=mysqli_fetch_assoc($query);
+      $sql="select  enc_procesadas.cod_enc_proc, enc_procesadas.asesor, enc_procesadas.cliente, enc_procesadas.fecha_recepcion, enc_procesadas.fecha_revision, enc_procesadas.archivos, estado.descripcion as estado, enc_procesadas.id_fasfield, enc_procesadas.ciudad, enc_procesadas.arch_pdf, tipo_encuesta.nombre as tipo_encuesta from enc_procesadas, estado, tipo_encuesta where enc_procesadas.cod_estado=estado.cod_estado and enc_procesadas.tipo_encuesta=tipo_encuesta.tipo_encuesta  and enc_procesadas.id_fasfield='".$_GET['id_fasfield']."' ";
+          $query=pg_query($conexion, $sql);
+          $rows=pg_num_rows($query);
+          $datos=pg_fetch_assoc($query);
+        $archivo_pdf=$datos['arch_pdf'];    
     
+      
         }
 ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ <link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
  <header class="page-header">
            <section class="tables">   
@@ -19,16 +24,16 @@ include('../dependencia/conexion.php');
                   <div class="card">
                     
                     <div class="card-header d-flex align-items-center">
-                      <h3 class="h4">Contactar (Soporte técnico)</h3>
+                      <h3 class="h4">Imagenes (Ficha técnica)   ?> </h3>
                     </div>
                     <div class="card-body">
 
                       <p>
-                         
+                        
                          </p>
                          <table width="600" border="0" id="pan_add_revision" class="table responsive" cellpadding="1" cellspacing="4">
                            <tr>
-                             <td width="189"><strong>Seleccione</strong></td>
+                             <td width="189"><strong>Actividad:</strong></td>
                              <td width="26">&nbsp;</td>
                              <td width="227"><strong>Observación:</strong></td>
                              <td width="11">&nbsp;</td>
@@ -37,33 +42,19 @@ include('../dependencia/conexion.php');
                            <tr>
                              <td height="46"><select name="select" id="cod_estado" class="form-control">
                                <option value="1" selected="selected">Sin revisar</option>
-
-                               <option value="" disabled="disabled">Módulo diagnósticos</option>
-                               <option value="" disabled="disabled">------------------------</option>                               
-                               <option value="38">Problema funcional</option>
-                               <option value="39">Sugerencia o mejoras</option>  
-                               <option value="" disabled="disabled">------------------------</option>
-                                <option value="" disabled="disabled">Módulo servicios</option>
-                               <option value="" disabled="disabled">------------------------</option>                               
-                               <option value="40">Problema funcional</option>
-                               <option value="41">Sugerencia o mejoras</option>  
-                                  <option value="" disabled="disabled">------------------------</option>        
-                                <option value="" disabled="disabled">Módulo Pagos</option>
-                               <option value="" disabled="disabled">------------------------</option>                               
-                               <option value="42">Problema funcional</option>
-                               <option value="43">Sugerencia o mejoras</option>  
-
-
+                              <option value="21">Foto (Fachada cliente)</option>
+                              <option value="22">Foto (Descripción predio) Satélite)</option>
+                             
+                              <!-- <option value="8">Corregido</option>
+                                <option value="20">Duplicado</option>-->
                              </select></td>
                              <td><label for="textfield"></label></td>
-                             <td><input type="textarea" class="form-control" name="textfield2" id="observacion"></td>
-                             <td>&nbsp;</td>
+                             <td><input type="text" class="form-control" name="textfield2" id="observacion"></td>
+                             <td><iframe src="subir_archivo.php" scrolling="no" height="200" width="300" /></iframe></iframe>
                              <td><input type="button" class="btn btn-primary" name="button" id="g_revision" value="Registrar"></td>
                            </tr>
                          </table>
-                         <div id='historial_revi' align="center">
-                           <hr>&nbsp;</hr>
-                           <table width="155" border="0" cellpadding="0" cellspacing="0">
+                           <table width="155" border="0" align="center" cellpadding="0" cellspacing="0">
                              <tr align="center">
                                <td width="106"><strong>Agregar revisión</strong></td>
                              </tr>
@@ -71,15 +62,14 @@ include('../dependencia/conexion.php');
                                <td><img src="../../img/if_Plus_206460.png" id="add_revision" style="cursor:pointer" title="Agregar revisión" width="38" height="38"></td>
                              </tr>
                            </table>
-                           <strong>Observaciones</strong>
-                           
-                           
-                           <div id='history_revi' align="center">
-                           </div>
-                      </div>
+                        
                       <p>
                       <div id='cargar2' align="center"> 
-                            <img src="img/loading_azul.gif" id="cargar2">
+                        <img src="../../img/loading_azul.gif" id="cargar2">
+                            
+                      </div>
+                          <div id='resul_seguimiento' align="center"> 
+                          
                       </div>
                          </p>
                       <p>&nbsp;</p>
@@ -131,8 +121,9 @@ $("#g_revision").click(function(){  // Abregamos revisión .....
 
 var cod_estado=$("#cod_estado").val();
 var observacion=$("#observacion").val();
-var id_fasfield=1;
-var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+observacion+'&add_revi_call='+1+'&tipo_seguimiento='+7;
+var tipo_seguimiento="<?php echo "$_GET[tipo_seguimiento]" ?>";
+var id_fasfield="<?php echo "$_GET[id_elab_diag]" ?>";
+var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+observacion+'&add_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;
     
     if(cod_estado!=1){
 
@@ -141,15 +132,14 @@ var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+o
 
                         type: "POST",
                         data: datos,
-                        url: 'includes/php/g_procesos.php?'+datos,
+                        url: '../../includes/php/g_procesos.php?'+datos,
                         success: function(valor){
                            
                                if(valor!=2){
                                 $("#cargar2").hide();
-                                  alert("Se ha agregado su observación al cliente");   
-                                  $("#history_revi").html(valor);
-                                  
-                               
+                                  alert("Se ha agregado su a la factura");   
+								  $("#resul_seguimiento").html(valor);                            
+
                                }else{
                                       $("#cargar2").hide();
                                 alert("Ocurrió un error al crear el registro de la observación, por favor intenta de nuevo o comuníquese con el administrador.");
@@ -162,26 +152,27 @@ var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+o
 
     }
     else
-      alert("Por favor selecione el módulo(estado) ");
+      alert("Por favor selecione un estado a la comunicación ");
 
 
 });
 
-var id_fasfield=1;
-var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+observacion+'&revi_revi_call='+1+'&tipo_seguimiento='+7;
-    
+
+var id_fasfield="<?php echo "$_GET[id_elab_diag]" ?>";
+var tipo_seguimiento="<?php echo "$_GET[tipo_seguimiento]" ?>";
+var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+observacion+'&revi_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;    
             $("#cargar2").show();
               $.ajax({
 
                         type: "POST",
                         data: datos,
-                        url: 'includes/php/g_procesos.php?'+datos,
+                        url: '../../includes/php/g_procesos.php?'+datos,
                         success: function(valor){
                            
                                if(valor!=2){
                                 $("#cargar2").hide();
                               //    alert("Se ha agregado su observación al cliente");   
-                                  $("#history_revi").html(valor);
+                                  $("#resul_seguimiento").html(valor);
 
                                }else{
                                       $("#cargar2").hide();

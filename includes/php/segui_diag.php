@@ -109,7 +109,7 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
                                                       data: datos,
                                                       url: 'g_procesos.php?'+datos,
                                                       success: function(valor){
-                                                          $("#history_serv_recom2").empty();
+                                                          $("#history_cotizacion").empty();
                                                               $("#cargar2").hide();
                                                             //    alert("Se ha agregado su observación al cliente");   
                                                                 $("#history_cotizacion").html(valor);
@@ -145,6 +145,34 @@ var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+t
                                 $("#cargar2").hide();
                               //    alert("Se ha agregado su observación al cliente");                                 
                                    $("#history_serv_recom2").html(valor);      
+
+                               }else{
+                                      $("#cargar2").hide();
+                                alert("Ocurrió un error al crear el registro de la observación, por favor intenta de nuevo o comuníquese con el administrador.");
+
+                               }
+
+
+                        }
+                  });
+
+var id_fasfield="<?php echo $id_elab_diag ?>";
+var tipo_seguimiento=16;
+var datos='id_fasfield='+id_fasfield+'&revi_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: '../../includes/php/g_procesos.php?'+datos,
+                        success: function(valor){
+                            
+                               if(valor!=2){
+
+
+                                $("#cargar2").hide();
+                              //    alert("Se ha agregado su observación al cliente");                                 
+                                   $("#history_serv_recom3").html(valor);      
 
                                }else{
                                       $("#cargar2").hide();
@@ -194,7 +222,7 @@ var datos='id_elab_diag='+id_elab_diag+'&list_servicios='+1;
                         data: datos,
                         url: 'g_procesos.php?'+datos,
                         success: function(valor){
-                            $("#history_serv_recom2").empty();
+                            $("#history_cotizacion").empty();
                                 $("#cargar2").hide();
                               //    alert("Se ha agregado su observación al cliente");   
                                   $("#history_cotizacion").html(valor);
@@ -455,6 +483,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
         var latitud=$("#latitud").val();
         var longitud=$("#longitud").val();
         var uso_suelo=$("#uso_suelo").val();
+        var patio=$("#patio").val();
                 
 
                 if(latitud!="" && ubu_predio!="" && longitud!="" && uso_suelo!=""){
@@ -473,7 +502,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
                     */
                     // Usuario super administrador..
                 //  else  if(grupo_usuario==1)
-                     var datos='g_elab_diag='+1+'&fecha='+fecha+'&direccion='+direccion+'&cond_serv='+cond_serv+'&elab_analitic='+elab_analitic+'&apr_analitic='+apr_analitic+'&llamada_client='+llamada_client+'&pagina_web='+pagina_web+'&consult_ent='+consult_ent+'&pot='+pot+'&der_peticion='+der_peticion+'&direccion='+direccion+'&dir_form_igac='+dir_form_igac+'&barrio='+barrio+'&municipio='+municipio+'&f_nec_form='+f_nec_form+'&par_predio_client='+par_predio_client+'&analis_client='+analis_client+'&msg_info='+msg_info+'&f_esp_legal='+f_esp_legal+'&aport_client_legal='+aport_client_legal+'&elab_legal='+elab_legal+'&apr_legal='+apr_legal+'&f_nec_legal='+f_nec_legal+'&f_ubic_coor='+f_ubic_coor+'&f_cons_lic='+f_cons_lic+'&f_riesg_inun='+f_riesg_inun+'&f_riesg_remo='+f_riesg_remo+'&f_riesg_proct='+f_riesg_proct+'&tipol_cant_constr='+tipol_cant_constr+'&alt_cant_pisos='+alt_cant_pisos+'&dim_frent_lote='+dim_frent_lote+'&dim_frent_const='+dim_frent_const+'&dist_lad_lot='+dist_lad_lot+'&dist_lot_izq='+dist_lot_izq+'&dist_lot_der='+dist_lot_der+'&area_catastral='+area_catastral+'&area_docu='+area_docu+'&ara_docu_es_de='+ara_docu_es_de+'&area_med_de='+area_med_de+'&raz_cumpl='+raz_cumpl+'&f_esp_tecn='+f_esp_tecn+'&aport_client_tecni='+aport_client_tecni+'&aport_tecni='+aport_tecni+'&apro_tecnico='+apro_tecnico+'&area_lote='+area_lote+'&elab_tecnico='+elab_tecnico+'&aport_legal='+aport_legal+'&id_fasfield='+id_fasfield+'&cod_estado_tec='+cod_estado_tec+'&cod_estado_ana='+cod_estado_ana+'&cod_estado_leg='+cod_estado_leg+'&ubu_predio='+ubu_predio+'&latitud='+latitud+'&longitud='+longitud+'&uso_suelo='+uso_suelo;
+                     var datos='g_elab_diag='+1+'&fecha='+fecha+'&direccion='+direccion+'&cond_serv='+cond_serv+'&elab_analitic='+elab_analitic+'&apr_analitic='+apr_analitic+'&llamada_client='+llamada_client+'&pagina_web='+pagina_web+'&consult_ent='+consult_ent+'&pot='+pot+'&der_peticion='+der_peticion+'&direccion='+direccion+'&dir_form_igac='+dir_form_igac+'&barrio='+barrio+'&municipio='+municipio+'&f_nec_form='+f_nec_form+'&par_predio_client='+par_predio_client+'&analis_client='+analis_client+'&msg_info='+msg_info+'&f_esp_legal='+f_esp_legal+'&aport_client_legal='+aport_client_legal+'&elab_legal='+elab_legal+'&apr_legal='+apr_legal+'&f_nec_legal='+f_nec_legal+'&f_ubic_coor='+f_ubic_coor+'&f_cons_lic='+f_cons_lic+'&f_riesg_inun='+f_riesg_inun+'&f_riesg_remo='+f_riesg_remo+'&f_riesg_proct='+f_riesg_proct+'&tipol_cant_constr='+tipol_cant_constr+'&alt_cant_pisos='+alt_cant_pisos+'&dim_frent_lote='+dim_frent_lote+'&dim_frent_const='+dim_frent_const+'&dist_lad_lot='+dist_lad_lot+'&dist_lot_izq='+dist_lot_izq+'&dist_lot_der='+dist_lot_der+'&area_catastral='+area_catastral+'&area_docu='+area_docu+'&ara_docu_es_de='+ara_docu_es_de+'&area_med_de='+area_med_de+'&raz_cumpl='+raz_cumpl+'&f_esp_tecn='+f_esp_tecn+'&aport_client_tecni='+aport_client_tecni+'&aport_tecni='+aport_tecni+'&apro_tecnico='+apro_tecnico+'&area_lote='+area_lote+'&elab_tecnico='+elab_tecnico+'&aport_legal='+aport_legal+'&id_fasfield='+id_fasfield+'&cod_estado_tec='+cod_estado_tec+'&cod_estado_ana='+cod_estado_ana+'&cod_estado_leg='+cod_estado_leg+'&ubu_predio='+ubu_predio+'&latitud='+latitud+'&longitud='+longitud+'&uso_suelo='+uso_suelo+'&patio='+patio;
 
                   
                             $.ajax({
@@ -773,7 +802,6 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
            <div id='list_revi_docu9'></div>
           <?php if($_SESSION['tipo_usuario']==22 or $_SESSION['tipo_usuario']==1 or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?> <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=9&ficha=<?php echo base64_encode('Analisis de la situación actual del impuesto predial') ?>" class='edicion'>Registrar/Editar</a>  <?php } ?>
 
-
        </div>
       </div>
     </div>
@@ -838,10 +866,12 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
         <td>(*)Uso de suelo</td>
         <td><input type="text" name="textfield4" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> class="form-control" id="uso_suelo" value="<?php echo $d['uso_suelo'] ?>"></td>
       </tr>
-      <!--<tr>
-        <td>(*)Foto o imagen</td>
-        <td>Ver/Visualizar</td>
-      </tr>-->
+      <tr>
+        <td>(*)Adjuntar imagenes</td>
+        <td><a href="../../includes/php/revi_tecnico.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=19" class='edicion'><?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1  or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19 or $_SESSION['tipo_usuario']==21){ ?> Ver/Visualizar <?php } ?></a></td>
+      </tr>
+
+
       </table>
 </div>
     </div>
@@ -857,7 +887,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       <div id="collapse6" class="panel-collapse collapse">
         <div class="panel-body">
             <div id='history_afect' align="center"> </div>
-    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=8" class='edicion'><?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1  or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19){ ?> Agregar/Editar Afectaciones <?php } ?></a></p></div>
+    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=8" class='edicion'><?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1  or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19 or $_SESSION['tipo_usuario']==21){ ?> Agregar/Editar Afectaciones <?php } ?></a></p></div>
        
 
        </div>
@@ -941,6 +971,15 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
           <textarea name="dist_lot_der" class="form-control" id="dist_lot_der" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['dist_lot_der'] ?></textarea>
         </span></td>
       </tr>
+
+      <tr>
+        <td><span class="form-group row">
+          <label class="col-sm-9 form-control-label">PATIO ( Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)):</label>
+        </span></td>
+        <td><span class="col-sm-9">
+          <textarea name="patio" class="form-control" id="patio" <?php if($_SESSION['tipo_usuario']==22){ ?> readonly="readonly" <?php } ?> placeholder="Separe por comas: el concepto de (Predio del usuario, Exigencias del POT, Cumplimiento de las exigencias)"><?php echo $d['patio'] ?></textarea>
+        </span></td>
+      </tr>
       <tr>
         <td><span class="form-group row">
           <label class="col-sm-9 form-control-label">Se toma el área tipo de área (catastral, registral, etc):</label>
@@ -987,8 +1026,23 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </div>
       <div id="collapse121" class="panel-collapse collapse">
         <div class="panel-body">
-          <div id='history_serv_recom' align="center"> </div>
+          <div id='history_serv_recom2' align="center"> </div>
     <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=15" class='edicion'>Agregar/Editar Servicios</a></p></div>
+
+        </div>
+      </div>
+
+       <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1212">
+        Servicios No viables (Opcional) </a>
+        </h4>
+      </div>
+      <div id="collapse1212" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div id='history_serv_recom3' align="center"> </div>
+    <p><a href="../../includes/php/revi_diag.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=16" class='edicion'>Agregar/Editar Servicios</a></p></div>
 
         </div>
       </div>
@@ -1025,17 +1079,17 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     </div>
 
     <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1212">
-        Finalizar (Concepto) </a>
-        </h4>
-      </div>
-      <div id="collapse1212" class="panel-collapse collapse">
-        <div class="panel-body">
-          <div id='history_serv_recom' align="center"> </div>
-    <p>   <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=13&ficha=<?php echo base64_encode('Finalizar concepto') ?>" class='edicion'>Registrar/Editar Observaciones</a>
-</p></div>
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1212">
+              Finalizar (Concepto) </a>
+              </h4>
+            </div>
+            <div id="collapse1212" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div id='history_serv_recom' align="center"> </div>
+          <p>   <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=13&ficha=<?php echo base64_encode('Finalizar concepto') ?>" class='edicion'>Registrar/Editar Observaciones</a>
+      </p></div>
 
         </div>
       </div>

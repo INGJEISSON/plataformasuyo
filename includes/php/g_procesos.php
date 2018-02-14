@@ -140,7 +140,7 @@ if(isset($_SESSION['cod_usuario'])){
                    // else{
 
                        
-               $update="update diagno_client set ubu_predio='".$_POST['ubu_predio']."', latitude='".$_POST['latitud']."', longitude='".$_POST['longitud']."', uso_suelo='".$_POST['uso_suelo']."', fecha='".$_POST['fecha']."', direccion='".$_POST['direccion']."', cond_serv='".$_POST['cond_serv']."', elab_analitic='".$_POST['elab_analitic']."', apr_analitic='".$_POST['apr_analitic']."', llamada_client='".$_POST['llamada_client']."', pagina_web='".$_POST['pagina_web']."', consult_ent='".$_POST['consult_ent']."', pot='".$_POST['pot']."', der_peticion='".$_POST['der_peticion']."', dir_form_igac='".$_POST['dir_form_igac']."', barrio='".$_POST['barrio']."', municipio='".$_POST['municipio']."', f_nec_form='".$_POST['f_nec_form']."', par_predio_client='".$_POST['par_predio_client']."', analis_client='".$_POST['analis_client']."', msg_info='".$_POST['msg_info']."', f_esp_legal='".$_POST['f_esp_legal']."', aport_client_legal='".$_POST['aport_client_legal']."', elab_legal='".$_POST['elab_legal']."', apr_legal='".$_POST['apr_legal']."', f_nec_legal='".$_POST['f_nec_legal']."', f_ubic_coor='".$_POST['f_ubic_coor']."', f_cons_lic='".$_POST['f_cons_lic']."', f_riesg_inun='".$_POST['f_riesg_inun']."', f_riesg_remo='".$_POST['f_riesg_remo']."', f_riesg_proct='".$_POST['f_riesg_proct']."', tipol_cant_constr='".$_POST['tipol_cant_constr']."', alt_cant_pisos='".$_POST['alt_cant_pisos']."', dim_frent_lote='".$_POST['dim_frent_lote']."', dim_frent_const='".$_POST['dim_frent_const']."', dist_lad_lot='".$_POST['dist_lad_lot']."', dist_lot_izq='".$_POST['dist_lot_izq']."', dist_lot_der='".$_POST['dist_lot_der']."', area_catastral='".$_POST['area_catastral']."', area_docu='".$_POST['area_docu']."', ara_docu_es_de='".$_POST['ara_docu_es_de']."', area_med_de='".$_POST['area_med_de']."', raz_cumpl='".$_POST['raz_cumpl']."', f_esp_tecn='".$_POST['f_esp_tecn']."', aport_client_tecni='".$_POST['aport_client_tecni']."', aport_tecni='".$_POST['aport_tecni']."', apro_tecnico='".$_POST['apro_tecnico']."', area_lote='".$_POST['area_lote']."', aport_legal='".$_POST['aport_legal']."', elab_tecnico='".$_POST['elab_tecnico']."'  where id_elab_diag='".$_POST['id_fasfield']."' ";
+               $update="update diagno_client set ubu_predio='".$_POST['ubu_predio']."', latitude='".$_POST['latitud']."', longitude='".$_POST['longitud']."', uso_suelo='".$_POST['uso_suelo']."', fecha='".$_POST['fecha']."', direccion='".$_POST['direccion']."', cond_serv='".$_POST['cond_serv']."', elab_analitic='".$_POST['elab_analitic']."', apr_analitic='".$_POST['apr_analitic']."', llamada_client='".$_POST['llamada_client']."', pagina_web='".$_POST['pagina_web']."', consult_ent='".$_POST['consult_ent']."', pot='".$_POST['pot']."', der_peticion='".$_POST['der_peticion']."', dir_form_igac='".$_POST['dir_form_igac']."', barrio='".$_POST['barrio']."', municipio='".$_POST['municipio']."', f_nec_form='".$_POST['f_nec_form']."', par_predio_client='".$_POST['par_predio_client']."', analis_client='".$_POST['analis_client']."', msg_info='".$_POST['msg_info']."', f_esp_legal='".$_POST['f_esp_legal']."', aport_client_legal='".$_POST['aport_client_legal']."', elab_legal='".$_POST['elab_legal']."', apr_legal='".$_POST['apr_legal']."', f_nec_legal='".$_POST['f_nec_legal']."', f_ubic_coor='".$_POST['f_ubic_coor']."', f_cons_lic='".$_POST['f_cons_lic']."', f_riesg_inun='".$_POST['f_riesg_inun']."', f_riesg_remo='".$_POST['f_riesg_remo']."', f_riesg_proct='".$_POST['f_riesg_proct']."', tipol_cant_constr='".$_POST['tipol_cant_constr']."', alt_cant_pisos='".$_POST['alt_cant_pisos']."', dim_frent_lote='".$_POST['dim_frent_lote']."', dim_frent_const='".$_POST['dim_frent_const']."', dist_lad_lot='".$_POST['dist_lad_lot']."', dist_lot_izq='".$_POST['dist_lot_izq']."', dist_lot_der='".$_POST['dist_lot_der']."', area_catastral='".$_POST['area_catastral']."', area_docu='".$_POST['area_docu']."', ara_docu_es_de='".$_POST['ara_docu_es_de']."', area_med_de='".$_POST['area_med_de']."', raz_cumpl='".$_POST['raz_cumpl']."', f_esp_tecn='".$_POST['f_esp_tecn']."', aport_client_tecni='".$_POST['aport_client_tecni']."', aport_tecni='".$_POST['aport_tecni']."', apro_tecnico='".$_POST['apro_tecnico']."', area_lote='".$_POST['area_lote']."', aport_legal='".$_POST['aport_legal']."', elab_tecnico='".$_POST['elab_tecnico']."', patio='".$_POST['patio']."'  where id_elab_diag='".$_POST['id_fasfield']."' ";
                 
                   // $update2="update estados_diag set estado_anali='".$_POST['cod_estado_ana']."', estado_tecn='".$_POST['cod_estado_tec']."',  estado_legal='".$_POST['cod_estado_leg']."'  where id_fasfield='".$_POST['id_fasfield']."' ";
                 
@@ -1120,18 +1120,24 @@ if(isset($_SESSION['cod_usuario'])){
 
               if($query){
 
-                        if($_POST['tipo_seguimiento']<8)
+                        if($_POST['tipo_seguimiento']<8 or $_POST['tipo_seguimiento']<19)
               
                          $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, estado.descripcion as estado, estado.cod_estado, usuarios.nombre as usuario from seguimientos, usuarios, estado where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=estado.cod_estado and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
                        else{
                             if($_POST['tipo_seguimiento']==8)
                                 $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, afectaciones.descripcion as estado, usuarios.nombre as usuario from seguimientos, usuarios, afectaciones where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=afectaciones.tipo_afect and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
 
-                             else if($_POST['tipo_seguimiento']==14){
+                             else if($_POST['tipo_seguimiento']==14 or $_POST['tipo_seguimiento']==15 or $_POST['tipo_seguimiento']==16){
 
-                                if($_POST['tipo_seguimiento']==14){
+                                if($_POST['tipo_seguimiento']==14 or $_POST['tipo_seguimiento']==15 or $_POST['tipo_seguimiento']==16){
 
                                   $_POST['pr_servi_n']="";
+                                      if($_POST['tipo_seguimiento']==14)
+                                        $tipo=1;
+                                      if($_POST['tipo_seguimiento']==15)
+                                        $tipo=2;
+                                      if($_POST['tipo_seguimiento']==16)
+                                        $tipo=3;
                                                      // Verificamos que el servicio aún no esté recomendado..
                                        $sql2="select cod_servicio from serv_recom_diag where cod_servicio='".$_POST['cod_estado']."' and id_elab_diag='".$_POST['id_fasfield']."' ";
                                       $query2=pg_query($conexion, $sql2); 
@@ -1154,7 +1160,7 @@ if(isset($_SESSION['cod_usuario'])){
                                                     }
                                                     else
                                                       $cod_product_serv=0;                                              
-                                        $insert="insert into serv_recom_diag (id_elab_diag, cod_servicio, pr_serv_n, cod_produc_serv) values('".$_POST['id_fasfield']."', '".$_POST['cod_estado']."', '".$_POST['pr_servi_n']."', '".$cod_product_serv."' ) ";
+                                        $insert="insert into serv_recom_diag (id_elab_diag, cod_servicio, pr_serv_n, cod_produc_serv, tipo) values('".$_POST['id_fasfield']."', '".$_POST['cod_estado']."', '".$_POST['pr_servi_n']."', '".$cod_product_serv."', '".$tipo."' ) ";
                                              
                                              $query=pg_query($conexion, $insert);
                                           }
@@ -1180,7 +1186,7 @@ if(isset($_SESSION['cod_usuario'])){
                                                                         }
                                                                         else
                                                                           $cod_product_serv=0;                                              
-                                                            $insert="insert into serv_recom_diag (id_elab_diag, cod_servicio, pr_serv_n, cod_produc_serv) values('".$_POST['id_fasfield']."', '".$_POST['observacion']."', '".$_POST['pr_servi_n']."', '".$cod_product_serv."' ) ";
+                                                            $insert="insert into serv_recom_diag (id_elab_diag, cod_servicio, pr_serv_n, cod_produc_serv, tipo) values('".$_POST['id_fasfield']."', '".$_POST['observacion']."', '".$_POST['pr_servi_n']."', '".$cod_product_serv."', '".$tipo."' ) ";
                                                                  
                                                                  $query=pg_query($conexion, $insert);
 
@@ -1406,12 +1412,12 @@ if(isset($_SESSION['cod_usuario'])){
       
          if(isset($_POST['revi_revi_call'])){ // Agregar revisión de call center.  y otras revisiones..
                 
-                      if($_POST['tipo_seguimiento']<8) 
+                      if($_POST['tipo_seguimiento']<8 or $_POST['tipo_seguimiento']==19) 
                        $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, estado.descripcion as estado, estado.cod_estado, usuarios.nombre as usuario from seguimientos, usuarios, estado where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=estado.cod_estado and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
                      else{
                            if($_POST['tipo_seguimiento']==8)  /// Sin son afectaciones..
                            $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, afectaciones.descripcion as estado, usuarios.nombre as usuario from seguimientos, usuarios, afectaciones where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=afectaciones.tipo_afect and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
-                           else if($_POST['tipo_seguimiento']==14 or $_POST['tipo_seguimiento']==15)
+                           else if($_POST['tipo_seguimiento']==14 or $_POST['tipo_seguimiento']==15 or $_POST['tipo_seguimiento']==16)
                             $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, servicios.nom_servicio as estado, usuarios.nombre as usuario from seguimientos, usuarios, servicios where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=servicios.cod_servicio and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
                      }
                         

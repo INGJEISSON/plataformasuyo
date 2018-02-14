@@ -44,6 +44,9 @@ if(isset($_SESSION['cod_usuario'])){
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
 
+<link rel="stylesheet" href="js/colorbox-master/example1/colorbox.css" />
+<script src="js/colorbox-master/jquery.colorbox-min.js"></script>
+
 <script src="js/charts/js/highcharts.js"></script>
 <script src="js/charts/js/modules/exporting.js"></script>
 </head>
@@ -84,7 +87,31 @@ if(isset($_SESSION['cod_usuario'])){
                       
                             <!--  <input type="text" placeholder="Buscar clientes" autocomplete="off" id="buscarcliente" class="form-control "></a> -->
                     </li>
-                    <li class="dropdown">
+
+                   <li class="dropdown">
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="img/help.png" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">SOPORTE TÉCNICO</b><span class="caret"></span> </a>
+                        <ul class="dropdown-menu dropdown-user animated flipInY">
+                            <li>
+                                <div class="dw-user-box">
+                                    <div class="u-img"><img src="img/help.png" alt="user" /></div>
+                                    <div class="u-text">
+                                        <h4>SOPORTE TÉCNICO</h4>
+                                        
+                                       <!-- <a href="profile.html" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a>--></div>
+                                </div>
+                            </li>
+                            <li role="separator" class="divider"></li>                          
+                            <!--<li><a href="#"><i class="ti-wallet"></i> Mis activides</a></li>
+                            <li><a href="#"><i class="ti-email"></i> Mensajes</a></li>--
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#"><i class="ti-settings"></i> Configuración de cuenta</a></li>
+                            <li role="separator" class="divider"></li>-->
+                            <li> <a href="includes/php/solicitud.php" class='edicion3'>Contactar</a></p></li>
+                        </ul>
+                  </li>
+
+
+                  <li class="dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="<?php echo $_SESSION['imagen'] ?>" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><?php echo $_SESSION['nombre'] ?></b><span class="caret"></span> </a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
                             <li>
@@ -104,8 +131,9 @@ if(isset($_SESSION['cod_usuario'])){
                             <li role="separator" class="divider"></li>-->
                             <li><a href="javascript:;" id="logout"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
+                  </li>
                         <!-- /.dropdown-user 
-                    </li>
+                    
                     <!-- /.dropdown -->
                 </ul>
             </div>
@@ -164,6 +192,14 @@ if(isset($_SESSION['cod_usuario'])){
     <script type="text/javascript">
    
         $(document).ready(function(){
+
+     $(".edicion3").colorbox({
+          iframe:false, 
+          width:"100%", 
+          height:"100%",
+          overlayClose:false,
+          //escKey:
+          });   
 
 
 

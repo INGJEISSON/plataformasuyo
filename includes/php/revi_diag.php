@@ -24,6 +24,9 @@ $_GET['id_elab_diag']=base64_decode($_GET['id_elab_diag']);
      if($_GET['tipo_seguimiento']==15)
     $sql1="select servicios.nom_servicio as descripcion, servicios.cod_servicio as tipo_afect from servicios where fecha_2='2018-12-01' and tipo=2 or tipo=0 order by nom_servicio";
 
+     if($_GET['tipo_seguimiento']==16)
+    $sql1="select servicios.nom_servicio as descripcion, servicios.cod_servicio as tipo_afect from servicios where fecha_2='2018-12-01' order by nom_servicio";
+
 
 
 
@@ -63,8 +66,6 @@ $query3=pg_query($conexion, $sql1);
                            <tr>
                              <td height="46"><select name="select" id="cod_estado" class="form-control">
                                <option value="0" selected="selected">Sin revisar</option>
-                               <option value="86">Ninguno</option>
-                               <option value="87">No viable</option>
                               <?php while($datos2=pg_fetch_assoc($query3)){ ?>
                                
                                <option value="<?= $datos2['tipo_afect'] ?>"> <?php echo ($datos2['descripcion'])?></option>
@@ -77,7 +78,9 @@ $query3=pg_query($conexion, $sql1);
 
                                 <select name="select" id="observacion" class="form-control">  
                              <option value="0">Ninguno</option>
-                             </select>
+                             </select>    
+
+                              <input type=text class="form-control" name="textfield2" id="observacion2">
 
 
                              </td>
@@ -123,6 +126,7 @@ $(document).ready(function(){
 $("#cargar2").hide();
 $("#archrev").hide();
 $("#archrev2").hide();
+$("#observacion2").hide();
 $("#pan_add_revision").hide();
 
 $("#add_revision").click(function(){
@@ -130,25 +134,36 @@ $("#pan_add_revision").show();
 
 });
 
+var tipo_seguimiento="<?php echo "$_GET[tipo_seguimiento]" ?>";
+    
+          $("#cod_estado").change(function(){
+            var cod_estado=$("#cod_estado").val();
+            var b_lista_despleg_serv_dep=1;
+            var datos='b_lista_despleg_serv_dep='+b_lista_despleg_serv_dep+'&cod_estado='+cod_estado;
+          $("#observacion").hide();
 
-$("#cod_estado").change(function(){
-  var cod_estado=$("#cod_estado").val();
-  var b_lista_despleg_serv_dep=1;
-  var datos='b_lista_despleg_serv_dep='+b_lista_despleg_serv_dep+'&cod_estado='+cod_estado;
-$("#observacion").hide();
-            $.ajax({
-                  type: "POST",
-                  data: datos,
-                  url: 'g_procesos.php?'+datos,
-                  success: function (valor){
-                      $("#observacion").empty(); 
-                      $("#observacion").html(valor);    
-                      $("#observacion").show();                   
-                  }
+              if(tipo_seguimiento==14){
 
-            });
+                     $.ajax({
+                            type: "POST",
+                            data: datos,
+                            url: 'g_procesos.php?'+datos,
+                            success: function (valor){
+                                $("#observacion").empty(); 
+                                $("#observacion").html(valor);    
+                                $("#observacion").show();                   
+                            }
 
-});
+                      });
+
+              }else{
+                $("#observacion2").show();
+                $("#observacion").hide();
+              }
+                    
+
+          });
+ 
 
 
 
@@ -189,7 +204,7 @@ var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+o
                                                       data: datos,
                                                       url: 'g_procesos.php?'+datos,
                                                       success: function(valor){
-                                                          $("#history_serv_recom2").empty();
+                                                          $("#history_cotizacion").empty();
                                                               $("#cargar2").hide();
                                                             //    alert("Se ha agregado su observación al cliente");   
                                                                 $("#history_cotizacion").html(valor);
@@ -198,7 +213,42 @@ var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+o
 
 
                                                       }
-                                                });      
+                                                });  
+                                                  
+var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+observacion+'&revi_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;    
+            $("#cargar2").show();
+              $.ajax({
+
+                        type: "POST",
+                        data: datos,
+                        url: '../../includes/php/g_procesos.php?'+datos,
+                        success: function(valor){
+                           
+                               if(valor!=2){
+                                $("#cargar2").hide();
+                              //    alert("Se ha agregado su observación al cliente");   
+                                  $("#resul_seguimiento").html(valor);
+                                  if(tipo_seguimiento==8)
+                                   $("#history_afect").html(valor);    
+                                  else if(tipo_seguimiento==14)
+                                  $("#history_serv_recom").html(valor);
+                                 else if(tipo_seguimiento==15)
+                                  $("#history_serv_recom2").html(valor);  
+                                else if(tipo_seguimiento==16)
+                                  $("#history_serv_recom3").html(valor);  
+
+                               }else{
+                                      $("#cargar2").hide();
+                                alert("Ocurrió un error al crear el registro de la observación, por favor intenta de nuevo o comuníquese con el administrador.");
+
+                               }
+
+
+                        }
+                  });
+
+
+
                                           
 
                                }else{
@@ -240,6 +290,8 @@ var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+o
                                   $("#history_serv_recom").html(valor);
                                  else if(tipo_seguimiento==15)
                                   $("#history_serv_recom2").html(valor);  
+                                else if(tipo_seguimiento==16)
+                                  $("#history_serv_recom3").html(valor);  
 
                                }else{
                                       $("#cargar2").hide();
