@@ -55,8 +55,11 @@ if(isset($_FILES['upl']) && $_FILES['upl']['error'] == 0){
 					
 
 									$sube=pg_query($conexion,  $qry);
-									if(isset($sube))
-									echo "1";
+									if(isset($sube)){
+										echo $_SESSION['nom_archivo']=$ruta;
+										echo "1";
+									}
+									
 									else
 									echo "2";
 						

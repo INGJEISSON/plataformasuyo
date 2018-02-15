@@ -214,7 +214,7 @@ var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+o
 
                                                       }
                                                 });  
-                                                  
+
 var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+observacion+'&revi_revi_call='+1+'&tipo_seguimiento='+tipo_seguimiento;    
             $("#cargar2").show();
               $.ajax({
@@ -279,8 +279,12 @@ var datos='id_fasfield='+id_fasfield+'&cod_estado='+cod_estado+'&observacion='+o
                         data: datos,
                         url: '../../includes/php/g_procesos.php?'+datos,
                         success: function(valor){
+
+                              if($valor==3){
+                              alert("El servicio no se pudo agregar: 1. Ya se encuentra ofrecido/recomendado o No viable en este cliente");
+                              }
                            
-                               if(valor!=2){
+                               else if(valor!=2){
                                 $("#cargar2").hide();
                               //    alert("Se ha agregado su observación al cliente");   
                                   $("#resul_seguimiento").html(valor);

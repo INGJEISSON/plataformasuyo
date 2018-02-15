@@ -24,7 +24,7 @@ include('../dependencia/conexion.php');
                   <div class="card">
                     
                     <div class="card-header d-flex align-items-center">
-                      <h3 class="h4">Imagenes (Ficha técnica)   ?> </h3>
+                      <h3 class="h4">Imagenes (Ficha técnica)  </h3>
                     </div>
                     <div class="card-body">
 
@@ -50,7 +50,7 @@ include('../dependencia/conexion.php');
                              </select></td>
                              <td><label for="textfield"></label></td>
                              <td><input type="text" class="form-control" name="textfield2" id="observacion"></td>
-                             <td><iframe src="subir_archivo.php" scrolling="no" height="200" width="300" /></iframe></iframe>
+                             <td><iframe src="upload_docu.php?cod_cliente=<?php echo $_GET['cod_cliente'] ?>&id_cate_docu=3" scrolling="no" height="200" width="300" /></iframe></iframe>
                              <td><input type="button" class="btn btn-primary" name="button" id="g_revision" value="Registrar"></td>
                            </tr>
                          </table>

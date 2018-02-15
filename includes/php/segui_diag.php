@@ -868,7 +868,7 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
       </tr>
       <tr>
         <td>(*)Adjuntar imagenes</td>
-        <td><a href="../../includes/php/revi_tecnico.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=19" class='edicion'><?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1  or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19 or $_SESSION['tipo_usuario']==21){ ?> Ver/Visualizar <?php } ?></a></td>
+        <td><a href="../../includes/php/revi_tecnico.php?id_elab_diag=<?php echo $_GET['id_elab_diag'] ?>&tipo_seguimiento=19&cod_cliente=<?php echo $d['cod_cliente'] ?>" class='edicion'><?php if($_SESSION['tipo_usuario']==23 or $_SESSION['tipo_usuario']==1  or $_SESSION['tipo_usuario']==6 or $_SESSION['tipo_usuario']==19 or $_SESSION['tipo_usuario']==21){ ?> Ver/Visualizar <?php } ?></a></td>
       </tr>
 
 
@@ -1081,11 +1081,11 @@ var datos='listar_actividades_diag='+1+'&tipo='+6+'&cod_equipo='+2+'&id_elab_dia
     <div class="panel panel-primary">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1212">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse12122">
               Finalizar (Concepto) </a>
               </h4>
             </div>
-            <div id="collapse1212" class="panel-collapse collapse">
+            <div id="collapse12122" class="panel-collapse collapse">
               <div class="panel-body">
                 <div id='history_serv_recom' align="center"> </div>
           <p>   <a href="../../includes/php/activi_diag.php?id_elab_diag=<?php echo $id_elab_diag ?>&cod_equipo=2&cod_cliente=<?php echo $d['cod_cliente'] ?>&tipo=13&ficha=<?php echo base64_encode('Finalizar concepto') ?>" class='edicion'>Registrar/Editar Observaciones</a>

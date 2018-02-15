@@ -1095,18 +1095,7 @@ if(isset($_SESSION['cod_usuario'])){
                   
 
            }
-       if(isset($_POST['add_revi_call'])){ // Agregar revisión de call center.
-
-
-          // Verificamos quién está realizando la revisión.....
-          if($_SESSION['cod_grupo']==6 or $_SESSION['cod_grupo']==1) // Coordiandor de operaciones.  o Super administrador
-            $tipo_revision=1; // Control de calidad
-          else if($_SESSION['cod_grupo']==3 or $_SESSION['cod_grupo']==1) // Analítico....  o Super administrador
-            $tipo_revision=2; 
-          else if($_SESSION['cod_grupo']==8 or $_SESSION['cod_grupo']==1) // Asesor...  o Super administrador
-            $tipo_revision=3; // Asesor
-          
-         
+       if(isset($_POST['add_revi_call'])){ // Agregar revisiónes (Seguimientos)
 
        $insert="insert into seguimientos (tipo_seguimiento, id_fasfield, cod_usuario, observacion, cod_estado,  fecha_agenda, archivo, fecha_registro) values('".$_POST['tipo_seguimiento']."',  '".$_POST['id_fasfield']."', '".$_SESSION['cod_usuario']."',  '".($_POST['observacion'])."', '".$_POST['cod_estado']."', '".$_POST['fecha_agenda']."', '".$_SESSION['nom_archivo']."', '".$fecha_registro."') ";
         $query=pg_query($conexion, $insert);
@@ -1120,23 +1109,23 @@ if(isset($_SESSION['cod_usuario'])){
 
               if($query){
 
-                        if($_POST['tipo_seguimiento']<8 or $_POST['tipo_seguimiento']<19)
+                        if($_POST['tipo_seguimiento']<8 or $_POST['tipo_seguimiento']==19)
               
                          $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, estado.descripcion as estado, estado.cod_estado, usuarios.nombre as usuario from seguimientos, usuarios, estado where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=estado.cod_estado and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
                        else{
-                            if($_POST['tipo_seguimiento']==8)
+                            if($_POST['tipo_seguimiento']==8) // Afectaciones
                                 $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, afectaciones.descripcion as estado, usuarios.nombre as usuario from seguimientos, usuarios, afectaciones where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=afectaciones.tipo_afect and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";
 
-                             else if($_POST['tipo_seguimiento']==14 or $_POST['tipo_seguimiento']==15 or $_POST['tipo_seguimiento']==16){
+                             else if($_POST['tipo_seguimiento']==14 or $_POST['tipo_seguimiento']==15 or $_POST['tipo_seguimiento']==16){ // Servicios (Ofrecidos, No Viables, Recomendables )
 
                                 if($_POST['tipo_seguimiento']==14 or $_POST['tipo_seguimiento']==15 or $_POST['tipo_seguimiento']==16){
 
                                   $_POST['pr_servi_n']="";
-                                      if($_POST['tipo_seguimiento']==14)
+                                      if($_POST['tipo_seguimiento']==14) // OFrecidos
                                         $tipo=1;
-                                      if($_POST['tipo_seguimiento']==15)
-                                        $tipo=2;
-                                      if($_POST['tipo_seguimiento']==16)
+                                      if($_POST['tipo_seguimiento']==15) // REcomeendados
+                                        $tipo=2; 
+                                      if($_POST['tipo_seguimiento']==16) // NO viables.
                                         $tipo=3;
                                                      // Verificamos que el servicio aún no esté recomendado..
                                        $sql2="select cod_servicio from serv_recom_diag where cod_servicio='".$_POST['cod_estado']."' and id_elab_diag='".$_POST['id_fasfield']."' ";
@@ -1144,7 +1133,7 @@ if(isset($_SESSION['cod_usuario'])){
                                       $rows=pg_num_rows($query2);
 
                                           if($rows)
-                                            echo "3"; // Servicio ya se encuentra recomendado en el diagnóstico..
+                                            echo "3"; // Servicio ya se encuentra ofrecido en el diagnóstico..
                                           
                                           else{ // AHora insertarmos el servicio recomendado..
 
@@ -1197,7 +1186,7 @@ if(isset($_SESSION['cod_usuario'])){
 
                                
 
-                                  $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.observacion, servicios.nom_servicio as estado, usuarios.nombre as usuario from seguimientos, usuarios, servicios where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=servicios.cod_servicio and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";  
+                                  $sql2="select seguimientos.fecha_registro, seguimientos.archivo, seguimientos.tipo_seguimiento, seguimientos.observacion, servicios.nom_servicio as estado, usuarios.nombre as usuario from seguimientos, usuarios, servicios where seguimientos.cod_usuario=usuarios.cod_usuario and seguimientos.cod_estado=servicios.cod_servicio and seguimientos.id_fasfield='".$_POST['id_fasfield']."' and seguimientos.cod_usuario!=0 and seguimientos.tipo_seguimiento='".$_POST['tipo_seguimiento']."' order by seguimientos.id_segui_llam desc  ";  
                             } // FIn si tipo de seguimineto 14 y 15
 
                        }
@@ -1321,85 +1310,6 @@ if(isset($_SESSION['cod_usuario'])){
 
                               }
 
-                                  // Verificamos aprobación del cliente y lo agregamos
-
-                             /*  if($_POST['cod_estado']==6){ // Si aprobado, lo agrgamos al grupo de clientes..
-
-                                            //Consultamos los datos del cliente
-                                          $sql3="select enc_procesadas.id_cliente, enc_procesadas.Asesor, enc_procesadas.ciudad, enc_procesadas.direccion, enc_procesadas.telefono, enc_procesadas.Barrio, det_repor_aseso.resul_visita, det_repor_aseso.tom_serv, det_repor_aseso.valor, det_repor_aseso.tipo_pago  from det_repor_aseso, enc_procesadas where det_repor_aseso.id_fasfield=enc_procesadas.id_fasfield and enc_procesadas.id_fasfield='".$_POST['id_fasfield']."' ";
-                                          $query3=pg_query($conexion, $sql3);
-                                          $datos=pg_fetch_assoc($query3);
-
-                                              // Verificamos que no esté registrado
-                                              $sql4="select cod_cliente from cliente where cod_cliente='".$datos['id_cliente']."'";
-                                              $query4=pg_query($coenxion, $sql4); 
-                                                $rows4=pg_num_rows($query4);
-
-                                                  if($rows4==0){ // SI no está registrado entonces..
-
-                                                            $insert="insert into cliente (id_fasfield, cod_cliente, nombre, tipo_cliente, ciudad, barrio, direccion_predio, telefono_1) values('".$_POST['id_fasfield']."', '".$datos['id_cliente']."', '".$datos['cliente']."', 1, '".$datos['ciudad']."', '".$datos['Barrio']."', '".$datos['direccion']."', '".$datos['telefono']."') ";
-                                                             $query4=pg_query($conexion, $insert);
-
-                                                          // Ahora creamos la carpeta del cliente..
-
-                                                               // insertamos cliente   
-                                                        $carpeta_cliente=$datos['cliente'];
-                                                        $md5_carp=$clave:md5($carpeta_cliente);                                                                                
-
-                                                          $sql2="insert into documentacion (cod_cliente,  nombres, apellidos, tipo_docu, ciudad, cod_bodega, cod_estante, ubicacion, usr_codif) values('".$_POST['id_cliente']."', '".$_POST['cliente']."', '', 2, '', 1, 1, 1, '".$md5_carp."') ";                                                       
-                                                                     
-                                                          $query2=pg_query($conexion, $sql2);
-
-                                                               if($query2){
-                                                                  mkdir('../files/clientes/'.$md5_carp); // Creamos carpeta inicial...
-                                                                        // Creamos subcarpetas
-                                                                       mkdir('../files/clientes/'.$md5_carp."/Documentos de propiedad");
-                                                                       mkdir('../files/clientes/'.$md5_carp."/Facturas y contratos");
-                                                                      mkdir('../files/clientes/'.$md5_carp."/Otros documentos");
-                                                                        mkdir('../files/clientes/'.$md5_carp."/Analisis de caso");
-
-                                                                        echo "1";// Carpeta creada 
-                                                                }
-                                                    } // Fin si no encontró el cliente...
-                                                 
-                                                 // Veriquemos el tipo de encuesta....
-
-                                              if($datos['resul_visita']=='Visitado y pagado'){   // Es un diagnóstico entonces.. registramos el diagnóstico nuevo del cliente..                                                
-                                                $insert2="insert into diagno_client (id_fasfield, cod_cliente, ciudad, direccion, cod_estado) values('".$_POST['id_fasfield']."', '".$datos['id_cliente']."', '".$datos['ciudad']."', '".$datos['direccion']."', 23) ";
-                                                $query2=pg_query($insert2);
-
-                                              } else  if($datos['tom_serv']=='Si'){ // Es un servicio nuevo 
-
-
-                                                    $serv_tomados=$datos['serv_tomados'];
-                                                    $separar=explode(',',$serv_tomados); 
-
-                                                          for($i=0;$i<count($separar);$i++){
-
-                                                                $cod_servicio=$separar[$i];
-
-                                                                if(is_integer($cod_servicio)){ // Si es un código de servicio entonces...
-
-                                                                  //Verificamos que el servicio no se haya registrado al cliente..
-                                                                $sql31="select serv_cliente where cod_servicio='".$cod_servicio."' and cod_cliente='".$datos['id_cliente']."' ";
-                                                                $query31=pg_query($conexion, $sql31);
-                                                                $rows31=pg_num_rows($query31);
-
-                                                                          if($rows31==0){ // EL servicio no se ha registrado enttonces... agréguelo..
-                                                                              
-                                                                              if($datos['tipo_pago']=='Contado'){
-                                                                               $insert2="insert into serv_cliente (asesor, cod_servicio, cod_estado, cod_cliente, valor, fecha_registro, cod_usuario, cod_acuer_pago, id_list_despleg) values('".$datos['asesor']."', '".$cod_servicio."', 23, '".$datos['cod_cliente']."', '".$datos['valor']."', '".$fecha_registro."', 92, 1, 1)  ";
-                                                                                $queryinser=pg_query($conexion, $insert2); // INsertamos el cliente..
-                                                                              }
-
-                                                                          }      
-
-                                                                } // FIn Si es un codigo de servicio...
-                                                          }
-
-                                              }  // Fin si es un servicio nuevo..... tomado por el cliente.
-
-                                  }*/
                           }
                       include('history_revi.php');                      
                     

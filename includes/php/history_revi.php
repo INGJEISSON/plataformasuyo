@@ -15,13 +15,18 @@
                              <?php
                              $i=1;
                              while($datos2=pg_fetch_assoc($query2)){
-                                 
-                                 
-                                            @$sql6="select * from serv_cliente  where id_serv_cliente='".$_POST['id_fasfield']."' ";
-                                             @$query6=pg_query($conexion, $sql6);
-                                             @$rows6=pg_num_rows($query6);
-                                             @$datos6=pg_fetch_assoc($query6);
-                                            
+                                         
+                                              if($_POST['tipo_seguimiento']==19){ // Imagenes técniicas de un diagnóstico.
+
+                                                    // Buscamos la carpeta del cliente
+                                                  $sql6="select documentacion.usr_codif FROM diagno_client, documentacion, seguimientos where documentacion.cod_cliente=diagno_client.cod_cliente and seguimientos.id_fasfield=diagno_client.id_fasfield and diagno_client.id_elab_diag='".$_POST['id_fasfield']."'  ";
+                                                  $query6=pg_query($conexion, $sql6);
+                                                  $datos6=pg_fetch_assoc($query6);
+                                                  $ruta=$datos6['usr_codif'];
+
+                                                  $ruta='../files/clientes/'.$ruta."/Otros documentos/".$datos2['archivo'];
+                                              }else
+                                              $ruta="../files/".$datos2['archivo'];
                              ?>
                              <tr>
                                <td><?php echo $i; ?></td>
@@ -30,7 +35,7 @@
                                <td><?php echo ($datos2['usuario']) ?></td>
                                <td><?php echo ($datos2['estado']) ?></td>
                                <td><?php if($datos2['archivo']!=""){ ?>
-                                 <a href="../files/<?php echo $datos2['archivo'] ?>" target="_blank"><img src="../../img/icono_pdf.png" width="31" height="31"></a>
+                                 <a href="<?php echo $ruta ?>" target="_blank"><img src="../../img/icono_pdf.png" width="31" height="31"></a>
                                <?php } ?></td>
                                <td><?php  if($_SESSION['tipo_usuario']==1){ ?><a href="../../includes/php/edicion_usu.php?id_serv_cliente=<?php echo $_POST['id_fasfield'] ?>&cod_cliente=<?php echo $datos6['cod_cliente'] ?>&nom_estado=<?php echo $datos2['estado'] ?>&estado=<?php echo $datos2['cod_estado'] ?>" target="_blank">Responder</a><?php } ?></td>
                                <td>&nbsp;</td>
