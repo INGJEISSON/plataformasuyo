@@ -188,13 +188,14 @@ if($rows==1){
     <td>&nbsp;</td>
   </tr>
 </table>
-<table width="670" border="0" >
+<table width="690" border="0" >
   <tr style="text-align:justify">
     <td width="19" height="155"><img src="img/Barra_Parrafo1.png" width="10" height="153" /></td>
     <td width="354"><p class="gris_texto">Por medio de la presente nos permitimos en
       primera medida agradecer la confianza quen ha depositado en Suyo y en todo el grupo de profesionales que hay detrás de esta empre
-        sa de impacto social. Respondiendo al servicio que adquirió con nosotros, hacemos entrega de su documento de diagnóstico de propiedad en el cual resumimos el análisis  legal y técnico que hemos realizado de su caso; así mismo señalamos la viabilidad y el tipo de servicio que requiere, con todos los costos asociados. Recuerde preguntar a su</p></td>
-    <td width="283"><p class="gris_texto">asesor de ventas por las diferentes opciones de financiación que brindamos a través de nuestros aliados.Finalmente, quisiera reiterarle que sabemos
+        sa de impacto social. Respondiendo al servicio que adquirió con nosotros, hacemos entrega de su documento de diagnóstico de propiedad en el cual resumimos el análisis  legal y técnico que hemos realizado de su caso; así mismo señalamos la viabilidad y el tipo de servicio que requiere, con todos los costos asociados. Recuerde preguntar a su asesor de ventas</p></td>
+    <td width="16">&nbsp;</td>
+    <td width="283"><p class="gris_texto"> por las diferentes opciones de financiación que brindamos a través de nuestros aliados.Finalmente, quisiera reiterarle que sabemos
       que su hogar es su bien más preciado, por
       esto no defraudaremos su voto de confianza.
       Esperamos que pueda tomar los servicios
@@ -290,7 +291,7 @@ if($rows==1){
                       <td width="910" class="gris_texto"  style="width:auto" ><?php echo $nec_ident ?></td>                      
                     </tr>
                   </table>
-                  <p style="font-style:italic; font-size:14px; width:auto" >A continuación presentamos el análisis de su caso y las posibilidades de servicios para darle respuesta a sus deseso y, en caso de no ser posible, las diferentes alternativas que le podemos brindar</p>
+        <p style="font-style:italic; font-size:14px; width:auto" >A continuación presentamos el análisis de su caso y las posibilidades de servicios para darle respuesta a sus deseso y, en caso de no ser posible, las diferentes alternativas que le podemos brindar</p>
                  
 
 </page>
@@ -328,11 +329,11 @@ if($rows==1){
             <br>
   <br><br><br><br><br><br>
   <p class="turquesa" style="font-size:11px; font-weight:bold"><span class="turquesa" style="font-size:11px; font-weight:bold">Análisis del cumplimiento del plan de ordanimiento territorial con respecto a las características físicas de la propiedad:</span></p>
-                      <table width="577" height="440" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla_tecnico">
+                      <table width="455" height="440" border="0" align="center" cellpadding="0" cellspacing="0" class="tabla_tecnico">
                           <tr>
                             <td height="32" colspan="4">ALTURA: Cantidad de pisos construidos</td>
-                            <td width="157" style="text-align:center">TIPOLOGIA: Cantidad de viviendas por construcción<br></td>
-                            <td colspan="5" rowspan="2">&nbsp;</td>
+                            <td width="137" style="text-align:center">TIPOLOGIA: Cantidad de viviendas por construcción<br></td>
+                            <td colspan="4" rowspan="2">&nbsp;</td>
                           </tr>
                           <tr>
                             <td height="18" colspan="4"><span style="text-align:center"><?php echo $alt_cant_pisos[0]." | ".$alt_cant_pisos[1]." | ".$alt_cant_pisos[2] ?></span></td>
@@ -341,7 +342,7 @@ if($rows==1){
                           <tr>
                             <td colspan="4">&nbsp;</td>
                             <td rowspan="4">&nbsp;</td>
-                            <td width="56" rowspan="4"><br>
+                            <td width="46" rowspan="4"><br>
                               <br>
                               <br>
                               <br>
@@ -353,41 +354,39 @@ if($rows==1){
                               <br>
                               <br>
                               <br></td>
-                            <td width="101">&nbsp;</td>
-                            <td width="101">Distancia entre el lado izquierdo
+                            <td width="67">Distancia entre el lado izquierdo
                             del lote y la construcción</td>
-                            <td width="3" rowspan="4">&nbsp;</td>
-                            <td width="9" rowspan="4">&nbsp;</td>
                           </tr>
                           <tr>
-                            <td width="72" height="62"><p>Distancia entre el lado
+                            <td width="68" height="62"><p>Distancia entre el lado
                               derecho del lote
                               y la construcción</p></td>
-                            <td width="123">&nbsp;</td>
+                            <td width="104">&nbsp;</td>
                             <td height="62">&nbsp;</td>
                             <td rowspan="2">&nbsp;</td>
-                            <td width="202" colspan="2"><?php echo $dist_lot_izq[0]." | ".$dist_lot_izq[1]." | ".$dist_lot_izq[2] ?></td>
+                            <td><?php echo $dist_lot_izq[0]." | ".$dist_lot_izq[1]." | ".$dist_lot_izq[2] ?></td>
                           </tr>
                           <tr>
                             <td height="18"><span style="text-align:center"><?php echo $dist_lot_der[0]." | ".$dist_lot_der[1]." | ".$dist_lot_der[2] ?></span></td>
                             <td height="18">&nbsp;</td>
                             <td height="18">&nbsp;</td>
-                            <td width="202" colspan="2">&nbsp;</td>
+                            <td>&nbsp;</td>
                           </tr>
                           <tr>
                             <td height="48" colspan="4">&nbsp;</td>
-                            <td width="202" colspan="2">&nbsp;</td>
+                            <td>&nbsp;</td>
                           </tr>
                           <tr>
                             <td height="49" colspan="3"><p>&nbsp;</p>
                               <p>&nbsp;</p></td>
                             <td width="3">&nbsp;</td>
                             <td rowspan="3">&nbsp;</td>
-                            <td height="81" colspan="5" rowspan="2">&nbsp;</td>
+                            <td height="81" colspan="4" rowspan="2">&nbsp;</td>
                           </tr>
                           <tr>
-                            <td height="66" colspan="2">Dimensión frente de la
+                            <td height="66">Dimensión frente de la
                                 construcción</td>
+                            <td height="66">&nbsp;</td>
                             <td height="66">&nbsp;</td>
                             <td height="66">&nbsp;</td>
                           </tr>
@@ -395,27 +394,28 @@ if($rows==1){
                             <td height="30" colspan="2"><span style="text-align:center"><?php echo $dim_frent_const[0]." | ".$dim_frent_const[1]." | ".$dim_frent_const[2] ?></span></td>
                             <td height="30">&nbsp;</td>
                             <td height="30">&nbsp;</td>
-                            <td height="30" colspan="5">Distancia entre el lado posterior del lote y la construcción</td>
+                            <td height="30" colspan="4">Distancia entre el lado posterior del lote y la construcción</td>
                           </tr>
                           <tr>
                             <td height="45" colspan="3">&nbsp;</td>
                             <td height="45">&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td colspan="5"><span style="text-align:center"><?php echo $dist_lad_lot[0]." | ".$dist_lad_lot[1]." | ".$dist_lad_lot[2] ?></span></td>
+                            <td colspan="4"><span style="text-align:center"><?php echo $dist_lad_lot[0]." | ".$dist_lad_lot[1]." | ".$dist_lad_lot[2] ?></span></td>
                           </tr>
                           <tr>
-                            <td height="30" colspan="2"><span style="text-align:center">Dimensión frente del lote</span></td>
+                            <td height="30"><span style="text-align:center">Dimensión frente del lote</span></td>
+                            <td height="30">&nbsp;</td>
                             <td>&nbsp;</td>
                             <td height="30">&nbsp;</td>
                             <td>Área del lote según las escritura</td>
-                            <td colspan="5">&nbsp;</td>
+                            <td colspan="4">&nbsp;</td>
                           </tr>
                           <tr>
                             <td height="18" colspan="2"><span style="text-align:center"><?php echo $dim_frent_lote[0]." | ".$dim_frent_lote[1]." | ".$dim_frent_lote[2] ?></span></td>
-                            <td width="37">&nbsp;</td>
+                            <td width="30">&nbsp;</td>
                             <td height="18">&nbsp;</td>
                             <td><span style="text-align:center"><?php echo $area_lote[0]." | ".$area_lote[1]." | ".$area_lote[2] ?></span></td>
-                            <td colspan="5">&nbsp;</td>
+                            <td colspan="4">&nbsp;</td>
                           </tr>
               </table>
                       <p>&nbsp;</p>
@@ -433,7 +433,7 @@ if($rows==1){
                         </tr>
                       </table>
 			
-           </page>
+</page>
 				 <page pageset="old">
                  
                   <br>
@@ -462,9 +462,9 @@ if($rows==1){
                        </div>
                  
                  </page>
-        <page pageset="old"> 
+<page pageset="old"> 
 
-              <table width="280" border="0" cellpadding="0" cellspacing="0" class="azul" >
+  <table width="280" border="0" cellpadding="0" cellspacing="0" class="azul" >
                 <tr>
                   <td width="35"><img src="img/Barra_Subtitulo.png" alt="" width="23" height="111" /></td>
                   <td width="245"><span style="font-size:40px">02</span><span style="font-size:24px; font-weight: bold"><br>SERVICIOS<span style="font-size:17px;"><br>OFRECIDOS</span></span></td>
@@ -550,16 +550,9 @@ if($rows==1){
                  DEVOLUCIONES</span></span></td>
            </tr>
          </table>
-         <table width="364" border="0" class="azul">
-                    <tr>
-                      <td style="font-weight:bold">POLÍTICA DE</td>
-                    </tr>
-                    <tr>
-                      <td>DEVOLUCIONES SUYO</td>
-                    </tr>
-                  </table>
-                  <table width="549" border="0" class="gris_texto">
-                    <tr>
+         <p>&nbsp;</p>
+         <table width="549" border="0" class="gris_texto">
+           <tr>
                       <td width="12" height="114"><p><img src="img/Barra_Parrafo1.png" alt="" width="12" height="75" /></p>
                       <p>&nbsp;</p></td>
                       <td width="527" style="text-align: justify;">Aunque no podemos asegurarle con 100% de seguridad que su servicio podrá llevarse a buen  término, pues pueden presentarse situaciones extraordinarias que lo impidan. Podemos  asegurarle que, en caso de que esto pase, nosotros asumimos los riesgos y por lo tanto, el  cliente recibirá reembolso total de su dinero si Suyo no puede lograr la entrega del producto  final del servicio dentro del plazo de tiempo establecido en el contrato.  Esta política aplica sólo si decide adquirir los servicios bajo la modalidad 2 de servicio  completo (asesoría, análisis, acompañamiento, trámites) (Iva incluido).  Esta política no aplica cuando:</td>
