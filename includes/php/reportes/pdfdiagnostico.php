@@ -151,6 +151,17 @@ if($rows==1){
   background-size:1024px 60px;
 
 }
+.documentos{
+	
+  background-image:url(img/Documento-Diagnostico_03.png);
+  background-position:center;
+  /*background-repeat:no-repeat;*/
+  text-align:center;
+  color: #255590;
+  font-weight: bold; font-size: 14px;
+ background-size: 25px 50px;
+}
+	
 </style>
 
 
@@ -551,38 +562,37 @@ if($rows==1){
            </tr>
          </table>
          <p>&nbsp;</p>
-         <table width="549" border="0" class="gris_texto">
-           <tr>
-                      <td width="12" height="114"><p><img src="img/Barra_Parrafo1.png" alt="" width="12" height="75" /></p>
+         <table width="756" border="0" class="gris_texto">
+           <tr style="text-align: justify; width:auto">
+                      <td width="18" height="112"><p><img src="img/Barra_Parrafo1.png" alt="" width="12" height="75" /></p>
                       <p>&nbsp;</p></td>
-                      <td width="527" style="text-align: justify;">Aunque no podemos asegurarle con 100% de seguridad que su servicio podrá llevarse a buen  término, pues pueden presentarse situaciones extraordinarias que lo impidan. Podemos  asegurarle que, en caso de que esto pase, nosotros asumimos los riesgos y por lo tanto, el  cliente recibirá reembolso total de su dinero si Suyo no puede lograr la entrega del producto  final del servicio dentro del plazo de tiempo establecido en el contrato.  Esta política aplica sólo si decide adquirir los servicios bajo la modalidad 2 de servicio  completo (asesoría, análisis, acompañamiento, trámites) (Iva incluido).  Esta política no aplica cuando:</td>
+                      <td width="728" style="width:auto">Aunque no podemos asegurarle que su servicio podrá llevarse a buen término, pues pueden presentarse situaciones extraordinarias  atribuibles a un tercero (como una entidad) o casos de fuerza mayor y casos fortuito que lo impidan. Si esto llegara a pasar, podemos asegurarle que nosotros soportamos este riesgo con usted y le devolveremos la totalidad del dinero pagado que no hayamos ejecutado y  el  50% del dinero pagado que ya ejecutamos.   Esta política aplica sólo si decide adquirir los servicios bajo la modalidad 2 de servicio completo (asesoría, análisis, acompañamiento, trámites) (Iva incluido).  Esta política no aplica cuando: </td>
                     </tr>
                   </table>
-                  <table width="549" border="0" class="gris_texto" style="text-align: justify;">
-                    <tr>
-                      <td width="12" height="66"><p>&nbsp;</p>
-                        <p>&nbsp;</p></td>
-                      <td width="527">El tiempo del servicio se extiende por a) casos fortuitos o de fuerza mayor, como paros  judiciales, cierres de las entidades y/o b) el cliente no responde a solicitudes de firmas y  documentación adicional dentro del plazo máximo establecido en tales casos (aplica al  cliente y las otras personas involucradas en el caso)</td>
+                  <table width="549" border="0" class="gris_texto" style="text-align: justify; width:auto">
+                    <tr style="text-align: justify; width:auto">
+                      <td width="12" height="18"><img src="img/Vineta_Verde.png" width="11" height="18"></td>
+                      <td width="527">El cliente entrega documentación o información falsa a Suyo. </td>
                     </tr>
-                    <tr>
-                      <td height="18">&nbsp;</td>
-                      <td>El cliente entrega documentación o información falsa a Suyo.</td>
-                    </tr>
-                    <tr>
-                      <td height="18">&nbsp;</td>
+                    <tr style="text-align: justify; width:auto">
+                      <td height="18"><img src="img/Vineta_Verde.png" alt="" width="11" height="18"></td>
                       <td>El cliente registra testigos que desconozcan el caso o testigos falsos. </td>
                     </tr>
-                    <tr>
-                      <td height="34">&nbsp;</td>
+                    <tr style="text-align: justify; width:auto">
+                      <td height="34"><img src="img/Vineta_Verde.png" alt="" width="11" height="18"></td>
                       <td>El cliente aporta información incompleta diferente o nueva información a la aportada  para la elaboración de este diagnóstico. </td>
                     </tr>
-                    <tr>
-                      <td height="34">&nbsp;</td>
+                    <tr style="text-align: justify; width:auto">
+                      <td height="34"><img src="img/Vineta_Verde.png" alt="" width="11" height="18"></td>
                       <td>El cliente omite información pertinente a Suyo, al juez o a entidades gubernamentales  relacionadas con el proceso.</td>
                     </tr>
-                    <tr>
-                      <td height="18">&nbsp;</td>
+                    <tr style="text-align: justify; width:auto">
+                      <td height="18"><img src="img/Vineta_Verde.png" alt="" width="11" height="18"></td>
                       <td>El cliente no respeta los plazos de pago establecidos por Suyo al vender el servicio. </td>
+                    </tr>
+                    <tr style="text-align: justify; width:auto">
+                      <td height="18"><img src="img/Vineta_Verde.png" alt="" width="11" height="18"></td>
+                      <td>Cualquier otra causa atribuible al cliente.</td>
                     </tr>
                   </table>
             </page>
@@ -598,15 +608,30 @@ if($rows==1){
                  EQUIPO DE TRABAJO</span></span></td>
            </tr>
          </table>
-         <table width="364" border="0" class="azul">
+         <table width="200" border="0" align="center">
+           <tr>
+             <td>&nbsp;</td>
+             <td>&nbsp;</td>
+           </tr>
+           <tr>
+             <td>&nbsp;</td>
+             <td>&nbsp;</td>
+           </tr>
+         </table>
+         <table width="699" height="287" border="0" align="center"  class="documentos">
                     <tr>
-                      <td style="font-weight:bold">ÉSTE DIAGNÓSTICO SE REALIZÓ CON BASE</td>
+                      <td height="47" colspan="3" style="font-weight:bold"></td>
                     </tr>
                     <tr>
-                      <td>A LA SIGUIENTE INFORMACIÓN</td>
+                      <td width="178" height="230"></td>
+                      <td width="136"></td>
+                      <td width="437" rowspan="2"></td>
+                    </tr>
+                    <tr>
+                      <td height="2" colspan="2"></td>
                     </tr>
                   </table>
-                  <p style="text-align:center"><img src="img/Documento-Diagnostico_03.png" width="633" height="306" /></p>
+         <p style="text-align:center">&nbsp;</p>
                   <table width="364" border="0" align="center" class="azul">
                     <tr>
                       <td style="font-weight:bold">EN ESTE DIAGNÓSTICO</td>
