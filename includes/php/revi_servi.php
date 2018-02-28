@@ -14,11 +14,18 @@ include('../dependencia/conexion.php');
 
           if($r1==1){
                   // Buscamos la etapa de la última actuación..
-                $sql2="select max(activ_serv.cod_activi_etapa) as cod_activi_etapa from activ_serv, activi_etapa where activi_etapa.cod_activi_etapa=activ_serv.cod_activi_etapa and activ_serv.id_serv_cliente='".$_GET['id_serv_cliente']."' ";
+               
+
+               $sql2="select activ_serv.cod_activi_etapa from activ_serv, activi_etapa where activi_etapa.cod_activi_etapa=activ_serv.cod_activi_etapa and activ_serv.id_serv_cliente='".$_GET['id_serv_cliente']."' order by activ_serv.id_activi_serv desc limit 1  ";
                 $query2=pg_query($conexion, $sql2);
                 $rows2=pg_num_rows($query2);
                  $datos2=pg_fetch_assoc($query2);
                 $etapa=12;   
+                    if($datos2['cod_activi_etapa']==715){
+                      $etapa=13;   
+
+                    } // Remitido a devolución pasa a la etapa final de devolución...
+
                     if($datos2['cod_activi_etapa']==12){
                       //if()
                        
@@ -81,7 +88,7 @@ include('../dependencia/conexion.php');
                               $etapa=$datos5['cod_etapa']; // Obtengo la etapa del usuario..
 
                             // Consulto las actividades  necesarias de la etapa
-                                 $sql3="select * from activi_etapa where cod_etapa='".$etapa."' and cod_servicio='".$_GET['cod_servicio']."'  ";
+                                $sql3="select * from activi_etapa where cod_etapa='".$etapa."' and cod_servicio='".$_GET['cod_servicio']."'  ";
                                 $query3=pg_query($conexion, $sql3);
                                 $n_activi=pg_num_rows($query3); // Número de actividades a reallizar..
                                     
@@ -127,7 +134,6 @@ include('../dependencia/conexion.php');
                                               $query4=pg_query($conexion, $sql4);
                                               $datos4=pg_fetch_assoc($query4);              
                                       } else
-
                                       $datos4['descripcion']='SIN ETAPA A REALIZAR';
                                   
                         

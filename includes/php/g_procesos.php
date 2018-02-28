@@ -1007,13 +1007,13 @@ if(isset($_SESSION['cod_usuario'])){
 
                           /// Entrega de diagnóstico.
                       
-                       $sql126="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".('Entrega de diagnÃ³stico')."'  and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                      /* $sql126="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".('Entrega de diagnÃ³stico')."'  and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query126=pg_query($conexion, $sql126);
-                      $entr_diag=pg_num_rows($query126); 
+                      $entr_diag=pg_num_rows($query126); */
                         
 
 
-                          $sql126="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and det_repor_aseso.resul_visita='".('Entrega de diagnÃ³stico')."' and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
+                          $sql126="select enc_procesadas.id_fasfield, det_repor_aseso.resul_visita from enc_procesadas, det_repor_aseso where $parametro enc_procesadas.id_fasfield=det_repor_aseso.id_fasfield and enc_procesadas.tipo_encuesta=2 and (det_repor_aseso.resul_visita='".('Entrega de diagnÃ³stico')."' or det_repor_aseso.resul_visita='".('Entrega de diagnóstico')."' ) and enc_procesadas.fecha_filtro between '".$_POST['fecha_1']."' and '".$_POST['fecha_2']."' ";
                         $query126=pg_query($conexion, $sql126);
                       $entr_diag=pg_num_rows($query126); 
                         // Sumamos los servicios express..

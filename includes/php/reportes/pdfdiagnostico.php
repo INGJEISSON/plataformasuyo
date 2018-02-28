@@ -20,7 +20,7 @@ if(isset($_GET['id_elab_diag'])){
           $sql21="select serv_recom_diag.id_serv_recom, servicios.nom_servicio, servicios.cod_servicio from serv_recom_diag, servicios where serv_recom_diag.cod_servicio=servicios.cod_servicio and id_elab_diag='".$id_elab_diag."' ";
           $query21=pg_query($conexion, $sql21);
           $query22=pg_query($conexion, $sql21);
-		  $rows22=pg_num_rows($conexion, $sql21);
+      $rows22=pg_num_rows($conexion, $sql21);
           // Buscamos los párrafos  realizados por el diagnóstico
 
           $sql3="select id_parraf_diag from parraf_diag where id_elab_diag='".$id_elab_diag."' limit 1 ";
@@ -69,11 +69,11 @@ if(isset($_GET['id_elab_diag'])){
                                    $datos1=pg_fetch_assoc($query1);
 
                                      $otrs_situa=$datos1['observacion'];
-									 
-									 
-								// Buscamos las amenanzas registradas
-								
-								
+                   
+                   
+                // Buscamos las amenanzas registradas
+                
+                
 
                 }
 
@@ -96,11 +96,14 @@ $dist_lot_der=explode(",",$datos['dist_lot_der']);
 if($rows==1){
 
 ?>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 <page backtop="40mm" backbottom="7mm" backleft="30mm" backright="10mm"> 
-      <page_header style='text-align: right;'> 
-               <img src="img/Logo.png" width="124" height="49" />
+        <page_header style='text-align: right;'> 
+               <img src="img/Logo.png" />
           
           </page_header> 
+
            <page_footer> 
               ALGO ALGO
           </page_footer>
@@ -111,7 +114,7 @@ if($rows==1){
 
 .gris_texto{
     color: #5b5b5f;
-    font-size:14px
+    font-size:18px
 }
 .turquesa{
   color: #00BEBE;
@@ -152,16 +155,16 @@ if($rows==1){
 
 }
 .documentos{
-	
+  
   background-image:url(img/Documento-Diagnostico_03.png);
-  background-position:center;
+  background-position:cover;
   /*background-repeat:no-repeat;*/
   text-align:center;
   color: #255590;
   font-weight: bold; font-size: 14px;
- background-size: 25px 50px;
+/* background-size: 25px 50px;*/
 }
-	
+  
 </style>
 
 
@@ -172,12 +175,12 @@ if($rows==1){
 </page_header> 
      <br>
   <br><br><br><br>
-  <table width="260" border="0" cellpadding="0" cellspacing="0" class="azul" >
+  <table width="349" border="0" cellpadding="0" cellspacing="0" class="azul" >
     <tr>
       <td>12 de Febrero de 2017</td>
     </tr>
     <tr>
-      <td width="260"><span style="font-size:27px; font-weight: bold">DIAGNÓSTICO<br>
+      <td width="349"><span style="font-size:37px; font-weight: bold">DIAGNÓSTICO<br>
       DE PROPIEDAD</span><span class="azul" style="font-size:"><img src="img/Linea_Titulo.png" width="260" height="12" /></span></td>
     </tr>
   </table>
@@ -201,12 +204,12 @@ if($rows==1){
 </table>
 <table width="690" border="0" >
   <tr style="text-align:justify">
-    <td width="19" height="155"><img src="img/Barra_Parrafo1.png" width="10" height="153" /></td>
-    <td width="354"><p class="gris_texto">Por medio de la presente nos permitimos en
+    <td width="22" height="155" style="background-color: #39C; width:10px; border-left:solid #39C"></td>
+    <td width="346"><p class="gris_texto">Por medio de la presente nos permitimos en
       primera medida agradecer la confianza quen ha depositado en Suyo y en todo el grupo de profesionales que hay detrás de esta empre
         sa de impacto social. Respondiendo al servicio que adquirió con nosotros, hacemos entrega de su documento de diagnóstico de propiedad en el cual resumimos el análisis  legal y técnico que hemos realizado de su caso; así mismo señalamos la viabilidad y el tipo de servicio que requiere, con todos los costos asociados. Recuerde preguntar a su asesor de ventas</p></td>
     <td width="16">&nbsp;</td>
-    <td width="283"><p class="gris_texto"> por las diferentes opciones de financiación que brindamos a través de nuestros aliados.Finalmente, quisiera reiterarle que sabemos
+    <td width="288"><p class="gris_texto"> por las diferentes opciones de financiación que brindamos a través de nuestros aliados.Finalmente, quisiera reiterarle que sabemos
       que su hogar es su bien más preciado, por
       esto no defraudaremos su voto de confianza.
       Esperamos que pueda tomar los servicios
@@ -443,9 +446,9 @@ if($rows==1){
                           <td height="92"><p>&nbsp;</p></td>
                         </tr>
                       </table>
-			
+      
 </page>
-				 <page pageset="old">
+         <page pageset="old">
                  
                   <br>
   <br><br><br><br><br><br>
@@ -498,11 +501,12 @@ if($rows==1){
            </tr>
          </table>
          <p><span class="azul" style="font-size:15px; font-weight:bold">COTIZACIÓN</span></p>
-                <table width="794" border="0">
+                <table width="772" border="0">
                   <tr style="text-align:justify">
                     <td width="15" height="162"><img src="img/Barra_Parrafo1.png" alt="" width="10" height="153" /></td>
                     <td width="405"><p class="gris_texto">Suyo ofrece sus servicios en dos  modalidades, la primera en donde se  incluye sólo la asesoría, análisis y  acompañamiento legal y técnico, así como  la preparación de documentos  relacionados con el servicio final. Sin  embargo, en este caso es el cliente quien  se hace responsable tanto por realizar  personalmente los trámites relacionados,  como por hacer el pago de los costos  asociados, ante cada entidad  gubernamental correspondiente. En esta  opción el tiempo requerido para realizar  el servicio dependerá en buena parte del  cliente, dado que sería directamente el </p></td>
-                    <td width="360"><p class="gris_texto">responsable de realizar los trámites del  proceso.  La segunda modalidad que incluye toda la  asesoría, análisis y acompañamiento de la  opción 1, además del pago de todos los  trámites, costos gubernamentales y  judiciales, e impuestos del servicio (si  aplican). De igual forma, Suyo realizará  directamente todos los trámites  personalmente. En esta opción, sí podemos  estimar el tiempo requerido del servicio,  dado que la misma empresa realiza los  trámites.</p></td>
+                    <td width="20">&nbsp;</td>
+                    <td width="314"><p class="gris_texto">responsable de realizar los trámites del  proceso.  La segunda modalidad que incluye toda la  asesoría, análisis y acompañamiento de la  opción 1, además del pago de todos los  trámites, costos gubernamentales y  judiciales, e impuestos del servicio (si  aplican). De igual forma, Suyo realizará  directamente todos los trámites  personalmente. En esta opción, sí podemos  estimar el tiempo requerido del servicio,  dado que la misma empresa realiza los  trámites.</p></td>
                   </tr>
                 </table>
                 <p><span style="font-style:italic; font-size:14px; width:auto">A continuación se resumen los costos para una y otra modalidad de los servicios ofrecidos. Para más detalle de los costos consulte el anexo.</span></p>
@@ -608,9 +612,9 @@ if($rows==1){
                  EQUIPO DE TRABAJO</span></span></td>
            </tr>
          </table>
-         <table width="200" border="0" align="center">
+         <table width="200" border="0" style="background-image:url(img/Documento-Diagnostico_031.png); background-position:center; background-repeat:no-repeat;  width:100%; height:700px; position:absoluto; margin-top:-40px" >
            <tr>
-             <td>&nbsp;</td>
+             <td height="49">&nbsp;</td>
              <td>&nbsp;</td>
            </tr>
            <tr>
@@ -618,28 +622,14 @@ if($rows==1){
              <td>&nbsp;</td>
            </tr>
          </table>
-         <table width="699" height="287" border="0" align="center"  class="documentos">
-                    <tr>
-                      <td height="47" colspan="3" style="font-weight:bold"></td>
-                    </tr>
-                    <tr>
-                      <td width="178" height="230"></td>
-                      <td width="136"></td>
-                      <td width="437" rowspan="2"></td>
-                    </tr>
-                    <tr>
-                      <td height="2" colspan="2"></td>
-                    </tr>
-                  </table>
-         <p style="text-align:center">&nbsp;</p>
-                  <table width="364" border="0" align="center" class="azul">
-                    <tr>
-                      <td style="font-weight:bold">EN ESTE DIAGNÓSTICO</td>
-                    </tr>
-                    <tr>
-                      <td>PARTICIPARON</td>
-                    </tr>
-                  </table>
+<table width="364" border="0" align="center" class="azul">
+    <tr>
+      <td style="font-weight:bold">EN ESTE DIAGNÓSTICO</td>
+    </tr>
+    <tr>
+      <td>PARTICIPARON</td>
+    </tr>
+    </table>
                   <table width="200" border="0" align="center">
                     <tr class="azul" style="font-weight:bold">
                       <td colspan="2">ELABORÓ</td>
@@ -649,8 +639,14 @@ if($rows==1){
                       <td colspan="4"><img src="img/Linea_Tabla.png" width="477" height="4" /></td>
                     </tr>
                     <tr>
-                      <td width="18">&nbsp;</td>
-                      <td width="217">&nbsp;</td>
+                      <td><img src="img/Vineta_Verde.png" alt="" width="11" height="18"></td>
+                      <td>Yor Mary Montes</td>
+                      <td>&nbsp;</td>
+                      <td>Jarinson Hinestroza Arroyo</td>
+                    </tr>
+                    <tr>
+                      <td width="18"><img src="img/Vineta_Verde.png" alt="" width="11" height="18"></td>
+                      <td width="217">Viviana Paola</td>
                       <td width="13">&nbsp;</td>
                       <td width="217">&nbsp;</td>
                     </tr>
@@ -666,7 +662,7 @@ if($rows==1){
                 ANEXOS<span style="font-size:17px;"><br>
                   DEL DIAGNÓSTICO</span></span></td>
             </tr>
-          </table>
+         </table>
           <table width="364" border="0" class="azul">
                     <tr>
                       <td style="font-weight:bold">COTIZACIÓN</td>
@@ -674,20 +670,20 @@ if($rows==1){
                     <tr>
                       <td>DETALLADA</td>
                     </tr>
-                  </table>
+         </table>
       <table width="543" border="0">
           <?php 
-		  	$j=1;
+        $j=1;
                  while($datos22=pg_fetch_assoc($query22)){
 
-                      					 		if($j==3){
-                      								$j=1;
-                      				      	?>  
+                                    if($j==3){
+                                      $j=1;
+                                      ?>  
                                       JEISSON
                                  <br><br><br><br><br><br><br><br><br><br><br>
-                                 					 <?php 
-                      							}	
-                               			 ?>
+                                           <?php 
+                                    } 
+                                     ?>
                             <tr class="azul" style="font-weight:bold">
                               <td width="461"><?php echo ($datos22['nom_servicio']) ?></td>
                               <td width="72">VALOR</td>
@@ -769,14 +765,14 @@ if($rows==1){
                         <td width="10" height="87" class="gris_texto"></td>
                         <td width="181" class="gris_texto" style="text-align:left"><p class="azul" style="font-weight:bold">Notas Aclaratorias: </p>
                          <p> La presente oferta tiene una validez de 30 días.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.</p>
-                          </td>
+                        </td>
                         <td width="238"  class="gris_texto" style="text-align:left">La presente oferta tiene una validez de 30 días.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.  El trabajo iniciará a partir de la aprobación de la  cotización y su pago correspondiente.</td>
                       </tr>
                     </table></td>
                   </tr>
                 </table>
                 
-       </page>
+</page>
 </body>
 </page>
 <?php
